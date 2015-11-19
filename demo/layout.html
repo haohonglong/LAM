@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-Type" content="text/html" charset="utf-8">
+<title>背景半透明覆盖整个可视区域</title>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../css/global.css" type="text/css" />
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        var AutoLayout;
+        window[LHH_NAMESPACE_20150715_].main([window,
+            '/Browser.class',
+            '/Dom.class',
+            '/Sport.class',
+            '/Layout.class',
+            '/AutoLayout.class'
+        ],function(window,Browser,Dom,Sport,Layout,AutoLayout){
+            var System=this;
+            System.import([Browser,Dom,Sport,Layout,AutoLayout],System.classPath);
+
+
+
+            var content,content1,ul1,ul2;
+            $(function(){
+
+                $('#content').width($(window).width()-($('.sidbar').width()+$('.sidbar2').width()+30));
+
+
+                content=new System.AutoLayout({'$view':$('#content'),'minWidth':0,'position':'left'}).run();
+
+                ul1=new System.AutoLayout({'$ul':$('#ul1'),'$view':$('#ul1'),'minWidth':0,'$li':$('#ul1 > li'),'vcount':$('#ul1 > li').length,'margin':10,'position':'left'}).run();
+
+                content1=new System.AutoLayout({'$view':$('#content1'),'minWidth':0,'position':'left'}).run();
+
+                ul2=new System.AutoLayout({'$ul':$('#ul2'),'$view':$('#ul2'),'minWidth':0,'$li':$('#ul2 li'),'vcount':$('#ul2 li').length,'margin':10,
+                    'after_fn':function(){
+//                        console.log('ul1.temps_w : '+ul1.changeValueWidth)
+//                        this.setAllLiWidth(ul1.changeValueWidth/this.vcount);
+                    },
+                    'position':'left'
+                }).run();
+
+
+
+
+                $(window).resize(function(){
+                    content.resize();
+                    content1.resize();
+                    ul1.resize();
+                    ul2.resize();
+
+                });
+
+
+
+            });
+
+
+
+
+
+        });
+    </script>
+
+    <style type="text/css">
+        .w-page{}
+        html,body,#container,.sidbar,.content{height:100%;}
+        #container{}
+        .sidbar{width:200px;position: absolute;top:0;left:0;background:red;}
+        .sidbar2{width:200px;left:auto; right:0;background:blue;}
+        .content{width:100%; margin-left:210px;background:green;margin:0 auto;overflow: hidden;}
+        #content1{margin:0;width:100%;background:#333;}
+        .ul{width:100%;padding:0;}
+        .ul li{background:#ccc;height:150px;margin-right:10px;}
+        #ul2 li{background:#f60;}
+
+    </style>
+</head>
+<body>
+<div id="container" class="">
+    <div class="sidbar"></div>
+    <div class="content" id="content">
+        <ul id="ul1" class="ul sectionFloat clearfix">
+            <li>
+                <div class="content" id="content1">
+                    <ul id="ul2" class="ul sectionFloat clearfix">
+                        <li></li>
+                        <li></li>
+                    </ul>
+
+                </div>
+            </li>
+            <li></li>
+        </ul>
+
+    </div>
+    <div class="sidbar sidbar2"></div>
+</div>
+
+</body>
+</html> 

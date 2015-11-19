@@ -1,0 +1,32 @@
+@charset "utf-8";
+/* CSS Document */
+
+.wrap-container{}
+.wrap-wrapper{}
+.wrap-grid-one{}
+.wrap-grid-two{}
+.wrap-grid-three{}
+.wrap-grid-four{}
+.wrap-grid-five{}
+
+
+
+/*f:final 整站框架 这个是唯一的不可被复用*/
+.f-container{}
+.f-wrapper{}
+.f-primary{}
+.f-secondary{}
+.f-row{}
+.f-col-1{}
+
+
+/*通用框架 如果是只针对某个单独页面的结构 就把section 换成页面的名字*/
+.section-container{}
+.section-wrapper{}
+.section-primary{}
+.section-secondary{}
+.section-row{}
+.section-col-1{}
+
+
+

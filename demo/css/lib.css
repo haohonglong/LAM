@@ -1,0 +1,499 @@
+@charset "utf-8";
+@import url("global.css");
+/* CSS Document */
+/*
+just here is interface
+@autho: lhh
+命名规则(避免多人开发或者和别的插件命名冲突)：
+   1.模块命名
+        lhh-item-Model{}
+        作者-项目名称-模块名称{}
+   2.多模版互相嵌套避免命名冲突法：
+        lhh-item-tpl-Model{}
+        作者-项目名称-模板名称-模块名称{}
+*/
+
+/*mouse selected bg-color*/
+body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53;}
+::selection {}
+
+/*文字有鼠标移入移除渐隐渐变的效果*/
+a{-webkit-transition:all 0.5s linear;-moz-transition:all 0.5s linear;-ms-transition:all 0.5s linear;-o-transition:all 0.5s linear}
+
+
+
+
+
+/*自定义字体*/
+@font-face { 
+  font-family: fz; /*这里是说明调用来的字体名字*/ 
+  src: url('font/AGENCYB.ttf'); /*这里是字体文件路径*/ 
+} 
+.lhh-custom-font{
+  font-family: fz; /*这里设置某参数的字体值，在这里是“my_CSS3_class”调用了你刚才声明的字体值"fz"*/ 
+  font-size: 5.2em; /*这里是字体大小*/ 
+}
+
+
+/*弹出层*/
+.lhh-pop{width: 1100px;position: fixed;background: #fff;z-index:11111;}
+.lhh-pop-content{}
+
+
+/*整屏遮罩*/
+.lhh-mask{width: 100%;height: 100%;position: fixed; z-index:10000;left:0px;top:0px;background:#000;opacity:0.3;filter:Alpha(opacity=30);}
+
+
+/*局部透明遮罩层(oo css example)
+
+*/
+/*=================================================================================================================================*/
+
+/*
+<div class="lhh-mask-text">
+    <div class="lhh-mask-text-wrap">
+        <div class="lhh-mask-text-bg"></div>
+        <div class="lhh-mask-text-desc"> 描述文字</div>
+    </div>
+</div>
+*/
+.lhh-mask-text{width: 100%; position: relative;z-index: 10;}
+.lhh-mask-text-wrap{width: 100%; position: absolute;top:-30px;}
+.lhh-mask-text-bg{position: relative;opacity:0.4;filter:Alpha(opacity=30);background:#000;}
+.lhh-mask-text-desc{z-index:15;margin-top: -30px;color: #fff;line-height: 30px;}
+.lhh-mask-text-wrap-hover{display: none;top:0;}
+.lhh-mask-text-wrap,
+.lhh-mask-text-bg,
+.lhh-mask-text-desc{height: 30px;}
+.lhh-mask-text-bg,
+.lhh-mask-text-desc{position: relative;}
+
+
+/*
+<div class="lhh-mask-text">
+    <div class="lhh-mask-text-wrap">
+        <div class="lhh-mask-text-bg"></div>
+        <div class="lhh-mask-text-desc lhh-mask-text1-desc"> 描述文字</div>
+    </div>
+</div>
+*/
+.lhh-mask-text1{}
+.lhh-mask-text1-wrap{}
+.lhh-mask-text1-bg{}
+.lhh-mask-text1-desc{position: absolute;}
+.lhh-mask-text1-wrap-hover{}
+.lhh-mask-text1-wrap,
+.lhh-mask-text1-bg,
+.lhh-mask-text1-desc{}
+/*=================================================================================================================================*/
+
+
+
+/*透明层*/
+.lhh-opacity{opacity:0.3;filter:Alpha(opacity=30);}
+
+
+/* fix-position */
+.lhh-fixed{position: fixed;z-index: 1000;}
+.lhh-fixed-top{top: 0;left: 0;}
+.lhh-fixed-bottom{bottom: 0;left: 0;}
+
+/*伪 placeholder*/
+.lhh-placeholder{padding:11px;position: absolute;left: 0;top: 0;}
+.lhh-placeholder-p{white-space:pre-line; line-height:18px; }
+
+
+/*
+双飞翼布局
+*/
+.lhh-brid-main{background:red;width:100%;}
+.lhh-brid-main-content{margin:0 200px 0 150px;padding:20px;}
+.lhh-brid-col1{width:150px; background:blue;margin-left:-100%;}
+.lhh-brid-col2{width:200px;margin-left:-200px; background:green;}
+
+
+
+
+/*文字*/
+/*=================================================================================================================================*/
+/*link*/
+.linkBlue,.linkBlue a:link,.linkBlue a:visited,.linkBlue:link,.linkBlue a:visited,.linkBlue:visited{color:#4a759f!important;}
+.linkBlue a:hover,.linkBlue:hover{color:#4a759f!important;}
+.linkBlack,.linkBlack a:link,.linkBlack a:visited,.linkBlack:link,.linkBlack:visited{color:#000!important;}
+.linkBlack a:hover.linkBlack:hover{color:#000!important;}
+.linkRed,.linkRed a:link,.linkRed a:visited,a.linkRed:link,a.linkRed:visited{color:#ff3300!important;}
+.linkRed a:hover,.linkRed:hover{color:#ff3300!important;}
+.linkWhite,.linkWhite a:link,.linkWhite a:visited,.linkWhite:link,.linkWhite:visited{color:#ffffff!important;}
+.linkWhite a:hover,.linkWhite:hover{color:#ffffff!important;}
+.linkGreen,.linkGreen a:link,.linkGreen a:visited,.linkGreen:link,.linkGreen:visited{color:#009900 !important;}
+.linkGreen a:hover.linkGreen:hover{color:#009900!important;}
+.linkYellow,.linkYellow a:link,.linkYellow a:visited,.linkYellow:link,.linkYellow:visited{color:#fb4410!important;}
+.linkYellow a:hover,.linkYellow:hover{color:#fb4410!important;}
+.linkGrey,.linkGrey a:link,.linkGrey a:visited,.linkGrey:link,.linkGrey:visited{color:#999999!important;}
+.linkGrey a:hover.linkGrey:hover{color:#999999!important;}
+.linkOrange,.linkOrange a:link,.linkOrange a:visited,.linkOrange:link,.linkOrange:visited{color:#f60!important;}
+.linkOrange a:hover.linkOrange:hover{color:#f60!important;}
+.linkRose,.linkRose a:link,.linkRose a:visited,.linkRose:link,.linkRose:visited{color:#e80274!important;}
+.linkRose a:hover.linkRose:hover{color:#e80274!important;}
+
+/*文字样式*/
+.lhh-Font,.lhh-Font a{color: #666;font-size: 12px;}
+.lhh-Font-grey,.lhh-Font-grey a{color: #ccc;}
+.lhh-Font-333,.lhh-Font-333 a{color: #333;}
+.lhh-Font-f60,.lhh-Font-f60 a{color: #f60;}
+.lhh-Font-lightgrey,.lhh-Font-lightgrey a{color: #999;}
+.lhh-Font-ccc,.lhh-Font-ccc a{color: #ccc;}
+.lhh-Font-red,.lhh-Font-red a{color: #cc0000;}
+.lhh-Font-white,.lhh-Font-white a{color: #fff;}
+.lhh-Font-green,.lhh-Font-green a{color: #41bd39;}
+.lhh-Font-blue,.lhh-Font-blue a{color: #33a5f7;}
+
+/*传统标题*/
+h1,h2,h3,h4,h5,h6{font-family:"Microsoft Yahei";font-weight:bold;letter-spacing:normal;}
+h1{font-size: 35px;}
+h2{font-size: 30px;}
+h3{font-size: 18px;}
+h4{}
+h5{}
+h6{}
+
+/*自定义标题*/
+.H1,.H2,.H3,.H4,.H5,.H6{}
+.H1{}
+.H2{}
+.H3{}
+.H4{}
+.H5{}
+.H6{}
+
+/*通用抽象模块样式*/
+.lhh-box{position: relative;}
+.lhh-box h1,.lhh-box h2,.lhh-box h3,.lhh-box h4,.lhh-box h5,.lhh-box h6{font-family:"Microsoft Yahei";font-weight:bold;letter-spacing:normal;}
+.lhh-box h1{}
+.lhh-box h2{}
+.lhh-box h3{}
+.lhh-box h4{}
+.lhh-box h5{}
+.lhh-box h6{}
+.lhh-box-more{ position:absolute;top: 0;right: 0;left: auto;}
+
+/*段落样式*/
+p{}
+section,.section{}
+
+/*cms 规定的格式*/
+.lhh-cms,
+.lhh-cms-p{line-height: 25px;}
+
+/*图文文字样式*/
+.lhh-text{}
+
+
+/*shadow*/
+/*=================================================================================================================================*/
+.lhh-shadow-a1{box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);background-color:#000;}
+.lhh-shadow-a2{box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);background-color:#000;}
+.lhh-shadow-a3{box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);background-color:#000;}
+.lhh-shadow-a4{box-shadow:1px 0 1px rgba(0, 0, 0, 0.1)}
+.lhh-shadow-a5{box-shadow:2px 2px 5px #eee;}
+.lhh-shadow-a6{box-shadow:0 0 4px 4px rgba(0, 0, 0, 0.2); box-sizing:border-box; -webkit-transform:translate3d(0,0,0);}
+.lhh-shadow-a7{box-shadow:2px 2px 1px #eee;}
+.lhh-shadow-a8{
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+
+/*文字阴影*/
+.lhh-text-shadow{text-shadow: 1px 1px 1px #333;}
+
+/*价格类*/
+.lhh-price{color: #cc0000;font-size: 16px;font-family:"Microsoft Yahei";font-weight: bold;}
+.lhh-price-number{}
+.lhh-price-symbol{font-size: 15px;}
+.lhh-price-word{font-size: 16px;margin-left: -2px;}
+.lhh-price-del{text-decoration: line-through;color:#999;font-size: 12px;font-weight: normal; }
+.lhh-price-call{ font-size:16px;font-weight: normal;}
+.lhh-price-i{}
+
+/*borders*/
+.lhh-border-a1{}
+
+/*一根线的样式
+col : 竖线
+row : 横线
+*/
+.lhh-line-col{background:#e5e5e5;height: 100%;width: 1px;}
+.lhh-line-row{background:#e5e5e5;width: 100%; height: 1px;}
+
+/*全局图标
+gi ： 全局图标(global icon)
+*/
+.lhh-gi{position: relative;}
+.lhh-gi-i{width: 20px;height: 20px;position: absolute;top: 0;left: 0; z-index: 1000;}
+
+
+
+
+/*三角箭头
+iup     :上边图标样式
+idown   :下边图标样式
+il      :左边图标样式
+ir      :右边图标样式
+
+*/
+/*==============================================================================================================================================*/
+.lhh-arrow       {position: relative;}
+.lhh-arrow-i {width: 0;height: 0;position: absolute;overflow: hidden;border-width: 5px;font-size:0;line-height: 0; margin: 0;}
+.lhh-arrow-iup{border-style: dashed dashed solid; border-color:transparent transparent #b8b8b8;  }
+.lhh-arrow-idown{border-style: solid dashed dashed; border-color: #b8b8b8 transparent transparent;bottom: -10px; }
+.lhh-arrow-il {border-style: dashed solid dashed dashed; border-color:transparent #b8b8b8 transparent transparent;}
+.lhh-arrow-ir {border-style: dashed dashed dashed solid; border-color:transparent transparent transparent #b8b8b8;}
+
+/*双箭头重叠
+fill    :填充颜色
+border  :边线颜色
+*/
+.lhh-arrow-overlap-i{border-width: 7px;}
+.lhh-arrow-overlap-fill{}
+.lhh-arrow-overlap-border{}
+
+
+
+/*css3 旋转 在IE7下有兼容的问题影响整个页面！这个当前css文件解析问题不推荐用*/
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+.lhh-rotate-a1{position: relative;}
+.lhh-rotate-a1-i{position:absolute;left:50%;width:8px;height:8px;overflow:hidden;font-size:0;background-color:#F3F3F3;border-top:1px solid #D9D9D9;border-right:1px solid #D9D9D9;}
+.lhh-rotate-a1-iup{
+    margin-left:-5px;
+    -webkit-transform:rotate(-45deg);
+    -moz-transform:rotate(-45deg);
+    -ms-transform:rotate(-45deg);
+    -o-transform:rotate(-45deg);
+    transform:rotate(-45deg);
+    filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=0.7660444431189777, M12=-0.6427876096865394, M21=0.6427876096865398, M22=0.7660444431189779); 
+}
+
+/*==============================================================================================================================================*/
+
+
+/*basis*/
+/*===============================================================================================================*/
+/*头部*/
+.lhh-header{}
+
+/*脚部*/
+.lhh-foot{}
+
+/*顶部*/
+.lhh-top{height: 46px;line-height: 46px; text-align: right;background:url(images/title_bg.png) repeat-x 0 0; position: relative;z-index: 10;}
+.lhh-top-a{color: #565656;}
+.lhh-top-span{margin: 0 5px;}
+
+/*导航条*/
+.lhh-nav{}
+
+/*Menu*/
+.lhh-menu{}
+
+
+/*Logo*/
+.lhh-logo{width: 80px; height:80px;position:absolute; left:0; top:0; background:url(images/logo.png) no-repeat 0 0;}
+.lhh-logo-a{display:block; width:80px; height:80px;overflow: hidden;}
+.lhh-logo-img{width: 100%;height: auto;}
+.lhh-Logo-i{}
+
+/*处理方式：图片自适应 超出大小溢出隐藏*/
+.lhh-logo-auto{ display:block;width:80px; height:80px;overflow: hidden}
+.lhh-logo-auto-a{width:80px; height:80px;overflow: hidden;display: table-cell;vertical-align: middle;text-align: center;
+  *display: block;
+  *font-size: 175px;/*约为高度的0.873，200*0.873 约为175*/
+  *font-family:Arial;/*防止非utf-8引起的hack失效问题，如gbk编码*/
+}
+.lhh-logo-auto-img{width: 100%;height: auto;vertical-align: middle;}
+/*end basis===============================================================================================================*/
+
+
+
+
+
+/*searchBox*/
+.lhh-searchBox{}
+
+
+/*缩略图*/
+.lhh-thumbnail{
+  -webkit-box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  box-sizing:content-box;
+  position: relative;
+}
+.lhh-thumbnail-img{text-align: center;}
+
+
+
+/*媒体对象*/
+.lhh-media{}
+
+/*面板
+
+*/
+.lhh-panel{}
+.lhh-panel-t{}
+.lhh-panel-c{}
+.lhh-panel-i{}
+
+
+/*Tab*/
+.lhh-tab{position: relative;}
+.lhh-tab-more{}
+
+/*Title*/
+.lhh-title{position: relative;}
+.lhh-title-h2{color: #333;font-size: 14px;font-family:"Microsoft Yahei";}
+.lhh-title-more{right:25px; top:0;background-position: 0 0;}
+
+
+/*带图标的标题
+
+*/
+.lhh-titleIcon{position: relative; background: #fafafa; height: 65px;line-height: normal;}
+.lhh-titleIcon-h2{font-size: 16px;font-family:"Microsoft Yahei";font-weight: normal;padding-left: 55px;}
+.lhh-titleIcon-i{width: 55px;height: 65px;background: url(images/mapSearchBox_title_icon.png) no-repeat 0 0;position: absolute;top: 0;left: 0;}
+
+/*lists*/
+.lhh-list-li{height: 26px; line-height:26px; background:url(images/li.png) 0 12px no-repeat; padding-left:12px; }
+.lhh-list-a{color: #333;font-size: 12px;}
+.lhh-list-date{color: #999;font-size: 12px;}
+.lhh-list a:hover,.lhh-list-hover{}
+
+.lhh-message{}
+/*提示*/
+.lhh-tips{}
+.lhh-alert{}
+.lhh-map{}
+/*use global.css*/
+.lhh-bg-color{}
+/*广告*/
+.lhh-ad{}
+.lhh-banner{}
+.lhh-tel{}
+
+/* 友情链接 */
+.lhh-links{}
+
+/*版权*/
+.lhh-copyright{}
+
+/*标签类*/
+.lhh-label{}
+.lhh-label-li{width:auto;color:#04639d;padding: 10px;margin-right: 10px;margin-bottom: 10px;background: #f8f8f8;}
+.lhh-label-a{width:auto;}
+
+
+
+/*button*/
+.lhh-button-btn{background: #00a99d;}
+.lhh-button-btn:hover,
+.lhh-button-btn-hover{background: #009389;}
+
+
+/*use autoBtn.css*/
+.lhh-button-auto-btn{background-position:0 0;position: relative;top: 1px;}
+.lhh-button-auto-btn-span{background-position:right -37px;padding: 0 10px;margin-left: 20px;}
+.lhh-button-auto-btn,
+.lhh-button-auto-btn-span{height:37px;line-height: 37px; font-size:12px;}
+
+
+
+/*GotoTop*/
+.lhh-gotoTop{position: fixed;bottom:10px;right:100px;width: 40px;height: 40px;background-image: url(images/icon.png) no-repeat 0 -439px;cursor: pointer;}
+.lhh-gotoTop-hover{background-position: -40px -439px;}
+
+/*当前位置*/
+.lhh-crumb{height: 30px; line-height:30px;font-size:12px;position:relative;}
+.lhh-crumb-ul{padding: 0 10px;}
+.lhh-crumb-ul-li{}
+.lhh-crumb-border{border-color: #ccc;padding:5px;}
+.lhh-crumb-ul-li,
+.lhh-crumb-ul-li-a{font-family:"SimSun";color: #de8fa0;}
+
+/*pageing*/
+.lhh-pageing{}
+
+
+ /*star*/
+ /*===============================================================================================================*/
+.lhh-star{background:url(images/star.png) no-repeat 0 0;display: inline-block; overflow: hidden; }
+/*small star*/
+.lhh-star-small{height:12px;}
+.lhh-star-small-5{ width:60px;}
+.lhh-star-small-4{ width:48px;}
+.lhh-star-small-3{ width:36px;}
+.lhh-star-small-2{ width:24px;}
+.lhh-star-small-1{ width:12px;}
+/*big star*/
+.lhh-star-big{background-position:0 -15px;height:14px;}
+.lhh-star-big-5{ width:74px;}
+.lhh-star-big-4{ width:60px;}
+.lhh-star-big-3{ width:45px;}
+.lhh-star-big-2{ width:30px;}
+.lhh-star-big-1{ width:15px;}
+
+
+
+/*slider*/
+.lhh-slider{}
+.lhh-slider-ul{}
+.lhh-slider-li{}
+.lhh-slider-li-img{}
+/*slider button*/
+.lhh-slider-btn{width:92px;height:18px;position:absolute;top:auto;right:5px;left:auto;bottom:10px;z-index:100;}
+.lhh-slider-btn-li{height:18px;width:18px;overflow:hidden;float:left;_display: inline; cursor:pointer;margin-right:5px;text-align:center;line-height:18px;background:#fff;color:#000;font-weight:bold;}
+.lhh-slider-btn-cur{background:#f60;color:#fff;}
+
+
+/*抽象模块*/
+.lhh-box1{}
+
+
+
+
+
+
+
+
+
+/*
+
+页面统一标准
+注意：没有的话就空着
+
+页面min-width   ：1200px
+页面固定宽度    ：
+侧边栏宽度      ：
+主要内容宽度    ：
+body背景颜色    ：
+全局字体(字体,大小,颜色) ：("SimSun",12px,#3b3b3b)
+最大号标题(字体,大小,颜色,行高)   ：("Microsoft Yahei",12px,#3b3b3b,16px)
+通用标题(字体,大小,颜色,行高)     ：
+导航    (字体,大小,颜色,行高)     ：("Microsoft Yahei",18px,#3b3b3b)
+导航链接                          ：
+全局边框颜色    ：#e5e5e5
+全局间距                          ：
+全局链接颜色                      ：#227AB9
+全局红颜色                        ：#f10000
+全局黄颜色                        ：
+全局蓝颜色                        ：
+全局绿颜色                        ：#6abf70 
+全局橙颜色                        ：#fd6f35
+全局黑颜色                        ：
+全局深灰颜色                      ：
+全局灰颜色                        ：
+全局浅灰颜色                      ：
+价格字体(字体,大小,颜色,行高)     ：("Microsoft Yahei",14px,#f10000)
+加入购物车按钮：默认 #fd6f35，高亮#fd5916
+*/

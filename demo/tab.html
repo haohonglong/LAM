@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>拖拽实例</title>
+	<link href="css/lib.css" rel="stylesheet" />
+	<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript">
+
+	window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
+		'use strict';
+		var System=this;
+		System.import(['http://dms.website.eyouke.net/templates/768/js/jquery1.7']).import([
+			'/Browser.class',
+			'/Tab.class'
+		],System.classPath);
+
+	});
+
+
+
+</script>
+
+<!--<script type="text/javascript" js="../js/system/Drag.class.js"></script>-->
+<script type="text/javascript">
+
+	window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
+		'use strict';
+		var System=this;
+		$(function(){
+			new System.Tab({
+				'list':$('.list li'),
+				'event':'click',
+				'hover':false,
+				'or':true,
+				'class':'cur',
+				'block':$('.block'),
+				'fn':function(obj){
+					var index=obj.this_index;
+					obj.current.block.hide();
+					obj.current.block.eq(index).show();
+
+				}
+			}).run();
+
+
+
+
+
+		});
+
+
+	});
+
+</script>
+
+
+
+<style type="text/css">
+	.list li{color:#333;width:100px;}
+	.list .cur{color:red;}
+	.hide{display:none;}
+</style>
+</head>
+
+<body>
+<ul class="list sectionFloat clearfix">
+	<li class="cur">111</li>
+	<li>222</li>
+	<li>333</li>
+</ul>
+<div class="block">11111</div>
+<div class="block hide">22222</div>
+<div class="block hide">33333</div>
+
+</body>
+</html>
