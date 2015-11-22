@@ -1,7 +1,7 @@
-version ： LamborghiniJS(OOPJS) 1.0
-author  ：lhh
-创建日期 ：2015-8-19
-修改日期 ：2015-11-22
+	version ： LamborghiniJS(OOPJS) 1.0
+	author  ：lhh
+	创建日期 ：2015-8-19
+	修改日期 ：2015-11-22
 
 
 产品介绍：
@@ -21,6 +21,7 @@ author  ：lhh
 类库声明：
 
 类库说明：
+
 	一、配置
 		
 		一次配置即可搞定!
@@ -63,6 +64,7 @@ author  ：lhh
 
 
 	二、开发约定
+	
 		'LHH_NAMESPACE_20150715_' 在'config.js'里设定,变量名: LHH_NAMESPACE_20150715_ 是框架里定死的禁止改动，可以修改变量的值。
 		禁止修改'Basis.class.js'里的 'LHH_NAMESPACE_20150715_' 的值。
 		成员都是受保护的，不对外共享，如要在外面修改或者复写，都要通过接口。
