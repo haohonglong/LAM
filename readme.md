@@ -1,20 +1,29 @@
 version ： LamborghiniJS(OOPJS) 1.0
 author  ：lhh
 创建日期 ：2015-8-19
-修改日期 ：2015-11-15
+修改日期 ：2015-11-22
 
 
-框架介绍：
-	LamborghiniJS 不是插件，是一个javascript OOP的框架，框架的目的是为应用层开发做更好的基础服务。
-	框架中有选项卡、拖拽、常用工具、弹出层、幻灯、html5绘图基础类的实例
+产品介绍：
+	LamborghiniJS 不是插件，是一种javascript OOP的思想实现的类库，类库的目的是为应用框架的搭建做更好的基础服务。
+	LamborghiniJS 的诞生初衷是自2013年起,为解决自己工作方便写的小工具,发展到现在的一个类库思想实现.
+	LamborghiniJS 的目的是:少写重复性的代码,封装已通过测试功能的成熟代码,便于以后开发中复用.
+	LamborghiniJS 里有接口的概念,每一个类都是通过接口去调用.每定义一个类名,都要先定义一个同名的接口名(参考 二、开发约定 类结构)
+	
+	现有选项卡、拖拽、常用工具、弹出层、幻灯、html5绘图基础类的实例．
+	如要根据项目需求要修改或扩展现有的这些实例，正确的方法是：
+	1.创建一个子类继承父类(现有的实例的类)
+	2.覆写父类里的成员
+	(继承参考 六、继承)
+	错误的方法是:在原有的类库实例上修改!!!
 
-框架声明：
+类库声明：
 
-框架说明：
+类库说明：
 	一、配置
 		
 		一次配置即可搞定!
-		拷贝当前文件夹里的'config.js'文件到你的项目中并引用到页面里，只有这个文件是跟项目绑定的。
+		'config.js'文件到你的项目中并引用到页面里，只有这个文件是跟项目绑定的。
 		<script type="text/javascript" src="./js/config.js"></script>
 		然后修改下面信息 (参考 二、开发约定)
 
@@ -41,10 +50,11 @@ author  ：lhh
 
 
 		'config.js'文件里做的事情是：
-			1.配置框架文件的路径信息及别的相关信息
-			2.加载框架基础类文件
-			3.加载初始化init.js文件
-			4.检测框架文件路径加载是否正确
+			1.配置类库文件的路径信息及别的相关信息
+			2.加载基础类文件
+			3.加载加载器工具
+			4.加载初始化init.js文件
+			5.检测框架文件路径加载是否正确
 
 		'init.js'文件里做的事情是：加载通用框架类
 
@@ -94,8 +104,11 @@ author  ：lhh
         		'Tools'      		:{},
         		'Css'        		:function(){},
         		'FindParentObject'	:function(){},
+        		'Widget'			:function(){},
+                'Tree'				:function(){},
         		'Html5':{
-        			'Canvas':function(){},
+        			'Svg'		:function(){},
+        			'Canvas'	:function(){},
         			'CanvasForm':function(){}
         		}
         	}
@@ -110,13 +123,15 @@ author  ：lhh
                 });
 				上面的是类框架代码块
 				System是一个对象,用来向外提供模块接口
+				
 
 			Example:
 				window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 					'use strict';
 					var System=this;
 					System.is(System,'superName','className');
-
+					System.className={};
+					//如要定义一个类首先要定义一个同名的接口名, 定义的接口名是一个对象,像上面这样方式定义
 					var __this__=null;
 
 					function className(){
@@ -143,7 +158,7 @@ author  ：lhh
 							 * 创建日期：2015-4-2
 							 * 修改日期：2015-4-2
 							 * 名称：destructor
-							 * 功能：在注销Basis对象时调用此方法
+							 * 功能：在注销className对象时调用此方法
 							 * 说明：
 							 * 注意：
 							 * @return  ()						:
