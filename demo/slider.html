@@ -5,9 +5,9 @@
 <title>背景半透明覆盖整个可视区域</title>
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
     <script type="text/javascript" src="js/config.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript">
         var slider;
+
         window[LHH_NAMESPACE_20150715_].main([window,
             '/Browser.class',
             '/Dom.class',
@@ -16,7 +16,17 @@
             '/Slider.class'
         ],function(window,Browser,Dom,Sport,Layout,Slider){
             var System=this;
-            System.import([Browser,Dom,Sport,Layout,Slider],System.classPath);
+            System.
+                    import(["http://code.jquery.com/jquery-2.1.4.min"]).
+                    import([Browser,Dom,Sport,Layout,Slider],System.classPath);
+        });
+    </script>
+
+    <script type="text/javascript">
+        var slider;
+
+        window[LHH_NAMESPACE_20150715_].main([window],function(window){
+            var System=this;
 
             $(function(){
 
@@ -48,7 +58,7 @@
                         if(this.event) {
                             this['$next']['on']('click', function () {
 
-                                 __this__.next();
+                                __this__.next();
                             });
 
                             this['$pre']['on']('click', function () {
