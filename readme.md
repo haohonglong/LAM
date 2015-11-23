@@ -9,7 +9,8 @@
 	LamborghiniJS 不是插件，是一种javascript OOP的思想实现的类库，它可以为应用框架的搭建做更好的基础服务。
 	LamborghiniJS 的诞生初衷是自2013年起,为解决自己工作方便写的小工具,发展到现在的一个类库思想实现.
 	LamborghiniJS 的目的:少写重复性的代码,封装已通过测试功能的成熟代码,便于以后开发中复用.
-	LamborghiniJS 里有接口的概念,每一个类都是通过接口去调用.每定义一个类名,都要先定义一个同名的接口名(参考 二、开发约定 类结构)
+	LamborghiniJS 里有接口的概念,每一个类都要通过接口去调用.每定义一个类名,都要先定义一个同名的接口名(参考 二、开发约定 类结构)
+	LamborghiniJS 里有沙箱机制(参考 十四、沙箱)
 	
 	现有选项卡、拖拽、常用工具、弹出层、幻灯、html5绘图基础类的实例．
 	如要根据项目需求要修改或扩展现有的这些实例，正确的方法是：
@@ -319,11 +320,11 @@
 			Array.each();
 			Array.filter();
 
-	八、框架里的方法说明
+	八、框架里的方法
 			LAMJS.main();
+			LAMJS.import();
 			LAMJS.config();
 			LAMJS.print();
-			LAMJS.import();
 			LAMJS.arr_isEmpty();
 			LAMJS.wait();
 			LAMJS.queues();
@@ -378,6 +379,11 @@
 			 */
 
 	十三、组件的配置属性
+	
+	十四、沙箱(Sandbox)
+		
+		LAMJS.main()是LamborghiniJS 的沙箱机制 也可以用LAMJS.run() 这俩方法等同
+		沙箱的作用防止全局变量污染
 		
 	
 
