@@ -31,6 +31,7 @@ if(!LHH_CLASSPATH_20150717_){
 
 //加载基础类
 document.write('<script src="'+LHH_CLASSPATH_20150717_.getClassPath()+'/Basis.class.js" type="text/javascript"><\/script>');
+document.write('<script src="'+LHH_CLASSPATH_20150717_.getClassPath()+'/loadcommon.js" type="text/javascript"><\/script>');
 document.write('<script src="'+LHH_CLASSPATH_20150717_.getClassPath()+'/init.js" type="text/javascript"><\/script>');
 
 
