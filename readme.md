@@ -85,12 +85,12 @@
         all classes：
         	{
         		'Basis'      		:function(){},
+        		'BiObject'   		:function(){},
         		'Component'      	:function(){},
         		'Helper'     		:function(){},
         		'Browser'    		:function(){},
         		'Event'      		:function(){},
         		'Dom'        		:function(){},
-        		'BiObject'   		:function(){},
         		'Cookie'     		:function(){},
         		'Html'        		:function(){},
         		'Drag'       		:function(){},
@@ -337,6 +337,7 @@
 			LAMJS.merge();
 			LAMJS.clone();
 			LAMJS.is();
+			LAMJS.log();
 			LAMJS.autoCenter();
 			
 			LAMJS.Basis.printTag();
