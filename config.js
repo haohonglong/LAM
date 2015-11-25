@@ -21,7 +21,7 @@ if(!LHH_NAMESPACE_20150715_){
 if(!LHH_CLASSPATH_20150717_){
     var LHH_CLASSPATH_20150717_={
         'vendorPath':'./',
-        'classPath':'lib/js',
+        'classPath':'lib/class',
         'getClassPath':function(){
             return this.vendorPath+this.classPath;
         }
