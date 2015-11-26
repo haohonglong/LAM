@@ -1,0 +1,26 @@
+2015-11月 项目：
+	一、项目名称(大屏幕)
+			一、插件集合
+				1.boostrap
+				2.jquery
+				3.圆圈转动  : jquery.easy-pie-chart  	url:
+				4.三角形    : skinny-frames 			url:https://github.com/haohonglong/PixelKit-Bootstrap-UI-Kits
+				5.仪表盘	   : justgage				url:https://github.com/toorshia/justgage
+
+			二、技术分析
+
+			三、布局分析
+				header
+					logo
+					headerDataShow
+				sidebar
+				content
+					nav
+						crumb
+						logout
+					summary
+						site-images
+						site-summary
+						site-situation
+					detail
+
