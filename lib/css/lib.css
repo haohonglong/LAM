@@ -103,14 +103,6 @@ a{-webkit-transition:all 0.5s linear;-moz-transition:all 0.5s linear;-ms-transit
 .lhh-placeholder-p{white-space:pre-line; line-height:18px; }
 
 
-/*
-双飞翼布局
-*/
-.lhh-brid-main{background:red;width:100%;}
-.lhh-brid-main-content{margin:0 200px 0 150px;padding:20px;}
-.lhh-brid-col1{width:150px; background:blue;margin-left:-100%;}
-.lhh-brid-col2{width:200px;margin-left:-200px; background:green;}
-
 
 
 
