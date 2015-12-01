@@ -28,13 +28,17 @@
 .section-row{}
 .section-col-1{}
 
-
 /*
 双飞翼布局
 */
-.lhh-brid-main{background:red;width:100%;}
-.lhh-brid-main-content{margin:0 200px 0 150px;padding:20px;}
-.lhh-brid-col1{width:150px; background:blue;margin-left:-100%;}
-.lhh-brid-col2{width:200px;margin-left:-200px; background:green;}
+.brid{ width:100%; margin-right:auto; margin-left:auto;}
+.brid-main{float:left; width:100%; min-height:30px; background:#ccc;}
+.brid-main-warp{
+    margin-left:200px;  /*与col-sub产生10像素距离*/
+    margin-right:200px; /*与col-extra产生10像素距离*/
+    background:#e5e5e5;
+    min-height:30px;}
+.brid-sub{float:left; width:190px; min-height:30px; background:#eee; margin-left:-100%;}
+.brid-extra{float:left; width:190px; min-height:30px; background:#ddd; margin-left:-190px; }
 
 
