@@ -4,8 +4,8 @@
 
 /*float*/
 .L,.R,.fl,.fr{_display: inline;}
-.L,.fl{float:left;}
-.R,.fr{float: right;}
+.L,.fl,.pull-left{float:left;}
+.R,.fr,.pull-right{float: right;}
 .f-none{float: none; float: none!important;}
 
 /*clear float*/
@@ -489,29 +489,55 @@ html:
 /*仅被firefox支持*/ 
 @-moz-document url-prefix() {}
 
-
-/*主要是针对Webkit内核的浏览器，如Google Chrome 和 Safari浏览器：*/
+/*Webkit枘核浏览器(chrome and safari)*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {}
+/*Opera浏览器*/
+@media all and (min-width:0){}
 
 
 /*响应式*/
 /*=============================================================================*/
-/*computer*/
-@media (min-width: 960px) {}
 
-/* 平板电脑和小屏电脑之间的分辨率的样式 */
-@media (min-width: 768px) and (max-width: 979px) {}
-
-/* 横向放置的手机和竖直放置的平板之间分辨率的样式 */
+/* 超小屏幕
+手机 (<768px) */
 @media (max-width: 767px) {}
+
+/*
+小屏幕 平板 (≥768px)
+中等屏幕 桌面 (≥992px)*/
+@media (min-width:768px)and (max-width:991px) {}
+
+@media (min-width:992px) {}
+
+@media (min-width:768px){}
+
+@media screen and (min-width:768px) {}
+
+/*移动设备整个显示区域的宽度480px 并且是横屏时*/
+@media (max-device-width:480px)and (orientation:landscape) {}
+
 
 /* 横向放置的手机及分辨率更小的设备的样式 */
 @media (max-width: 522px) {}
-
 @media (max-width: 255px) {}
 
-/* 只要屏幕小于768就执行里面的样式*/
-@media only screen and (max-width: 768px) {}
+/*中等屏幕
+桌面 (≥992px)*/
+@media (min-width:992px)and (max-width:1199px){}
+
+/*大屏幕
+桌面 (≥1200px)*/
+@media (min-width:1200px) {}
+
+/* 只要屏幕小于767就执行里面的样式*/
+@media only screen and (max-width: 767px) {}
+
+@media screen and (max-width:767px) {}
+
+/*打印*/
+@media print {}
+
+
 /*end=============================================================================*/
 
 
