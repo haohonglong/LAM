@@ -6,14 +6,14 @@ just here is interface
 @autho: lhh
 命名规则(避免多人开发或者和别的插件命名冲突)：
    1.模块命名
-        _lhh_-name{}
+        _lhh_name{}
         作者-模块名称{}
    2.模块命名
-        _lhh_-item-name{}
+        _lhh_item_name{}
         作者-项目名称-模块名称{}
 
    3.多模版互相嵌套避免命名冲突法：
-        _lhh_-item-tpl-name{}
+        _lhh_item_tpl_name{}
         作者-项目名称-模板名称-模块名称{}
 */
 
