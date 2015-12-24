@@ -1,5 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
+/*页面架子 begin*/
+    ._lhh_container{position: relative;}
+    ._lhh_secondary{}
+    ._lhh_primary{}
+/*页面架子 end*/
 
 .wrap-container{}
 .wrap-wrapper{}

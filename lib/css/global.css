@@ -3,7 +3,7 @@
 /* CSS Document */
 /*float li*/
 .sectionFloat{position:relative;}
-.sectionFloat > li,.sectionFloat .item{float:left;display: inline;}
+.sectionFloat li,.sectionFloat .item{float:left;display: inline;}
 .sectionFloat .R{float:right;}
 .sectionFloat .N{float:none;}
 

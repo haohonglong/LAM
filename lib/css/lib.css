@@ -6,10 +6,14 @@ just here is interface
 @autho: lhh
 命名规则(避免多人开发或者和别的插件命名冲突)：
    1.模块命名
-        lhh-item-Model{}
+        _lhh_-name{}
+        作者-模块名称{}
+   2.模块命名
+        _lhh_-item-name{}
         作者-项目名称-模块名称{}
-   2.多模版互相嵌套避免命名冲突法：
-        lhh-item-tpl-Model{}
+
+   3.多模版互相嵌套避免命名冲突法：
+        _lhh_-item-tpl-name{}
         作者-项目名称-模板名称-模块名称{}
 */
 
@@ -131,6 +135,7 @@ a{-webkit-transition:all 0.5s linear;-moz-transition:all 0.5s linear;-ms-transit
 
 /*文字样式*/
 .font,.font a{color: #666;font-size: 12px;}
+.font-warning,.font-warning a{color: #ff0101;}
 .font-grey,.font-grey a{color: #ccc;}
 .font-333,.font-333 a{color: #333;}
 .font-f60,.font-f60 a{color: #f60;}
@@ -140,6 +145,9 @@ a{-webkit-transition:all 0.5s linear;-moz-transition:all 0.5s linear;-ms-transit
 .font-white,.font-white a{color: #fff;}
 .font-green,.font-green a{color: #41bd39;}
 .font-blue,.font-blue a{color: #33a5f7;}
+.font-12,.font-12 a{font-size: 12px;}
+.font-14,.font-14 a{font-size: 14px;}
+.font-16,.font-16 a{font-size: 16px;}
 
 /*传统标题*/
 h1,h2,h3,h4,h5,h6{font-family:"Microsoft Yahei";font-weight:bold;letter-spacing:normal;}
@@ -242,6 +250,15 @@ row : 横线
     ._lhh_icon.del{background-position: 0 0;}
 /*icon end*/
 
+/*单独图标*/
+/*icon begin*/
+    ._lhh_icon{position: relative;}
+    ._lhh_icon-i{position: absolute;right: 10px;top:10px; width:10px;height:10px;background:url(img/icons.png) no-repeat;}
+    ._lhh_icon-i.plus{background-position: 0 0;}
+    ._lhh_icon-i.edit{background-position: 0 0;}
+    ._lhh_icon-i.del{background-position: 0 0;}
+/*icon end*/
+
 /*背景图片箭头 begin*/
     ._lhh_imgArrow{position: relative;}
     ._lhh_imgArrow-i {background:url(img/arrow.png) no-repeat 0 0;position:absolute;top:15px;right:2em;cursor: pointer;}
@@ -260,7 +277,7 @@ ir      :右边图标样式
 /*==============================================================================================================================================*/
 ._lhh_arrow       {position: relative;}
 ._lhh_arrow-i {width: 0;height: 0;position: absolute;overflow: hidden;border-width: 5px;font-size:0;line-height: 0; margin: 0;}
-._lhh_arrow-i.iup{border-style: dashed dashed solid; border-color:transparent transparent #b8b8b8;  }
+._lhh_arrow-i.up{border-style: dashed dashed solid; border-color:transparent transparent #b8b8b8;  }
 ._lhh_arrow-i.down{border-style: solid dashed dashed; border-color: #b8b8b8 transparent transparent;bottom: -10px; }
 ._lhh_arrow-i.il {border-style: dashed solid dashed dashed; border-color:transparent #b8b8b8 transparent transparent;}
 ._lhh_arrow-i.ir {border-style: dashed dashed dashed solid; border-color:transparent transparent transparent #b8b8b8;}
@@ -288,6 +305,28 @@ border  :边线颜色
     transform:rotate(-45deg);
     filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=0.7660444431189777, M12=-0.6427876096865394, M21=0.6427876096865398, M22=0.7660444431189779); 
 }
+
+
+
+
+
+
+
+/*arrow begin*/
+    ._lhh_arrow       {position: relative;}
+    ._lhh_arrow-i {width: 0;height: 0;position: absolute;overflow: hidden;border-width: 5px;font-size:0;line-height: 0; margin: 0;cursor: pointer;}
+    ._lhh_arrow-i.up{border-style: dashed dashed solid; border-color:transparent transparent #1177ee;  }
+    ._lhh_arrow-i.down{border-style: solid dashed dashed; border-color: #1177ee transparent transparent;}
+/*arrow end*/
+
+
+
+/*背景图片箭头 begin*/
+    ._lhh_imgArrow{position: relative;}
+    ._lhh_imgArrow-i {background:url(img/arrow.png) no-repeat 0 0;position:absolute;top:15px;right:2em;cursor: pointer;}
+    ._lhh_imgArrow-i.up{}
+    ._lhh_imgArrow-i.down{background-position: 0 -80px;}
+/*背景图片箭头 end*/
 
 /*==============================================================================================================================================*/
 
@@ -407,25 +446,26 @@ border  :边线颜色
 
 
 
-/*button*/
-._lhh_button{display:block; width:108px;height:24px;background:#ccc;cursor: pointer;}
-._lhh_button.search{}
-._lhh_button.export{}
-._lhh_button.del{}
-._lhh_button.add{}
-._lhh_button.save{}
-._lhh_button.back{}
-._lhh_button:hover,
-._lhh_button.hover{background: #009389;}
+/*button begin*/
+    ._lhh_button{display:block; width:108px;height:24px;background:#ccc;cursor: pointer;}
+    ._lhh_button.search{}
+    ._lhh_button.export{}
+    ._lhh_button.del{}
+    ._lhh_button.add{}
+    ._lhh_button.save{}
+    ._lhh_button.back{}
+    ._lhh_button:hover,
+    ._lhh_button.hover{background: #009389;}
+/*button end*/
 
 /*image button begin*/
-._lhh_imgButton{display:block; width:108px;height:24px;background:#ccc url(img/buttons.png) no-repeat;cursor: pointer;}
-._lhh_imgButton.search{background-position: 0 0;}
-._lhh_imgButton.export{background-position: 0 -24px;}
-._lhh_imgButton.del{background-position: 0 -48px;}
-._lhh_imgButton.add{background-position: 0 72px;}
-._lhh_imgButton.save{background-position: 0 0;}
-._lhh_imgButton.back{background-position: 0 0;}
+    ._lhh_imgButton{display:block; width:108px;height:24px;background:#ccc url(img/buttons.png) no-repeat;cursor: pointer;}
+    ._lhh_imgButton.search{background-position: 0 0;}
+    ._lhh_imgButton.export{background-position: 0 -24px;}
+    ._lhh_imgButton.del{background-position: 0 -48px;}
+    ._lhh_imgButton.add{background-position: 0 72px;}
+    ._lhh_imgButton.save{background-position: 0 0;}
+    ._lhh_imgButton.back{background-position: 0 0;}
 /*image button end*/
 
 

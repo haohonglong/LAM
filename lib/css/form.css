@@ -2,14 +2,18 @@
 /* CSS Document */
 /*表单样式*/
 /*forms*/
-._lhh_form{font-family:"SimSun";}
+._lhh_form{}
 ._lhh_form-ul{*margin-bottom: 10px;}
 ._lhh_form-li{position: relative;line-height: 25px;}
-._lhh_form-label{font-size: 12px;text-align: right;margin-right: 5px;}
+._lhh_form-label,
+._lhh_form-text label{font-size: 12px;text-align: right;margin-right: 5px;font-weight: normal;}
 ._lhh_form-label-warning{color: #f00;margin: 0;}
 ._lhh_form-text{width: auto; height: 25px;padding: 0 5px;color: #333; vertical-align:middle;font-size:12px;border: 1px solid #ccc;}
+._lhh_form-text-i{width:10px;height:10px;position: absolute;right:15px;top:15px;cursor: pointer;background:url(img/icons.png) no-repeat 0 0;}
+._lhh_form-pass{}
 ._lhh_form-radio{}
 ._lhh_form-radio-span{margin-right: 5px;color: #333;font-size: 12px;}
+._lhh_form-checkbox{}
 ._lhh_form-textarea{width: 490px;border: 1px solid #ccc;font-size: 12px;padding: 10px;color: #999;}
 ._lhh_form-select{width: auto;padding: 3px 2px; font-size:12px;border: 1px solid #ccc;}
 ._lhh_form-warning{color: #cc0000;margin:0 5px;}
@@ -44,6 +48,8 @@
        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
           transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+
+
 
 
 
