@@ -22,6 +22,7 @@ if(!LHH_CLASSPATH_20150717_){
     var LHH_CLASSPATH_20150717_={
         'vendorPath':'../',
         'classPath':'lib/class',
+        'random':20000,
         'getClassPath':function(){
             return this.vendorPath+this.classPath;
         }
