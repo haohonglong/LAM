@@ -36,12 +36,34 @@
         	var LHH_NAMESPACE_20150715_='interfaceName';
         }
 
-        if(!LHH_CLASSPATH_20150717_){
-            var LHH_CLASSPATH_20150717_={
-                'path':'../',
-                'classpath':'LamborghiniJS',
-                'getClasspath':function(){
-                    return this.path+this.classpath;
+        if(!LHH_CONFIG_20150717_){
+            var LHH_CONFIG_20150717_={
+                'vendorPath':'../lib/',
+                'classPath':'class',
+                //hashcode 随机种子
+                'random':10000,
+                //标签的渲染方式 (create | print)
+                'render':{
+                    //输出标签的方式 (create | print)
+                    'create':'print',
+                    'script':{
+                        'Attribute':{
+                            'type':'text/javascript',
+                            'charset':'utf-8'
+                            //'defer':'defer',
+                            //'async':'async'
+                        }
+                    },
+                    'css':{
+                        'Attribute':{
+                            'type':'text/css',
+                            'rel':'stylesheet'
+                        }
+                    }
+        
+                },
+                'getClassPath':function(){
+                    return this.vendorPath+this.classPath;
                 }
             };
         }
@@ -49,8 +71,8 @@
 
         根据下面三条修改上面对应的参数
 			1.修改 LHH_NAMESPACE_20150715_ 的值
-			2.修改 LHH_CLASSPATH_20150717_.path 的值
-			3.修改 LHH_CLASSPATH_20150717_.classpath 的值
+			2.修改 LHH_CONFIG_20150717_.vendorPath 的值
+			3.修改 LHH_CONFIG_20150717_.classPath 的值
 
 
 		'config.js'文件里做的事情是：
@@ -395,6 +417,10 @@
 		1.实例化时自动生成
 		2.调用静态的 BiObject.toHashCode()方法生成(如果检查对象里已有_hashCode 就返回,不会重新生成新的值)
 		当前实例的对象的toHashCode()方法可以返回_hashCode 如果没有就创建并返回
+		
+	十六、标签渲染方式(在配置文件中设置)
+		1.create
+		2.print
 		
 
 
