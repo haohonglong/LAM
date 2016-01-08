@@ -28,6 +28,7 @@ if(!LHH_CONFIG_20150717_){
         'render':{
             //输出标签的方式 (create | print)
             'create':'print',
+            'append':'after',
             'script':{
                 'Attribute':{
                     'type':'text/javascript',
