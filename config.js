@@ -34,7 +34,7 @@ if(!LHH_CONFIG_20150717_){
                     'type':'text/javascript',
                     'charset':'utf-8'
                     //'defer':'defer',
-                    //'async':'async'
+                    //'async':true
                 }
             },
             'css':{
