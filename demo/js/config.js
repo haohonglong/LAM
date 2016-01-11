@@ -28,13 +28,13 @@ if(!LHH_CONFIG_20150717_){
         'render':{
             //输出标签的方式 (create | print)
             'create':'print',
-            'append':'befor',
+            'append':'after',
             'script':{
                 'Attribute':{
                     'type':'text/javascript',
                     'charset':'utf-8'
                     //'defer':'defer',
-                    //'async':'async'
+                    //'async':true
                 }
             },
             'css':{
