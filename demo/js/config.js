@@ -30,14 +30,14 @@ if(!LHH_CONFIG_20150717_){
             //输出标签的方式 ()
             'fragment':null,
             //true : document.createElement(); false :document.write();
-            'create':true,
+            'create':null,
             'append':'after',
             'script':{
                 'Attribute':{
                     'type':'text/javascript',
-                    'charset':'utf-8'
                     //'defer':'defer',
-                    //'async':true
+                    //'async':true,
+                    'charset':'utf-8'
                 }
             },
             'css':{
@@ -113,6 +113,8 @@ if(!LHH_CONFIG_20150717_){
             document.write('<'+tag+' src="'+Config.getClassPath()+srcs[i]+'" type="text/javascript"><\/'+tag+'>');
         }
     }
+
+
 })(LHH_CONFIG_20150717_);
 
 
