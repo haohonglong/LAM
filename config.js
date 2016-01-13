@@ -29,7 +29,7 @@ if(!LHH_CONFIG_20150717_){
             //输出标签的方式 ()
             'fragment':null,
             //true : document.createElement(); false :document.write();
-            'create':true,
+            'create':null,
             'append':'after',
             'script':{
                 'Attribute':{
