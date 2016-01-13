@@ -4,92 +4,7 @@
 <meta http-equiv="content-Type" content="text/html" charset="utf-8">
 <title>背景半透明覆盖整个可视区域</title>
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-    <script type="text/javascript" src="js/config.js"></script>
-    <script type="text/javascript">
-        var slider;
 
-        window[LHH_NAMESPACE_20150715_].main([window,
-            '/Browser.class',
-            '/Dom.class',
-            '/Sport.class',
-            '/Layout.class',
-            '/Slider.class'
-        ],function(window,Browser,Dom,Sport,Layout,Slider){
-            var System=this;
-            System.
-                    import(["http://code.jquery.com/jquery-2.1.4.min"]).
-                    import([Browser,Dom,Sport,Layout,Slider],System.classPath);
-        });
-    </script>
-
-    <script type="text/javascript">
-        var slider;
-
-        window[LHH_NAMESPACE_20150715_].run([window],function(window){
-            var System=this;
-
-            $(function(){
-
-                slider=new System.Slider({
-                    '$pre':$('.pre'),
-                    '$next':$('.next'),
-                    '$autoHandler':$('.Area'),
-                    '$ul':$('ul.imgs'),
-                    '$li':$('.img'),
-                    '$view':$('.Area'),
-                    'count':$('.img').length,
-                    'unit':'px',
-                    'margin':5,
-                    'moveNumber':3,
-                    'vcount':2,
-                    'position':'left',
-                    'autoMove':function(that,$autoHandler){
-                        $autoHandler = $autoHandler || that.$autoHandler;
-                        $autoHandler.hover(function(){
-                            that.stop();
-                        },function(){
-                            that.begin();
-                        });
-                    },
-
-                    'callback_event':function(){
-                        var __this__ =this;
-
-                        if(this.event) {
-                            this['$next']['on']('click', function () {
-
-                                __this__.next();
-                            });
-
-                            this['$pre']['on']('click', function () {
-                                __this__.pre();
-
-
-                            });
-
-                        }
-
-
-                    },
-                    'sport':true
-                }).run();
-
-                $(window).resize(function(){
-                    slider.resize();
-
-                });
-
-
-
-
-            });
-
-
-
-
-
-        });
-    </script>
 
 </head>
 <body>
@@ -126,8 +41,92 @@
 <br>
 <br>
 <br>
-<script type="text/javascript">
-
-</script>
 </body>
+
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript">
+    var slider;
+
+    window[LHH_NAMESPACE_20150715_].main([window,
+        '/Browser.class',
+        '/Dom.class',
+        '/Sport.class',
+        '/Layout.class',
+        '/Slider.class'
+    ],function(window,Browser,Dom,Sport,Layout,Slider){
+        var System=this;
+        System.
+                import(["http://code.jquery.com/jquery-2.1.4.min"]).
+                import([Browser,Dom,Sport,Layout,Slider],System.classPath);
+    });
+</script>
+
+<script type="text/javascript">
+    var slider;
+
+    window[LHH_NAMESPACE_20150715_].run([window],function(window){
+        var System=this;
+
+        $(function(){
+
+            slider=new System.Slider({
+                '$pre':$('.pre'),
+                '$next':$('.next'),
+                '$autoHandler':$('.Area'),
+                '$ul':$('ul.imgs'),
+                '$li':$('.img'),
+                '$view':$('.Area'),
+                'count':$('.img').length,
+                'unit':'px',
+                'margin':5,
+                'moveNumber':3,
+                'vcount':2,
+                'position':'left',
+                'autoMove':function(that,$autoHandler){
+                    $autoHandler = $autoHandler || that.$autoHandler;
+                    $autoHandler.hover(function(){
+                        that.stop();
+                    },function(){
+                        that.begin();
+                    });
+                },
+
+                'callback_event':function(){
+                    var __this__ =this;
+
+                    if(this.event) {
+                        this['$next']['on']('click', function () {
+
+                            __this__.next();
+                        });
+
+                        this['$pre']['on']('click', function () {
+                            __this__.pre();
+
+
+                        });
+
+                    }
+
+
+                },
+                'sport':true
+            }).run();
+
+            $(window).resize(function(){
+                slider.resize();
+
+            });
+
+
+
+
+        });
+
+
+
+
+
+    });
+</script>
 </html> 

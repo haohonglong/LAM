@@ -26,8 +26,10 @@ if(!LHH_CONFIG_20150717_){
         'random':10000,
         //标签的渲染方式
         'render':{
-            //输出标签的方式 (create | print)
-            'create':'print',
+            //输出标签的方式 ()
+            'fragment':null,
+            //true : document.createElement(); false :document.write();
+            'create':true,
             'append':'after',
             'script':{
                 'Attribute':{
@@ -42,20 +44,76 @@ if(!LHH_CONFIG_20150717_){
                     'type':'text/css',
                     'rel':'stylesheet'
                 }
+            },
+            'H':{
+                'html'    : document.getElementsByTagName('html')[0],
+                'head'    : document.getElementsByTagName('head')[0],
+                'body'    : document.getElementsByTagName('body')[0],
+                'meta'    : document.getElementsByTagName('meta'),
+                'script'  : document.getElementsByTagName('script'),
+                'link'    : document.getElementsByTagName('link')
+            },
+            'bulid':function(tag,D){
+                tag = tag || "div";
+                var node;
+                var k;
+                var fragment;
+                node=document.createElement(tag);
+
+                for(k in D){
+                    node[k] = D[k];
+                }
+
+                if(!LHH_CONFIG_20150717_.render.fragment){
+                    LHH_CONFIG_20150717_.render.fragment = document.createDocumentFragment();
+                }
+                fragment = LHH_CONFIG_20150717_.render.fragment;
+
+                LHH_CONFIG_20150717_.render.fragment.appendChild(node);
+
+                return fragment;
             }
 
         },
+        'init':{},
         'getClassPath':function(){
             return this.vendorPath+this.classPath;
         }
     };
 }
 
-
 //加载基础类
-document.write('<script src="'+LHH_CONFIG_20150717_.getClassPath()+'/Basis.class.js" type="text/javascript"><\/script>');
-document.write('<script src="'+LHH_CONFIG_20150717_.getClassPath()+'/loadcommon.js" type="text/javascript"><\/script>');
-document.write('<script src="'+LHH_CONFIG_20150717_.getClassPath()+'/init.js" type="text/javascript"><\/script>');
+(function(Config){
+    var tag = "script";
+    var scriptAttribute = Config.render.script.Attribute;
+    var i = 0;
+    var len;
+    var data;
+    var srcs =[
+        '/Basis.class.js',
+        '/loadcommon.js',
+        '/init.js'];
+
+    if(Config.render.create){
+        for(i=0,len = srcs.length;i < len; i++){
+            var data = scriptAttribute;
+            data.src = Config.getClassPath()+srcs[i],
+            Config.render.bulid(tag,data);
+        }
+        Config.render.H.body.appendChild(Config.render.fragment);
+
+
+
+    }else{
+        for(i=0,len = srcs.length;i < len; i++){
+            document.write('<'+tag+' src="'+Config.getClassPath()+srcs[i]+'" type="text/javascript"><\/'+tag+'>');
+        }
+    }
+})(LHH_CONFIG_20150717_);
+
+
+
+
 
 
 setTimeout(function(){
