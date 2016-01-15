@@ -35,8 +35,8 @@ if(!LHH_CONFIG_20150717_){
             'script':{
                 'Attribute':{
                     'type':'text/javascript',
-                    //'defer':'defer',
                     //'async':true,
+                    //'defer':'defer',
                     'charset':'utf-8'
                 }
             },
@@ -94,7 +94,9 @@ if(!LHH_CONFIG_20150717_){
     var srcs =[
         '/Basis.class.js',
         '/loadcommon.js',
-        '/init.js'];
+        '/BiObject.class.js',
+        '/Component.class.js',
+        '/Helper.class.js'];
 
     if(Config.render.create){
         for(i=0,len = srcs.length;i < len; i++){

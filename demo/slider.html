@@ -68,6 +68,20 @@
         var System=this;
 
         $(function(){
+            var html = System.classPath+"/Html.class.js";
+//            $.ajax({
+//                type: "GET",
+//                url: System.classPath+"/Slider.class.js",
+//                dataType: "script",
+//                success: function(msg){
+//                    console.log(msg)
+//                }
+//            });
+
+//            jQuery.getScript(html, function(i){
+//                eval(i)
+//                console.log(System.Html)
+//            });
 
             slider=new System.Slider({
                 '$pre':$('.pre'),
