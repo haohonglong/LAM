@@ -33,7 +33,7 @@
 
     </ul>
 </div>
-
+<include url="./js/form.js" type="script"></include>
 
 <br>
 <br>
@@ -66,17 +66,24 @@
 
     window[LHH_NAMESPACE_20150715_].run([window],function(window){
         var System=this;
+        //include html
+        function include($dom,type){
+            type = type || "GET";
+            var dataType = $dom.attr('type') || "html";
+            $.ajax({
+                type: type,
+                url: $dom.attr('url'),
+                dataType: dataType,
+                success: function(msg){
+                    $dom.after(eval(msg)).remove();
+                }
+            });
+        }
 
         $(function(){
             var html = System.classPath+"/Html.class.js";
-//            $.ajax({
-//                type: "GET",
-//                url: System.classPath+"/Slider.class.js",
-//                dataType: "script",
-//                success: function(msg){
-//                    console.log(msg)
-//                }
-//            });
+            include($('include'));
+
 
 //            jQuery.getScript(html, function(i){
 //                eval(i)
