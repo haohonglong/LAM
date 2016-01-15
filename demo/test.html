@@ -8,3 +8,50 @@
 <div class="block hide">22222</div>
 <div class="block hide">33333</div>
 
+<script type="text/javascript">
+
+	window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
+		'use strict';
+		var System=this;
+
+		System.import([
+			'/Tab.class'
+		],System.classPath);
+
+	});
+
+
+
+</script>
+
+<script type="text/javascript">
+
+	window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
+		'use strict';
+		var System=this;
+		$(function(){
+			new System.Tab({
+				'list':$('.list li'),
+				'event':'click',
+				'hover':false,
+				'or':true,
+				'class':'cur',
+				'block':$('.block'),
+				'fn':function(obj){
+					var index=obj.this_index;
+					obj.current.block.hide();
+					obj.current.block.eq(index).show();
+
+				}
+			}).run();
+
+
+
+
+
+		});
+
+
+	});
+
+</script>

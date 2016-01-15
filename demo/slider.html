@@ -33,7 +33,7 @@
 
     </ul>
 </div>
-<include url="./js/form.js" type="script"></include>
+<include url="./test.html" type="html"></include>
 
 <br>
 <br>
@@ -52,12 +52,13 @@
         '/Dom.class',
         '/Sport.class',
         '/Layout.class',
+        '/Html.class',
         '/Slider.class'
-    ],function(window,Browser,Dom,Sport,Layout,Slider){
+    ],function(window,Browser,Dom,Sport,Layout,Html,Slider){
         var System=this;
         System.
                 import(["http://code.jquery.com/jquery-2.1.4.min"]).
-                import([Browser,Dom,Sport,Layout,Slider],System.classPath);
+                import([Browser,Dom,Sport,Layout,Html,Slider],System.classPath);
     });
 </script>
 
@@ -66,23 +67,13 @@
 
     window[LHH_NAMESPACE_20150715_].run([window],function(window){
         var System=this;
-        //include html
-        function include($dom,type){
-            type = type || "GET";
-            var dataType = $dom.attr('type') || "html";
-            $.ajax({
-                type: type,
-                url: $dom.attr('url'),
-                dataType: dataType,
-                success: function(msg){
-                    $dom.after(eval(msg)).remove();
-                }
-            });
-        }
+        System.Config.render.create=true;
+        System.Config.render.script.Attribute.async=true;
+
 
         $(function(){
             var html = System.classPath+"/Html.class.js";
-            include($('include'));
+            System.Html.include($('include'));
 
 
 //            jQuery.getScript(html, function(i){
