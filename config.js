@@ -89,17 +89,22 @@ if(!LHH_CONFIG_20150717_){
     var i = 0;
     var len;
     var data;
+    //加载基础类
     var srcs =[
         '/Basis.class.js',
         '/loadcommon.js',
-        '/init.js'];
+        '/BiObject.class.js',
+        '/Component.class.js',
+        '/Helper.class.js'];
 
     if(Config.render.create){
         for(i=0,len = srcs.length;i < len; i++){
             var data = scriptAttribute;
             data.src = Config.getClassPath()+srcs[i],
-            Config.render.bulid(tag,data);
+                Config.render.bulid(tag,data);
         }
+        console.log(Config.render.H.body)
+        console.log(Config.render.fragment)
         Config.render.H.body.appendChild(Config.render.fragment);
 
 
@@ -109,6 +114,8 @@ if(!LHH_CONFIG_20150717_){
             document.write('<'+tag+' src="'+Config.getClassPath()+srcs[i]+'" type="text/javascript"><\/'+tag+'>');
         }
     }
+
+
 })(LHH_CONFIG_20150717_);
 
 
