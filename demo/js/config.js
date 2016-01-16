@@ -135,5 +135,11 @@ if(!LHH_CONFIG_20150717_){
 setTimeout(function(){
     if(!window[LHH_NAMESPACE_20150715_]) {
         alert("cannot find Basis class");
+    }else{
+        window[LHH_NAMESPACE_20150715_].main(function(){
+            var System=this;
+            System.print();
+
+        });
     }
 },1800);
