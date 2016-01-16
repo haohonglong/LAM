@@ -97,7 +97,9 @@ if(!LHH_CONFIG_20150717_){
         '/loadcommon.js',
         '/BiObject.class.js',
         '/Component.class.js',
-        '/Helper.class.js'];
+        '/Helper.class.js',
+        '/jQuery/jquery.js'
+    ];
 
     if(Config.render.create){
         for(i=0,len = srcs.length;i < len; i++){
