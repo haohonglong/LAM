@@ -34,9 +34,9 @@ if(!LHH_CONFIG_20150717_){
             'script':{
                 'Attribute':{
                     'type':'text/javascript',
-                    'charset':'utf-8'
+                    //'async':true,
                     //'defer':'defer',
-                    //'async':true
+                    'charset':'utf-8'
                 }
             },
             'css':{
