@@ -29,7 +29,7 @@ if(!LHH_CONFIG_20150717_){
             //输出标签的方式 ()
             'fragment':null,
             //true : document.createElement(); false :document.write();
-            'create':null,
+            'create':false,
             'append':'after',
             'script':{
                 'Attribute':{
@@ -58,18 +58,19 @@ if(!LHH_CONFIG_20150717_){
                 var node;
                 var k;
                 var fragment;
+                var Config = LHH_CONFIG_20150717_;
                 node=document.createElement(tag);
 
                 for(k in D){
                     node[k] = D[k];
                 }
 
-                if(!LHH_CONFIG_20150717_.render.fragment){
-                    LHH_CONFIG_20150717_.render.fragment = document.createDocumentFragment();
+                if(!Config.render.fragment){
+                    Config.render.fragment = document.createDocumentFragment();
                 }
-                fragment = LHH_CONFIG_20150717_.render.fragment;
+                fragment = Config.render.fragment;
 
-                LHH_CONFIG_20150717_.render.fragment.appendChild(node);
+                Config.render.fragment.appendChild(node);
 
                 return fragment;
             }

@@ -36,37 +36,71 @@
         	var LHH_NAMESPACE_20150715_='interfaceName';
         }
 
-        if(!LHH_CONFIG_20150717_){
-            var LHH_CONFIG_20150717_={
-                'vendorPath':'../lib/',
-                'classPath':'class',
-                //hashcode 随机种子
-                'random':10000,
-                //标签的渲染方式 (create | print)
-                'render':{
-                    //输出标签的方式 (create | print)
-                    'create':'print',
-                    'script':{
-                        'Attribute':{
-                            'type':'text/javascript',
-                            'charset':'utf-8'
-                            //'defer':'defer',
-                            //'async':'async'
-                        }
-                    },
-                    'css':{
-                        'Attribute':{
-                            'type':'text/css',
-                            'rel':'stylesheet'
-                        }
-                    }
         
-                },
-                'getClassPath':function(){
-                    return this.vendorPath+this.classPath;
-                }
-            };
-        }
+		if(!LHH_CONFIG_20150717_){
+			var LHH_CONFIG_20150717_={
+				'vendorPath':'./lib/',
+				'classPath':'class',
+				//hashcode 随机种子
+				'random':10000,
+				//标签的渲染方式
+				'render':{
+					//输出标签的方式 ()
+					'fragment':null,
+					//true : document.createElement(); false :document.write();
+					'create':null,
+					'append':'after',
+					'script':{
+						'Attribute':{
+							'type':'text/javascript',
+							//'async':true,
+							//'defer':'defer',
+							'charset':'utf-8'
+						}
+					},
+					'css':{
+						'Attribute':{
+							'type':'text/css',
+							'rel':'stylesheet'
+						}
+					},
+					'H':{
+						'html'    : document.getElementsByTagName('html')[0],
+						'head'    : document.getElementsByTagName('head')[0],
+						'body'    : document.getElementsByTagName('body')[0],
+						'meta'    : document.getElementsByTagName('meta'),
+						'script'  : document.getElementsByTagName('script'),
+						'link'    : document.getElementsByTagName('link')
+					},
+					'bulid':function(tag,D){
+						tag = tag || "div";
+						var node;
+						var k;
+						var fragment;
+						node=document.createElement(tag);
+		
+						for(k in D){
+							node[k] = D[k];
+						}
+		
+						if(!LHH_CONFIG_20150717_.render.fragment){
+							LHH_CONFIG_20150717_.render.fragment = document.createDocumentFragment();
+						}
+						fragment = LHH_CONFIG_20150717_.render.fragment;
+		
+						LHH_CONFIG_20150717_.render.fragment.appendChild(node);
+		
+						return fragment;
+					}
+		
+				},
+				'init':{},
+				'getClassPath':function(){
+					return this.vendorPath+this.classPath;
+				}
+			};
+		}
+
 
 
         根据下面三条修改上面对应的参数
@@ -79,7 +113,7 @@
 			1.配置类库文件的路径信息及别的相关信息
 			2.加载基础类文件
 			3.加载加载器工具
-			4.加载初始化init.js文件
+			4.加载初始化文件(或是init.js)
 			5.检测框架文件路径加载是否正确
 
 		'init.js'文件里做的事情是：加载通用框架类
@@ -422,6 +456,25 @@
 		1.create
 		2.print
 		
+	十七、模块化html(.html include 另一个.html文件)
+		警告:有些浏览器要支持跨域才可以!!!
+		1.自定义标签:<include url="./include/header.html" type="html"></include>
+		2.先要加载Html.class 类文件
+			window[LHH_NAMESPACE_20150715_].run(function(){
+                    var System=this;
+                    3.修改创建tag方式
+						System.Config.render.create=true;
+						System.Config.render.script.Attribute.async=true;
+            
+            
+                    $(function(){
+                    	4.调用include 方法 根据include 标签里的url 找到指定的html 文件替换当前的include 标签
+                    	System.Html.include($('include'));
+                                
+                    });
+             });
+		
+	
 
 
 
