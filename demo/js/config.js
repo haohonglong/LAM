@@ -114,8 +114,13 @@ if(!LHH_CONFIG_20150717_){
 
 
     }else{
+        var attrs=[];
+        for(var k in scriptAttribute){
+            attrs.push(k+'="'+scriptAttribute[k]+'"');
+        }
         for(i=0,len = srcs.length;i < len; i++){
-            document.write('<'+tag+' src="'+Config.getClassPath()+srcs[i]+'" type="text/javascript"><\/'+tag+'>');
+            //document.write('<'+tag+' src="'+Config.getClassPath()+srcs[i]+'" type="text/javascript"><\/'+tag+'>');
+            document.write('<'+tag+' src="'+Config.getClassPath()+srcs[i]+'" '+attrs.join('')+'><\/'+tag+'>');
         }
     }
 
