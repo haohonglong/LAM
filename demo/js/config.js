@@ -138,7 +138,6 @@ setTimeout(function(){
     }else{
         window[LHH_NAMESPACE_20150715_].main(function(){
             var System=this;
-            System.print();
 
         });
     }
