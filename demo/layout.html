@@ -71,8 +71,7 @@
 
 
         var content,content1,ul1,ul2;
-        $(function(){
-            System.Html.include($('include'));
+        function layout(){
             $('#content').width($(window).width()-($('.sidbar').width()+$('.sidbar2').width()+30));
 
 
@@ -89,22 +88,19 @@
                 },
                 'position':'left'
             }).run();
+        }
+        $(function(){
+
+        });
+        System.Html.include($('include'));
+        layout();
 
 
-
-
-
-
-
-            $(window).resize(function(){
-                content.resize();
-                content1.resize();
-                ul1.resize();
-                ul2.resize();
-
-            });
-
-
+        $(window).resize(function(){
+            content.resize();
+            content1.resize();
+            ul1.resize();
+            ul2.resize();
 
         });
 

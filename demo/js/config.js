@@ -93,12 +93,13 @@ if(!LHH_CONFIG_20150717_){
     var data;
     //加载基础类
     var srcs =[
+        '/jQuery/jquery.js',
         '/Basis.class.js',
         '/loadcommon.js',
         '/BiObject.class.js',
         '/Component.class.js',
         '/Helper.class.js',
-        '/jQuery/jquery.js'
+        '/Controller.js'
     ];
 
     if(Config.render.create){
