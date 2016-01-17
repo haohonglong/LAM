@@ -145,6 +145,7 @@
         		'BiObject'   		:function(){},
         		'Component'      	:function(){},
         		'Helper'     		:function(){},
+        		'Controller'     	:function(){},
         		'Browser'    		:function(){},
         		'Event'      		:function(){},
         		'Dom'        		:function(){},

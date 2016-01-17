@@ -95,11 +95,11 @@ if(!LHH_CONFIG_20150717_){
     var srcs =[
         '/jQuery/jquery.js',
         '/Basis.class.js',
-        '/loadcommon.js',
+        '/loadcommon.class.js',
         '/BiObject.class.js',
         '/Component.class.js',
         '/Helper.class.js',
-        '/Controller.js'
+        '/Controller.class.js'
     ];
 
     if(Config.render.create){
