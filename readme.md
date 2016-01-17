@@ -458,7 +458,7 @@
 		
 	十七、模块化html(.html include 另一个.html文件)
 		警告:有些浏览器要支持跨域才可以!!!
-		1.自定义标签:<include url="./include/header.html" type="html"></include>
+		1.自定义标签:<include file="./include/header.html" type="html"></include>
 		2.先要加载Html.class 类文件
 			window[LHH_NAMESPACE_20150715_].run(function(){
                     var System=this;
@@ -468,7 +468,7 @@
             
             
                     $(function(){
-                    	4.调用include 方法 根据include 标签里的url 找到指定的html 文件替换当前的include 标签
+                    	4.调用include 方法 根据include 标签里的file 找到指定的html 文件替换当前的include 标签
                     	System.Html.include($('include'));
                                 
                     });
