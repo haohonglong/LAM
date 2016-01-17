@@ -33,7 +33,7 @@
 
     </ul>
 </div>
-<include url="./test.html" type="html"></include>
+<include file="./test.html" type="html"></include>
 
 <br>
 <br>
@@ -63,7 +63,7 @@
 </script>
 
 <script type="text/javascript">
-    var slider;
+
 
     window[LHH_NAMESPACE_20150715_].run([window],function(window){
         var System=this;
@@ -72,6 +72,7 @@
 
 
         var html = System.classPath+"/Html.class.js";
+        var slider;
 
 
 
@@ -80,54 +81,58 @@
 //                eval(i)
 //                console.log(System.Html)
 //            });
-
-        slider=new System.Slider({
-            '$pre':$('.pre'),
-            '$next':$('.next'),
-            '$autoHandler':$('.Area'),
-            '$ul':$('ul.imgs'),
-            '$li':$('.img'),
-            '$view':$('.Area'),
-            'count':$('.img').length,
-            'unit':'px',
-            'margin':5,
-            'moveNumber':3,
-            'vcount':2,
-            'position':'left',
-            'autoMove':function(that,$autoHandler){
-                $autoHandler = $autoHandler || that.$autoHandler;
-                $autoHandler.hover(function(){
-                    that.stop();
-                },function(){
-                    that.begin();
-                });
-            },
-
-            'callback_event':function(){
-                var __this__ =this;
-
-                if(this.event) {
-                    this['$next']['on']('click', function () {
-
-                        __this__.next();
+        function slider_f(){
+            slider=new System.Slider({
+                '$pre':$('.pre'),
+                '$next':$('.next'),
+                '$autoHandler':$('.Area'),
+                '$ul':$('ul.imgs'),
+                '$li':$('.img'),
+                '$view':$('.Area'),
+                'count':$('.img').length,
+                'unit':'px',
+                'margin':5,
+                'moveNumber':3,
+                'vcount':2,
+                'position':'left',
+                'autoMove':function(that,$autoHandler){
+                    $autoHandler = $autoHandler || that.$autoHandler;
+                    $autoHandler.hover(function(){
+                        that.stop();
+                    },function(){
+                        that.begin();
                     });
+                },
 
-                    this['$pre']['on']('click', function () {
-                        __this__.pre();
+                'callback_event':function(){
+                    var __this__ =this;
+
+                    if(this.event) {
+                        this['$next']['on']('click', function () {
+
+                            __this__.next();
+                        });
+
+                        this['$pre']['on']('click', function () {
+                            __this__.pre();
 
 
-                    });
+                        });
 
-                }
+                    }
 
 
-            },
-            'sport':true
-        }).run();
+                },
+                'sport':true
+            }).run();
+        }
+
+
 
 
         $(function(){
             System.Html.include($('include'));
+            slider_f();
         });
         $(window).resize(function(){
             slider.resize();
