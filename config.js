@@ -45,13 +45,15 @@ if(!LHH_CONFIG_20150717_){
                     'rel':'stylesheet'
                 }
             },
-            'H':{
-                'html'    : document.getElementsByTagName('html')[0],
-                'head'    : document.getElementsByTagName('head')[0],
-                'body'    : document.getElementsByTagName('body')[0],
-                'meta'    : document.getElementsByTagName('meta'),
-                'script'  : document.getElementsByTagName('script'),
-                'link'    : document.getElementsByTagName('link')
+            'H':function(){
+                return {
+                    'html'    : document.getElementsByTagName('html')[0],
+                    'head'    : document.getElementsByTagName('head')[0],
+                    'body'    : document.getElementsByTagName('body')[0],
+                    'meta'    : document.getElementsByTagName('meta'),
+                    'script'  : document.getElementsByTagName('script'),
+                    'link'    : document.getElementsByTagName('link')
+                };
             },
             'bulid':function(tag,D){
                 tag = tag || "div";
@@ -91,6 +93,7 @@ if(!LHH_CONFIG_20150717_){
     var len;
     var data;
     var classPath=Config.getClassPath();
+
     //加载基础类
     var srcs =[
         classPath+'/jQuery/jquery.js',
@@ -100,14 +103,15 @@ if(!LHH_CONFIG_20150717_){
     ];
 
     if(Config.render.create){
+        var H=Config.render.H();
         for(i=0,len = srcs.length;i < len; i++){
             var data = scriptAttribute;
             data.src = Config.getClassPath()+srcs[i],
                 Config.render.bulid(tag,data);
         }
-        console.log(Config.render.H.body)
+        console.log(H.body)
         console.log(Config.render.fragment)
-        Config.render.H.body.appendChild(Config.render.fragment);
+        H.body.appendChild(Config.render.fragment);
 
 
 
@@ -135,8 +139,8 @@ setTimeout(function(){
     }else{
         window[LHH_NAMESPACE_20150715_].main(function(){
             var System=this;
-            System.Config.render.create=true;
-            System.Config.render.script.Attribute.async=true;
+            //System.Config.render.create=true;
+            //System.Config.render.script.Attribute.async=true;
 
         });
     }
