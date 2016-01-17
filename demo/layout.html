@@ -47,27 +47,25 @@
 
 </body>
 
-<script type="text/javascript" src="js/config.js"></script>
+
 <script type="text/javascript">
 
     window[LHH_NAMESPACE_20150715_].main([
-        '/Browser.class',
-        '/Dom.class',
-        '/Html.class',
+        '/jQuery/jquery',
         '/Sport.class',
         '/Layout.class',
         '/AutoLayout.class'
-    ],function(Browser,Dom,Html,Sport,Layout,AutoLayout){
+    ],function(jquery,Sport,Layout,AutoLayout){
         var System=this;
-        System.import([Browser,Dom,Html,Sport,Layout,AutoLayout],System.classPath);
+        System.import([jquery,Sport,Layout,AutoLayout],System.classPath);
     });
 
 </script>
 <script type="text/javascript">
     window[LHH_NAMESPACE_20150715_].run(function(){
         var System=this;
-        System.Config.render.create=true;
-        System.Config.render.script.Attribute.async=true;
+//        System.Config.render.create=true;
+//        System.Config.render.script.Attribute.async=true;
 
 
         var content,content1,ul1,ul2;

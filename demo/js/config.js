@@ -91,15 +91,13 @@ if(!LHH_CONFIG_20150717_){
     var i = 0;
     var len;
     var data;
+    var classPath=Config.getClassPath();
     //加载基础类
     var srcs =[
-        '/jQuery/jquery.js',
-        '/Basis.class.js',
-        '/loadcommon.class.js',
-        '/BiObject.class.js',
-        '/Component.class.js',
-        '/Helper.class.js',
-        '/Controller.class.js'
+        classPath+'/jQuery/jquery.js',
+        classPath+'/Basis.class.js',
+        classPath+'/loadcommon.class.js',
+        classPath+'/init.js'
     ];
 
     if(Config.render.create){
@@ -120,8 +118,7 @@ if(!LHH_CONFIG_20150717_){
             attrs.push(k+'="'+scriptAttribute[k]+'"');
         }
         for(i=0,len = srcs.length;i < len; i++){
-            //document.write('<'+tag+' src="'+Config.getClassPath()+srcs[i]+'" type="text/javascript"><\/'+tag+'>');
-            document.write('<'+tag+' src="'+Config.getClassPath()+srcs[i]+'" '+attrs.join('')+'><\/'+tag+'>');
+            document.write('<'+tag+' src="'+srcs[i]+'" '+attrs.join('')+'><\/'+tag+'>');
         }
     }
 

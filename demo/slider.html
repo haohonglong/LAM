@@ -47,18 +47,14 @@
 <script type="text/javascript">
     var slider;
 
-    window[LHH_NAMESPACE_20150715_].main([window,
-        '/Browser.class',
-        '/Dom.class',
+    window[LHH_NAMESPACE_20150715_].main([
+        '/jQuery/jquery',
         '/Sport.class',
         '/Layout.class',
-        '/Html.class',
         '/Slider.class'
-    ],function(window,Browser,Dom,Sport,Layout,Html,Slider){
+    ],function(jquery,Sport,Layout,Slider){
         var System=this;
-        System.
-                import(["http://code.jquery.com/jquery-2.1.4.min"]).
-                import([Browser,Dom,Sport,Layout,Html,Slider],System.classPath);
+        System.import([jquery,Sport,Layout,Slider],System.classPath);
     });
 </script>
 
@@ -67,8 +63,8 @@
 
     window[LHH_NAMESPACE_20150715_].run([window],function(window){
         var System=this;
-        System.Config.render.create=true;
-        System.Config.render.script.Attribute.async=true;
+//        System.Config.render.create=true;
+//        System.Config.render.script.Attribute.async=true;
 
 
         var html = System.classPath+"/Html.class.js";
