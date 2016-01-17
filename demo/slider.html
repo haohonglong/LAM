@@ -72,7 +72,8 @@
 
 
         var html = System.classPath+"/Html.class.js";
-        System.Html.include($('include'));
+
+
 
 
 //            jQuery.getScript(html, function(i){
@@ -125,7 +126,9 @@
         }).run();
 
 
-
+        $(function(){
+            System.Html.include($('include'));
+        });
         $(window).resize(function(){
             slider.resize();
 
