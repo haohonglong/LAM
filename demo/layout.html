@@ -23,7 +23,7 @@
 </head>
 <body>
 <div id="container" class="">
-    <div class="sidbar"><include file="./test.html" type="html"></include></div>
+    <div class="sidbar"><include file="./test.html" dataType="html"></include></div>
     <div class="content" id="content">
         <ul id="ul1" class="ul sectionFloat clearfix">
             <li>
@@ -47,7 +47,7 @@
 
 </body>
 
-
+<script type="text/javascript" src="./js/config.js"></script>
 <script type="text/javascript">
 
     window[LHH_NAMESPACE_20150715_].main([
@@ -58,6 +58,7 @@
     ],function(jquery,Sport,Layout,AutoLayout){
         var System=this;
         System.import([jquery,Sport,Layout,AutoLayout],System.classPath);
+        alert(22222)
     });
 
 </script>
