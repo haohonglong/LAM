@@ -137,8 +137,8 @@ setTimeout(function(){
         window[LHH_NAMESPACE_20150715_].main(function(){
             var System=this;
 
-            System.Config.render.create=true;
-            System.Config.render.script.Attribute.async=true;
+//            System.Config.render.create=true;
+//            System.Config.render.script.Attribute.async=true;
         });
     }
 },1800);
