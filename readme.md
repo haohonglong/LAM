@@ -459,7 +459,7 @@
 		
 	十七、模块化html(.html include 另一个.html文件)
 		警告:有些浏览器要支持跨域才可以!!!
-		1.自定义标签:<include file="./include/header.html" type="html"></include>
+		1.自定义标签:<include file="./include/header.html" dataType="html"></include>
 		2.先要加载Html.class 类文件
 			window[LHH_NAMESPACE_20150715_].run(function(){
                     var System=this;
