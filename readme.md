@@ -39,8 +39,8 @@
         
 		if(!LHH_CONFIG_20150717_){
 			var LHH_CONFIG_20150717_={
-				'vendorPath':'./lib/',
-				'classPath':'class',
+				'vendorPath':'../lib',
+				'classPath':'/class',
 				//hashcode 随机种子
 				'random':10000,
 				//标签的渲染方式
@@ -48,47 +48,52 @@
 					//输出标签的方式 ()
 					'fragment':null,
 					//true : document.createElement(); false :document.write();
-					'create':null,
+					'create':false,
 					'append':'after',
-					'script':{
-						'Attribute':{
-							'type':'text/javascript',
-							//'async':true,
-							//'defer':'defer',
-							'charset':'utf-8'
+					'default':{
+						'script':{
+							'Attribute':{
+								'type':'text/javascript',
+								//'async':true,
+								//'defer':'defer',
+								'charset':'utf-8'
+							}
+						},
+						'css':{
+							'Attribute':{
+								'type':'text/css',
+								'rel':'stylesheet'
+							}
 						}
 					},
-					'css':{
-						'Attribute':{
-							'type':'text/css',
-							'rel':'stylesheet'
-						}
-					},
-					'H':{
-						'html'    : document.getElementsByTagName('html')[0],
-						'head'    : document.getElementsByTagName('head')[0],
-						'body'    : document.getElementsByTagName('body')[0],
-						'meta'    : document.getElementsByTagName('meta'),
-						'script'  : document.getElementsByTagName('script'),
-						'link'    : document.getElementsByTagName('link')
+					'H':function(){
+						return {
+							'html'    : document.getElementsByTagName('html')[0],
+							'head'    : document.getElementsByTagName('head')[0],
+							'body'    : document.getElementsByTagName('body')[0],
+							'meta'    : document.getElementsByTagName('meta'),
+							'script'  : document.getElementsByTagName('script'),
+							'link'    : document.getElementsByTagName('link')
+						};
 					},
 					'bulid':function(tag,D){
 						tag = tag || "div";
 						var node;
 						var k;
 						var fragment;
+						var Config = LHH_CONFIG_20150717_;
 						node=document.createElement(tag);
 		
 						for(k in D){
 							node[k] = D[k];
 						}
 		
-						if(!LHH_CONFIG_20150717_.render.fragment){
-							LHH_CONFIG_20150717_.render.fragment = document.createDocumentFragment();
+						if(!Config.render.fragment){
+							Config.render.fragment = document.createDocumentFragment();
 						}
-						fragment = LHH_CONFIG_20150717_.render.fragment;
+						fragment = Config.render.fragment;
 		
-						LHH_CONFIG_20150717_.render.fragment.appendChild(node);
+						Config.render.fragment.appendChild(node);
 		
 						return fragment;
 					}
@@ -441,7 +446,8 @@
 	
 	十四、沙箱(Sandbox)
 		
-		LAMJS.main()是LamborghiniJS 的沙箱机制 也可以用LAMJS.run() 这俩方法等同
+		LAMJS.main()是LamborghiniJS 的沙箱机制 
+		LAMJS.run() 是改变创建标签机制 用document.createElement() 
 		沙箱的作用防止全局变量污染
 		
 	

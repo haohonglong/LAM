@@ -21,8 +21,8 @@ if(!LHH_NAMESPACE_20150715_){
 
 if(!LHH_CONFIG_20150717_){
     var LHH_CONFIG_20150717_={
-        'vendorPath':'../lib/',
-        'classPath':'class',
+        'vendorPath':'../lib',
+        'classPath':'/class',
         //hashcode 随机种子
         'random':10000,
         //标签的渲染方式
@@ -32,18 +32,20 @@ if(!LHH_CONFIG_20150717_){
             //true : document.createElement(); false :document.write();
             'create':false,
             'append':'after',
-            'script':{
-                'Attribute':{
-                    'type':'text/javascript',
-                    //'async':true,
-                    //'defer':'defer',
-                    'charset':'utf-8'
-                }
-            },
-            'css':{
-                'Attribute':{
-                    'type':'text/css',
-                    'rel':'stylesheet'
+            'default':{
+                'script':{
+                    'Attribute':{
+                        'type':'text/javascript',
+                        //'async':true,
+                        //'defer':'defer',
+                        'charset':'utf-8'
+                    }
+                },
+                'css':{
+                    'Attribute':{
+                        'type':'text/css',
+                        'rel':'stylesheet'
+                    }
                 }
             },
             'H':function(){
@@ -89,7 +91,7 @@ if(!LHH_CONFIG_20150717_){
 
 (function(Config){
     var tag = "script";
-    var scriptAttribute = Config.render.script.Attribute;
+    var scriptAttribute = Config.render.default.script.Attribute;
     var i = 0;
     var len;
     var data;
@@ -142,7 +144,7 @@ setTimeout(function(){
             var System=this;
 
             //System.Config.render.create=true;
-            //System.Config.render.script.Attribute.async=true;
+            //System.Config.render.default.script.Attribute.async=true;
         });
     }
 },1800);
