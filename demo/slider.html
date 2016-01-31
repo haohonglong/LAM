@@ -47,22 +47,21 @@
 <script type="text/javascript">
     var slider;
 
-    window[LHH_NAMESPACE_20150715_].main([
-        '/jQuery/jquery',
-        '/Sport.class',
-        '/Layout.class',
-        '/Slider.class'
-    ],function(jquery,Sport,Layout,Slider){
+    LAMJS.main(function(){
         var System=this;
 
-        System.import([jquery,Sport,Layout,Slider],System.classPath);
+        System.import([
+            '/Sport.class',
+            '/Layout.class',
+            '/Slider.class'
+        ],System.classPath);
     });
 </script>
 
 <script type="text/javascript">
 
 
-    window[LHH_NAMESPACE_20150715_].run(function(){
+    LAMJS.run(function(){
         var System=this;
 
 

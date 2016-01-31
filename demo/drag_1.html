@@ -9,30 +9,18 @@
 	<script type="text/javascript" src="js/config.js"></script>
 
 <script type="text/javascript">
-LAMJS.main([
-	'http://dms.website.eyouke.net/templates/768/js/jquery1.7',
-	'/Browser.class',
-	'/Drag.class',
-	'/Dom.class',
-	'/Tools.class',
-	'/Tab.class',
-	'/Canvas.class',
-	'/CanvasForm.class'
-],function(jquery,Browser,Drag,Dom,Tools,Tab,Canvas,CanvasForm){
+LAMJS.main(function(){
 	var System=this;
-//	System['Loadcommon'].
-//	load({
-//		'baseUrl':null,
-//		'js':[
-//			'http://dms.website.eyouke.net/templates/768/js/jquery1.7'
-//		]
-//	}).
-//	load({
-//		'baseUrl':System.classPath,
-//		'js':[Browser,Drag,Dom,Tools,PaintBase]
-//	}).print();
 
-	System.import([jquery]).import([Browser,Drag,Dom,Tools,Tab,Canvas,CanvasForm],System.classPath);
+	System.import([
+		'/Browser.class',
+		'/Drag.class',
+		'/Dom.class',
+		'/Tools.class',
+		'/Tab.class',
+		'/Canvas.class',
+		'/CanvasForm.class'
+	],System.classPath);
 
 });
 </script>
@@ -40,7 +28,7 @@ LAMJS.main([
 
 <script type="text/javascript">
 
-	window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
+	LAMJS.main([window],function(window,undefined){
 		var System=this;
 		window.onload=function(){
 

@@ -7,12 +7,12 @@
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript">
         var pop;
-        window[LHH_NAMESPACE_20150715_].main([window,
-            '/Browser.class',
-            '/PopupLayer.class'
-        ],function(window,Browser,PopupLayer){
+        LAMJS.main(function(){
             var System=this;
-            System.import([Browser,PopupLayer],System.classPath);
+            System.import([
+                '/Browser.class',
+                '/PopupLayer.class'
+            ],System.classPath);
 
             $(function(){
 

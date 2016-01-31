@@ -50,20 +50,19 @@
 <script type="text/javascript" src="./js/config.js"></script>
 <script type="text/javascript">
 
-    window[LHH_NAMESPACE_20150715_].main([
-        '/jQuery/jquery',
-        '/Sport.class',
-        '/Layout.class',
-        '/AutoLayout.class'
-    ],function(jquery,Sport,Layout,AutoLayout){
+    LAMJS.main(function(){
         var System=this;
-        System.import([jquery,Sport,Layout,AutoLayout],System.classPath);
+        System.import([
+            '/Sport.class',
+            '/Layout.class',
+            '/AutoLayout.class'
+        ],System.classPath);
 
     });
 
 </script>
 <script type="text/javascript">
-    window[LHH_NAMESPACE_20150715_].run(function(){
+    LAMJS.run(function(){
         var System=this;
         System.use();
 //        System.unUse();
