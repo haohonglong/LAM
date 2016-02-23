@@ -384,29 +384,32 @@
 			Array.filter();
 
 	八、框架里的方法
-			LAMJS.main();
-			LAMJS.import();
-			LAMJS.config();
-			LAMJS.print();
-			LAMJS.arr_isEmpty();
-			LAMJS.wait();
-			LAMJS.queues();
-			LAMJS.length();
-			LAMJS.proxy();
-			LAMJS.putIndexGetObjectTheValue();
-			LAMJS.list();
-			LAMJS.extends();
-			LAMJS.extend();
-			LAMJS.merge();
-			LAMJS.clone();
-			LAMJS.is();
-			LAMJS.log();
-			LAMJS.autoCenter();
+			1.LAMJS.main();
+			2.LAMJS.import();
+			3.LAMJS.config();
+			4.LAMJS.print();
+				LAMJS.print('s'[,1,'a',...]);
+				可以像python 的print 方法一样 ,会依次打印每个字符串，遇到逗号“,”会输出一个空格
 			
-			LAMJS.Basis.printTag();
-			LAMJS.Basis.printScript();
-			LAMJS.Basis.printLink();
-			LAMJS.Basis.extends();
+			5.LAMJS.arr_isEmpty();
+			6.LAMJS.wait();
+			7.LAMJS.queues();
+			8.LAMJS.length();
+			9.LAMJS.proxy();
+			10.LAMJS.putIndexGetObjectTheValue();
+			11.LAMJS.list();
+			12.LAMJS.extends();
+			13.LAMJS.extend();
+			14.LAMJS.merge();
+			15.LAMJS.clone();
+			16.LAMJS.is();
+			17.LAMJS.log();
+			18.LAMJS.autoCenter();
+			
+			19.LAMJS.Basis.printTag();
+			20.LAMJS.Basis.printScript();
+			21.LAMJS.Basis.printLink();
+			22.LAMJS.Basis.extends();
 		
 		
 	九、错误机制
