@@ -123,7 +123,8 @@ if(!LHH_CONFIG_20150717_){
             attrs.push(k+'="'+scriptAttribute[k]+'"');
         }
         for(i=0,len = srcs.length;i < len; i++){
-            document.write('<'+tag+' src="'+srcs[i]+'" '+attrs.join('')+'><\/'+tag+'>');
+            //document.write('<'+tag+' src="'+srcs[i]+'" '+attrs.join('')+'><\/'+tag+'>');
+            document.write('\<',tag,' ',attrs.join(''),' ','src="',srcs[i],'"','\>\<\/',tag,'\>');
         }
     }
 
