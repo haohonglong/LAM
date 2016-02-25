@@ -120,11 +120,11 @@ if(!LHH_CONFIG_20150717_){
     }else{
         var attrs=[];
         for(var k in scriptAttribute){
-            attrs.push(k+'="'+scriptAttribute[k]+'"');
+            attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
         }
         for(i=0,len = srcs.length;i < len; i++){
-            //document.write('<'+tag+' src="'+srcs[i]+'" '+attrs.join('')+'><\/'+tag+'>');
-            document.write('\<',tag,' ',attrs.join(''),' ','src="',srcs[i],'"','\>\<\/',tag,'\>');
+            document.write('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
+
         }
     }
 
