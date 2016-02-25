@@ -149,3 +149,8 @@ setTimeout(function(){
         });
     }
 },1800);
+
+
+var common = '../common';
+var common_plugins = common+'/plugins';
+var plugins = './plugins';
