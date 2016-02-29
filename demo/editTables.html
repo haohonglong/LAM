@@ -74,10 +74,10 @@
     </table>
 
     <br />
-    <input type="button" name="Submit" value="新增" onclick="LAMJS.EditTables.AddRow(document.getElementById('tabProduct'),1)" />
-    <input type="button" name="Submit2" value="删除" onclick="LAMJS.EditTables.DeleteRow(document.getElementById('tabProduct'),1)" />
-    <input type="button" name="Submit22" value="重置" onclick="window.location.reload()" />
-    <input type="submit" name="Submit3" value="提交" onclick="LAMJS.EditTables.GetTableData(document.getElementById('tabProduct'));return false;" />
+    <input type="button" name="Submit" data-input="add" value="新增" onclick="LAMJS.EditTables.AddRow(document.getElementById('tabProduct'),1)" />
+    <input type="button" name="Submit2" data-input="del" value="删除" onclick="LAMJS.EditTables.DeleteRow(document.getElementById('tabProduct'),1)" />
+    <input type="button" name="Submit22" data-input="reset" value="重置" onclick="window.location.reload()" />
+    <input type="submit" name="Submit3"  data-input="submit" value="提交" onclick="LAMJS.EditTables.GetTableData(document.getElementById('tabProduct'));return false;" />
 </form>
 <script type="text/javascript" src="./js/config.js"></script>
 <script type="text/javascript">
@@ -100,7 +100,9 @@
 
         // 设置表格可编辑
         // 可一次设置多个，例如：EditTables(tb1,tb2,tb2,......)
-        System.EditTables(tabProduct);
+        System.EditTables({
+            'table':[ document.getElementById("tabProduct")]
+        });
 
 
 
