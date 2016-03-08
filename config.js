@@ -24,6 +24,10 @@ if(!LHH_CONFIG_20150717_){
         'classPath':'/class',
         //hashcode 随机种子
         'random':10000,
+        'templat':{
+            'leftLimit':'{{',
+            'rightLimit':'}}'
+        },
         //标签的渲染方式
         'render':{
             //输出标签的方式 ()
