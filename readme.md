@@ -12,6 +12,7 @@
 	LamborghiniJS 里有接口的概念,每一个类都要通过接口去调用.每定义一个类名,都要先定义一个同名的接口名(参考 二、开发约定 类结构)
 	LamborghiniJS 里有沙箱机制(参考 十四、沙箱)
 	LamborghiniJS 里有hashcode概念（参考 十五、hashcode）
+	LamborghiniJS 里有模版标签概念（参考 十八、模版标签）
 	
 	现有选项卡、拖拽、常用工具、弹出层、幻灯、html5绘图基础类的实例．
 	如要根据项目需求要修改或扩展现有的这些实例，正确的方法是：
@@ -39,10 +40,14 @@
         
 		if(!LHH_CONFIG_20150717_){
 			var LHH_CONFIG_20150717_={
-				'vendorPath':'../lib',
+				'vendorPath':'./lib',
 				'classPath':'/class',
 				//hashcode 随机种子
 				'random':10000,
+				'templat':{
+					'leftLimit':'{{',
+					'rightLimit':'}}'
+				},
 				//标签的渲染方式
 				'render':{
 					//输出标签的方式 ()
@@ -487,6 +492,10 @@
 									
 						});
 				 });
+				 
+	十八、模版标签
+				 LAMJS.templat();
+	
 		
 	
 
