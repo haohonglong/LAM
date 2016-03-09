@@ -17,6 +17,11 @@
 if(!LHH_NAMESPACE_20150715_){
     var LHH_NAMESPACE_20150715_='System';
 }
+if(!__root__){
+    var __root__ = '../..';
+
+}
+
 
 if(!LHH_CONFIG_20150717_){
     var LHH_CONFIG_20150717_={
