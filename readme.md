@@ -224,6 +224,7 @@
         		'Helper'     		:function(){},
         		'Controller'     	:function(){},
         		'Browser'    		:function(){},
+        		'Template'    		:function(){},
         		'Event'      		:function(){},
         		'Dom'        		:function(){},
         		'Cookie'     		:function(){},
@@ -477,28 +478,34 @@
 			16.LAMJS.is();
 			17.LAMJS.log();
 			18.LAMJS.autoCenter();
+			19.LAMJS.template();
+			20.LAMJS.replaceTpl();
 			
-			19.LAMJS.Basis.printTag();
-			20.LAMJS.Basis.printScript();
-			21.LAMJS.Basis.printLink();
-			22.LAMJS.Basis.extends();
+			21.LAMJS.Basis.printTag();
+			22.LAMJS.Basis.printScript();
+			23.LAMJS.Basis.printLink();
+			24.LAMJS.Basis.extends();
 		
 		
 	九、错误机制
 			throw new Error(msg);
 	十、检测机制
-			LAMJS.is(); 	
-			LAMJS.isset(); 	
-        	LAMJS.empty();
-        	LAMJS.error(); 	 	
-        	LAMJS.isEmptyObject(); 
-        	LAMJS.isType();
-        	LAMJS.isObject();	 
-        	LAMJS.isString();	 
-        	LAMJS.isArray();
-        	LAMJS.isFunction(); 
-        	LAMJS.isNumber(); 	 
-        	LAMJS.isFloat(); 
+			1.数据类型检测
+				LAMJS.isset(); 	
+				LAMJS.empty();
+				LAMJS.error(); 	 	
+				LAMJS.isEmptyObject(); 
+				LAMJS.isType();
+				LAMJS.isObject();	 
+				LAMJS.isString();	 
+				LAMJS.isArray();
+				LAMJS.isFunction(); 
+				LAMJS.isNumber(); 	 
+				LAMJS.isFloat(); 
+        	
+        	2.文件类型检测
+        		LAMJS.is();
+        		LAMJS.isClassFile(); 
 
 	十一、基础类非独立浏览器环境（浏览器有专用的类）， 可应用服务器nodejs 。
 	十二、说明格式
