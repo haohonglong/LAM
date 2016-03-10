@@ -1,5 +1,5 @@
 	name    ：LamborghiniJS(OOPJS)
-	version ：v-1.0.8
+	version ：1.0.8
 	author  ：lhh
 	创建日期 ：2015-8-19
 	修改日期 ：2016-3-10
@@ -570,6 +570,7 @@
 				 
 	十八、模版标签
 				 LAMJS.templat();
+				 LAMJS.replaceTpl();
 	
 		
 	
