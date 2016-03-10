@@ -1,7 +1,8 @@
-	version ： LamborghiniJS(OOPJS) 1.0
+	name    ：LamborghiniJS(OOPJS)
+	version ：v-1.0.8
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-1-7
+	修改日期 ：2016-3-10
 
 
 产品介绍：
