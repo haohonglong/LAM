@@ -33,15 +33,20 @@
 		然后修改下面信息 (参考 二、开发约定)
 
 
+		//基础类的设置
 		if(!LHH_NAMESPACE_20150715_){
-        	var LHH_NAMESPACE_20150715_='interfaceName';
-        }
-
-        
+			var LHH_NAMESPACE_20150715_='System';
+		}
+		if(!_ROOT_){
+			var _ROOT_ = '../..';
+		
+		}
+		
+		
 		if(!LHH_CONFIG_20150717_){
 			var LHH_CONFIG_20150717_={
-				'vendorPath':'./lib',
-				'classPath':'/class',
+				'vendorPath':_ROOT_,
+				'classPath':'/lib/class',
 				//hashcode 随机种子
 				'random':10000,
 				'templat':{
@@ -110,6 +115,68 @@
 				}
 			};
 		}
+		
+		
+		(function(Config){
+			var tag = "script";
+			var scriptAttribute = Config.render.default.script.Attribute;
+			var i = 0;
+			var len;
+			var data;
+			var classPath=Config.getClassPath();
+		
+			//加载基础类
+			var srcs =[
+				classPath+'/jQuery/jquery.js',
+				classPath+'/Basis.class.js',
+				classPath+'/loadcommon.class.js',
+				classPath+'/init.js'
+			];
+		
+			if(Config.render.create){
+				var H=Config.render.H();
+				for(i=0,len = srcs.length;i < len; i++){
+					var data = scriptAttribute;
+					data.src = Config.getClassPath()+srcs[i],
+						Config.render.bulid(tag,data);
+				}
+				console.log(H.body)
+				console.log(Config.render.fragment)
+				H.body.appendChild(Config.render.fragment);
+		
+		
+		
+			}else{
+				var attrs=[];
+				for(var k in scriptAttribute){
+					attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
+				}
+				for(i=0,len = srcs.length;i < len; i++){
+					document.write('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
+		
+				}
+			}
+		
+		
+		})(LHH_CONFIG_20150717_);
+		
+		
+		
+		
+		
+		
+		setTimeout(function(){
+			if(!window[LHH_NAMESPACE_20150715_]) {
+				alert("cannot find Basis class");
+			}else{
+				window[LHH_NAMESPACE_20150715_].main(function(){
+					var System=this;
+		
+					//System.Config.render.create=true;
+					//System.Config.render.default.script.Attribute.async=true;
+				});
+			}
+		},5000);
 
 
 

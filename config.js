@@ -17,15 +17,15 @@
 if(!LHH_NAMESPACE_20150715_){
     var LHH_NAMESPACE_20150715_='System';
 }
-if(!__root__){
-    var __root__ = '../..';
+if(!_ROOT_){
+    var _ROOT_ = '../..';
 
 }
 
 
 if(!LHH_CONFIG_20150717_){
     var LHH_CONFIG_20150717_={
-        'vendorPath':__root__,
+        'vendorPath':_ROOT_,
         'classPath':'/lib/class',
         //hashcode 随机种子
         'random':10000,
@@ -156,7 +156,7 @@ setTimeout(function(){
             //System.Config.render.default.script.Attribute.async=true;
         });
     }
-},1800);
+},5000);
 
 
 
