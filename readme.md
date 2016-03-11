@@ -22,6 +22,30 @@
 	(继承参考 六、继承)
 	错误的方法是:在类库的源码上修改!!!
 
+
+文件说明：
+		
+	文件夹结构：
+			|-LAM      		 #项目根目录
+				|-demo 		 #
+				|-lib  		 #
+					|-class  #类文件
+					|-css  	 #样式文件
+				|-config.js  #项目配置文件
+	
+	类成员属性：
+		 class:
+			 |-Basis.class
+				|-
+			 |-BiObject.class
+				|-
+			 |-Component.class
+				|-
+         
+            
+         
+
+
 类库声明：
 
 类库说明：
