@@ -49,7 +49,41 @@
 </head>
 
 <body>
-
+<div class="content">
+    <div class="title">
+        <h2>{{title}}</h2>
+    </div>
+    <div class="p10">
+        {{content}}
+    </div>
+</div>
 </body>
 
 </html>
+<script type="text/javascript">
+     LAMJS.main(function(){
+        'use strict';
+        var System=this;
+
+        System.import([
+            '/Template.class'
+        ],System.classPath);
+    });
+</script>
+<script type="text/javascript">
+
+    LAMJS.main(function() {
+        'use strict';
+        var System = this;
+        var t=new System.Template();
+        var s=t.render([_ROOT_,'/project/item/views/index/index.html'].join(''),{
+            'title':'出境游',
+            'content':'欢迎来到途牛旅游。。。'
+        })();
+       console.log(s)
+        $('html').html(s);
+
+
+    });
+
+</script>
