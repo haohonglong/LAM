@@ -7,6 +7,7 @@
     <meta name="renderer" content="webkit">
 
     <title>templat</title>
+    <script type="text/javascript" src="config.js"></script>
 
     <!--[if lt IE 8]>
     <script>
@@ -14,8 +15,37 @@
     </script>
     <![endif]-->
 
-    <link href="../common/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
-    <link href="../../css/lhh_style.css" rel="stylesheet">
+    <script type="text/javascript">
+
+        LAMJS.main(function() {
+            'use strict';
+            var System = this;
+            System.Loadcommon.
+                    load({
+                        'baseUrl':_ROOT_+'/project/common/css',
+                        'suffix':'.css',
+                        'rel':'stylesheet',
+                        'css':[
+                            '/bootstrap'
+                        ]
+                    }).
+                    load({
+                        'baseUrl':_ROOT_+'/project/item/css',
+                        'suffix':'.css',
+                        'rel':'stylesheet',
+                        'css':[
+                            '/lhh_style'
+                        ]
+                    })
+
+                    .print();
+
+
+        });
+
+    </script>
+
+
 </head>
 
 <body>
