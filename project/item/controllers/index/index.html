@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="config.js"></script>
+</head>
+</html>
+<script type="text/javascript">
+     LAMJS.main(function(){
+        'use strict';
+        var System=this;
+
+        System.import([
+            '/Template.class'
+        ],System.classPath);
+    });
+</script>
+<script type="text/javascript">
+
+    LAMJS.main(function() {
+        'use strict';
+        var System = this;
+        new System.Template().render('html',[_ROOT_,'/project/item/views/index/index.html'].join(''),{
+            'PATH':_ROOT_,
+            'title':'旅游网',
+            'D':{
+                'title':'旅游标题',
+                'news1':'新闻1',
+                'news2':'新闻2',
+                'news3':'新闻3',
+                'news4':'新闻4',
+                'news5':'新闻5'
+            }
+
+        });
+
+
+
+    });
+
+</script>

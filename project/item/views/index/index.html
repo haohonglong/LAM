@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
 
-    <title>templat</title>
-    <script type="text/javascript" src="config.js"></script>
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{{PATH}}/project/common/css/bootstrap.css"/>
 
     <!--[if lt IE 8]>
     <script>
@@ -15,75 +15,31 @@
     </script>
     <![endif]-->
 
-    <script type="text/javascript">
 
-        LAMJS.main(function() {
-            'use strict';
-            var System = this;
-            System.Loadcommon.
-                    load({
-                        'baseUrl':_ROOT_+'/project/common/css',
-                        'suffix':'.css',
-                        'rel':'stylesheet',
-                        'css':[
-                            '/bootstrap'
-                        ]
-                    }).
-                    load({
-                        'baseUrl':_ROOT_+'/project/item/css',
-                        'suffix':'.css',
-                        'rel':'stylesheet',
-                        'css':[
-                            '/lhh_style'
-                        ]
-                    })
-
-                    .print();
-
-
-        });
-
-    </script>
 
 
 </head>
 
 <body>
+
 <div class="content">
-    <div class="title">
-        <h2>{{title}}</h2>
-    </div>
-    <div class="p10">
-        {{content}}
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">{{D.title}}</div>
+        <div class="panel-body">
+            <p>...</p>
+        </div>
+
+        <!-- List group -->
+        <ul class="list-group">
+            <li class="list-group-item">{{D.title}}{{D.news1}}</li>
+            <li class="list-group-item">{{D.news2}}</li>
+            <li class="list-group-item">{{D.news3}}</li>
+            <li class="list-group-item">{{D.news4}}</li>
+            <li class="list-group-item">{{D.news5}}</li>
+        </ul>
     </div>
 </div>
 </body>
 
 </html>
-<script type="text/javascript">
-     LAMJS.main(function(){
-        'use strict';
-        var System=this;
-
-        System.import([
-            '/Template.class'
-        ],System.classPath);
-    });
-</script>
-<script type="text/javascript">
-
-    LAMJS.main(function() {
-        'use strict';
-        var System = this;
-        var t=new System.Template();
-        var s=t.render([_ROOT_,'/project/item/views/index/index.html'].join(''),{
-            'title':'出境游',
-            'content':'欢迎来到途牛旅游。。。'
-        })();
-       console.log(s)
-        $('html').html(s);
-
-
-    });
-
-</script>
