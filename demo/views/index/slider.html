@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="content-Type" content="text/html" charset="utf-8">
 <title>背景半透明覆盖整个可视区域</title>
-    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript">
 
         LAMJS.main(function() {
@@ -11,7 +11,7 @@
             var System = this;
             System.Loadcommon.
                     load({
-                        'baseUrl':'',
+                        'baseUrl':_ROOT_+'demo',
                         'suffix':'.css',
                         'rel':'stylesheet',
                         'css':[
@@ -54,7 +54,7 @@
 
     </ul>
 </div>
-<include file="./test.html" dataType="html"></include>
+<include file="{{_ROOT_}}/demo/test.html" dataType="html"></include>
 
 <br>
 <br>
