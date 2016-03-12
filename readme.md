@@ -32,7 +32,16 @@
 					|-class  #类文件
 					|-css  	 #样式文件
 				|-config.js  #项目配置文件
-	
+				|-project  	 #项目文件
+					|-common #公共文件
+					|-controllers #控制器渲染对应的页面
+					|-views   #项目中所有页面
+					|-plugins #插件存放地
+					|-doc #文档说明
+					|-css #
+					|-js #
+					|-images #公共文件
+
 	类成员属性：
 		 class:
 			 |-Basis.class
