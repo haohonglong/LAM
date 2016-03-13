@@ -2,37 +2,10 @@
 <html>
 <head>
 <meta http-equiv="content-Type" content="text/html" charset="utf-8">
-<title>背景半透明覆盖整个可视区域</title>
-    <script type="text/javascript" src="config.js"></script>
-    <script type="text/javascript">
+<title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{{project}}/common/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="{{PATH}}/lib/css/global.css"/>
 
-        LAMJS.main(function() {
-            'use strict';
-            var System = this;
-            System.Loadcommon.
-                    load({
-                        'baseUrl':_ROOT_+'/demo/css',
-                        'suffix':'.css',
-                        'rel':'stylesheet',
-                        'css':[
-                            '/bootstrap'
-                        ]
-                    }).
-                    load({
-                        'baseUrl':_ROOT_+'/lib/css',
-                        'suffix':'.css',
-                        'rel':'stylesheet',
-                        'css':[
-                            '/global'
-                        ]
-                    })
-
-                    .print();
-
-
-        });
-
-    </script>
 
 
     <style type="text/css">
@@ -51,7 +24,7 @@
 </head>
 <body>
 <div id="container" class="">
-    <div class="sidbar"><include file="{{_ROOT_}}/demo/test.html" dataType="html"></include></div>
+    <div class="sidbar"><include file="{{project}}/views/demo/test.html" dataType="html"></include></div>
 
     <div class="content" id="content">
         <ul id="ul1" class="ul sectionFloat clearfix">
@@ -59,8 +32,8 @@
 
                 <div class="content" id="content1">
                     <ul id="ul2" class="ul sectionFloat clearfix">
-                        <li></li>
-                        <li></li>
+                        <li>{{D.title}}</li>
+                        <li>{{D.content}}</li>
                     </ul>
 
                 </div>
@@ -76,20 +49,7 @@
 
 </body>
 
-<script type="text/javascript" src="config.js"></script>
-<script type="text/javascript">
 
-    LAMJS.main(function(){
-        var System=this;
-        System.import([
-            '/Sport.class',
-            '/Layout.class',
-            '/AutoLayout.class'
-        ],System.classPath);
-
-    });
-
-</script>
 <script type="text/javascript">
     LAMJS.run(function(){
         var System=this;
