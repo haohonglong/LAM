@@ -5,6 +5,9 @@
     <script type="text/javascript" src="config.js"></script>
 </head>
 </html>
+<body>
+<div id="content"></div>
+</body>
 <script type="text/javascript">
      LAMJS.main(function(){
         'use strict';
@@ -17,10 +20,10 @@
 </script>
 <script type="text/javascript">
 
-    LAMJS.main(function() {
+    LAMJS.main([_ROOT_+'/project/views'],function(views) {
         'use strict';
         var System = this;
-        new System.Template().render('html',[_ROOT_,'/project/views/index/index.html'].join(''),{
+        new System.Template().render(views+'/index/index.html',{
             'PATH':_ROOT_,
             'title':'Bootstrap 101 Template',
             'D':{
@@ -29,6 +32,8 @@
             }
 
         });
+
+
 
 
 
