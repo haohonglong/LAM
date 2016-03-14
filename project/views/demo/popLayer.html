@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="content-Type" content="text/html" charset="utf-8">
-<title>背景半透明覆盖整个可视区域</title>
-    <!--<link rel="stylesheet" type="text/css" href="{{project}}/common/css/bootstrap.css"/>-->
-
-
-
-
 <style>
 html,body{ height:100%; margin:0; padding:0; font-size:14px;}
 p{ line-height:18px;}
@@ -44,65 +34,4 @@ html,body{ height:100%; margin:0; padding:0}
 </pre>
 </p>
 </div>
-</body>
-</html>
 
-<script type="text/javascript">
-
-    LAMJS.main(function(){
-        var System=this;
-        var pop;
-
-        $(function(){
-
-
-            System.defined(System,'Obj',{
-                'line':'20',
-                'message':'出错信息'
-            });
-            System.Obj={};
-            System.defined(System['Obj'],'pop',{
-                'line':'25',
-                'message':'出错信息'
-            });
-
-
-
-            System.Obj.pop = pop=new System.PopupLayer({
-                'popLayout':$('.content'),
-                'mask':$('.mask'),
-                'padding':6
-            });
-            pop.setCenter();
-
-            $(window).scroll(function() {
-                pop.scroll();
-
-
-            });
-            $(window).resize(function() {
-                pop.resize();
-                pop.scroll();
-            });
-
-
-
-
-            $('.content-close,.mask').on('click',function(){
-                pop.hide();
-            });
-
-            $('#button').on('click',function(){
-                pop.resize();
-                pop.show();
-            });
-
-
-        });
-
-
-
-
-
-    });
-</script>

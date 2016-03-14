@@ -2,26 +2,26 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <title>布局demo</title>
     <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript">
+        LAMJS.main(function(){
+            'use strict';
+            var System=this;
+
+            System.import([
+                '/Template.class',
+                '/Sport.class',
+                '/Layout.class',
+                '/AutoLayout.class',
+                '/Tab.class'
+            ],System.classPath);
+        });
+    </script>
 </head>
 </html>
-<body>
-<div id="content"></div>
-</body>
-<script type="text/javascript">
-     LAMJS.main(function(){
-        'use strict';
-        var System=this;
+<body></body>
 
-        System.import([
-            '/Template.class',
-            '/Sport.class',
-            '/Layout.class',
-            '/AutoLayout.class',
-            '/Tab.class'
-        ],System.classPath);
-    });
-</script>
 <script type="text/javascript">
 
     LAMJS.main([_ROOT_+'/project/views'],function(views) {
@@ -30,12 +30,28 @@
         new System.Template().render(views+'/demo/layout.html',{
             'PATH':_ROOT_,
             'project':_ROOT_+'/project',
-            'title':'布局demo',
             'D':{
                 'title':'你好，世界！',
                 'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.',
                 'content2':'this is include content'
             }
+
+        },function(content){
+            $('body').html(content);
+            new System.Template().render(views+'/demo/test.html',{
+                'PATH':_ROOT_,
+                'project':_ROOT_+'/project',
+                'D':{
+                    'title':'你好，世界！',
+                    'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.',
+                    'content2':'this is include content'
+                }
+
+            },function(content){
+                $('include').after(content).remove();
+
+            });
+
 
         });
 
@@ -44,5 +60,58 @@
 
 
     });
+
+</script>
+
+<script type="text/javascript">
+    LAMJS.run(function(){
+        var System=this;
+
+
+
+
+
+
+        var content,content1,ul1,ul2;
+        function layout(){
+            $('#content').width($(window).width()-($('.sidbar').width()+$('.sidbar2').width()+30));
+
+
+            content=new System.AutoLayout({'$view':$('#content'),'minWidth':0,'position':'left'}).run();
+
+            ul1=new System.AutoLayout({'$ul':$('#ul1'),'$view':$('#ul1'),'minWidth':0,'$li':$('#ul1 > li'),'vcount':$('#ul1 > li').length,'margin':10,'position':'left'}).run();
+
+            content1=new System.AutoLayout({'$view':$('#content1'),'minWidth':0,'position':'left'}).run();
+
+            ul2=new System.AutoLayout({'$ul':$('#ul2'),'$view':$('#ul2'),'minWidth':0,'$li':$('#ul2 li'),'vcount':$('#ul2 li').length,'margin':10,
+                'after_fn':function(){
+//                        console.log('ul1.temps_w : '+ul1.changeValueWidth)
+//                        this.setAllLiWidth(ul1.changeValueWidth/this.vcount);
+                },
+                'position':'left'
+            }).run();
+        }
+        $(function(){
+
+
+        });
+
+
+        layout();
+
+
+
+        $(window).resize(function(){
+            content.resize();
+            content1.resize();
+            ul1.resize();
+            ul2.resize();
+
+        });
+
+
+
+    });
+
 
 </script>

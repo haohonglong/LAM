@@ -2,12 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <title>背景半透明覆盖整个可视区域</title>
     <script type="text/javascript" src="config.js"></script>
 </head>
 </html>
-<body>
-<div id="content"></div>
-</body>
+<body></body>
 <script type="text/javascript">
      LAMJS.main(function(){
         'use strict';
@@ -37,6 +36,26 @@
                 'content2':'this is include content'
             }
 
+        },function(content){
+            $('body').html(content);
+            new System.Template().render(views+'/demo/test.html',{
+                'PATH':_ROOT_,
+                'project':_ROOT_+'/project',
+                'D':{
+                    'title':'你好，世界！',
+                    'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.',
+                    'content2':'this is include content'
+                }
+
+            },function(content){
+                $('include').after(content).remove();
+
+
+
+
+            });
+
+
         });
 
 
@@ -45,4 +64,79 @@
 
     });
 
+</script>
+
+
+<script type="text/javascript">
+
+    LAMJS.run(function(){
+        'use strict';
+        var System=this;
+        System.Html.include($('include'));
+        var slider;
+
+
+//            jQuery.getScript(html, function(i){
+//                eval(i)
+//                console.log(System.Html)
+//            });
+        function slider_f(){
+            slider=new System.Slider({
+                '$pre':$('.pre'),
+                '$next':$('.next'),
+                '$autoHandler':$('.Area'),
+                '$ul':$('ul.imgs'),
+                '$li':$('.img'),
+                '$view':$('.Area'),
+                'count':$('.img').length,
+                'unit':'px',
+                'margin':5,
+                'moveNumber':3,
+                'vcount':2,
+                'position':'left',
+                'autoMove':function(that,$autoHandler){
+                    $autoHandler = $autoHandler || that.$autoHandler;
+                    $autoHandler.hover(function(){
+                        that.stop();
+                    },function(){
+                        that.begin();
+                    });
+                },
+
+                'callback_event':function(){
+                    var __this__ =this;
+
+                    if(this.event) {
+                        this['$next']['on']('click', function () {
+
+                            __this__.next();
+                        });
+
+                        this['$pre']['on']('click', function () {
+                            __this__.pre();
+
+
+                        });
+
+                    }
+
+
+                },
+                'sport':true
+            }).run();
+        }
+
+
+
+        slider_f();
+        $(window).resize(function(){
+            slider.resize();
+
+        });
+
+
+
+
+
+    });
 </script>

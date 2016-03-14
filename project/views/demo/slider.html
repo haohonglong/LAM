@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="content-Type" content="text/html" charset="utf-8">
-<title>背景半透明覆盖整个可视区域</title>
-    <link rel="stylesheet" type="text/css" href="{{project}}/common/css/bootstrap.css"/>
 
+<link rel="stylesheet" type="text/css" href="{{project}}/common/css/bootstrap.css"/>
 
-
-
-</head>
-<body>
 <style type="text/css">
     *{margin:0;padding:0;}
     html,body{height:100%;}
@@ -43,81 +34,8 @@
 <br>
 <br>
 <br>
-</body>
-
-
-
-<script type="text/javascript">
-
-    LAMJS.run(function(){
-        'use strict';
-        var System=this;
-        System.Html.include($('include'));
-        var slider;
-
-
-//            jQuery.getScript(html, function(i){
-//                eval(i)
-//                console.log(System.Html)
-//            });
-        function slider_f(){
-            slider=new System.Slider({
-                '$pre':$('.pre'),
-                '$next':$('.next'),
-                '$autoHandler':$('.Area'),
-                '$ul':$('ul.imgs'),
-                '$li':$('.img'),
-                '$view':$('.Area'),
-                'count':$('.img').length,
-                'unit':'px',
-                'margin':5,
-                'moveNumber':3,
-                'vcount':2,
-                'position':'left',
-                'autoMove':function(that,$autoHandler){
-                    $autoHandler = $autoHandler || that.$autoHandler;
-                    $autoHandler.hover(function(){
-                        that.stop();
-                    },function(){
-                        that.begin();
-                    });
-                },
-
-                'callback_event':function(){
-                    var __this__ =this;
-
-                    if(this.event) {
-                        this['$next']['on']('click', function () {
-
-                            __this__.next();
-                        });
-
-                        this['$pre']['on']('click', function () {
-                            __this__.pre();
-
-
-                        });
-
-                    }
-
-
-                },
-                'sport':true
-            }).run();
-        }
-
-
-
-        slider_f();
-        $(window).resize(function(){
-            slider.resize();
-
-        });
 
 
 
 
 
-    });
-</script>
-</html> 
