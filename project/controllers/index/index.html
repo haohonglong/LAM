@@ -2,11 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <title>Bootstrap 101 Template</title>
     <script type="text/javascript" src="config.js"></script>
 </head>
 </html>
 <body>
-<div id="content"></div>
+
 </body>
 <script type="text/javascript">
      LAMJS.main(function(){
@@ -25,13 +26,12 @@
         var System = this;
         new System.Template().render(views+'/index/index.html',{
             'PATH':_ROOT_,
-            'title':'Bootstrap 101 Template',
             'D':{
                 'title':'你好，世界！',
                 'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
             }
 
-        });
+        },function(content){$('body').html(content)});
 
 
 
