@@ -32,30 +32,12 @@
             'project':_ROOT_+'/project',
             'D':{
                 'title':'你好，世界！',
-                'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.',
-                'content2':'this is include content'
+                'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
             }
 
         },function(content){
             $('body').html(content);
-            $('include').each(function(){
-                var $self=$(this);
-                new System.Template().render($self.attr('file'),{
-                    'PATH':_ROOT_,
-                    'project':_ROOT_+'/project',
-                    'D':{
-                        'title':'你好，世界！',
-                        'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.',
-                        'content2':'this is include content'
-                    }
-
-                },function(content){
-                    $self.after(content).remove();
-
-                });
-            });
-
-
+            System.Html.include($('include'));
 
         });
 

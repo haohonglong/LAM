@@ -32,28 +32,12 @@
             'title':'Bootstrap 101 Template',
             'D':{
                 'title':'你好，世界！',
-                'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.',
-                'content2':'this is include content'
+                'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
             }
 
         },function(content){
             $('body').html(content);
-            new System.Template().render(views+'/demo/test.html',{
-                'PATH':_ROOT_,
-                'project':_ROOT_+'/project',
-                'D':{
-                    'title':'你好，世界！',
-                    'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.',
-                    'content2':'this is include content'
-                }
-
-            },function(content){
-                $('include').after(content).remove();
-
-
-
-
-            });
+            System.Html.include($('include'));
 
 
         });
@@ -72,7 +56,6 @@
     LAMJS.run(function(){
         'use strict';
         var System=this;
-        System.Html.include($('include'));
         var slider;
 
 
