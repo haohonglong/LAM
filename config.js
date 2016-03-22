@@ -29,6 +29,7 @@ if(!LHH_CONFIG_20150717_){
         'classPath':'/lib/class',
         //hashcode 随机种子
         'random':10000,
+        //定义模版标签
         'templat':{
             'leftLimit':'{{',
             'rightLimit':'}}'
