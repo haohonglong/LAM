@@ -90,6 +90,22 @@ if(!LHH_CONFIG_20150717_){
 
         },
         'init':{},
+        /**
+         * 用createElement 创建标签并且设为异步
+         */
+        'use':function(){
+            this.render.create=true;
+            this.render.default.script.Attribute.async=true;
+            this.render.default.script.Attribute.defer='defer';
+        },
+        /**
+         * 用document.write() 创建标签并且设为非异步
+         */
+        'unuse':function(){
+            this.render.create=false;
+            this.render.default.script.Attribute.async=false;
+            this.render.default.script.Attribute.defer='';
+        },
         'getClassPath':function(){
             return this.vendorPath+this.classPath;
         }
