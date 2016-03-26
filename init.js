@@ -9,6 +9,7 @@ window[LHH_NAMESPACE_20150715_].main(function(){
     System.import([
         '/BiObject.class',
         '/Component.class',
-        '/Helper.class'
+        '/Helper.class',
+        '/Template.class'
     ],System.classPath);
 });

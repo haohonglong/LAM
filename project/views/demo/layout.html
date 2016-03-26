@@ -1,18 +1,27 @@
-<link rel="stylesheet" type="text/css" href="{{project}}/common/css/bootstrap.css"/>
-<link rel="stylesheet" type="text/css" href="{{PATH}}/lib/css/global.css"/>
-<style type="text/css">
-    .w-page{}
-    html,body,#container,.sidbar,.content{height:100%;}
-    #container{}
-    .sidbar{width:200px;position: absolute;top:0;left:0;background:red;}
-    .sidbar2{width:200px;left:auto; right:0;background:blue;}
-    .content{width:100%; margin-left:210px;background:green;margin:0 auto;overflow: hidden;}
-    #content1{margin:0;width:100%;background:#333;}
-    .ul{width:100%;padding:0;}
-    .ul li{background:#ccc;height:150px;margin-right:10px;}
-    #ul2 li{background:#f60;}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{{project}}/common/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="{{PATH}}/lib/css/global.css"/>
+    <style type="text/css">
+        .w-page{}
+        html,body,#container,.sidbar,.content{height:100%;}
+        #container{}
+        .sidbar{width:200px;position: absolute;top:0;left:0;background:red;}
+        .sidbar2{width:200px;left:auto; right:0;background:blue;}
+        .content{width:100%; margin-left:210px;background:green;margin:0 auto;overflow: hidden;}
+        #content1{margin:0;width:100%;background:#333;}
+        .ul{width:100%;padding:0;}
+        .ul li{background:#ccc;height:150px;margin-right:10px;}
+        #ul2 li{background:#f60;}
 
-</style>
+    </style>
+
+</head>
+
+<body>
+
 <div id="container" class="">
     <div class="sidbar"><include file="{{project}}/controllers/demo/test.html" dataType="html"></include></div>
 
@@ -36,3 +45,9 @@
 
     </div>
 </div>
+
+</body>
+</html>
+<script type="text/javascript" src="{{LAMJS}}/Sport.class.js"></script>
+<script type="text/javascript" src="{{LAMJS}}/Layout.class.js"></script>
+<script type="text/javascript" src="{{LAMJS}}/AutoLayout.class.js"></script>

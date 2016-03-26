@@ -1,6 +1,5 @@
-<div class="testdiv"></div>
-
-
+<meta charset="UTF-8">
+<plate></plate>
 <script type="text/javascript">
 
 	LAMJS.main([_ROOT_+'/project/views'],function(views) {
@@ -9,13 +8,29 @@
 		new System.Template().render(views+'/demo/test.html',{
 			'PATH':_ROOT_,
 			'project':_ROOT_+'/project',
+			'LAMJS':System.classPath,
 			'D':{
 				'title':'你好，世界！',
 				'content':'this is include'
 			}
 
 		},function(content){
-			$('.testdiv').after(content).remove();
+			$('plate').after(content).remove();
+
+			new System.Tab({
+				'list':$('.list li'),
+				'event':'click',
+				'hover':false,
+				'or':true,
+				'class':'cur',
+				'block':$('.block'),
+				'fn':function(obj){
+					var index=obj.this_index;
+					obj.current.block.hide();
+					obj.current.block.eq(index).show();
+
+				}
+			}).run();
 		});
 
 
@@ -24,20 +39,4 @@
 
 	});
 
-</script>
-<script type="text/javascript">
-	new System.Tab({
-		'list':$('.list li'),
-		'event':'click',
-		'hover':false,
-		'or':true,
-		'class':'cur',
-		'block':$('.block'),
-		'fn':function(obj){
-			var index=obj.this_index;
-			obj.current.block.hide();
-			obj.current.block.eq(index).show();
-
-		}
-	}).run();
 </script>

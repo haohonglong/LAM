@@ -1,39 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{{project}}/common/css/bootstrap.css"/>
 
-<link rel="stylesheet" type="text/css" href="{{project}}/common/css/bootstrap.css"/>
+    <style type="text/css">
+        *{margin:0;padding:0;}
+        html,body{height:100%;}
+        .Area{ height: 100%;position: relative;overflow: hidden;margin:0 auto;}
+        .pre,.next{position:absolute;top:50%;z-index: 100;cursor: pointer;}
+        .pre{left:30px;}
+        .next{right:30px;}
+        .imgs{position: absolute;top: 0;left: 0;width: 100%; height: 100%;}
+        .imgs .img{display: block;float: left;width:100%; height: 100%;background-size: 100% 100%;background-repeat: no-repeat;margin:0; margin-right:5px;border:5px solid red;padding:10px;}
+        .imgs img{width:100%; }
+    </style>
 
-<style type="text/css">
-    *{margin:0;padding:0;}
-    html,body{height:100%;}
-    .Area{ height: 100%;position: relative;overflow: hidden;margin:0 auto;}
-    .pre,.next{position:absolute;top:50%;z-index: 100;cursor: pointer;}
-    .pre{left:30px;}
-    .next{right:30px;}
-    .imgs{position: absolute;top: 0;left: 0;width: 100%; height: 100%;}
-    .imgs .img{display: block;float: left;width:100%; height: 100%;background-size: 100% 100%;background-repeat: no-repeat;margin:0; margin-right:5px;border:5px solid red;padding:10px;}
-    .imgs img{width:100%; }
-</style>
-<div class="Area">
-    <i class="pre">上一个</i>
-    <i class="next">下一个</i>
-    <ul class="imgs clearfix">
-        <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/mingxing0923.jpg" /></li>
-        <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/chongwu0923.jpg" /></li>
-        <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/dongman0923.jpg" /></li>
-        <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/touxiang0923.jpg" /></li>
-        <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/xiaoqingxin0923.jpg" /></li>
-        <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/dongman0923.jpg" /></li>
+</head>
+<body>
+    <div class="Area">
+        <i class="pre">上一个</i>
+        <i class="next">下一个</i>
+        <ul class="imgs clearfix">
+            <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/mingxing0923.jpg" /></li>
+            <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/chongwu0923.jpg" /></li>
+            <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/dongman0923.jpg" /></li>
+            <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/touxiang0923.jpg" /></li>
+            <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/xiaoqingxin0923.jpg" /></li>
+            <li class="img"><img src="http://img0.bdstatic.com/img/image/shouye/dongman0923.jpg" /></li>
 
 
-    </ul>
-</div>
-<include file="{{project}}/controllers/demo/test.html" dataType="html"></include>
+        </ul>
+    </div>
+    <include file="{{project}}/controllers/demo/test.html" dataType="html"></include>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+</body>
+</html>
+
+<script type="text/javascript" src="{{LAMJS}}/Sport.class.js"></script>
+<script type="text/javascript" src="{{LAMJS}}/Layout.class.js"></script>
+<script type="text/javascript" src="{{LAMJS}}/Slider.class.js"></script>
+
+
 
 
 

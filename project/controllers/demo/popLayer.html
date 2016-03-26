@@ -1,24 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>背景半透明覆盖整个可视区域</title>
-    <script type="text/javascript" src="config.js"></script>
-</head>
-</html>
-<body></body>
-<script type="text/javascript">
-     LAMJS.main(function(){
-        'use strict';
-        var System=this;
-
-        System.import([
-            '/Template.class',
-            '/PopupLayer.class',
-            '/Tab.class'
-        ],System.classPath);
-    });
-</script>
+<meta charset="utf-8">
+<script type="text/javascript" src="config.js"></script>
 <script type="text/javascript">
 
     LAMJS.main([_ROOT_+'/project/views'],function(views) {
@@ -26,15 +7,13 @@
         var System = this;
         new System.Template().render(views+'/demo/popLayer.html',{
             'PATH':_ROOT_,
+            'LAMJS':System.classPath,
             'project':_ROOT_+'/project',
-            'title':'Bootstrap 101 Template',
-            'D':{
-                'title':'你好，世界！',
-                'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
-            }
+            'title':'弹出层',
+            'D':{}
 
         },function(content){
-            $('body').html(content);
+            System.print(content);
             System.Html.include($('include'));
 
         });
