@@ -49,6 +49,74 @@
 <script type="text/javascript" src="{{LAMJS}}/Slider.class.js"></script>
 
 
+<script type="text/javascript">
+
+    LAMJS.main(function(){
+        'use strict';
+        var System=this;
+        var slider;
+
+        function slider_f(){
+            slider=new System.Slider({
+                '$pre':$('.pre'),
+                '$next':$('.next'),
+                '$autoHandler':$('.Area'),
+                '$ul':$('ul.imgs'),
+                '$li':$('.img'),
+                '$view':$('.Area'),
+                'count':$('.img').length,
+                'unit':'px',
+                'margin':5,
+                'moveNumber':3,
+                'vcount':2,
+                'position':'left',
+                'autoMove':function(that,$autoHandler){
+                    $autoHandler = $autoHandler || that.$autoHandler;
+                    $autoHandler.hover(function(){
+                        that.stop();
+                    },function(){
+                        that.begin();
+                    });
+                },
+
+                'callback_event':function(){
+                    var __this__ =this;
+
+                    if(this.event) {
+                        this['$next']['on']('click', function () {
+
+                            __this__.next();
+                        });
+
+                        this['$pre']['on']('click', function () {
+                            __this__.pre();
+
+
+                        });
+
+                    }
+
+
+                },
+                'sport':true
+            }).run();
+        }
+
+
+
+        slider_f();
+        $(window).resize(function(){
+            slider.resize();
+
+        });
+
+
+
+
+
+
+    });
+</script>
 
 
 

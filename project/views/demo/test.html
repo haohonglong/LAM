@@ -7,3 +7,20 @@
 <div class="block hide">22222</div>
 <div class="block hide">33333</div>
 <script type="text/javascript" src="{{LAMJS}}/Tab.class.js"></script>
+
+<script type="text/javascript">
+	new System.Tab({
+		'list':$('.list li'),
+		'event':'click',
+		'hover':false,
+		'or':true,
+		'class':'cur',
+		'block':$('.block'),
+		'fn':function(obj){
+			var index=obj.this_index;
+			obj.current.block.hide();
+			obj.current.block.eq(index).show();
+
+		}
+	}).run();
+</script>

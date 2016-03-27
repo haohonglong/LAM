@@ -17,20 +17,7 @@
 		},function(content){
 			$('plate').after(content).remove();
 
-			new System.Tab({
-				'list':$('.list li'),
-				'event':'click',
-				'hover':false,
-				'or':true,
-				'class':'cur',
-				'block':$('.block'),
-				'fn':function(obj){
-					var index=obj.this_index;
-					obj.current.block.hide();
-					obj.current.block.eq(index).show();
 
-				}
-			}).run();
 		});
 
 

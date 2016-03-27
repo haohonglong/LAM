@@ -51,3 +51,52 @@
 <script type="text/javascript" src="{{LAMJS}}/Sport.class.js"></script>
 <script type="text/javascript" src="{{LAMJS}}/Layout.class.js"></script>
 <script type="text/javascript" src="{{LAMJS}}/AutoLayout.class.js"></script>
+
+
+
+<script type="text/javascript">
+    LAMJS.run(function(){
+        var System=this;
+        var content,content1,ul1,ul2;
+        function layout(){
+            $('#content').width($(window).width()-($('.sidbar').width()+$('.sidbar2').width()+30));
+
+
+            content=new System.AutoLayout({'$view':$('#content'),'minWidth':0,'position':'left'}).run();
+
+            ul1=new System.AutoLayout({'$ul':$('#ul1'),'$view':$('#ul1'),'minWidth':0,'$li':$('#ul1 > li'),'vcount':$('#ul1 > li').length,'margin':10,'position':'left'}).run();
+
+            content1=new System.AutoLayout({'$view':$('#content1'),'minWidth':0,'position':'left'}).run();
+
+            ul2=new System.AutoLayout({'$ul':$('#ul2'),'$view':$('#ul2'),'minWidth':0,'$li':$('#ul2 li'),'vcount':$('#ul2 li').length,'margin':10,
+                'after_fn':function(){
+//                        console.log('ul1.temps_w : '+ul1.changeValueWidth)
+//                        this.setAllLiWidth(ul1.changeValueWidth/this.vcount);
+                },
+                'position':'left'
+            }).run();
+        }
+        $(function(){
+
+
+        });
+
+
+        layout();
+
+
+
+        $(window).resize(function(){
+            content.resize();
+            content1.resize();
+            ul1.resize();
+            ul2.resize();
+
+        });
+
+
+
+    });
+
+
+</script>
