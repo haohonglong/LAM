@@ -2,10 +2,10 @@
 <plate></plate>
 <script type="text/javascript">
 
-	LAMJS.main([_ROOT_+'/project/views'],function(views) {
+	LAMJS.main([_ROOT_+'/project/views/include'],function(views) {
 		'use strict';
 		var System = this;
-		new System.Template().render(views+'/demo/test.html',{
+		new System.Template().render(views+'/test.html',{
 			'PATH':_ROOT_,
 			'project':_ROOT_+'/project',
 			'LAMJS':System.classPath,

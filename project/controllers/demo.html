@@ -1,0 +1,72 @@
+<meta charset="utf-8">
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript">
+    LAMJS.main([_ROOT_+'/project/views/demo'],function(views) {
+        'use strict';
+        var System = this;
+        eval('action'+System.Controller.get_url_name('file').firstToUpperCase())();
+
+        function actionLayout(){
+            new System.Template().render(views+'/layout.html',{
+                'PATH':_ROOT_,
+                'title':'布局demo',
+                'project':_ROOT_+'/project',
+                'LAMJS':System.classPath,
+                'D':{
+                    'title':'你好，世界！',
+                    'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
+                }
+
+            },function(content){
+                System.print(content);
+                System.Html.include($('include'));
+
+            },{
+                'async':true
+            });
+        }
+
+        function actionPopLayer(){
+            new System.Template().render(views+'/popLayer.html',{
+                'PATH':_ROOT_,
+                'LAMJS':System.classPath,
+                'project':_ROOT_+'/project',
+                'title':'弹出层',
+                'D':{}
+
+            },function(content){
+                System.print(content);
+                System.Html.include($('include'));
+
+            });
+        }
+
+        function actionSlider(){
+            new System.Template().render(views+'/slider.html',{
+                'PATH':_ROOT_,
+                'project':_ROOT_+'/project',
+                'title':'背景半透明覆盖整个可视区域',
+                'LAMJS':System.classPath,
+                'D':{}
+
+            },function(content){
+                System.print(content);
+                System.Html.include($('include'));
+
+
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+    });
+
+</script>

@@ -23,7 +23,7 @@
 <body>
 
 <div id="container" class="">
-    <div class="sidbar"><include file="{{project}}/controllers/demo/test.html" dataType="html"></include></div>
+    <div class="sidbar"><include file="{{project}}/controllers/include/test.html" dataType="html"></include></div>
 
     <div class="content" id="content">
         <ul id="ul1" class="ul sectionFloat clearfix">
@@ -55,7 +55,7 @@
 
 
 <script type="text/javascript">
-    LAMJS.run(function(){
+    LAMJS.main(function(){
         var System=this;
         var content,content1,ul1,ul2;
         function layout(){
