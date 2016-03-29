@@ -23,6 +23,11 @@ if(!_ROOT_){
 }
 
 
+var common = _ROOT_+'/common';
+var common_plugins = common+'/plugins';
+var plugins = _ROOT_+'/plugins';
+
+
 if(!LHH_CONFIG_20150717_){
     var LHH_CONFIG_20150717_={
         'Public':{
@@ -110,7 +115,7 @@ if(!LHH_CONFIG_20150717_){
             this.render.default.script.Attribute.defer='';
         },
         'getClassPath':function(){
-            return this.vendorPath+this.classPath;
+            return this.Public.ROOT+this.classPath;
         }
     };
 }
@@ -170,15 +175,8 @@ setTimeout(function(){
     }else{
         window[LHH_NAMESPACE_20150715_].main(function(){
             var System=this;
-
-            //System.Config.render.create=true;
-            //System.Config.render.default.script.Attribute.async=true;
         });
     }
 },5000);
 
 
-
-var common = '../common';
-var common_plugins = common+'/plugins';
-var plugins = './plugins';
