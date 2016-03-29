@@ -25,7 +25,9 @@ if(!_ROOT_){
 
 if(!LHH_CONFIG_20150717_){
     var LHH_CONFIG_20150717_={
-        'vendorPath':_ROOT_,
+        'Public':{
+            'ROOT':_ROOT_
+        },
         'classPath':'/lib/class',
         //hashcode 随机种子
         'random':10000,
