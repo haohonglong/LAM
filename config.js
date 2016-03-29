@@ -30,6 +30,7 @@ var plugins = _ROOT_+'/plugins';
 
 if(!LHH_CONFIG_20150717_){
     var LHH_CONFIG_20150717_={
+        'vendorPath':_ROOT_,
         'Public':{
             'ROOT':_ROOT_
         },
@@ -115,7 +116,7 @@ if(!LHH_CONFIG_20150717_){
             this.render.default.script.Attribute.defer='';
         },
         'getClassPath':function(){
-            return this.Public.ROOT+this.classPath;
+            return this.vendorPath+this.classPath;
         }
     };
 }
