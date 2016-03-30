@@ -2,12 +2,16 @@
 <plate></plate>
 <script type="text/javascript">
 
-	LAMJS.main([_ROOT_+'/project/views/include'],function(views) {
+	LAMJS.main([
+		LAMJS.Config.Public.ROOT,
+		LAMJS.Config.Public.ROOT+'/project/views/include'
+	],function(ROOT,views) {
 		'use strict';
 		var System = this;
+
 		new System.Template().render(views+'/test.html',{
-			'PATH':_ROOT_,
-			'project':_ROOT_+'/project',
+			'PATH':ROOT,
+			'project':ROOT+'/project',
 			'LAMJS':System.classPath,
 			'D':{
 				'title':'你好，世界！',

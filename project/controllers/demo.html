@@ -1,16 +1,19 @@
 <meta charset="utf-8">
 <script type="text/javascript" src="config.js"></script>
 <script type="text/javascript">
-    LAMJS.main([_ROOT_+'/project/views/demo'],function(views) {
+    LAMJS.main([
+        LAMJS.Config.Public.ROOT,
+        LAMJS.Config.Public.ROOT+'/project/views/demo'
+    ],function(ROOT,views) {
         'use strict';
         var System = this;
         eval('action'+System.Controller.get_url_name('file').firstToUpperCase())();
 
         function actionLayout(){
             new System.Template().render(views+'/layout.html',{
-                'PATH':_ROOT_,
+                'PATH':ROOT,
                 'title':'布局demo',
-                'project':_ROOT_+'/project',
+                'project':ROOT+'/project',
                 'LAMJS':System.classPath,
                 'D':{
                     'title':'你好，世界！',
@@ -28,9 +31,9 @@
 
         function actionPopLayer(){
             new System.Template().render(views+'/popLayer.html',{
-                'PATH':_ROOT_,
+                'PATH':ROOT,
                 'LAMJS':System.classPath,
-                'project':_ROOT_+'/project',
+                'project':ROOT+'/project',
                 'title':'弹出层',
                 'D':{}
 
@@ -45,8 +48,8 @@
 
         function actionSlider(){
             new System.Template().render(views+'/slider.html',{
-                'PATH':_ROOT_,
-                'project':_ROOT_+'/project',
+                'PATH':ROOT,
+                'project':ROOT+'/project',
                 'title':'背景半透明覆盖整个可视区域',
                 'LAMJS':System.classPath,
                 'D':{}
