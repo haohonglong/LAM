@@ -622,11 +622,32 @@
 				 LAMJS.replaceTpl('selector','attrName');
 	
 	十九、MVC (详细案例看project目录里demo演示)
-			new System.Template().render('view.html',{},function(content){
-				System.print(content);
-			},{
-				'async':true //默认是同步的
-			});
+				方法名称前缀action
+				渲染方式:http://localhost:63342/project/controllers/index.html?file=viewName
+			    LAMJS.main([
+						LAMJS.Config.Public.ROOT,
+						LAMJS.Config.Public.ROOT+'/project/views/index'
+					],function(ROOT,views) {
+						'use strict';
+						var System = this;
+						eval('action'+System.Controller.get_url_name('file').firstToUpperCase())();
+
+						function actionIndex(){
+							new System.Template().render(views+'/index.html',{
+								'ROOT':ROOT,
+								'D':{
+									'title':'你好，世界！',
+									'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
+								}
+
+							},function(content){
+								System.print(content);
+							},{
+								'async':true
+							});
+						}
+
+                });
 
 
 	
