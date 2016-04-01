@@ -1,8 +1,8 @@
 	name    ：LamborghiniJS(OOPJS)
-	version ：1.0.8
+	version ：1.0.9
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-3-10
+	修改日期 ：2016-4-1
 
 
 产品介绍：
@@ -14,7 +14,8 @@
 	LamborghiniJS 里有沙箱机制(参考 十四、沙箱)
 	LamborghiniJS 里有hashcode概念（参考 十五、hashcode）
 	LamborghiniJS 里有模版标签概念（参考 十八、模版标签）
-	
+	LamborghiniJS 里有VC(view controller)概念（参考 十九、MVC）
+
 	现有选项卡、拖拽、常用工具、弹出层、幻灯、html5绘图基础类的实例．
 	如要根据项目需求要修改或扩展现有的这些实例，正确的方法是：
 	1.创建一个子类继承父类(现有的实例的类)
@@ -62,8 +63,8 @@
 	一、配置
 		
 		一次配置即可搞定!
-		'config.js'文件到你的项目中并引用到页面里，只有这个文件是跟项目绑定的。
-		<script type="text/javascript" src="./js/config.js"></script>
+		'config.js'文件到你的项目中并引用到页面里，只有这个文件是跟项目绑定的(这个文件的位置在项目根目录)。
+		<script type="text/javascript" src="./config.js"></script>
 		然后修改下面信息 (参考 二、开发约定)
 
 
@@ -72,17 +73,25 @@
 			var LHH_NAMESPACE_20150715_='System';
 		}
 		if(!_ROOT_){
-			var _ROOT_ = '../..';
-		
+			var _ROOT_ = '.';
+
 		}
-		
-		
+
+
+		var common = _ROOT_+'/common';
+		var plugins = _ROOT_+'/plugins';
+
+
 		if(!LHH_CONFIG_20150717_){
 			var LHH_CONFIG_20150717_={
 				'vendorPath':_ROOT_,
+				'Public':{
+					'ROOT':_ROOT_
+				},
 				'classPath':'/lib/class',
 				//hashcode 随机种子
 				'random':10000,
+				//定义模版标签
 				'templat':{
 					'leftLimit':'{{',
 					'rightLimit':'}}'
@@ -127,30 +136,46 @@
 						var fragment;
 						var Config = LHH_CONFIG_20150717_;
 						node=document.createElement(tag);
-		
+
 						for(k in D){
 							node[k] = D[k];
 						}
-		
+
 						if(!Config.render.fragment){
 							Config.render.fragment = document.createDocumentFragment();
 						}
 						fragment = Config.render.fragment;
-		
+
 						Config.render.fragment.appendChild(node);
-		
+
 						return fragment;
 					}
-		
+
 				},
 				'init':{},
+				/**
+				 * 用createElement 创建标签并且设为异步
+				 */
+				'use':function(){
+					this.render.create=true;
+					this.render.default.script.Attribute.async=true;
+					this.render.default.script.Attribute.defer='defer';
+				},
+				/**
+				 * 用document.write() 创建标签并且设为非异步
+				 */
+				'unuse':function(){
+					this.render.create=false;
+					this.render.default.script.Attribute.async=false;
+					this.render.default.script.Attribute.defer='';
+				},
 				'getClassPath':function(){
 					return this.vendorPath+this.classPath;
 				}
 			};
 		}
-		
-		
+
+
 		(function(Config){
 			var tag = "script";
 			var scriptAttribute = Config.render.default.script.Attribute;
@@ -158,7 +183,7 @@
 			var len;
 			var data;
 			var classPath=Config.getClassPath();
-		
+
 			//加载基础类
 			var srcs =[
 				classPath+'/jQuery/jquery.js',
@@ -166,7 +191,7 @@
 				classPath+'/loadcommon.class.js',
 				classPath+'/init.js'
 			];
-		
+
 			if(Config.render.create){
 				var H=Config.render.H();
 				for(i=0,len = srcs.length;i < len; i++){
@@ -177,9 +202,9 @@
 				console.log(H.body)
 				console.log(Config.render.fragment)
 				H.body.appendChild(Config.render.fragment);
-		
-		
-		
+
+
+
 			}else{
 				var attrs=[];
 				for(var k in scriptAttribute){
@@ -187,31 +212,27 @@
 				}
 				for(i=0,len = srcs.length;i < len; i++){
 					document.write('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
-		
+
 				}
 			}
-		
-		
+
+
 		})(LHH_CONFIG_20150717_);
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 		setTimeout(function(){
 			if(!window[LHH_NAMESPACE_20150715_]) {
 				alert("cannot find Basis class");
 			}else{
 				window[LHH_NAMESPACE_20150715_].main(function(){
 					var System=this;
-		
-					//System.Config.render.create=true;
-					//System.Config.render.default.script.Attribute.async=true;
 				});
 			}
 		},5000);
-
 
 
         根据下面三条修改上面对应的参数
@@ -575,9 +596,10 @@
 		2.调用静态的 BiObject.toHashCode()方法生成(如果检查对象里已有_hashCode 就返回,不会重新生成新的值)
 		当前实例的对象的toHashCode()方法可以返回_hashCode 如果没有就创建并返回
 		
-	十六、标签渲染方式(在配置文件中设置)
-		1.create
-		2.print
+	十六、标签创建方式(在配置文件中设置)
+		标签创建方式有两种
+		1.document.createElement()
+		2.document.write()
 		
 	十七、模块化html(.html include 另一个.html文件)
         功能：
@@ -587,25 +609,26 @@
 		步骤：
 			1.自定义标签:<include file="./include/header.html" dataType="html"></include>
 			2.先要加载Html.class 类文件
-				window[LHH_NAMESPACE_20150715_].run(function(){
+			3.修改创建tag方式 run方法
+				LAMJS.run(function(){
 						var System=this;
-						3.修改创建tag方式
-							System.Config.render.create=true;
-							System.Config.render.script.Attribute.async=true;
-				
-				
-						$(function(){
-							4.调用include 方法 根据include 标签里的file 找到指定的html 文件替换当前的include 标签
-							System.Html.include($('include'));
-									
-						});
+						4.调用include 方法 根据include 标签里的file 找到指定的html 文件替换当前的include 标签
+						System.Html.include($('include'));
+
 				 });
 				 
 	十八、模版标签
-				 LAMJS.templat();
-				 LAMJS.replaceTpl();
+				 查找解析指定元素属性里的模板标签 note:标签一定要是js全局变量名
+				 LAMJS.replaceTpl('selector','attrName');
 	
-		
+	十九、MVC (详细案例看project目录里demo演示)
+			new System.Template().render('view.html',{},function(content){
+				System.print(content);
+			},{
+				'async':true //默认是同步的
+			});
+
+
 	
 
 

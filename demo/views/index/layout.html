@@ -81,7 +81,7 @@
 
     LAMJS.main(function(){
         var System=this;
-        System.import([
+        this.import([
             '/Sport.class',
             '/Layout.class',
             '/AutoLayout.class'
@@ -93,8 +93,7 @@
 <script type="text/javascript">
     LAMJS.run(function(){
         var System=this;
-        System.use();
-//        System.unUse();
+        System.Html.include($('include'));
 
 
 
@@ -122,7 +121,7 @@
 
         });
 
-        System.Html.include($('include'));
+
         layout();
 
 
