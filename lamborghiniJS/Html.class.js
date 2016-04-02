@@ -94,8 +94,9 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 			contentType:contentType,
 			dataType: dataType,
 			beforeSend:function(jqXHR,PlainObject){
+				var self=this;
 				if(System.isFunction(beforeSend)){
-					beforeSend(jqXHR,PlainObject);
+					beforeSend.call(self,jqXHR,PlainObject);
 				}
 			},
 			error:function(){
