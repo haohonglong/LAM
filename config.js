@@ -24,7 +24,6 @@ if(!_ROOT_){
 
 
 var common = _ROOT_+'/common';
-var common_plugins = common+'/plugins';
 var plugins = _ROOT_+'/plugins';
 
 
@@ -34,7 +33,7 @@ if(!LHH_CONFIG_20150717_){
         'Public':{
             'ROOT':_ROOT_
         },
-        'classPath':'/lib/class',
+        'classPath':'/lamborghiniJS',
         //hashcode 随机种子
         'random':10000,
         //定义模版标签
@@ -172,7 +171,7 @@ if(!LHH_CONFIG_20150717_){
 
 setTimeout(function(){
     if(!window[LHH_NAMESPACE_20150715_]) {
-        alert("cannot find Basis class");
+        alert('cannot find Basis class! the lamborghiniJS\' path is :{'+LHH_CONFIG_20150717_.getClassPath()+'}');
     }else{
         window[LHH_NAMESPACE_20150715_].main(function(){
             var System=this;
