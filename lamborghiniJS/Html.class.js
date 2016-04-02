@@ -68,6 +68,7 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 					      data,
 					 	  async,
 					 	  cache,
+						  beforeSend,
 					 	  callBack){
 		//如果第一个是对象且不是jQuery对象
 		if ($dom && System.isObject($dom) && !$dom.each) {
@@ -82,7 +83,8 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 		type  		= $dom && $dom.attr('type')  		|| D&&D.type  	 	||	"POST";
 		async 		= $dom && $dom.attr('async') 		|| D&&D.async ;
 		cache 		= $dom && $dom.attr('cache') 		|| D&&D.cache ;
-		callBack 	= D&&D.callBack || 0;
+		callBack 	= D&&D.callBack   || 0;
+		beforeSend 	= D&&D.beforeSend || 0;
 
 		$.ajax(System.template(url),{
 			type : 	  type,
@@ -91,6 +93,11 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 			cache:    cache ? true : false,
 			contentType:contentType,
 			dataType: dataType,
+			beforeSend:function(jqXHR,PlainObject){
+				if(System.isFunction(beforeSend)){
+					beforeSend(jqXHR,PlainObject);
+				}
+			},
 			error:function(){
 				throw new Error("Warning :没有取到数据！！！note:也许是file属性的参数错了哦...");
 			},
@@ -133,18 +140,10 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 			return 0;
 		}
 
-		var obj={};
-		obj.url=url;
-		obj.callBack=callBack;
-		if(D){
-			obj.type= D.type;
-			obj.data= D.data;
-			obj.async= D.async;
-			obj.cache= D.cache;
-			obj.dataType= D.dataType;
-
-		}
-		getFile(null,obj);
+		getFile(System.merge({
+			'url':url,
+			'callBack':callBack
+		},[D || {}]));
 
 	};
 	/**
