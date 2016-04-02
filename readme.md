@@ -620,7 +620,7 @@
 	十八、模版标签
 				 查找解析指定元素属性里的模板标签
 					 1.定义元素属性值里的模板标签 
-					    <link rel="stylesheet" type="text/css" href="{{__ROOT__}}/project/common/css/bootstrap.css"/>
+					    <link rel="stylesheet" type="text/css" href="{{_ROOT_}}/project/common/css/bootstrap.css"/>
 					 2.解析模板标签 (模板标签就是js 变量名称)
 					    LAMJS.replaceTpl('link','href');
 					    
