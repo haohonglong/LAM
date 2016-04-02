@@ -133,8 +133,15 @@ if(!LHH_CONFIG_20150717_){
     var srcs =[
         classPath+'/jQuery/jquery.js',
         classPath+'/Basis.class.js',
+        classPath+'/BiObject.class.js',
         classPath+'/loadcommon.class.js',
-        classPath+'/init.js'
+        classPath+'/Component.class.js',
+        classPath+'/Helper.class.js',
+        classPath+'/Browser.class.js',
+        classPath+'/Dom.class.js',
+        classPath+'/Html.class.js',
+        classPath+'/Template.class.js',
+        classPath+'/Controller.class.js'
     ];
 
     if(Config.render.create){
