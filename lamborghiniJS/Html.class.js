@@ -41,7 +41,7 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-1-15
-	 * 修改日期：2016-1-15
+	 * 修改日期：2016-4-2
 	 * 名称： getFile
 	 * 功能：返回指定的文件
 	 * 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象
@@ -50,6 +50,7 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 	 * @param 	(Object)D                	   NO NULL :json 数据
 	 * @param 	(String)  	D.type             NO NULL :获取方式
 	 * @param 	(String)  	D.dataType         NO NULL :获取文件类型
+	 * @param 	(String)  	D.contentType      	  NULL :设置编码等
 	 * @param 	(String)  	D.url         	      NULL :请求地址
 	 * @param 	(String|{}) D.data             	  NULL :请求地址的参数
 	 * @param 	(Boolean) 	D.async               NULL :是否异步加载
@@ -62,26 +63,33 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 	var getFile=function($dom,D,
 					 	  type,
 					      dataType,
+						  contentType,
 					      url,
 					      data,
 					 	  async,
 					 	  cache,
 					 	  callBack){
+		//如果第一个是对象且不是jQuery对象
+		if ($dom && System.isObject($dom) && !$dom.each) {
+			D = $dom;
+			$dom = undefined;
+		}
 
-		data  		= $dom && $dom.attr('data')  	|| D&&D.data  	 || {};
-		dataType 	= $dom && $dom.attr('dataType') || D&&D.dataType ||"html";
-		url  		= $dom && $dom.attr('file')  	|| D&&D.url;
-		type  		= $dom && $dom.attr('type')  	|| D&&D.type  	 || "GET";
-		async 		= $dom && $dom.attr('async') 	|| D&&D.async ;
-		cache 		= $dom && $dom.attr('cache') 	|| D&&D.cache ;
+		data  		= $dom && $dom.attr('data')  		|| D&&D.data  	 	|| {};
+		dataType 	= $dom && $dom.attr('dataType') 	|| D&&D.dataType 	||	"html";
+		contentType = $dom && $dom.attr('contentType') 	|| D&&D.contentType ||"application/x-www-form-urlencoded; charset=UTF-8";
+		url  		= $dom && $dom.attr('file')  		|| D&&D.url;
+		type  		= $dom && $dom.attr('type')  		|| D&&D.type  	 	|| "POST";
+		async 		= $dom && $dom.attr('async') 		|| D&&D.async ;
+		cache 		= $dom && $dom.attr('cache') 		|| D&&D.cache ;
 		callBack 	= D&&D.callBack || 0;
 
-		$.ajax({
-			type :    type,
-			url  :    System.template(url),
+		$.ajax(System.template(url),{
+			type : 	  type,
 			data :    data,
 			async:    async ? true : false,
 			cache:    cache ? true : false,
+			contentType:contentType,
 			dataType: dataType,
 			error:function(){
 				throw new Error("Warning :没有取到数据！！！note:也许是file属性的参数错了哦...");
