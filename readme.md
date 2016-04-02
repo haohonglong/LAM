@@ -2,7 +2,7 @@
 	version ：1.0.9
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-4-1
+	修改日期 ：2016-4-2
 
 
 产品介绍：
@@ -14,12 +14,12 @@
 	LamborghiniJS 里有沙箱机制(参考 十四、沙箱)
 	LamborghiniJS 里有hashcode概念（参考 十五、hashcode）
 	LamborghiniJS 里有模版标签概念（参考 十八、模版标签）
-	LamborghiniJS 里有VC(view controller)概念（参考 十九、MVC）
+	LamborghiniJS 里有MVC概念（参考 十九、MVC）
 
 	现有选项卡、拖拽、常用工具、弹出层、幻灯、html5绘图基础类的实例．
 	如要根据项目需求要修改或扩展现有的这些实例，正确的方法是：
-	1.创建一个子类继承父类(现有的实例的类)
-	2.覆写父类里的成员(属性和方法)
+		1.创建一个子类继承父类(现有的实例的类)
+		2.覆写父类里的成员(属性和方法)
 	(继承参考 六、继承)
 	错误的方法是:在类库的源码上修改!!!
 
@@ -597,15 +597,15 @@
 		当前实例的对象的toHashCode()方法可以返回_hashCode 如果没有就创建并返回
 		
 	十六、标签创建方式(在配置文件中设置)
-		标签创建方式有两种
-		1.document.createElement()
-		2.document.write()
+			标签创建方式有两种：
+				1.document.createElement()
+				2.document.write()
 		
-	十七、模块化html(.html include 另一个.html文件)
+	十七、页面里包含另一个页面(.html include 另一个.html文件)
         功能：
-			1.html include other html
-			2.根据url参数渲染指定的页面
-		警告:有些浏览器要支持跨域才可以!!!
+			1.设定一个占位符标签
+			2.根据占位符里file参数请求另一个页面，然后替换掉当前占位符
+		警告:有些浏览器要支持跨域才可以!!!，解决方法：在服务器环境里运行
 		步骤：
 			1.自定义标签:<include file="./include/header.html" dataType="html"></include>
 			2.先要加载Html.class 类文件
@@ -618,12 +618,22 @@
 				 });
 				 
 	十八、模版标签
-				 查找解析指定元素属性里的模板标签 note:标签一定要是js全局变量名
-				 LAMJS.replaceTpl('selector','attrName');
+				 查找解析指定元素属性里的模板标签
+					 1.定义元素属性值里的模板标签 
+					    <link rel="stylesheet" type="text/css" href="{{__ROOT__}}/project/common/css/bootstrap.css"/>
+					 2.解析模板标签 (模板标签就是js 变量名称)
+					    LAMJS.replaceTpl('link','href');
+					    
+				 note:用MVC方式渲染页面就不用这种方式
+				 修改模板标签分隔符参考 二十、配置参数 一、模板标签分隔符
 	
-	十九、MVC (详细案例看project目录里demo演示)
+	十九、MVC (详细demo看project目录里)
 				方法名称前缀action
-				渲染方式:http://localhost:63342/project/controllers/index.html?file=viewName
+				流程：
+					http://localhost:63342/project/controllers/index.html?file=viewName
+					1.根据url file参数执行对应的方法
+					2.请求视图页并根据model data数据 解析视图里的模板标签
+					3.返回解析后的视图字符串输出view
 			    LAMJS.main([
 						LAMJS.Config.Public.ROOT,
 						LAMJS.Config.Public.ROOT+'/project/views/index'
@@ -648,6 +658,17 @@
 						}
 
                 });
+                
+                
+    二十、配置参数
+            一、模板标签分隔符
+                1.设置模板分隔符： 
+                     在配置文件 的templat里配置左右分隔符分别是：leftLimit , rightLimit
+                     也可在单独视图里定义，只匹配当前页面里的分隔符与别的页面没关系，不会改变全局配置
+                 2.修改模板分隔符：(用MVC方式：设置在控制器方法里)
+                     LAMJS.Config.templat.leftLimit  = '${{';
+                     LAMJS.Config.templat.rightLimit = '}}$';
+                
 
 
 	
