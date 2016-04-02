@@ -75,11 +75,11 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 			$dom = undefined;
 		}
 
-		data  		= $dom && $dom.attr('data')  		|| D&&D.data  	 	|| {};
+		data  		= $dom && $dom.attr('data')  		|| D&&D.data  	 	||	{};
 		dataType 	= $dom && $dom.attr('dataType') 	|| D&&D.dataType 	||	"html";
-		contentType = $dom && $dom.attr('contentType') 	|| D&&D.contentType ||"application/x-www-form-urlencoded; charset=UTF-8";
+		contentType = $dom && $dom.attr('contentType') 	|| D&&D.contentType ||	"application/x-www-form-urlencoded; charset=UTF-8";
 		url  		= $dom && $dom.attr('file')  		|| D&&D.url;
-		type  		= $dom && $dom.attr('type')  		|| D&&D.type  	 	|| "POST";
+		type  		= $dom && $dom.attr('type')  		|| D&&D.type  	 	||	"POST";
 		async 		= $dom && $dom.attr('async') 		|| D&&D.async ;
 		cache 		= $dom && $dom.attr('cache') 		|| D&&D.cache ;
 		callBack 	= D&&D.callBack || 0;
