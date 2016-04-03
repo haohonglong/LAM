@@ -68,7 +68,7 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
             async: async ? true : false,
             dataType: 'html',
             success: function(content){
-                document.write(content);
+                System.print(content);
             }
         });
     };
