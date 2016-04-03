@@ -674,7 +674,7 @@
 						controllerName:控制器文件名称（对应视图文件的文件夹，如：index）
 						file:接收控制器中的方法名的参数。file关键字可以在控制器中自定义
 						view：调用对应控制器中的方法（对应着视图文件名）
-				controllers:
+				controllers/index.html:
 						    LAMJS.main([
 									LAMJS.Config.Public.ROOT,
 									LAMJS.Config.Public.ROOT+'/project/views/index'
@@ -724,7 +724,7 @@
 	                                                            render方法参数4就可以设置一个beforeSend回调函数，其余的参数都可以在这里设置。
 	                                                            函数里的两个参数请参考jQuery Ajax API。
 	                
-	            views:
+	            views/index/index.html:
 		                <!DOCTYPE html>
 	                    <html>
 	                    <head>
