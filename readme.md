@@ -668,59 +668,88 @@
 	
 	十九、MVC (详细demo看project目录里)
 				方法名称前缀action
-				流程：
+				访问url格式：
 					localhost/project/controllers/controllerName.html?file=view
 						controllers:控制器文件夹
 						controllerName:控制器文件名称（对应视图文件的文件夹，如：index）
 						file:接收控制器中的方法名的参数。file关键字可以在控制器中自定义
 						view：调用对应控制器中的方法（对应着视图文件名）
-			    LAMJS.main([
-						LAMJS.Config.Public.ROOT,
-						LAMJS.Config.Public.ROOT+'/project/views/index'
-					],function(ROOT,views) {
-						'use strict';
-						var System = this;
-						eval('action'+System.Controller.get_url_name('file').firstToUpperCase())();
-
-						function actionIndex(){
-							new System.Template().render(views+'/index.html',{
-								'ROOT':ROOT,
-								'D':{
-									'title':'你好，世界！',
-									'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
-								}
-
-							},function(content){
-								System.print(content);
-								//注1
-								 System.Html.include($('include'));
-							},{
-								'async':true,
-								//注2
-								beforeSend:function(a,b){
-                                    //this：就是Ajax的settings
-                                    //下面的意思是发送之前把async属性设置为false,等于把上面的相同设置给覆盖掉，上面的设置就无效了
-                                    this.async=false;
-                                }
-							});
-						}
-
-                });
+				controllers:
+						    LAMJS.main([
+									LAMJS.Config.Public.ROOT,
+									LAMJS.Config.Public.ROOT+'/project/views/index'
+								],function(ROOT,views) {
+									'use strict';
+									var System = this;
+									eval('action'+System.Controller.get_url_name('file').firstToUpperCase())();
+			
+									function actionIndex(){
+										new System.Template().render(views+'/index.html',{
+											'ROOT':ROOT,
+											'title':'Bootstrap Template',
+											'D':{
+												'title':'hello word！',
+												'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
+											}
+			
+										},function(content){
+											System.print(content);
+											//注1
+											 System.Html.include($('include'));
+										},{
+											'async':true,
+											//注2
+											beforeSend:function(a,b){
+			                                    //this：就是Ajax的settings
+			                                    //下面的意思是发送之前把async属性设置为false,等于把上面的相同设置给覆盖掉，上面的设置就无效了
+			                                    this.async=false;
+			                                }
+										});
+									}
+			
+			                });
+			                
+			           render参数：
+		                        参数1：请求视图的路径
+		                        参数2：替换视图中模板标签的数据（这里就是MVC中的M ）
+		                        参数3：视图路径请求成功后返回视图文件(String) 
+		                        参数4：设置请求Ajax 的参数(必须是json类型)
+                          
+	                   note:
+	                          注1： System.Html.include($('include'))是可选的， 要放在渲染视图的下面。
+	                                MVC方式的include标签的file属性值是请求的控制器，而后通过控制器请求视图，而不是直接去请求视图。
+	                                错误的方式：System.Html.include($('include'))放在视图里。
+	                                    
+	                          注2：beforeSend函数里的this就是Ajax的settings,在发送之前设置jQuery Ajax提供的所有参数。
+	                                                            render方法参数4就可以设置一个beforeSend回调函数，其余的参数都可以在这里设置。
+	                                                            函数里的两个参数请参考jQuery Ajax API。
+	                
+	            views:
+		                <!DOCTYPE html>
+	                    <html>
+	                    <head>
+	                        <title>{{title}}</title>
+	                        <link rel="stylesheet" type="text/css" href="{{ROOT}}/project/common/css/bootstrap.css"/>
+	                        <!--[if lt IE 8]>
+	                        <script>
+	                            alert('请使用谷歌、火狐浏览器！');
+	                        </script>
+	                        <![endif]-->
+	                    
+	                    
+	                    </head>
+	                    <body>
+		                    <div class="container">
+		                        <div class="jumbotron">
+		                            <h1>{{D.title}}</h1>
+		                            <p>{{D.content}}</p>
+		                            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+		                        </div>
+		                    </div>
+	                    </body>
+	                    </html>
                 
-                render参数：
-	                参数1：请求视图的路径
-	                参数2：替换视图中模板标签的数据（这里就是MVC中的M ）
-	                参数3：视图路径请求成功后返回视图文件(String) 
-	                参数4：设置请求Ajax 的参数(必须是json类型)
-                
-                note:
-                    注1： System.Html.include($('include'))是可选的， 要放在渲染视图的下面。
-                          MVC方式的include标签的file属性值是请求的控制器，而后通过控制器请求视图，而不是直接去请求视图。
-                          错误的方式：System.Html.include($('include'))放在视图里。
-                              
-                    注2：beforeSend函数里的this就是Ajax的settings,在发送之前设置jQuery Ajax提供的所有参数。
-                     				                    render方法参数4就可以设置一个beforeSend回调函数，其余的参数都可以在这里设置。
-                     				                    函数里的两个参数请参考jQuery Ajax API。
+               
                 
     二十、配置参数
             一、模板标签分隔符设置与修改
