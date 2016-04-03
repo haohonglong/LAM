@@ -633,7 +633,7 @@
 		                              this.dataType='html';
                                       this.async=true;
                          }"></include>
-                 note:beforeSend 属性是可选的，这里的this就是Ajax的settings,在发送之前设置jQuery Ajax提供的所有参数，
+                 note:beforeSend 属性是可选的，这里的this就是jQuery Ajax的settings,在发送之前设置jQuery Ajax提供的所有参数，
                                      这里就可以设置一个beforeSend回调函数，其余的参数都可以在这个函数里设置,
                                      在beforeSend回调函数里设置file 参数 要换成 url 参数。
                                      函数里的两个参数请参考jQuery Ajax API。
