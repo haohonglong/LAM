@@ -671,7 +671,7 @@
 				流程：
 					http://localhost:63342/project/controllers/controllerName.html?file=view
 					1.controllerName:控制器文件名称（对应视图文件的文件夹，如：index）
-					2.file:可以在控制器中自定义
+					2.file:接收控制器中的方法名的参数。file关键字可以在控制器中自定义
 					3.view：调用对应控制器中的方法（对应着视图文件名）
 			    LAMJS.main([
 						LAMJS.Config.Public.ROOT,
