@@ -429,7 +429,7 @@
 			之前在别的地方引入的文件它也能会检测到是否是同名文件，这个是通过对文件名解析做出的判断。但只检测带.class的关键字文件名称。
 
 			1.下面这种不仅适合脚本文件和样式文件的引入还适合less文件的引入。load方法是加载指定的文件到加载器中，load方法可以链式调用多个不同类型文件，当调用到print方法的时候才会一次性从加载器里输出到页面中
-				window[LHH_NAMESPACE_20150715_]['Loadcommon'].
+				LAMJS['Loadcommon'].
 					load({
 						'baseUrl':jsPath,
 						'suffix':'.js',
@@ -475,31 +475,35 @@
 			2.下面这种仅适合脚本文件的引入（只引入脚本时推荐使用这种方式）
 				System.import(['http://apps.bdimg.com/libs/jquery/1.6.4/jquery.js']);
 
-				System.import([
-					'/Browser.class',
-					'/Drag.class',
-					'/Dom.class',
-					'/Tools.class',
-					'/PaintBase.class'
-				],classPath);
+				System
+					.import([
+						'/Browser.class',
+						'/Drag.class',
+						'/Dom.class',
+						'/Tools.class',
+						'/PaintBase.class'
+					],classPath);
 
 				或者像下面这样可以添加自定义参数
-				System.import([
-					{'src':'/Browser.class','data-main':'scripts/main.js'},
-					{'src':'/Drag.class','attr':2},
-					{'src':'/Drag_xy.class','attr':3},
-					{'src':'/Dom.class','attr':4},
-					{'src':'/PaintBase.class','attr':5}
-				],classPath);
+				System
+					.import([
+						{'src':'/Browser.class','data-main':'scripts/main.js'},
+						{'src':'/Drag.class','attr':2},
+						{'src':'/Drag_xy.class','attr':3},
+						{'src':'/Dom.class','attr':4},
+						{'src':'/PaintBase.class','attr':5}
+					],classPath);
 				
 				也可以链式调用
-				System.import(['http://apps.bdimg.com/libs/jquery/1.6.4/jquery.js']).import([
-                					'/Browser.class',
-                					'/Drag.class',
-                					'/Dom.class',
-                					'/Tools.class',
-                					'/PaintBase.class'
-                				],classPath);
+				System
+					.import(['http://apps.bdimg.com/libs/jquery/1.6.4/jquery.js'])
+					.import([
+	                    '/Browser.class',
+	                    '/Drag.class',
+	                    '/Dom.class',
+	                    '/Tools.class',
+	                    '/PaintBase.class'
+	                ],classPath);
 
 
 
