@@ -618,7 +618,8 @@
 	
 	十五、hashcode
 		this.equals(Object) 方法
-		equals()方法是当前对象比对指定对象的 _hashCode 属性值, 这个值是一个字符串 是new 一个对象时随即生成的，不同的对象的_hashCode 是不同的，由此根据这个原理可以比对两个对象是否相等。
+		equals()方法的作用是比较俩对象是否是同一个对象。
+		 _hashCode 属性值, 这个值是一个字符串 是new 一个对象时随机生成的，不同的对象的_hashCode 是不同的，由此根据这个原理可以比对两个对象是否相等。
 		给对象创建_hashCode属性有两种方式
 		1.实例化时自动生成
 		2.调用静态的 BiObject.toHashCode()方法生成(如果检查对象里已有_hashCode 就返回,不会重新生成新的值)
@@ -643,7 +644,7 @@
                  note:beforeSend 属性是可选的，这里的this就是Ajax的settings,在发送之前设置jQuery Ajax提供的所有参数，
                                      这里就可以设置一个beforeSend回调函数，其余的参数都可以在这个函数里设置,
                                      在beforeSend回调函数里设置file 参数 要换成 url 参数。
-                                     函数里的两个参数请参考jQuery API
+                                     函数里的两个参数请参考jQuery Ajax API。
                 
 			2.先要加载Html.class 类文件
 				//run方法可以修改创建tag方式 
@@ -668,10 +669,10 @@
 	十九、MVC (详细demo看project目录里)
 				方法名称前缀action
 				流程：
-					http://localhost:63342/project/controllers/index.html?file=viewName
-					1.根据url file参数执行对应的方法
-					2.请求视图页并根据model data数据 解析视图里的模板标签
-					3.返回解析后的视图字符串输出view
+					http://localhost:63342/project/controllers/controllerName.html?file=view
+					1.controllerName:控制器文件名称（对应视图文件的文件夹，如：index）
+					2.file:可以在控制器中自定义
+					3.view：调用对应控制器中的方法（对应着视图文件名）
 			    LAMJS.main([
 						LAMJS.Config.Public.ROOT,
 						LAMJS.Config.Public.ROOT+'/project/views/index'
@@ -718,7 +719,7 @@
                               
                     注2：beforeSend函数里的this就是Ajax的settings,在发送之前设置jQuery Ajax提供的所有参数。
                      				                    render方法参数4就可以设置一个beforeSend回调函数，其余的参数都可以在这里设置。
-                     				                    函数里的两个参数请参考jQuery API。
+                     				                    函数里的两个参数请参考jQuery Ajax API。
                 
     二十、配置参数
             一、模板标签分隔符设置与修改
