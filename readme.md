@@ -630,7 +630,7 @@
 		步骤：
 			1.自定义标签:<include file="./include/header.html" 
 								  beforeSend="function(a,b){
-		                              this.dataType="html" 
+		                              this.dataType='html';
                                       this.async=true;
                          }"></include>
                  note:beforeSend 属性是可选的，这里的this就是Ajax的settings,在发送之前设置jQuery Ajax提供的所有参数，
