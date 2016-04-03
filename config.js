@@ -29,11 +29,10 @@ var plugins = _ROOT_+'/plugins';
 
 if(!LHH_CONFIG_20150717_){
     var LHH_CONFIG_20150717_={
-        'vendorPath':_ROOT_,
+        'vendorPath':_ROOT_+'/lamborghiniJS',
         'Public':{
             'ROOT':_ROOT_
         },
-        'classPath':'/lamborghiniJS',
         //hashcode 随机种子
         'random':10000,
         //定义模版标签
@@ -115,7 +114,7 @@ if(!LHH_CONFIG_20150717_){
             this.render.default.script.Attribute.defer='';
         },
         'getClassPath':function(){
-            return this.vendorPath+this.classPath;
+            return this.vendorPath;
         }
     };
 }

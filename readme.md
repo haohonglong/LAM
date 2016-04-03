@@ -258,7 +258,7 @@
 		
         根据下面三条修改上面对应的参数
 			1.修改 LHH_NAMESPACE_20150715_ 的值
-			2.修改 LHH_CONFIG_20150717_.classPath 的值
+			2.修改 LHH_CONFIG_20150717_.vendorPath 的值
 
 
 		'config.js'文件里做的事情是：
@@ -473,7 +473,7 @@
 
 
 			2.下面这种仅适合脚本文件的引入（只引入脚本时推荐使用这种方式）
-				System.import(['http://apps.bdimg.com/libs/jquery/1.6.4/jquery.js']);
+				System.import(['http://apps.bdimg.com/libs/jquery/1.6.4/jquery.js'],' ',' ');
 
 				System
 					.import([

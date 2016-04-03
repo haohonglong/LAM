@@ -24,6 +24,7 @@ window[LHH_NAMESPACE_20150715_].main([window,document],function(window,document,
     var append;
     var sAttribute   = System.Config.render.default.script.Attribute;
     var cAttribute   = System.Config.render.default.css.Attribute;
+    var ROOT         = System.Config.Public.ROOT;
 
 
 
@@ -87,22 +88,23 @@ window[LHH_NAMESPACE_20150715_].main([window,document],function(window,document,
          *  创建日期：2014.9.10
          *  修改日期：2014.9.10
          *  Example：
-         *          <script type="text/javascript" src="{global}/js/lib.class.js"></script>
-         *          <link href="{global}/css/global.css" type="text/css" rel="stylesheet" />
+         *          <script type="text/javascript" src="{{ROOT}}/js/lib.class.js"></script>
+         *          <link href="{{ROOT}}/css/global.css" type="text/css" rel="stylesheet" />
          */
         'replace_tpl':function(D){
-            var baseUrl=D.baseUrl;
-            var reg=/{global}/;
-            var i=0;
-            var len;
-            for(i=0,len= s.length;i < len ; i++){
-                dom.attr(s[i],'src',dom.attr(s[i],'src').replace(reg,baseUrl));
+            var baseUrl=D.baseUrl || ROOT;
+            var reg= D.reg || /{{ROOT}}/;
+            var $=jQuery;
 
-            }
+            $.each(script,function(){
+                var $this=$(this);
+                $this.attr('src',$this.attr('src').replace(reg,baseUrl));
+            });
+            $.each(link,function(){
+                var $this=$(this);
+                $this.attr('href',$this.attr('href').replace(reg,baseUrl));
+            });
 
-            for(i=0,len=link.length;i < len ;i++){
-                dom.attr(link[i],'href',dom.attr(link[i],'href').replace(reg,baseUrl));
-            }
         },
         /**
          *
@@ -166,7 +168,7 @@ window[LHH_NAMESPACE_20150715_].main([window,document],function(window,document,
             }
             var suffix;
             var rel;
-            var baseUrl=D.baseUrl || null;
+            var baseUrl=D.baseUrl || ROOT;
             var len;
             var src="";
             var href="";

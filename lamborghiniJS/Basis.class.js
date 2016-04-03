@@ -1868,12 +1868,12 @@ if(!LHH_NAMESPACE_20150715_){
 window[LHH_NAMESPACE_20150715_].main([window,LHH_CONFIG_20150717_],function(W,Config){
 	'use strict';
 	var System=this;
+	var _ROOT_ = '.';
 	var defaultConfig={
-		'vendorPath':'',
+		'vendorPath':_ROOT_+'/lamborghiniJS',
 		'Public':{
-			'ROOT':''//_ROOT_
+			'ROOT':_ROOT_
 		},
-		'classPath':'/class',
 		//hashcode 随机种子
 		'random':10000,
 		//定义模版标签
@@ -1955,7 +1955,7 @@ window[LHH_NAMESPACE_20150715_].main([window,LHH_CONFIG_20150717_],function(W,Co
 			this.render.default.script.Attribute.defer='';
 		},
 		'getClassPath':function(){
-			return this.vendorPath+this.classPath;
+			return this.vendorPath;
 		}
 	};
 
