@@ -63,11 +63,32 @@
 	一、配置
 		
 		一次配置即可搞定!
-		'config.js'文件到你的项目中并引用到页面里，只有这个文件是跟项目绑定的(这个文件的位置在项目根目录)。
 		<script type="text/javascript" src="./config.js"></script>
-		然后修改下面信息 (参考 二、开发约定)
+		config.js 分为两个，一个是当前配置文件，一个是主配置文件。
+		当前配置文件是跟视图文件或者控制器文件在同级目录里，
+		当期配置文件的作用：
+			1.配置项目主目录路径（_ROOT_ 变量）
+			2.引入主配置文件
+		当期配置文件的配置：这里只修改_ROOT_ 变量值其余都不用动
+		内容如下：
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+			if(!_ROOT_){
+	            var _ROOT_ = '../..';
+	        
+	        }
+	        (function(){
+	            var tag = "script",attrs=[],src;
+	            attrs.push('type="text/javascript"');
+	            src=_ROOT_+'/config.js';
+	        
+	            document.write('<',tag,' ',attrs.join(' '),'src=','"',src,'"','>','<','/',tag,'>');
+	        })();
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	    主配置文件在项目的根目录里，（只有这个文件是跟项目绑定的）
+	    主配置文件配置： 参考 二、开发约定
+	    内容如下：
 
-
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		//基础类的设置
 		if(!LHH_NAMESPACE_20150715_){
 			var LHH_NAMESPACE_20150715_='System';
@@ -88,7 +109,7 @@
 				'Public':{
 					'ROOT':_ROOT_
 				},
-				'classPath':'/lib/class',
+				'classPath':'/lamborghiniJS',
 				//hashcode 随机种子
 				'random':10000,
 				//定义模版标签
@@ -234,11 +255,10 @@
 			}
 		},5000);
 
-
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         根据下面三条修改上面对应的参数
 			1.修改 LHH_NAMESPACE_20150715_ 的值
-			2.修改 LHH_CONFIG_20150717_.vendorPath 的值
-			3.修改 LHH_CONFIG_20150717_.classPath 的值
+			2.修改 LHH_CONFIG_20150717_.classPath 的值
 
 
 		'config.js'文件里做的事情是：
@@ -255,7 +275,8 @@
 
 	二、开发约定
 	
-		'LHH_NAMESPACE_20150715_' 在'config.js'里设定,变量名: LHH_NAMESPACE_20150715_ 是框架里定死的禁止改动，可以修改变量的值。
+		'LHH_NAMESPACE_20150715_' 在'config.js'里设定,变量名: LHH_NAMESPACE_20150715_ 是框架里定死的禁止改动，可以修改变量的值,
+		也就是说框架的命名空间可以用户自定义（参考 四、命名空间灵活 与其他插件无冲突）。
 		禁止修改'Basis.class.js'里的 'LHH_NAMESPACE_20150715_' 的值。
 		成员都是受保护的，不对外共享，如要在外面修改或者复写，都要通过接口。
 		调用基类的静态成员方法:(调用接口.类名称.静态成员)。
@@ -392,7 +413,7 @@
 			上面的方法是在当前实例中扩充成员
 
 	四、命名空间灵活 与其他插件无冲突
-		命名空间接口设计的宗旨是:只要修改一处即可搞定一切与第三方插件的冲突。
+		命名空间接口设计的宗旨是:只要修改一处即可搞定一切与第三方插件的冲突，命名空间的命名权限提供给用户，用户可以随意命名。
 		命名空间接口定义: var LHH_NAMESPACE_20150715_='interfaceName';
         命名空间接口调用: window[LHH_NAMESPACE_20150715_]  或者 window['interfaceName'] 或者 LamborghiniJS_20150910123700_ 或者 LAMJS
 		命名空间接口的设计是灵活的，修改接口名不影响库文件里的内核代码及类接口。
@@ -610,12 +631,21 @@
 			2.根据占位符里file参数请求另一个页面，然后替换掉当前占位符
 		警告:有些浏览器要支持跨域才可以!!!，解决方法：在服务器环境里运行
 		步骤：
-			1.自定义标签:<include file="./include/header.html" dataType="html"></include>
+			1.自定义标签:<include file="./include/header.html" 
+								  beforeSend="function(a,b){
+		                              this.dataType="html" 
+                                      this.async=true;
+                         }"></include>
+                 note:beforeSend 属性是可选的，这里的this就是Ajax的settings,在发送之前设置jQuery Ajax提供的所有参数，
+                                     这里就可以设置一个beforeSend回调函数，其余的参数都可以在这个函数里设置,
+                                     在beforeSend回调函数里设置file 参数 要换成 url 参数。
+                                     函数里的两个参数请参考jQuery API
+                
 			2.先要加载Html.class 类文件
-			3.修改创建tag方式 run方法
+				//run方法可以修改创建tag方式 
 				LAMJS.run(function(){
 						var System=this;
-						4.调用include 方法 根据include 标签里的file 找到指定的html 文件替换当前的include 标签
+						3.调用include 方法 根据include 标签里的file 找到指定的html 文件替换当前的include 标签
 						System.Html.include($('include'));
 
 				 });
@@ -627,8 +657,9 @@
 					 2.解析模板标签 (模板标签就是js 变量名称)
 					    LAMJS.replaceTpl('link','href');
 					    
-				 note:用MVC方式渲染页面就不用这种方式
-				 修改模板标签分隔符参考 二十、配置参数 一、模板标签分隔符
+				 
+				 note:  用MVC方式渲染页面就不用这种方式，MVC渲染请参考 十九、MVC。
+				        修改模板标签分隔符参考 二十、配置参数 一、模板标签分隔符
 	
 	十九、MVC (详细demo看project目录里)
 				方法名称前缀action
@@ -655,23 +686,48 @@
 
 							},function(content){
 								System.print(content);
+								//注1
+								 System.Html.include($('include'));
 							},{
-								'async':true
+								'async':true,
+								//注2
+								beforeSend:function(a,b){
+                                    //this：就是Ajax的settings
+                                    //下面的意思是发送之前把async属性设置为false,等于把上面的相同设置给覆盖掉，上面的设置就无效了
+                                    this.async=false;
+                                }
 							});
 						}
 
                 });
                 
+                render参数：
+	                参数1：请求视图的路径
+	                参数2：替换视图中模板标签的数据（这里就是MVC中的M ）
+	                参数3：视图路径请求成功后返回视图文件(String) 
+	                参数4：设置请求Ajax 的参数(必须是json类型)
+                
+                note:
+                    注1： System.Html.include($('include'))是可选的， 要放在渲染视图的下面。
+                          MVC方式的include标签的file属性值是请求的控制器，而后通过控制器请求视图，而不是直接去请求视图。
+                          错误的方式：System.Html.include($('include'))放在视图里。
+                              
+                    注2：beforeSend函数里的this就是Ajax的settings,在发送之前设置jQuery Ajax提供的所有参数。
+                     				                    render方法参数4就可以设置一个beforeSend回调函数，其余的参数都可以在这里设置。
+                     				                    函数里的两个参数请参考jQuery API。
                 
     二十、配置参数
-            一、模板标签分隔符
+            一、模板标签分隔符设置与修改
                 1.设置模板分隔符： 
                      在配置文件 的templat里配置左右分隔符分别是：leftLimit , rightLimit
                      也可在单独视图里定义，只匹配当前页面里的分隔符与别的页面没关系，不会改变全局配置
                  2.修改模板分隔符：(用MVC方式：设置在控制器方法里)
                      LAMJS.Config.templat.leftLimit  = '${{';
                      LAMJS.Config.templat.rightLimit = '}}$';
-                
+                     
+                     
+
+                   
 
 
 	

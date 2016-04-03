@@ -1,4 +1,7 @@
-var _ROOT_ = '../..';
+if(!_ROOT_){
+    var _ROOT_ = '../..';
+
+}
 (function(){
     var tag = "script",attrs=[],src;
     attrs.push('type="text/javascript"');
