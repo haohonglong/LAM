@@ -667,7 +667,7 @@
 				        修改模板标签分隔符参考 二十、配置参数 一、模板标签分隔符
 	
 	十九、MVC (详细demo看project目录里)
-				方法名称前缀action
+				
 				访问url格式：
 					localhost/project/controllers/controllerName.html?file=view
 						controllers:控制器文件夹
@@ -716,6 +716,7 @@
 		                        参数4：设置请求Ajax 的参数(必须是json类型)
                           
 	                   note:
+	                          不要忘了方法名称前缀action
 	                          注1： System.Html.include($('include'))是可选的， 要放在渲染视图的下面。
 	                                MVC方式的include标签的file属性值是请求的控制器，而后通过控制器请求视图，而不是直接去请求视图。
 	                                错误的方式：System.Html.include($('include'))放在视图里。
