@@ -285,8 +285,14 @@
 		调用基类的静态成员方法:(调用接口.类名称.静态成员)。
         基类不允许被直接实例化，要实例化它的派生类。
         
-        全局变量
-            1._ROOT_  设置项目的根目录
+        1.全局常量:字符大写，俩边各一个下横线
+        	expmple:
+        		_ROOT_  设置项目的根目录
+        2.全局变量:字符小写
+        	
+        3.对象里的私有属性
+        
+            
 
         不能被直接实例化的类：
         	{
@@ -432,8 +438,8 @@
 			之前在别的地方引入的文件它也能会检测到是否是同名文件，这个是通过对文件名解析做出的判断。但只检测带.class的关键字文件名称。
 
 			1.下面这种不仅适合脚本文件和样式文件的引入还适合less文件的引入。load方法是加载指定的文件到加载器中，load方法可以链式调用多个不同类型文件，当调用到print方法的时候才会一次性从加载器里输出到页面中
-				LAMJS['Loadcommon'].
-					load({
+				LAMJS['Loadcommon']
+					.load({
 						'baseUrl':jsPath,
 						'suffix':'.js',
 						'js':[
@@ -444,8 +450,8 @@
 							'/Tools.class',
 							'/PaintBase.class'
 						]
-					}).
-					load({
+					})
+					.load({
 						'baseUrl':cssPath,
 						'suffix':'.css',
 						'rel':'stylesheet',
@@ -456,8 +462,8 @@
 							'/global',
 							'/lib'
 						]
-					}).
-					load({
+					})
+					.load({
 						'baseUrl':lessPath,
 						'suffix':'.less',
 						'rel':'stylesheet/less',
@@ -490,7 +496,7 @@
 				或者像下面这样可以添加自定义参数
 				System
 					.import([
-						{'src':'/Browser.class','data-main':'scripts/main.js'},
+						{'src':'/Browser.class','data-main':'scripts/main.js',' ',' '},
 						{'src':'/Drag.class','attr':2},
 						{'src':'/Drag_xy.class','attr':3},
 						{'src':'/Dom.class','attr':4},
@@ -677,7 +683,7 @@
 						controllerName:控制器文件名称（对应视图文件的文件夹，如：index）
 						file:接收控制器中的方法名的参数。file关键字可以在控制器中自定义
 						view：调用对应控制器中的方法（对应着视图文件名）
-				controllers/index.html:
+				//controllers/index.html
 						    LAMJS.main([
 									LAMJS.Config.Public.ROOT,
 									LAMJS.Config.Public.ROOT+'/project/views/index'
@@ -728,7 +734,7 @@
 	                                                            render方法参数4就可以设置一个beforeSend回调函数，其余的参数都可以在这里设置。
 	                                                            函数里的两个参数请参考jQuery Ajax API。
 	                
-	            views/index/index.html:
+	            //views/index/index.html
 		                <!DOCTYPE html>
 	                    <html>
 	                    <head>
@@ -763,6 +769,11 @@
                  2.修改模板分隔符：(用MVC方式：设置在控制器方法里)
                      LAMJS.Config.templat.leftLimit  = '${{';
                      LAMJS.Config.templat.rightLimit = '}}$';
+                     
+                     
+
+    二十、参考附录
+            一、闭包：A和B俩函数，A包含B此时A就是闭包。
                      
                      
 
