@@ -690,6 +690,8 @@
 								],function(ROOT,views) {
 									'use strict';
 									var System = this;
+									//note:变量都在这里声明
+									
 									eval('action'+System.Controller.get_url_name('file').firstToUpperCase())();
 			
 									function actionIndex(){
