@@ -41,7 +41,7 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-1-15
-	 * 修改日期：2016-4-2
+	 * 修改日期：2016-4-5
 	 * 名称： getFile
 	 * 功能：返回指定的文件
 	 * 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象
@@ -55,6 +55,7 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 	 * @param 	(String|{}) D.data             	  NULL :请求地址的参数
 	 * @param 	(Boolean) 	D.async               NULL :是否异步加载
 	 * @param 	(Boolean) 	D.cache           	  NULL :是否缓存默认true
+	 * @param 	(Function)	D.beforeSend       	  NULL :在发送数据之前执行的方法
 	 * @param 	(Function)	D.callBack       	  NULL :返回到回调函数里的内容
 	 * @return ()
 	 * Example：
