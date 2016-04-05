@@ -61,17 +61,7 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 
     }
 
-    Controller.getFile =function(async){
-        $.ajax({
-            type: "GET",
-            url: get_url_Param('file')+'.html',
-            async: async ? true : false,
-            dataType: 'html',
-            success: function(content){
-                System.print(content);
-            }
-        });
-    };
+
     /**
      *
      * @author lhh
