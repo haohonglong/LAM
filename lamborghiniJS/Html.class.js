@@ -167,7 +167,11 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 	 * Example：
 	 *
 	 */
-	Html.include=function($dom,D,type,async,cache,callBack){
+	Html.include=function($dom,D,
+						  type,
+						  async,
+						  cache,
+						  callBack){
 		callBack = D && D.callBack || 0;
 		$dom.each(function(){
 			var dom =this;
@@ -209,6 +213,23 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 					   async,
 					   cache,
 					   callBack){
+		callBack = D && D.callBack || 0;
+		$dom.each(function(){
+			var dom =this;
+			var $dom =$(this);
+
+
+			$dom.load($dom.attr('file') || D.url,$dom.attr('data') || D.data || {},function(content){
+				if(callBack && System.isFunction(callBack)){
+					D.callBack =function(content){
+						callBack.call(dom,content);
+					};
+
+				}
+			});
+
+
+		});
 
 
 	};
