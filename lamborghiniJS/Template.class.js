@@ -113,7 +113,7 @@ window[LHH_NAMESPACE_20150715_].main(function(undefined){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-03-10
-		 * 修改日期：2016-03-28
+		 * 修改日期：2016-4-7
 		 * 名称：render
 		 * 功能：
 		 * 说明：
