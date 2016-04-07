@@ -192,7 +192,7 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 	 * 修改日期：2016-1-15
 	 * 名称： Html.load
 	 * 功能：html文件里包含另一个文件,扩充jQuery load方法
-	 * 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象
+	 * 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象,跟Html.include方法不一样的地方是 Html.include 调用的是jQuery Ajax方法
 	 * 注意：
 	 * @param 	(jQuery)$dom             NO NULL :
 	 * @param 	(Object)D                NO NULL :json 数据
