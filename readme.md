@@ -659,8 +659,13 @@
 				//run方法可以修改创建tag方式 
 				LAMJS.run(function(){
 						var System=this;
-						3.调用include 方法 根据include 标签里的file 找到指定的html 文件替换当前的include 标签
+						3. Html.include 方法 根据include 标签里的file 找到指定的html 文件替换当前的include 标签
 						System.Html.include($('include'));
+						
+						4. Html.load 方法 跟Html.include 不同的是：它调用jQuery load 方法
+						System.Html.load($('include')[,{}]);
+						
+						
 
 				 });
 				 
