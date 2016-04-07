@@ -134,9 +134,7 @@ window[LHH_NAMESPACE_20150715_].main(function(undefined){
 				if(System.isFunction(callBack)){
 					callBack(S);
 				}else{
-					$('html').html(S);
-					//$('html').after(S).remove();
-
+					System.print(S);
 				}
 
 			},Cajax);

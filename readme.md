@@ -662,8 +662,8 @@
 						3. Html.include 方法 根据include 标签里的file 找到指定的html 文件替换当前的include 标签
 						System.Html.include($('include'));
 						
-						4. Html.load 方法 跟Html.include 不同的是：它调用jQuery load 方法
-						System.Html.load($('include')[,{}]);
+						也可用Html.load 方法 替代Html.include 不同的是：它调用jQuery load 方法 include 标签里只有一个file属性,include会包含请求页面的内容。
+						System.Html.load($('include'));
 						
 						
 

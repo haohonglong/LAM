@@ -193,30 +193,15 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 	 * 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象,跟Html.include方法不一样的地方是 Html.include 调用的是jQuery Ajax方法
 	 * 注意：
 	 * @param 	(jQuery)$dom             NO NULL :
-	 * @param 	(Object)D                NO NULL :json 数据
-	 * @param 	(Function)D.callBack       	NULL :返回到会调函数里的内容:this: 当前include 节点;content:include 的文件
 	 * @return ()
 	 * Example：
 	 *
 	 */
-	Html.load=function($dom,D,
-					   callBack){
-		callBack = D && D.callBack || 0;
+	Html.load=function($dom){
 		$dom.each(function(){
 			var dom =this;
 			var $dom =$(this);
-
-
-			$dom.load($dom.attr('file') || D.url,$dom.attr('data') || D.data || {},function(content){
-				if(callBack && System.isFunction(callBack)){
-					D.callBack =function(content){
-						callBack.call(dom,content);
-					};
-
-				}
-			});
-
-
+			$dom.load(System.template($dom.attr('file')));
 		});
 
 
