@@ -184,6 +184,37 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 
 	};
 
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-1-15
+	 * 修改日期：2016-1-15
+	 * 名称： Html.load
+	 * 功能：html文件里包含另一个文件,扩充jQuery load方法
+	 * 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象
+	 * 注意：
+	 * @param 	(jQuery)$dom             NO NULL :
+	 * @param 	(Object)D                NO NULL :json 数据
+	 * @param 	(String)type             	NULL :
+	 * @param 	(Boolean)async           	NULL :是否异步加载
+	 * @param 	(Boolean)cache           	NULL :是否缓存默认true
+	 * @param 	(Function)callBack       	NULL :返回到会调函数里的内容:this: 当前include 节点;content:include 的文件
+	 * @return ()
+	 * Example：
+	 *
+	 */
+	Html.load=function($dom,D,
+					   type,
+					   async,
+					   cache,
+					   callBack){
+
+
+	};
+
+
+
 
 	Html.prototype = {
 		'contructor':Html,
