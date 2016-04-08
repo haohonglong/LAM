@@ -1839,13 +1839,7 @@ if(!LHH_NAMESPACE_20150715_){
 
 
 
-
-	MySystem.merge(null,[Interface]);
-
-
-
-	return MySystem;
-
+	return MySystem.merge(null,[Interface]);
 });
 
 /*
