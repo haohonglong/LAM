@@ -1042,47 +1042,49 @@ if(!LHH_NAMESPACE_20150715_){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2014-12-23
-		 * 修改日期：2015-5-27
+		 * 修改日期：2016-4-11
 		 * 名称：MySystem.main
 		 * 功能：程序主方法
 		 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
 		 * 注意：
-		 * @param   (Array)args 			NO NULL :传入的参数
+		 * @param   (Array)args 			   NULL :传入的参数
 		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
 		 * @return  (MySystem | )						:
 		 * Example：
 		 */
 		'main':function(args,callback){
-			if(1 === arguments.length){
-				if (isFunction(arguments[0]) ) {
-					return arguments[0].call(this);
-				}else{
-					throw new Error('Warning 参数必须要有一个 Function 类型');
-					return this;
-				}
+			if (0 === arguments.length) {
+				throw new Error('Warning 至少要有一个参数');
+				return this;
+			}
+			if(isFunction(args)) {
+				callback = args;
+				args = undefined;
 			}
 
-
-			if(!isArray(args)){
-				throw new Error('Warning args 不是一个数组');
+			if(args && !isArray(args)){
+				throw new Error('Warning args 必须是数组类型');
 				return this;
 			}
 			if (!isFunction(callback) ) {
-				throw new Error('Warning callback 不是一个函数');
+				throw new Error('Warning 参数必须要有一个 Function 类型');
 				return this;
 			}
 
-			return callback.apply(this,args);
-
-
+			if(isArray(args)){
+				return callback.apply(this,args);
+			}else{
+				return callback.call(this);
+			}
 
 
 		},
+
 		/**
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-1-21
-		 * 修改日期：2016-1-21
+		 * 修改日期：2016-4-11
 		 * 名称：MySystem.run
 		 * 功能：在main方法功能上,扩充改变创建标签机制的功能, 用document.createElement()
 		 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
@@ -1093,12 +1095,55 @@ if(!LHH_NAMESPACE_20150715_){
 		 * Example：
 		 */
 		'run':function(args,callback){
-			if(1 === arguments.length){
-				return this.use().main(arguments[0]);
-			}else{
+			if(isFunction(args)) {
+				callback = args;
+				args = undefined;
+			}
+			if(args){
 				return this.use().main(args,callback);
+			}else{
+				return this.use().main(callback);
 			}
 
+		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-12-22
+		 * 修改日期：2016-4-11
+		 * 名称：wait
+		 * 功能：每隔规定的时间数再去调用传进来的函数
+		 * 说明：
+		 * 注意：
+		 * @param   (Array)args 			   NULL :传入的参数
+		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
+		 * @param   (Number)time 			   NULL :等待执行的时间
+		 * Example：
+		 */
+		'wait':function(args,callback,time){
+			var self=this;
+			if(isFunction(args)) {
+				time=callback;
+				callback = args;
+				args = undefined;
+			}
+			if(isFunction(callback)) {
+				time=time || 3000;
+				if(callback.timer){
+					clearTimeout(fn.timer);
+				}
+				callback.timer = setTimeout(function(){
+					if(isArray(args)){
+						self.main(args,callback);
+					}else{
+						self.main(callback);
+					}
+
+				}, time);
+			}
+			return this;
 		},
 
 		/**
@@ -1248,33 +1293,6 @@ if(!LHH_NAMESPACE_20150715_){
 					'js':url,
 					'suffix':suffix
 				}).print();
-			}
-			return this;
-		},
-
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2014-12-22
-		 * 修改日期：2014-12-22
-		 * 名称：wait
-		 * 功能：每隔规定的时间数再去调用传进来的函数
-		 * 说明：
-		 * 注意：
-		 * @param   (Function)fn 			NO NULL :
-		 * @param   (Number)time 			NO NULL :
-		 * Example：
-		 */
-		'wait':function(fn,time){
-
-			if(isFunction(fn)) {
-				time=time || 3000;
-				if(fn.timer){
-					clearTimeout(fn.timer);
-				}
-				fn.timer = setTimeout(fn, time);
 			}
 			return this;
 		},
