@@ -1002,6 +1002,9 @@ if(!LHH_NAMESPACE_20150715_){
 	 *			isFunction
 	 *			contains
 	 *			main
+	 *			run
+	 *			wait
+	 *			then
 	 *			config
 	 *			define
 	 *			print
@@ -1010,7 +1013,6 @@ if(!LHH_NAMESPACE_20150715_){
 	 *			proxy
 	 *			isEmptyObject
 	 *			arr_isEmpty
-	 *			wait
 	 *			queues
 	 *			putIndexGetObjectTheValue
 	 *			list
@@ -1046,10 +1048,10 @@ if(!LHH_NAMESPACE_20150715_){
 		 * 名称：MySystem.main
 		 * 功能：程序主方法
 		 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
-		 * 注意：
+		 * 注意：不能链式调用，如要链式调用，用 MySystem.then方法
 		 * @param   (Array)args 			   NULL :传入的参数
 		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
-		 * @return  (MySystem | )						:
+		 * @return  (Object) 返回callback 里的返回值
 		 * Example：
 		 */
 		'main':function(args,callback){
@@ -1086,12 +1088,12 @@ if(!LHH_NAMESPACE_20150715_){
 		 * 创建日期：2016-1-21
 		 * 修改日期：2016-4-11
 		 * 名称：MySystem.run
-		 * 功能：在main方法功能上,扩充改变创建标签机制的功能, 用document.createElement()
+		 * 功能：与main方法功类似,改变标签渲染方式, 用document.createElement()生成标签
 		 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
 		 * 注意：
 		 * @param   (Array)args 			NO NULL :传入的参数
 		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
-		 * @return  (MySystem | )						:
+		 * @return  (Object) 返回callback 里的返回值
 		 * Example：
 		 */
 		'run':function(args,callback){
@@ -1113,13 +1115,14 @@ if(!LHH_NAMESPACE_20150715_){
 		 * 产品介绍：
 		 * 创建日期：2014-12-22
 		 * 修改日期：2016-4-11
-		 * 名称：wait
-		 * 功能：每隔规定的时间数再去调用传进来的函数
-		 * 说明：
+		 * 名称：MySystem.wait
+		 * 功能：一直是链式调用，总是返回当前命名空间对象，
+		 * 说明：与main方法功类似,不同的是每隔规定的时间数再去调用传进来的函数
 		 * 注意：
 		 * @param   (Array)args 			   NULL :传入的参数
 		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
 		 * @param   (Number)time 			   NULL :等待执行的时间
+		 * @return  (MySystem)
 		 * Example：
 		 */
 		'wait':function(args,callback,time){
@@ -1147,6 +1150,40 @@ if(!LHH_NAMESPACE_20150715_){
 		},
 
 		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-4-11
+		 * 修改日期：2016-4-11
+		 * 名称：MySystem.then
+		 * 功能：一直是链式调用，总是返回当前命名空间对象，
+		 * 说明：跟main方法类似，不同的是main 返回的是callback里的返回值。
+		 * 注意：
+		 * @param   (Array)args 			   NULL :传入的参数
+		 * @param   (Function)callback 		NO NULL :要执行的操作
+		 * @return  (MySystem)
+		 * Example：
+		 */
+		'then':function(args,callback){
+			var self=this;
+			if(isFunction(args)) {
+				callback = args;
+				args = undefined;
+			}
+			if(isFunction(callback)) {
+				if(isArray(args)){
+					self.main(args,callback);
+				}else{
+					self.main(callback);
+				}
+
+			}
+			return this;
+		},
+
+
+
+		/**
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-1-18
@@ -1155,7 +1192,7 @@ if(!LHH_NAMESPACE_20150715_){
 		 * 功能：用createElement 创建标签并且设为异步
 		 * 说明：
 		 * 注意：
-		 * @return  (MySystem)						:
+		 * @return  (MySystem)
 		 * Example：
 		 */
 		'use':function(){
@@ -1171,7 +1208,7 @@ if(!LHH_NAMESPACE_20150715_){
 		 * 功能：用document.write() 创建标签并且设为非异步
 		 * 说明：
 		 * 注意：
-		 * @return  (MySystem)						:
+		 * @return  (MySystem)
 		 * Example：
 		 */
 		'unuse':function(){

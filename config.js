@@ -168,21 +168,30 @@ if(!LHH_CONFIG_20150717_){
     }
 
 
+
+
+
+    //=================================================================================================================================
+    //5秒之后检测lamborghiniJS基础类文件是否加载成功
+    //=================================================================================================================================
+    window.setTimeout(function(){
+        if(!window[LHH_NAMESPACE_20150715_]) {
+            alert('cannot find Basis class! the lamborghiniJS\' path is :{'+LHH_CONFIG_20150717_.getClassPath()+'}');
+        }else{
+            window[LHH_NAMESPACE_20150715_].main(function(){
+                var System=this;
+            });
+        }
+    },5000);
+    //=================================================================================================================================
+
+
 })(LHH_CONFIG_20150717_);
 
 
 
 
 
-//5秒之后检测lamborghiniJS基础类文件是否加载成功
-setTimeout(function(){
-    if(!window[LHH_NAMESPACE_20150715_]) {
-        alert('cannot find Basis class! the lamborghiniJS\' path is :{'+LHH_CONFIG_20150717_.getClassPath()+'}');
-    }else{
-        window[LHH_NAMESPACE_20150715_].main(function(){
-            var System=this;
-        });
-    }
-},5000);
+
 
 
