@@ -14,7 +14,7 @@
  * 
  */
 
-window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,jQuery,undefined){
+window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined){
 	'use strict';
 	var System=this;
 
@@ -22,7 +22,6 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,jQuery,unde
 
 	var __this__=null;
 	var fixEvt = System.Browser.fixEvt;
-	var $=jQuery;
 	var isIE6 = System.Browser.isIE6;
 	function Tools(){
 		System.Basis.extends.call(this,System.Browser);
@@ -146,6 +145,25 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,jQuery,unde
 					return false;
 				});;
 				return false;
+			});
+		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-4-14
+		 * 修改日期：2016-4-14
+		 * 名称： dropdownMenu
+		 * 功能：bootstrap下拉框选中所选的放入输入框
+		 * 说明：data-select="input" 这个属性放到 显示内容的元素
+		 * 注意：
+		 * @return (void)
+		 * Example：
+		 *
+		 */
+		'dropdownMenu':function(){
+			var $input=$('.btn[data-select="input"]');
+			$input.parent().on('click','.dropdown-menu li',function(){
+				$input.text($(this).text());
 			});
 		},
 
