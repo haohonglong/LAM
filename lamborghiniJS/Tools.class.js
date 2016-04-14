@@ -156,15 +156,20 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 		 * 功能：bootstrap下拉框选中所选的放入输入框
 		 * 说明：data-select="input" 这个属性放到 显示内容的元素
 		 * 注意：
+		 * @param   (String)box            NULL :输入框选择器字符
 		 * @return (void)
 		 * Example：
 		 *
 		 */
-		'dropdownMenu':function(){
-			var $input=$('.btn[data-select="input"]');
-			$input.parent().on('click','.dropdown-menu li',function(){
-				$input.text($(this).text());
+		'dropdownMenu':function(box){
+			box = box || '.btn[data-select="input"]';
+			$(box).each(function(){
+				var input=this;
+				$(this).parent().on('click','.dropdown-menu li',function(){
+					$(input).text($(this).text());
+				});
 			});
+
 		},
 
 		/**
