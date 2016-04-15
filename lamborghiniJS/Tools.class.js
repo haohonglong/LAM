@@ -143,7 +143,7 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 				$(this).find(nexBox).show().hover(null,function(){
 					$(this).hide();
 					return false;
-				});;
+				});
 				return false;
 			});
 		},
