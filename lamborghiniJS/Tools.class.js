@@ -159,7 +159,19 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 		 * @param   (String)box            		  NULL :输入框选择器字符
 		 * @param   (Function)callBack            NULL :回调：
 		 * @return (void)
-		 * Example：
+		 *html_strure:
+					 <div class="btn-group">
+						 <button type="button" class="btn btn-default" data-select="input">请选择...</button>
+						 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							 <span class="caret"></span>
+							 <span class="sr-only">Toggle Dropdown</span>
+						 </button>
+						 <ul class="dropdown-menu">
+							 <li>2016-2-5</li>
+							 <li>2016-2-5</li>
+							 <li>2016-2-5</li>
+						 </ul>
+					 </div>
 		 *
 		 */
 		'dropdownMenu':function(box,callBack){
@@ -171,11 +183,12 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 			$(box).each(function(){
 				var input=this;
 				$(this).parent().on('click','.dropdown-menu li',function(){
-					$(input).text($(this).text());
 					if(System.isFunction(callBack)){
 						//this : li
 						//input : 当前输入框
 						callBack.call(this,input);
+					}else{
+						$(input).text($(this).text());
 					}
 				});
 			});
@@ -193,16 +206,16 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 		 fake_drop_down_box($('.sectionSelect-A1'),'.js_select1');
 
 		 html_strure:
-		 <div class="sectionSelect-A1">
-		 <input type="hidden" value="" name="">
-		 <span>更换部门至</span>
-		 <div class="sectionArrow-A1 sectionArrow-A1-3 sectionArrow-A1-3-2"><i class="down"></i></div>
-		 </div>
-		 <div class="sectionShowBox-A3 sectionShowBox-A3-3 sectionList-A3 sectionList-A3-2 js_select1 none">
-		 <ul class="border">
-		 <li>text...</li>
-		 </ul>
-		 </div>
+				 <div class="sectionSelect-A1">
+					 <input data-box="input" type="hidden" value="" name="">
+					 <span data-box="tip">更换部门至</span>
+					 <div class="sectionArrow-A1 sectionArrow-A1-3 sectionArrow-A1-3-2"><i class="down"></i></div>
+				 </div>
+				 <div class="sectionShowBox-A3 sectionShowBox-A3-3 sectionList-A3 sectionList-A3-2 js_select1 none">
+					 <ul class="border">
+						<li>text...</li>
+					 </ul>
+				 </div>
 		 *
 		 */
 		'fake_drop_down_box':function($select,selectBox){
@@ -210,10 +223,10 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 				$(selectBox).show();
 				event.stopPropagation();
 			});
-			$(selectBox).find('li').click(function(){
+			$(selectBox).on('click','li',function(){
 				var val=$(this).text();
-				$select.find('span').text(val);
-				$select.find('input').val(val);
+				$select.find('[data-box="tip"]').text(val);
+				$select.find('input[data-box="input"]').val(val);
 				$(this).parents(selectBox).hide();
 
 
@@ -243,10 +256,10 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 				$(selectBox).hide();
 
 			});
-			$(selectBox).find('li').click(function(){
+			$(selectBox).on('click','li',function(){
 				var val=$(this).text();
-				$select.find('span').text(val);
-				$select.find('input').val(val);
+				$select.find('[data-box="tip"]').text(val);
+				$select.find('input[data-box="input"]').val(val);
 			});
 
 		},
