@@ -18,7 +18,7 @@ if(!LHH_NAMESPACE_20150715_){
     var LHH_NAMESPACE_20150715_='System';
 }
 if(!_ROOT_){
-    var _ROOT_ = '.';
+    var _ROOT_ = '';
 
 }
 
