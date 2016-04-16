@@ -12,7 +12,7 @@
 
 <body>
 <canvas id="chess" width="450" height="450"></canvas>
-<img src="{{ROOT}}/project/images/22.jpg" alt=""/>
+
 </body>
 </html>
 <script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Canvas.class.js"></script>
@@ -30,7 +30,10 @@
 
 		$(function(){
 			chess=new System.Html5.Chess($('#chess')[0]).create();
-			chess.init().add_watermark(ROOT+'/project/images/22.jpg');
+			chess.add_watermark(ROOT+'/project/images/22.jpg',function(){
+				chess.draw();
+			});
+
 
 
 		});
