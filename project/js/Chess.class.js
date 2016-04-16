@@ -1,55 +1,76 @@
 /**
  * 五子棋
  */
-window[LHH_NAMESPACE_20150715_].main([
+LAMJS.main([
 	window
 ],function(window){
 	var System=this;
 	System.is(System.Html5,'CanvasForm','Chess');
 	var __this__=null;
-	var chessBoard;
+	//棋盘行列数
+	var num = 15;
+	var chessBoard=[];
+	//赢法数组
+	var wins=[];
+
 	function Chess(dom){
 		System.Basis.extends.call(this,System.Html5.CanvasForm,2,[dom]);
 		__this__=this;
-		chessBoard=[];
-		for(var i=0;i<15;i++){
-			chessBoard[i] = [];
-			for(var j=0;j<15;j++){
-				chessBoard[i][j] = 0;
-			}
-		}
+		this.init();
 
 	}
 
 	Chess.prototype = {
 		'constructor':Chess,
 		'__constructor':function(){},
+		'init':function(){
+			chessBoard=[];
+			wins=[];
+			for(var i=0;i<num;i++){
+				chessBoard[i] = [];
+				for(var j=0;j<num;j++){
+					chessBoard[i][j] = 0;
+				}
+			}
+
+
+			for(var i=0;i<num;i++){
+				wins[i] = [];
+				for(var j=0;j<num;j++){
+					wins[i][j] = [];
+				}
+			}
+
+			var count = 0;
+			for(var i=0;i<num;i++){
+				for(var j=0;j<11;j++){
+					for(var k=0;k<5;k++){
+						wins[i][j+k][count] = true;
+					}
+					count++;
+				}
+			}
+
+		},
 		'click':function(){
 			var self = this;
 			var color =true;
 			var flag =true;
 			$(this.theCanvas).on('click',function(event){
-				System.wait(function(){
-					flag = !flag;
-				},500);
-				if(flag){
-					var event = $.event.fix(event);
-					var x = event.offsetX;
-					var y = event.offsetY;
-					var i = Math.floor(x/30);
-					var j = Math.floor(y/30);
-					if(0 === chessBoard[i][j]){
-						self.chess(i,j,color);
-						if(color){
-							chessBoard[i][j] = 1;
-						}else{
-							chessBoard[i][j] = 2;
-						}
+				var event = $.event.fix(event);
+				var x = event.offsetX;
+				var y = event.offsetY;
+				var i = Math.floor(x/30);
+				var j = Math.floor(y/30);
+				if(0 === chessBoard[i][j]){
+					self.chess(i,j,color);
+					if(color){
+						chessBoard[i][j] = 1;
+					}else{
+						chessBoard[i][j] = 2;
 					}
-					color = !color;
-					flag = !flag;
 				}
-
+				color = !color;
 			});
 
 			return this;
@@ -61,14 +82,14 @@ window[LHH_NAMESPACE_20150715_].main([
 		 */
 		'draw':function(color){
 			color = color || '#bfbfbf';
-			for(var i=0;i<15;i++){
+			for(var i=0;i<num;i++){
 				this
 					.strokeStyle(color)
-					.moveTo(15 + i*30, 15)
-					.lineTo(15 + i*30, 435)
+					.moveTo(num + i*30, num)
+					.lineTo(num + i*30, 435)
 					.stroke()
-					.moveTo(15, 15 + i*30)
-					.lineTo(435, 15 + i*30)
+					.moveTo(num,  num + i*30)
+					.lineTo(435, num + i*30)
 					.stroke();
 			}
 			return this;
@@ -83,8 +104,8 @@ window[LHH_NAMESPACE_20150715_].main([
 		'chess':function(i,j,color,D){
 			var defaults={
 					'position':{
-						'x':15+ i*30,
-						'y':15 +j*30
+						'x':num+ i*30,
+						'y':num +j*30
 					}
 				};
 
@@ -92,11 +113,11 @@ window[LHH_NAMESPACE_20150715_].main([
 			D.r = 13;
 			var G ={
 				'params':{
-					'x0':15 + i*30 +2,
-					'y0':15 + j*30 -2,
+					'x0':num + i*30 +2,
+					'y0':num + j*30 -2,
 					'r0':13,
-					'x1':15 + i*30 +2,
-					'y1':15 + j*30 -2,
+					'x1':num + i*30 +2,
+					'y1':num + j*30 -2,
 					'r1':0
 				},
 				'colors':[]
