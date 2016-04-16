@@ -75,6 +75,24 @@
             });
         }
 
+        function actionChess(){
+            new System.Template().render(views+'/chess.html',{
+                'ROOT':ROOT,
+                'title':'五子棋',
+                'LAMJS':System.classPath,
+                'D':{}
+
+            },function(content){
+                System.print(content);
+
+
+            },{
+                'async':true
+            });
+        }
+
+
+
 
 
 
