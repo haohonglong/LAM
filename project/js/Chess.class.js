@@ -7,17 +7,52 @@ window[LHH_NAMESPACE_20150715_].main([
 	var System=this;
 	System.is(System.Html5,'CanvasForm','Chess');
 	var __this__=null;
+	var chessBoard;
 	function Chess(dom){
 		System.Basis.extends.call(this,System.Html5.CanvasForm,2,[dom]);
 		__this__=this;
+		chessBoard=[];
+		for(var i=0;i<15;i++){
+			chessBoard[i] = [];
+			for(var j=0;j<15;j++){
+				chessBoard[i][j] = 0;
+			}
+		}
 
 	}
 
 	Chess.prototype = {
 		'constructor':Chess,
 		'__constructor':function(){},
-		'init':function(){
+		'click':function(){
+			var self = this;
+			var color =true;
+			var flag =true;
+			$(this.theCanvas).on('click',function(event){
+				System.wait(function(){
+					flag = !flag;
+				},500);
+				if(flag){
+					var event = $.event.fix(event);
+					var x = event.offsetX;
+					var y = event.offsetY;
+					var i = Math.floor(x/30);
+					var j = Math.floor(y/30);
+					if(0 === chessBoard[i][j]){
+						self.chess(i,j,color);
+						if(color){
+							chessBoard[i][j] = 1;
+						}else{
+							chessBoard[i][j] = 2;
+						}
+					}
+					color = !color;
+					flag = !flag;
+				}
 
+			});
+
+			return this;
 		},
 		/**
 		 * 绘制棋盘(15*15)
@@ -39,33 +74,46 @@ window[LHH_NAMESPACE_20150715_].main([
 			return this;
 		},
 		/**
-		 * 生成棋子
-		 * @param D
+		 *生成棋子
+		 * @param (int)i
+		 * @param (int)j
+		 * @param (Blooean)color
 		 * @returns {Chess}
 		 */
-		'draw_chess':function(D){
+		'chess':function(i,j,color,D){
 			var defaults={
-				'position':{'x':100,'y':75},
-				'color':'white'
-			};
+					'position':{
+						'x':15+ i*30,
+						'y':15 +j*30
+					}
+				};
 
 			D = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
-			D.r = 10;
-
-			this.arc(D).fillStyle(this.createRadialGradient({
+			D.r = 13;
+			var G ={
 				'params':{
-					'x0':100,
-					'y0':75,
-					'r0':10,
-					'x1':100,
-					'y1':75,
-					'r1':1
+					'x0':15 + i*30 +2,
+					'y0':15 + j*30 -2,
+					'r0':13,
+					'x1':15 + i*30 +2,
+					'y1':15 + j*30 -2,
+					'r1':0
 				},
-				'colors':[
-					{'stop':0,'color':'#0A0A0A'},
-					{'stop':1,'color':'#ccc'}
-				]
-			})).fill();
+				'colors':[]
+			};
+			if(color){
+				G.colors.push({'stop':0,'color':'#0A0A0A'});
+				G.colors.push({'stop':1,'color':'#636766'});
+			}else{
+				G.colors.push({'stop':0,'color':'#D1D1D1'});
+				G.colors.push({'stop':1,'color':'#F9F9F9'});
+			}
+
+			this
+				.arc(D)
+				.closePath()
+				.fillStyle(this.createRadialGradient(G))
+				.fill();
 
 			return this;
 		},
@@ -89,7 +137,9 @@ window[LHH_NAMESPACE_20150715_].main([
 			D.callback=function(){
 				callback();
 			};
-			return this.image(D);
+			this.image(D);
+
+			return this;
 		},
 
 		/**

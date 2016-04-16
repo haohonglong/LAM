@@ -13,13 +13,12 @@
  * 
  */
 
-window[LHH_NAMESPACE_20150715_].main([window,window['document'],jQuery],function(window,document,jQuery,undefined){
+window[LHH_NAMESPACE_20150715_].main([window,window['document'],jQuery],function(window,document,$,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Helper','Browser');
 
 	var __this__=null;
-	var $=jQuery;
 	/**
 	 *
 	 * @author lhh
