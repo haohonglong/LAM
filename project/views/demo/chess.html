@@ -31,7 +31,9 @@
 		$(function(){
 			chess=new System.Html5.Chess($('#chess')[0]).create();
 			chess.add_watermark(ROOT+'/project/images/22.jpg',function(){
-				chess.draw();
+				chess
+						.draw()
+						.draw_chess();
 			});
 
 
