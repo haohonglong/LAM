@@ -1,9 +1,0 @@
-@charset "utf-8";
-@import url("../../common/css/lhh_lib.css");
-
-html,body{height: 100%;background:#fff;overflow: hidden;font-size:12px;}
-body{_background:url(img/bg.jpg) no-repeat 0 0;}
-ul,ol,li{list-style:none;}
-
-.body-min-W{width:2024px;}
-

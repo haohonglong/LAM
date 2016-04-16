@@ -3,13 +3,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>{{title}}</title>
+	<link rel="stylesheet" type="text/css" href="{{ROOT}}/project/css/lib.css"/>
+	<link rel="stylesheet" type="text/css" href="{{ROOT}}/project/css/chess.css"/>
 	<style type="text/css">
 
 	</style>
 </head>
 
 <body>
-
+<canvas id="chess" width="450" height="450"></canvas>
+<img src="{{ROOT}}/project/images/22.jpg" alt=""/>
 </body>
 </html>
 <script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Canvas.class.js"></script>
@@ -23,8 +26,12 @@
 		LAMJS.Config.Public.ROOT
 	],function(ROOT) {
 		var System=this;
-		var chess=new System.Html5.Chess();
+		var chess;
+
 		$(function(){
+			chess=new System.Html5.Chess($('#chess')[0]).create();
+			chess.init().add_watermark(ROOT+'/project/images/22.jpg');
+
 
 		});
 

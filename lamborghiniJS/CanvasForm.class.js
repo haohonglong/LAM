@@ -179,7 +179,7 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 		 * 名称： image
 		 * 功能：在画布上绘制图像、画布或视频
 		 * 说明：
-		 * 注意：
+		 * 注意：当调用callback 执行drawImage 有异常报:"Illegal invocation" 错误
 		 * @param 	(String)src             NO NULL : 规定要使用的图像、画布或视频 的路径
 		 * @param 	(Number)D.position.x    NO NULL : 在画布上放置图像的 x 坐标位置
 		 * @param 	(Number)D.position.y    NO NULL : 在画布上放置图像的 y 坐标位置
@@ -196,15 +196,14 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 		 */
 		'image':function(D){
 			var defaults={
-				'src':System.classPath+'/../case/images/bdlogo.png',
+				'src':'',
 				'position':{'x':10,'y':10},
 				'size':{'w':540,'h':258},
-				'clip':{'sx':90,'sy':130,'sw':90,'sh':80},
-				'callback':function(){}
+				'clip':{'sx':90,'sy':130,'sw':90,'sh':80}
 			};
 			D = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
 
-			var __this__=this;
+			var self=this;
 			var src = D.src;
 			var x 	= D.position.x;
 			var y 	= D.position.y;
@@ -218,26 +217,27 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 				var sw = D.clip.sw;
 				var sh = D.clip.sh;
 			}
-			var img=new Image();
 
+			var callback = D.callback;
+			var img=new Image();
+			img.src=src;
 			img.onload=function(){
-				img.src=src;
 				if(D.clip){
-					__this__.ctx.drawImage(img,sx,sy,sw,sh,x,y,w,h);
+					self.ctx.drawImage(img,sx,sy,sw,sh,x,y,w,h);
 				}else{
 					if(D.size){
-						__this__.ctx.drawImage(img,x,y,w,h);
+						self.ctx.drawImage(img,x,y,w,h);
 					}else{
-						__this__.ctx.drawImage(img,x,y);
+						self.ctx.drawImage(img,x,y);
 					}
 
 				}
 
-				if(System.isFunction(D.callback)){
-					D.callback(__this__.ctx.drawImage);
+				if(System.isFunction(callback)){
+					callback.call(this,self.ctx.drawImage);
 				}
-
 			};
+			//$(img).load(function(){});
 
 			return this;
 
