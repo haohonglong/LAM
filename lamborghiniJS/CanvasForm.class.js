@@ -175,11 +175,11 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-9-18
-		 * 修改日期：2015-9-18
+		 * 修改日期：2016-4-16
 		 * 名称： image
 		 * 功能：在画布上绘制图像、画布或视频
 		 * 说明：
-		 * 注意：当调用callback 执行drawImage 有异常报:"Illegal invocation" 错误
+		 * 注意：在callback里 执行drawImage 有异常报:"Illegal invocation" 错误
 		 * @param 	(String)src             NO NULL : 规定要使用的图像、画布或视频 的路径
 		 * @param 	(Number)D.position.x    NO NULL : 在画布上放置图像的 x 坐标位置
 		 * @param 	(Number)D.position.y    NO NULL : 在画布上放置图像的 y 坐标位置

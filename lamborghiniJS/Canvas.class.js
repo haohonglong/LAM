@@ -596,6 +596,66 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 			return this;
 		},
 
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-4-16
+		 * 修改日期：2016-4-16
+		 * 名称： createRadialGradient
+		 * 功能：设置渐变渐变
+		 * 说明：
+		 * 注意：
+		 * @param 	(Object)D    			NO NULL :
+		 * @param 	(Number)D.params.x0   	NO NULL : 渐变的开始圆的 x 坐标
+		 * @param 	(Number)D.params.y0    	NO NULL : 渐变的开始圆的 y 坐标
+		 * @param 	(Number)D.params.r0	    NO NULL : 开始圆的半径
+		 * @param 	(Number)D.params.x1	    NO NULL : 渐变的结束圆的 x 坐标
+		 * @param 	(Number)D.params.y1	    NO NULL : 渐变的结束圆的 y 坐标
+		 * @param 	(Number)D.params.r1	    NO NULL : 结束圆的半径
+		 * @param 	(Number)D.colors[i].stop  NO NULL : gradient 对象中的位置
+		 * @param 	(Number)D.colors[i].color NO NULL : gradient 对象中的颜色
+		 * @return (Object)gradient 对象
+		 * Example：
+
+		 */
+		'createRadialGradient':function(D){
+			var defaults={
+				'params':{
+					'x0':100,
+					'y0':75,
+					'r0':10,
+					'x1':200,
+					'y1':75,
+					'r1':10
+
+				},
+				//这里可以设置多个渐变色
+				'colors':[
+					{'stop':0,'color':'#fff'},
+					{'stop':1,'color':'#000'}
+				]
+			};
+			D = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
+
+			var x0 = D.params.x0;
+			var y0 = D.params.y0;
+			var r0 = D.params.r0;
+			var x1 = D.params.x1;
+			var y1 = D.params.y1;
+			var r1 = D.params.r1;
+
+			var grd = this.ctx.createRadialGradient(x0,y0,r0,x1,y1,r1);
+			D.colors.each(function(){
+				grd.addColorStop(this.stop,this.color);
+			});
+
+			return grd;
+
+		},
+
+
+
 
 		/**
 		 *
