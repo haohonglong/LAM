@@ -53,7 +53,7 @@ window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
 
 		 */
 		'create':function(type){
-			type = type || '2d'
+			type = type || '2d';
 			this.ctx = this.theCanvas.getContext(type);
 			// this.team.push(this.ctx);
 			return this;
