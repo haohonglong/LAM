@@ -11,10 +11,8 @@
 
         function actionLayout(){
             new System.Template().render(views+'/layout.html',{
-                'PATH':ROOT,
+                'ROOT':ROOT,
                 'title':'布局demo',
-                'project':ROOT+'/project',
-                'LAMJS':System.classPath,
                 'D':{
                     'title':'你好，世界！',
                     'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
@@ -31,9 +29,7 @@
 
         function actionPopLayer(){
             new System.Template().render(views+'/popLayer.html',{
-                'PATH':ROOT,
-                'LAMJS':System.classPath,
-                'project':ROOT+'/project',
+                'ROOT':ROOT,
                 'title':'弹出层',
                 'D':{}
 
@@ -48,8 +44,7 @@
 
         function actionSlider(){
             new System.Template().render(views+'/slider.html',{
-                'PATH':ROOT,
-                'project':ROOT+'/project',
+                'ROOT':ROOT,
                 'title':'背景半透明覆盖整个可视区域',
                 'LAMJS':System.classPath,
                 'D':{}
@@ -63,6 +58,23 @@
                 'async':true
             });
         }
+
+        function actionDrag(){
+            new System.Template().render(views+'/drag.html',{
+                'ROOT':ROOT,
+                'title':'拖拽实例',
+                'LAMJS':System.classPath,
+                'D':{}
+
+            },function(content){
+                System.print(content);
+
+
+            },{
+                'async':true
+            });
+        }
+
 
 
 
