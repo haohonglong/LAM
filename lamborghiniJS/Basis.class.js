@@ -1030,6 +1030,8 @@ if(!LHH_NAMESPACE_20150715_){
 	 *			template
 	 *			findTpl
 	 *			replaceTpl
+	 *			analysisVar
+	 *			getRootPath
 	 * 对象列表:
 	 *			Function
 	 *			Date
