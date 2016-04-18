@@ -7,9 +7,9 @@
     ],function(ROOT,views) {
         'use strict';
         var System = this;
-        eval('action'+System.Controller.get_url_name('file').firstToUpperCase())();
+        eval(System.Controller.get_url_name('file')+'Action')();
 
-        function actionLayout(){
+        function layoutAction(){
             new System.Template().render(views+'/layout.html',{
                 'ROOT':ROOT,
                 'title':'布局demo',
@@ -27,7 +27,7 @@
             });
         }
 
-        function actionPopLayer(){
+        function popLayerAction(){
             new System.Template().render(views+'/popLayer.html',{
                 'ROOT':ROOT,
                 'title':'弹出层',
@@ -42,7 +42,7 @@
             });
         }
 
-        function actionSlider(){
+        function sliderAction(){
             new System.Template().render(views+'/slider.html',{
                 'ROOT':ROOT,
                 'title':'背景半透明覆盖整个可视区域',
@@ -59,7 +59,7 @@
             });
         }
 
-        function actionDrag(){
+        function dragAction(){
             new System.Template().render(views+'/drag.html',{
                 'ROOT':ROOT,
                 'title':'拖拽实例',
@@ -75,7 +75,7 @@
             });
         }
 
-        function actionChess(){
+        function chessAction(){
             new System.Template().render(views+'/chess.html',{
                 'ROOT':ROOT,
                 'title':'五子棋',

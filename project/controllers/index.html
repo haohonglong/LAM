@@ -8,9 +8,9 @@
     ],function(ROOT,views) {
         'use strict';
         var System = this;
-        eval('action'+System.Controller.get_url_name('file').firstToUpperCase())();
+        eval(System.Controller.get_url_name('file')+'Action')();
 
-        function actionIndex(){
+        function indexAction(){
             new System.Template().render(views+'/index.html',{
                 'ROOT':ROOT,
                 'D':{
