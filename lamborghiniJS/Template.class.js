@@ -13,7 +13,7 @@
  * 
  */
 
-window[LHH_NAMESPACE_20150715_].main(function(undefined){
+window[REGISTERNAMESPACE].main(function(undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Browser','Template');

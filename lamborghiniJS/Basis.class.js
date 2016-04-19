@@ -11,16 +11,16 @@
  * 修改日期:2015/7/15	
  * 名称：基类
  * 功能：服务于派生类
- * 命名空间接口定义: var LHH_NAMESPACE_20150715_='interfaceName';
- * 命名空间接口调用: window[LHH_NAMESPACE_20150715_]  或者 W['interfaceName']
+ * 命名空间接口定义: var REGISTERNAMESPACE='interfaceName';
+ * 命名空间接口调用: window[REGISTERNAMESPACE]  或者 W['interfaceName']
  * 说明 : 成员都是受保护的，不对外共享，如要在外面修改或者复写，都要通过接口。
  *        命名空间接口的设计是灵活的，修改接口名不影响库文件里的内核代码及类接口。
  *        命名空间接口设计的宗旨是:只要修改一处就可搞定一切与第三方插件的冲突。
- *        与第三方插件发生冲突时解决方法:  修改变量 'LHH_NAMESPACE_20150715_' 里的值 即可。'LHH_NAMESPACE_20150715_' 是命名空间接口的密钥 作用是定义命名空间。
+ *        与第三方插件发生冲突时解决方法:  修改变量 'REGISTERNAMESPACE' 里的值 即可。'REGISTERNAMESPACE' 是命名空间接口的密钥 作用是定义命名空间。
  * 	      调用基类的静态成员方法:(调用接口.静态成员)。
  * 	      这个基类不允许被直接实例化，要实例化它的派生类。
  * 	      页面中要引入'config.js'这个文件,因为这个文件里已经引入了'Basis.class.js'文件,所以不用在页面中再引入'Basis.class.js'文件了。
- * 	      'LHH_NAMESPACE_20150715_' 的设定也在'config.js'里设定,不要修改这里的 'LHH_NAMESPACE_20150715_' 的值。
+ * 	      'REGISTERNAMESPACE' 的设定也在'config.js'里设定,不要修改这里的 'REGISTERNAMESPACE' 的值。
  * 	      window['interfaceName'].app :这个对象代表当前实例化后的对象
  * 	      
  * note : 
@@ -30,8 +30,8 @@
  */
 
 
-if(!LHH_NAMESPACE_20150715_){
-	var LHH_NAMESPACE_20150715_='System';
+if(!REGISTERNAMESPACE){
+	var REGISTERNAMESPACE='System';
 	
 }
 (function(global,namespace,factory,undefined){
@@ -41,7 +41,7 @@ if(!LHH_NAMESPACE_20150715_){
 	}
 	global['LAMJS'] = global['LamborghiniJS_20150910123700_'] = global[namespace] = factory(global,namespace);
 
-})(typeof window !== "undefined" ? window : this,LHH_NAMESPACE_20150715_,function(W,namespace,undefined){
+})(typeof window !== "undefined" ? window : this,REGISTERNAMESPACE,function(W,namespace,undefined){
 	'use strict';
 	var version="1.0.9";
 
@@ -1916,7 +1916,7 @@ if(!LHH_NAMESPACE_20150715_){
  ==========================================================================================
 */
 
-window[LHH_NAMESPACE_20150715_].main([window,LHH_CONFIG_20150717_],function(W,Config){
+window[REGISTERNAMESPACE].main([window,LHH_CONFIG_20150717_],function(W,Config){
 	'use strict';
 	var System=this;
 	var _ROOT_ = '.';

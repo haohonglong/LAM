@@ -3,7 +3,7 @@
  * 创建日期:2015/3/20
  * 修改日期:2015/8/02
  * 功能：配置文件
- * 说明 : 这个文件要copy到项目里面可以修改 'LHH_CONFIG_20150717_'里的属性 和 'LHH_NAMESPACE_20150715_'; 的值；
+ * 说明 : 这个文件要copy到项目里面可以修改 'LHH_CONFIG_20150717_'里的属性 和 'REGISTERNAMESPACE'; 的值；
  *
  * note :
  *
@@ -14,8 +14,8 @@
 'use strict';
 
 //基础类的设置
-if(!LHH_NAMESPACE_20150715_){
-    var LHH_NAMESPACE_20150715_='System';
+if(!REGISTERNAMESPACE){
+    var REGISTERNAMESPACE='System';
 }
 
 //js获取项目根路径，如： http://localhost:8083/uimcardprj
@@ -190,10 +190,10 @@ if(!LHH_CONFIG_20150717_){
     //5秒之后检测lamborghiniJS基础类文件是否加载成功
     //=================================================================================================================================
     window.setTimeout(function(){
-        if(!window[LHH_NAMESPACE_20150715_]) {
+        if(!window[REGISTERNAMESPACE]) {
             alert('cannot find Basis class! the lamborghiniJS\' path is :{'+LHH_CONFIG_20150717_.getClassPath()+'}');
         }else{
-            window[LHH_NAMESPACE_20150715_].main(function(){
+            window[REGISTERNAMESPACE].main(function(){
                 var System=this;
             });
         }

@@ -13,7 +13,7 @@ function getRootPath(){
 }
 if(!_ROOT_){
     //var _ROOT_ = '../..';
-    var _ROOT_ = getRootPath()+'/LamborghiniJS/LAM';
+    var _ROOT_ = getRootPath();
 
 }
 (function(){

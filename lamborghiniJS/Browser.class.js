@@ -13,7 +13,7 @@
  * 
  */
 
-window[LHH_NAMESPACE_20150715_].main([window,window['document'],jQuery],function(window,document,$,undefined){
+window[REGISTERNAMESPACE].main([window,window['document'],jQuery],function(window,document,$,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Helper','Browser');

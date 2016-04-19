@@ -1,5 +1,5 @@
 
-window[LHH_NAMESPACE_20150715_].main([window],function(window,undefined){
+window[REGISTERNAMESPACE].main([window],function(window,undefined){
 	var System=this;
 	System.is(System,'Helper','Sort');
 
