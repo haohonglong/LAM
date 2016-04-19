@@ -203,7 +203,7 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 			});
 			//$(D.input).each(function(){
 			//	var input=this;
-			//	$(this).parent().on(D.event, D.option,function(){
+			//	$(this).closest(D.group).on(D.event, D.option,function(){
 			//		if(System.isFunction(callBack)){
 			//			//this : option
 			//			//input : 当前输入框
