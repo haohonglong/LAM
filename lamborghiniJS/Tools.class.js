@@ -181,13 +181,14 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 			}
 			var defaults={
 				'input': '.btn[data-select="input"]',
-				'option': '.dropdown-menu li'
+				'option': '.dropdown-menu li',
+				'event': 'click'
 			};
 			D = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
 
 			$(D.input).each(function(){
 				var input=this;
-				$(this).parent().on('click', D.option,function(){
+				$(this).parent().on(D.event, D.option,function(){
 					if(System.isFunction(callBack)){
 						//this : option
 						//input : 当前输入框
