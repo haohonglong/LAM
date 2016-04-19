@@ -157,6 +157,7 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 		 * 说明：data-select="input" 这个属性放到 显示内容的元素。
 		 * 注意：
 		 * @param   (Object)D            		  NULL :初始化数据
+		 * @param   (String)D.group             NULL :下拉框的包裹层
 		 * @param   (String)D.input             NULL :显示在输入框的信息
 		 * @param   (String)D.option            NULL :
 		 * @param   (String)D.event             NULL :触发下拉框的事件，默认时click
@@ -165,6 +166,7 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 		 *html_strure:
 					 <div class="btn-group">
 						 <button type="button" class="btn btn-default" data-select="input">请选择...</button>
+		 				<input type="hidden">
 						 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							 <span class="caret"></span>
 							 <span class="sr-only">Toggle Dropdown</span>
@@ -183,24 +185,34 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 				D = undefined;
 			}
 			var defaults={
+				'group': '.btn-group',
 				'input': '.btn[data-select="input"]',
 				'option': '.dropdown-menu li',
 				'event': 'click'
 			};
 			D = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
-
-			$(D.input).each(function(){
-				var input=this;
-				$(this).parent().on(D.event, D.option,function(){
-					if(System.isFunction(callBack)){
-						//this : option
-						//input : 当前输入框
-						callBack.call(this,input);
-					}else{
-						$(input).text($(this).text());
-					}
-				});
+			$(document).on(D.event, D.option,function(){
+				var $input = $(this).closest(D.group).find(D.input).text($(this).text());
+				if(System.isFunction(callBack)){
+					//this : option
+					//input : 当前输入框
+					callBack.call(this,$input);
+				}else{
+					$input.text($(this).text());
+				}
 			});
+			//$(D.input).each(function(){
+			//	var input=this;
+			//	$(this).parent().on(D.event, D.option,function(){
+			//		if(System.isFunction(callBack)){
+			//			//this : option
+			//			//input : 当前输入框
+			//			callBack.call(this,input);
+			//		}else{
+			//			$(input).text($(this).text());
+			//		}
+			//	});
+			//});
 
 		},
 
