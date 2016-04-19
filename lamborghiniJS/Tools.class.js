@@ -193,6 +193,7 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 				'event': 'click'
 			};
 			D = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
+			$(D.select).closest(D.group).off(D.event,D.option);
 			$(D.select).closest(D.group).on(
 				D.event,
 				D.option,
