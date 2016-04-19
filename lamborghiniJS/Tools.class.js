@@ -154,10 +154,13 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 		 * 修改日期：2016-4-19
 		 * 名称： dropdownMenu
 		 * 功能：bootstrap下拉框选中所选的放入输入框
-		 * 说明：data-select="input" 这个属性放到 显示内容的元素。callBack:this (当前点击的li元素) input(当前输入框)
+		 * 说明：data-select="input" 这个属性放到 显示内容的元素。
 		 * 注意：
 		 * @param   (Object)D            		  NULL :初始化数据
-		 * @param   (Function)callBack            NULL :回调：
+		 * @param   (String)D.input             NULL :显示在输入框的信息
+		 * @param   (String)D.option            NULL :
+		 * @param   (String)D.event             NULL :触发下拉框的事件，默认时click
+		 * @param   (Function)callBack            NULL :回调返回俩参数:this (当前点击的li元素) input(当前输入框)
 		 * @return (void)
 		 *html_strure:
 					 <div class="btn-group">
