@@ -22,6 +22,33 @@ window[LHH_NAMESPACE_20150715_].main(function(undefined){
 	 *
 	 * @author: lhh
 	 * 产品介绍：
+	 * 创建日期：2016-04-18
+	 * 修改日期：2016-04-18
+	 * 名称：MySystem.getRootPath
+	 * 功能：获取项目根路径，如： http://localhost:8083/uimcardprj
+	 * 说明：
+	 * 注意：
+	 * @param (void)
+	 * @returns {string}
+	 */
+	System.getRootPath=function(){
+		//获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+		var curWwwPath=window.document.location.href;
+		//获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+		var pathName=window.document.location.pathname;
+		var pos=curWwwPath.indexOf(pathName);
+		//获取主机地址，如： http://localhost:8083
+		var localhostPaht=curWwwPath.substring(0,pos);
+		//获取带"/"的项目名，如：/uimcardprj
+		var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+		return(localhostPaht+projectName);
+	};
+
+
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
 	 * 创建日期：2016-03-8
 	 * 修改日期：2016-03-9
 	 * 名称：MySystem.analysisVar

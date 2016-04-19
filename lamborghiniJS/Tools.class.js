@@ -151,17 +151,23 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-4-14
-		 * 修改日期：2016-4-15
+		 * 修改日期：2016-4-19
 		 * 名称： dropdownMenu
 		 * 功能：bootstrap下拉框选中所选的放入输入框
-		 * 说明：data-select="input" 这个属性放到 显示内容的元素。callBack:this (当前点击的li元素) input(当前输入框)
+		 * 说明：data-select="input" 这个属性放到 显示内容的元素。
 		 * 注意：
-		 * @param   (String)box            		  NULL :输入框选择器字符
-		 * @param   (Function)callBack            NULL :回调：
+		 * @param   (Object)D            		  NULL :初始化数据
+		 * @param   (String)D.group             NULL :下拉框的包裹层
+		 * @param   (String)D.text             NULL :显示在输入框的信息
+		 * @param   (String)D.select            NULL :
+		 * @param   (String)D.option            NULL :
+		 * @param   (String)D.event             NULL :触发下拉框的事件，默认时click
+		 * @param   (Function)callBack            NULL :回调返回俩参数:this (当前点击的li元素) input(当前输入框)
 		 * @return (void)
 		 *html_strure:
 					 <div class="btn-group">
 						 <button type="button" class="btn btn-default" data-select="input">请选择...</button>
+		 				<input type="hidden">
 						 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							 <span class="caret"></span>
 							 <span class="sr-only">Toggle Dropdown</span>
@@ -174,24 +180,45 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 					 </div>
 		 *
 		 */
-		'dropdownMenu':function(box,callBack){
-			if(System.isFunction(box)) {
-				callBack = box;
-				box = undefined;
+		'dropdownMenu':function(D,callBack){
+			if(System.isFunction(D)) {
+				callBack = D;
+				D = undefined;
 			}
-			box = box || '.btn[data-select="input"]';
-			$(box).each(function(){
-				var input=this;
-				$(this).parent().on('click','.dropdown-menu li',function(){
+			var defaults={
+				'group': '.btn-group',
+				'text': '.btn[data-select="input"]',
+				'select': '.dropdown-menu',
+				'option': 'li',
+				'event': 'click'
+			};
+			D = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
+			$(D.select).closest(D.group).off(D.event,D.option);
+			$(D.select).closest(D.group).on(
+				D.event,
+				D.option,
+				function(event){
+					var $input = $( event.target ).closest(D.group).find(D.text);
 					if(System.isFunction(callBack)){
-						//this : li
+						//this : option
 						//input : 当前输入框
-						callBack.call(this,input);
+						callBack.call(this,$input);
 					}else{
-						$(input).text($(this).text());
+						$input.text($(this).text());
 					}
-				});
 			});
+			//$(D.input).each(function(){
+			//	var input=this;
+			//	$(this).closest(D.group).on(D.event, D.option,function(){
+			//		if(System.isFunction(callBack)){
+			//			//this : option
+			//			//input : 当前输入框
+			//			callBack.call(this,input);
+			//		}else{
+			//			$(input).text($(this).text());
+			//		}
+			//	});
+			//});
 
 		},
 
