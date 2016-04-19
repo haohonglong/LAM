@@ -167,7 +167,7 @@ if(!LHH_NAMESPACE_20150715_){
 
 	if(!String.prototype.trim){
 		String.method('trim',function(){
-			return this.replace(/(^\s+)|\s+$/g,'');
+			return this.replace(/(^\s*)|(\s*$)/g, "");
 		});
 	}
 
