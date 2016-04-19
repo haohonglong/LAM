@@ -158,7 +158,8 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 		 * 注意：
 		 * @param   (Object)D            		  NULL :初始化数据
 		 * @param   (String)D.group             NULL :下拉框的包裹层
-		 * @param   (String)D.input             NULL :显示在输入框的信息
+		 * @param   (String)D.text             NULL :显示在输入框的信息
+		 * @param   (String)D.select            NULL :
 		 * @param   (String)D.option            NULL :
 		 * @param   (String)D.event             NULL :触发下拉框的事件，默认时click
 		 * @param   (Function)callBack            NULL :回调返回俩参数:this (当前点击的li元素) input(当前输入框)
@@ -186,20 +187,24 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 			}
 			var defaults={
 				'group': '.btn-group',
-				'input': '.btn[data-select="input"]',
-				'option': '.dropdown-menu li',
+				'text': '.btn[data-select="input"]',
+				'select': '.dropdown-menu',
+				'option': 'li',
 				'event': 'click'
 			};
 			D = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
-			$(document).on(D.event, D.option,function(event){
-				var $input = $( event.target ).closest(D.group).find(D.input).text($(this).text());
-				if(System.isFunction(callBack)){
-					//this : option
-					//input : 当前输入框
-					callBack.call(this,$input);
-				}else{
-					$input.text($(this).text());
-				}
+			$(D.select).closest(D.group).on(
+				D.event,
+				D.option,
+				function(event){
+					var $input = $( event.target ).closest(D.group).find(D.text);
+					if(System.isFunction(callBack)){
+						//this : option
+						//input : 当前输入框
+						callBack.call(this,$input);
+					}else{
+						$input.text($(this).text());
+					}
 			});
 			//$(D.input).each(function(){
 			//	var input=this;
