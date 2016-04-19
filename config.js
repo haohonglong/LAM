@@ -3,7 +3,7 @@
  * 创建日期:2015/3/20
  * 修改日期:2015/8/02
  * 功能：配置文件
- * 说明 : 这个文件要copy到项目里面可以修改 'LHH_CONFIG_20150717_'里的属性 和 'REGISTERNAMESPACE'; 的值；
+ * 说明 : 这个文件要copy到项目里面可以修改 'registerContainerConfiguration'里的属性 和 'GRN_LHH'; 的值；
  *
  * note :
  *
@@ -14,8 +14,8 @@
 'use strict';
 
 //基础类的设置
-if(!REGISTERNAMESPACE){
-    var REGISTERNAMESPACE='System';
+if(!GRN_LHH){
+    var GRN_LHH='System';
 }
 
 //js获取项目根路径，如： http://localhost:8083/uimcardprj
@@ -42,8 +42,8 @@ var common = _ROOT_+'/common';
 var plugins = _ROOT_+'/plugins';
 
 
-if(!LHH_CONFIG_20150717_){
-    var LHH_CONFIG_20150717_={
+if(!registerContainerConfiguration){
+    var registerContainerConfiguration={
         'vendorPath':_ROOT_+'/lamborghiniJS',
         'Public':{
             'ROOT':_ROOT_
@@ -93,7 +93,7 @@ if(!LHH_CONFIG_20150717_){
                 var node;
                 var k;
                 var fragment;
-                var Config = LHH_CONFIG_20150717_;
+                var Config = registerContainerConfiguration;
                 node=document.createElement(tag);
 
                 for(k in D){
@@ -190,10 +190,10 @@ if(!LHH_CONFIG_20150717_){
     //5秒之后检测lamborghiniJS基础类文件是否加载成功
     //=================================================================================================================================
     window.setTimeout(function(){
-        if(!window[REGISTERNAMESPACE]) {
-            alert('cannot find Basis class! the lamborghiniJS\' path is :{'+LHH_CONFIG_20150717_.getClassPath()+'}');
+        if(!window[GRN_LHH]) {
+            alert('cannot find Basis class! the lamborghiniJS\' path is :{'+registerContainerConfiguration.getClassPath()+'}');
         }else{
-            window[REGISTERNAMESPACE].main(function(){
+            window[GRN_LHH].main(function(){
                 var System=this;
             });
         }
@@ -201,7 +201,7 @@ if(!LHH_CONFIG_20150717_){
     //=================================================================================================================================
 
 
-})(LHH_CONFIG_20150717_);
+})(registerContainerConfiguration);
 
 
 

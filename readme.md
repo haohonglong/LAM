@@ -90,8 +90,8 @@
 		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		
 		//基础类的设置
-		if(!REGISTERNAMESPACE){
-		    var REGISTERNAMESPACE='System';
+		if(!GRN_LHH){
+		    var GRN_LHH='System';
 		}
 		//js获取项目根路径，如： http://localhost:8083/uimcardprj
         function getRootPath(){
@@ -117,8 +117,8 @@
 		var plugins = _ROOT_+'/plugins';
 		
 		
-		if(!LHH_CONFIG_20150717_){
-		    var LHH_CONFIG_20150717_={
+		if(!registerContainerConfiguration){
+		    var registerContainerConfiguration={
 		        'vendorPath':_ROOT_+'/lamborghiniJS',
 		        'Public':{
 		            'ROOT':_ROOT_
@@ -168,7 +168,7 @@
 		                var node;
 		                var k;
 		                var fragment;
-		                var Config = LHH_CONFIG_20150717_;
+		                var Config = registerContainerConfiguration;
 		                node=document.createElement(tag);
 		
 		                for(k in D){
@@ -262,10 +262,10 @@
 			//5秒之后检测lamborghiniJS基础类文件是否加载成功
 			//=================================================================================================================================
 			window.setTimeout(function(){
-				if(!window[REGISTERNAMESPACE]) {
-					alert('cannot find Basis class! the lamborghiniJS\' path is :{'+LHH_CONFIG_20150717_.getClassPath()+'}');
+				if(!window[GRN_LHH]) {
+					alert('cannot find Basis class! the lamborghiniJS\' path is :{'+registerContainerConfiguration.getClassPath()+'}');
 				}else{
-					window[REGISTERNAMESPACE].main(function(){
+					window[GRN_LHH].main(function(){
 						var System=this;
 					});
 				}
@@ -273,12 +273,12 @@
 			//=================================================================================================================================
 		
 		
-		})(LHH_CONFIG_20150717_);
+		})(registerContainerConfiguration);
 		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 		
         根据下面三条修改上面对应的参数
-			1.修改 REGISTERNAMESPACE 的值
-			2.修改 LHH_CONFIG_20150717_.vendorPath 的值
+			1.修改 GRN_LHH 的值
+			2.修改 registerContainerConfiguration.vendorPath 的值
 
 
 		'config.js'文件里做的事情是：
@@ -295,9 +295,9 @@
 
 	二、开发约定
 	
-		'REGISTERNAMESPACE' 在'config.js'里设定,变量名: REGISTERNAMESPACE 是框架里定死的禁止改动，可以修改变量的值,
+		'GRN_LHH'(GRN 是 'GLOBAL—REGISTER-NAMESPACE' 的缩写) 在'config.js'里设定,常量名: GRN_LHH 是框架里定死的禁止改动，可以修改变量的值,
 		也就是说框架的命名空间可以用户自定义（参考 四、命名空间灵活 与其他插件无冲突）。
-		禁止修改'Basis.class.js'里的 'REGISTERNAMESPACE' 的值。
+		禁止修改'Basis.class.js'里的 'GRN_LHH' 的值。
 		成员都是受保护的，不对外共享，如要在外面修改或者复写，都要通过接口。
 		调用基类的静态成员方法:(调用接口.类名称.静态成员)。
         基类不允许被直接实例化，要实例化它的派生类。
@@ -360,7 +360,7 @@
 
 			类结构:(继承参考 六、继承)
 
-				window[REGISTERNAMESPACE].main([window],function(window,undefined){
+				window[GRN_LHH].main([window],function(window,undefined){
                         'use strict';
                         var System=this;
                         System.import([class]).import([class],System.classPath);
@@ -371,7 +371,7 @@
 				
 
 			Example:
-				window[REGISTERNAMESPACE].main([window],function(window,undefined){
+				window[GRN_LHH].main([window],function(window,undefined){
 					'use strict';
 					var System=this;
 					System.is(System,'superName','className');
@@ -440,10 +440,10 @@
 
 	四、命名空间灵活 与其他插件无冲突
 		命名空间接口设计的宗旨是:只要修改一处即可搞定一切与第三方插件的冲突，命名空间的命名权限提供给用户，用户可以随意命名。
-		命名空间接口定义: var REGISTERNAMESPACE='interfaceName';
-        命名空间接口调用: window[REGISTERNAMESPACE]  或者 window['interfaceName'] 或者 LamborghiniJS_20150910123700_ 或者 LAMJS
+		命名空间接口定义: var GRN_LHH='interfaceName';
+        命名空间接口调用: window[GRN_LHH]  或者 window['interfaceName'] 或者 LamborghiniJS_20150910123700_ 或者 LAMJS
 		命名空间接口的设计是灵活的，修改接口名不影响库文件里的内核代码及类接口。
-        与第三方插件发生冲突时解决方法:  修改变量 'REGISTERNAMESPACE' 里的值 即可。'REGISTERNAMESPACE' 是命名空间接口的密钥 作用是定义命名空间。
+        与第三方插件发生冲突时解决方法:  修改变量 'GRN_LHH' 里的值 即可。'GRN_LHH' 是命名空间接口的密钥 作用是定义命名空间。
 
 
 	五、应用

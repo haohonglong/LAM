@@ -1,5 +1,5 @@
 
-window[REGISTERNAMESPACE].main([window,jQuery],function(window,jQuery,undefined){
+window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Browser','Tab');

@@ -11,16 +11,16 @@
  * 修改日期:2015/7/15	
  * 名称：基类
  * 功能：服务于派生类
- * 命名空间接口定义: var REGISTERNAMESPACE='interfaceName';
- * 命名空间接口调用: window[REGISTERNAMESPACE]  或者 W['interfaceName']
+ * 命名空间接口定义: var GRN_LHH='interfaceName';
+ * 命名空间接口调用: window[GRN_LHH]  或者 W['interfaceName']
  * 说明 : 成员都是受保护的，不对外共享，如要在外面修改或者复写，都要通过接口。
  *        命名空间接口的设计是灵活的，修改接口名不影响库文件里的内核代码及类接口。
  *        命名空间接口设计的宗旨是:只要修改一处就可搞定一切与第三方插件的冲突。
- *        与第三方插件发生冲突时解决方法:  修改变量 'REGISTERNAMESPACE' 里的值 即可。'REGISTERNAMESPACE' 是命名空间接口的密钥 作用是定义命名空间。
+ *        与第三方插件发生冲突时解决方法:  修改变量 'GRN_LHH' 里的值 即可。'GRN_LHH' 是命名空间接口的密钥 作用是定义命名空间。
  * 	      调用基类的静态成员方法:(调用接口.静态成员)。
  * 	      这个基类不允许被直接实例化，要实例化它的派生类。
  * 	      页面中要引入'config.js'这个文件,因为这个文件里已经引入了'Basis.class.js'文件,所以不用在页面中再引入'Basis.class.js'文件了。
- * 	      'REGISTERNAMESPACE' 的设定也在'config.js'里设定,不要修改这里的 'REGISTERNAMESPACE' 的值。
+ * 	      'GRN_LHH' 的设定也在'config.js'里设定,不要修改这里的 'GRN_LHH' 的值。
  * 	      window['interfaceName'].app :这个对象代表当前实例化后的对象
  * 	      
  * note : 
@@ -30,8 +30,8 @@
  */
 
 
-if(!REGISTERNAMESPACE){
-	var REGISTERNAMESPACE='System';
+if(!GRN_LHH){
+	var GRN_LHH='System';
 	
 }
 (function(global,namespace,factory,undefined){
@@ -41,7 +41,7 @@ if(!REGISTERNAMESPACE){
 	}
 	global['LAMJS'] = global['LamborghiniJS_20150910123700_'] = global[namespace] = factory(global,namespace);
 
-})(typeof window !== "undefined" ? window : this,REGISTERNAMESPACE,function(W,namespace,undefined){
+})(typeof window !== "undefined" ? window : this,GRN_LHH,function(W,namespace,undefined){
 	'use strict';
 	var version="1.0.9";
 
@@ -1916,10 +1916,23 @@ if(!REGISTERNAMESPACE){
  ==========================================================================================
 */
 
-window[REGISTERNAMESPACE].main([window,LHH_CONFIG_20150717_],function(W,Config){
+window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	'use strict';
 	var System=this;
-	var _ROOT_ = '.';
+	//js获取项目根路径，如： http://localhost:8083/uimcardprj
+	function getRootPath(){
+		//获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+		var curWwwPath=window.document.location.href;
+		//获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+		var pathName=window.document.location.pathname;
+		var pos=curWwwPath.indexOf(pathName);
+		//获取主机地址，如： http://localhost:8083
+		var localhostPaht=curWwwPath.substring(0,pos);
+		//获取带"/"的项目名，如：/uimcardprj
+		var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+		return(localhostPaht+projectName);
+	}
+	var _ROOT_ = getRootPath();
 	var defaultConfig={
 		'vendorPath':_ROOT_+'/lamborghiniJS',
 		'Public':{
