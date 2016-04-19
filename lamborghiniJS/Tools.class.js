@@ -191,8 +191,8 @@ window[LHH_NAMESPACE_20150715_].main([window,jQuery],function(window,$,undefined
 				'event': 'click'
 			};
 			D = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
-			$(document).on(D.event, D.option,function(){
-				var $input = $(this).closest(D.group).find(D.input).text($(this).text());
+			$(document).on(D.event, D.option,function(event){
+				var $input = $( event.target ).closest(D.group).find(D.input).text($(this).text());
 				if(System.isFunction(callBack)){
 					//this : option
 					//input : 当前输入框
