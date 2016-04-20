@@ -140,7 +140,7 @@ if(!registerContainerConfiguration){
     var scriptAttribute = Config.render.default.script.Attribute;
     var i = 0;
     var len;
-    var data;
+    var data = scriptAttribute;
     var classPath=Config.getClassPath();
 
     //加载基础类
@@ -157,21 +157,8 @@ if(!registerContainerConfiguration){
         classPath+'/Template.class.js',
         classPath+'/Controller.class.js'
     ];
-
-    if(Config.render.create){
-        var H=Config.render.H();
-        for(i=0,len = srcs.length;i < len; i++){
-            var data = scriptAttribute;
-            data.src = srcs[i];
-            Config.render.bulid(tag,data);
-        }
-        console.log(H.body);
-        console.log(Config.render.fragment);
-        H.body.appendChild(Config.render.fragment);
-
-
-
-    }else{
+    //=================================================================================================================================
+    if(!Config.render.create){
         var attrs=[];
         for(var k in scriptAttribute){
             attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
@@ -181,15 +168,28 @@ if(!registerContainerConfiguration){
 
         }
     }
-
-
-
+    //=================================================================================================================================
 
 
     //=================================================================================================================================
     //5秒之后检测lamborghiniJS基础类文件是否加载成功
     //=================================================================================================================================
     window.setTimeout(function(){
+        //
+        if(Config.render.create){
+            var H=Config.render.H();
+            for(i=0,len = srcs.length;i < len; i++){
+                data.src = srcs[i];
+                Config.render.bulid(tag,data);
+            }
+            console.log(H.body);
+            console.log(Config.render.fragment);
+            H.body.appendChild(Config.render.fragment);
+
+        }
+        //=================================================================================================================================
+
+
         if(!window[GRN_LHH]) {
             alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
         }else{
