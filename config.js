@@ -191,7 +191,7 @@ if(!registerContainerConfiguration){
     //=================================================================================================================================
     window.setTimeout(function(){
         if(!window[GRN_LHH]) {
-            alert('cannot find Basis class! the lamborghiniJS\' path is :{'+registerContainerConfiguration.getClassPath()+'}');
+            alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
         }else{
             window[GRN_LHH].main(function(){
                 var System=this;
