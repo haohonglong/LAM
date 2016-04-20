@@ -209,61 +209,63 @@
 		    };
 		}
 		
-		
 		(function(Config){
-		    var tag = "script";
-		    var scriptAttribute = Config.render.default.script.Attribute;
-		    var i = 0;
-		    var len;
-		    var data;
-		    var classPath=Config.getClassPath();
+			var tag = "script";
+			var scriptAttribute = Config.render.default.script.Attribute;
+			var i = 0;
+			var len;
+			var data = scriptAttribute;
+			var classPath=Config.getClassPath();
 		
-		    //加载基础类
-		    var srcs =[
-		        classPath+'/jQuery/jquery.js',
-		        classPath+'/Basis.class.js',
-		        classPath+'/BiObject.class.js',
-		        classPath+'/loadcommon.class.js',
-		        classPath+'/Component.class.js',
-		        classPath+'/Helper.class.js',
-		        classPath+'/Browser.class.js',
-		        classPath+'/Dom.class.js',
-		        classPath+'/Html.class.js',
-		        classPath+'/Template.class.js',
-		        classPath+'/Controller.class.js'
-		    ];
+			//加载基础类
+			var srcs =[
+				classPath+'/jQuery/jquery.js',
+				classPath+'/Basis.class.js',
+				classPath+'/BiObject.class.js',
+				classPath+'/loadcommon.class.js',
+				classPath+'/Component.class.js',
+				classPath+'/Helper.class.js',
+				classPath+'/Browser.class.js',
+				classPath+'/Dom.class.js',
+				classPath+'/Html.class.js',
+				classPath+'/Template.class.js',
+				classPath+'/Controller.class.js'
+			];
+			//=================================================================================================================================
+			if(!Config.render.create){
+				var attrs=[];
+				for(var k in scriptAttribute){
+					attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
+				}
+				for(i=0,len = srcs.length;i < len; i++){
+					document.write('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
 		
-		    if(Config.render.create){
-		        var H=Config.render.H();
-		        for(i=0,len = srcs.length;i < len; i++){
-		            var data = scriptAttribute;
-		            data.src = Config.getClassPath()+srcs[i],
-		                Config.render.bulid(tag,data);
-		        }
-		        console.log(H.body)
-		        console.log(Config.render.fragment)
-		        H.body.appendChild(Config.render.fragment);
+				}
+			}
+			//=================================================================================================================================
 		
 		
-		
-		    }else{
-		        var attrs=[];
-		        for(var k in scriptAttribute){
-		            attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
-		        }
-		        for(i=0,len = srcs.length;i < len; i++){
-		            document.write('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
-		
-		        }
-		    }
-		    
-		    
 			//=================================================================================================================================
 			//5秒之后检测lamborghiniJS基础类文件是否加载成功
 			//=================================================================================================================================
 			window.setTimeout(function(){
+				//
+				if(Config.render.create){
+					var H=Config.render.H();
+					for(i=0,len = srcs.length;i < len; i++){
+						data.src = srcs[i];
+						Config.render.bulid(tag,data);
+					}
+					console.log(H.body);
+					console.log(Config.render.fragment);
+					H.body.appendChild(Config.render.fragment);
+		
+				}
+				//=================================================================================================================================
+		
+		
 				if(!window[GRN_LHH]) {
-					alert('cannot find Basis class! the lamborghiniJS\' path is :{'+registerContainerConfiguration.getClassPath()+'}');
+					alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
 				}else{
 					window[GRN_LHH].main(function(){
 						var System=this;
