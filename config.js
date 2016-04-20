@@ -162,11 +162,11 @@ if(!registerContainerConfiguration){
         var H=Config.render.H();
         for(i=0,len = srcs.length;i < len; i++){
             var data = scriptAttribute;
-            data.src = Config.getClassPath()+srcs[i],
-                Config.render.bulid(tag,data);
+            data.src = srcs[i];
+            Config.render.bulid(tag,data);
         }
-        console.log(H.body)
-        console.log(Config.render.fragment)
+        console.log(H.body);
+        console.log(Config.render.fragment);
         H.body.appendChild(Config.render.fragment);
 
 
