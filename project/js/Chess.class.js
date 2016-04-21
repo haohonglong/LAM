@@ -8,7 +8,7 @@ LAMJS.main([
 	System.is(System.Html5,'CanvasForm','Chess');
 	var __this__=null;
 	//棋盘行列数
-	var num = 19;
+	var num = 15;
 	var pading = 15;
 	var w = 30;
 	var chessBoard=[];
@@ -18,7 +18,7 @@ LAMJS.main([
 	function Chess(dom,n){
 		System.Basis.extends.call(this,System.Html5.CanvasForm,2,[dom]);
 		__this__=this;
-		num = n || 19;
+		num = n || 15;
 		this.aLength = (num-1)*w;
 
 		dom.width = dom.height = this.aLength+pading*2;
