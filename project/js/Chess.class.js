@@ -90,7 +90,6 @@ LAMJS.main([
 		 * @returns {Chess}
 		 */
 		'draw':function(color){
-			console.log(this.aLength)
 			color = color || '#bfbfbf';
 			for(var i=0;i<num;i++){
 				this
