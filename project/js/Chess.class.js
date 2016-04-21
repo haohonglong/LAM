@@ -9,7 +9,9 @@ LAMJS.main([
 	var __this__=null;
 	//棋盘行列数
 	var num = 15;
+	//棋盘与画布的间距
 	var pading = 15;
+	//棋盘格子的宽高
 	var w = 30;
 	var chessBoard=[];
 	//赢法数组
@@ -66,12 +68,9 @@ LAMJS.main([
 				var event = $.event.fix(event);
 				var x = event.offsetX;
 				var y = event.offsetY;
-				//console.log(x+','+y)
 				var i = Math.floor(x/30);
 				var j = Math.floor(y/30);
 
-
-				console.log(i+','+j)
 				if(0 === chessBoard[i][j]){
 					self.chess(i,j,color);
 					if(color){
