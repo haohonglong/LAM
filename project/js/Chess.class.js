@@ -15,9 +15,10 @@ LAMJS.main([
 	//赢法数组
 	var wins=[];
 
-	function Chess(dom){
+	function Chess(dom,n){
 		System.Basis.extends.call(this,System.Html5.CanvasForm,2,[dom]);
 		__this__=this;
+		num = n || 19;
 		this.aLength = (num-1)*w;
 
 		dom.width = dom.height = this.aLength+pading*2;
