@@ -8,7 +8,9 @@ LAMJS.main([
 	System.is(System.Html5,'CanvasForm','Chess');
 	var __this__=null;
 	//棋盘行列数
-	var num = 15;
+	var num = 19;
+	var pading = 15;
+	var w = 30;
 	var chessBoard=[];
 	//赢法数组
 	var wins=[];
@@ -16,6 +18,9 @@ LAMJS.main([
 	function Chess(dom){
 		System.Basis.extends.call(this,System.Html5.CanvasForm,2,[dom]);
 		__this__=this;
+		this.aLength = (num-1)*w;
+
+		dom.width = dom.height = this.aLength+pading*2;
 		this.init();
 
 	}
@@ -60,8 +65,12 @@ LAMJS.main([
 				var event = $.event.fix(event);
 				var x = event.offsetX;
 				var y = event.offsetY;
+				//console.log(x+','+y)
 				var i = Math.floor(x/30);
 				var j = Math.floor(y/30);
+
+
+				console.log(i+','+j)
 				if(0 === chessBoard[i][j]){
 					self.chess(i,j,color);
 					if(color){
@@ -81,15 +90,16 @@ LAMJS.main([
 		 * @returns {Chess}
 		 */
 		'draw':function(color){
+			console.log(this.aLength)
 			color = color || '#bfbfbf';
 			for(var i=0;i<num;i++){
 				this
 					.strokeStyle(color)
-					.moveTo(num + i*30, num)
-					.lineTo(num + i*30, 435)
+					.moveTo(pading + i*30, pading)
+					.lineTo(pading + i*30, this.aLength+pading)
 					.stroke()
-					.moveTo(num,  num + i*30)
-					.lineTo(435, num + i*30)
+					.moveTo(pading,  pading + i*30)
+					.lineTo(this.aLength+pading, pading + i*30)
 					.stroke();
 			}
 			return this;
@@ -104,8 +114,8 @@ LAMJS.main([
 		'chess':function(i,j,color,D){
 			var defaults={
 					'position':{
-						'x':num+ i*30,
-						'y':num +j*30
+						'x':pading+ i*30,
+						'y':pading +j*30
 					}
 				};
 
@@ -113,11 +123,11 @@ LAMJS.main([
 			D.r = 13;
 			var G ={
 				'params':{
-					'x0':num + i*30 +2,
-					'y0':num + j*30 -2,
+					'x0':pading + i*30 +2,
+					'y0':pading + j*30 -2,
 					'r0':13,
-					'x1':num + i*30 +2,
-					'y1':num + j*30 -2,
+					'x1':pading + i*30 +2,
+					'y1':pading + j*30 -2,
 					'r1':0
 				},
 				'colors':[]
