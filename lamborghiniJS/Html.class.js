@@ -169,6 +169,10 @@ window[GRN_LHH].main([window],function(window,undefined){
 		callBack = D && D.callBack || 0;
 		$dom.each(function(){
 			var dom =this;
+			var file = $(this).attr('file');
+			if(file.indexOf('?') != -1){
+				location.href = file;
+			}
 			if(callBack && System.isFunction(callBack)){
 				D.callBack =function(content){
 					callBack.call(dom,content);
