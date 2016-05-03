@@ -1480,30 +1480,36 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-2-29
-		 * 修改日期：2016-2-29
+		 * 修改日期：2016-5-3
 		 * 名称： each
 		 * 功能：遍历数组或对象
 		 * 说明：
 		 * 注意：
 		 * @param 	(Array | Object)arr     NO NULL :
-		 * @param 	(Funtion)fn             NO NULL : 回调方法
+		 * @param 	(Funtion)callback             NO NULL : 回调方法
 		 * @return ()
 		 * Example：
 		 *
 		 */
-		'each':function(arr,fn){
-			if(!isFunction(fn)){
-				return arr;
-			}
-			var item;
-			for(var i=0,len=arr.length;i<len;i++) {
-				item=arr[i];
-				if(item && fn.call(item, i, item)){
-					break;
+		'each':function( obj, callback ) {
+			var len, i = 0;
+
+			if ( isArray( obj ) ) {
+				len = obj.length;
+				for ( ; i < len; i++ ) {
+					if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
+						break;
+					}
+				}
+			} else {
+				for ( i in obj ) {
+					if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
+						break;
+					}
 				}
 			}
 
-			return arr;
+			return obj;
 		},
 
 
