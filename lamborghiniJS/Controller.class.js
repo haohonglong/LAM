@@ -53,10 +53,16 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
         return items;
 
     };
-    function Controller(){
+    function Controller(file){
         System.Basis.extends.call(this,System.Component);
         __this__=this;
 
+        if(file){
+
+            //this[eval(System.Controller.get_url_name(file)+'Action')]();
+            //console.log(this.a2())
+            this.file = file;
+        }
 
 
     }
