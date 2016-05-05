@@ -59,7 +59,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 
         if(file){
 
-            //this[eval(System.Controller.get_url_name(file)+'Action')]();
+            //this[eval(Controller.get_url_name(file)+'Action')]();
             //console.log(this.a2())
             this.file = file;
         }
