@@ -58,9 +58,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
         __this__=this;
 
         if(file){
-
-            //this[eval(Controller.get_url_name(file)+'Action')]();
-            //console.log(this[eval(Controller.get_url_name(file)+'Action')])
+            this[Controller.get_url_name(file)+'Action']();
             this.file = file;
         }
 
