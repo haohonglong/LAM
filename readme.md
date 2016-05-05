@@ -2,7 +2,7 @@
 	version ：1.1.0
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-4-19
+	修改日期 ：2016-5-5
 
 
 产品介绍：
@@ -708,6 +708,8 @@
 						file:接收控制器中的方法名的参数。file关键字可以在控制器中自定义
 						view：调用对应控制器中的方法（对应着视图文件名）
 				//controllers/index.html
+				
+				Controller 范例一、
 						    LAMJS.main([
 									LAMJS.Config.Public.ROOT,
 									LAMJS.Config.Public.ROOT+'/project/views/index'
@@ -759,6 +761,67 @@
 	                          注2：beforeSend函数里的this就是Ajax的settings,在发送之前设置jQuery Ajax提供的所有参数。
 	                                                            render方法参数4就可以设置一个beforeSend回调函数，其余的参数都可以在这里设置。
 	                                                            函数里的两个参数请参考jQuery Ajax API。
+	                                                            
+	                                                            
+	                                                            
+	            Controller 范例二、(面向对象方式)
+	            		LAMJS.main([
+                            LAMJS.Config.Public.ROOT,
+                            LAMJS.Config.Public.ROOT+'/project/views/index'
+                        ],function(ROOT,views) {
+                            'use strict';
+                            var System = this;
+                            var __this__=null;
+                            System.is(System,'Controller','IndexController');
+                    
+                            function IndexController(){
+                                System.Basis.extends.call(this,System.Controller);
+                                __this__=this;
+                    
+                            }
+                    
+                    
+                            IndexController.prototype = {
+                                'constructor':IndexController,
+                                'indexAction':function(){
+                                    new System.Template().render(views+'/index.html',{
+                                        'ROOT':ROOT,
+                                        'D':{
+                                            'title':'你好，世界！',
+                                            'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
+                                        }
+                    
+                                    },function(content){
+                                        System.print(content);
+                                    },{
+                                        beforeSend:function(a,b){
+                                            this.async=true;
+                                        }
+                                    });
+                                },
+                    
+                    
+                    
+                                /**
+                                 *
+                                 * @author lhh
+                                 * 产品介绍：析构方法
+                                 * 创建日期：2015-4-2
+                                 * 修改日期：2015-4-2
+                                 * 名称：destructor
+                                 * 功能：在注销IndexController对象时调用此方法
+                                 * 说明：
+                                 * 注意：
+                                 * @return  ()
+                                 * Example：
+                                 */
+                                'destructor':function(){}
+                            };
+                            System.extends(IndexController,System.Controller,1);
+                            new IndexController();
+                    
+                    
+                        });
 	                
 	            //views/index/index.html
 		                <!DOCTYPE html>
