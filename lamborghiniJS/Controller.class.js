@@ -57,7 +57,8 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
         System.Basis.extends.call(this,System.Component);
         __this__=this;
 
-        this[Controller.get_url_name('file')+'Action']();
+        var file = Controller.get_url_name('file');
+        this[file+'Action']();
         this.file = file;
 
 
