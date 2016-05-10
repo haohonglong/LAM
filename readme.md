@@ -2,7 +2,7 @@
 	version ：1.1.0
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-5-5
+	修改日期 ：2016-5-10
 
 
 产品介绍：
@@ -232,7 +232,18 @@
 				classPath+'/Controller.class.js'
 			];
 			//=================================================================================================================================
-			if(!Config.render.create){
+			if(Config.render.create){
+				window.setTimeout(function(){
+					var H=Config.render.H();
+					for(i=0,len = srcs.length;i < len; i++){
+						data.src = srcs[i];
+						Config.render.bulid(tag,data);
+					}
+					console.log(H.body);
+					console.log(Config.render.fragment);
+					H.body.appendChild(Config.render.fragment);
+				},2000);
+			}else{
 				var attrs=[];
 				for(var k in scriptAttribute){
 					attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
@@ -242,6 +253,7 @@
 		
 				}
 			}
+		
 			//=================================================================================================================================
 		
 		
@@ -249,21 +261,6 @@
 			//5秒之后检测lamborghiniJS基础类文件是否加载成功
 			//=================================================================================================================================
 			window.setTimeout(function(){
-				//
-				if(Config.render.create){
-					var H=Config.render.H();
-					for(i=0,len = srcs.length;i < len; i++){
-						data.src = srcs[i];
-						Config.render.bulid(tag,data);
-					}
-					console.log(H.body);
-					console.log(Config.render.fragment);
-					H.body.appendChild(Config.render.fragment);
-		
-				}
-				//=================================================================================================================================
-		
-		
 				if(!window[GRN_LHH]) {
 					alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
 				}else{
