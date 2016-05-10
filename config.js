@@ -158,7 +158,18 @@ if(!registerContainerConfiguration){
         classPath+'/Controller.class.js'
     ];
     //=================================================================================================================================
-    if(!Config.render.create){
+    if(Config.render.create){
+        window.setTimeout(function(){
+            var H=Config.render.H();
+            for(i=0,len = srcs.length;i < len; i++){
+                data.src = srcs[i];
+                Config.render.bulid(tag,data);
+            }
+            console.log(H.body);
+            console.log(Config.render.fragment);
+            H.body.appendChild(Config.render.fragment);
+        },2000);
+    }else{
         var attrs=[];
         for(var k in scriptAttribute){
             attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
@@ -168,6 +179,7 @@ if(!registerContainerConfiguration){
 
         }
     }
+
     //=================================================================================================================================
 
 
@@ -175,21 +187,6 @@ if(!registerContainerConfiguration){
     //5秒之后检测lamborghiniJS基础类文件是否加载成功
     //=================================================================================================================================
     window.setTimeout(function(){
-        //
-        if(Config.render.create){
-            var H=Config.render.H();
-            for(i=0,len = srcs.length;i < len; i++){
-                data.src = srcs[i];
-                Config.render.bulid(tag,data);
-            }
-            console.log(H.body);
-            console.log(Config.render.fragment);
-            H.body.appendChild(Config.render.fragment);
-
-        }
-        //=================================================================================================================================
-
-
         if(!window[GRN_LHH]) {
             alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
         }else{
