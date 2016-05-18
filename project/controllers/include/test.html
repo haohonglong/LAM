@@ -10,9 +10,7 @@
 		var System = this;
 
 		new System.Template().render(views+'/test.html',{
-			'PATH':ROOT,
-			'project':ROOT+'/project',
-			'LAMJS':System.classPath,
+			'ROOT':ROOT,
 			'D':{
 				'title':'你好，世界！',
 				'content':'this is include'
