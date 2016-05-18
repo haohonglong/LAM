@@ -16,6 +16,8 @@
 window[GRN_LHH].main(function(undefined){
 	'use strict';
 	var System=this;
+	System.is(System,'Component','Helper');
+	var __this__=null;
 
 
 	/**
@@ -189,8 +191,7 @@ window[GRN_LHH].main(function(undefined){
 	};
 
 
-	System.is(System,'Component','Helper');
-	var __this__=null;
+
 
 	function Helper(){
 		System.Basis.extends.call(this,System.Component);
