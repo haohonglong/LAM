@@ -147,6 +147,7 @@ if(!registerContainerConfiguration){
     var srcs =[
         classPath+'/jQuery/jquery.js',
         classPath+'/Basis.class.js',
+        //classPath+'/Base.class.js',
         classPath+'/BiObject.class.js',
         classPath+'/loadcommon.class.js',
         classPath+'/Component.class.js',
