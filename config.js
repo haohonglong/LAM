@@ -168,7 +168,7 @@ if(!registerContainerConfiguration){
             console.log(H.body);
             console.log(Config.render.fragment);
             H.body.appendChild(Config.render.fragment);
-        },2000);
+        },3000);
     }else{
         var attrs=[];
         for(var k in scriptAttribute){

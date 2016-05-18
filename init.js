@@ -1,10 +1,12 @@
 //加载基础类
 
-window[GRN_LHH].main(function(){
+LAMJS.main([
+    LAMJS.Config.Public.ROOT
+],function(ROOT) {
     'use strict';
     var System=this;
     System.root={
-        'path':__root__
+        'path':ROOT
     };
     System.import([
         '/BiObject.class',
