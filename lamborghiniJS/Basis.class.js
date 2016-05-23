@@ -2146,16 +2146,17 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	 * 功能：动态返回指定的标签
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(String)name             NO NULL : 标签名称
+	 * @param 	(String)name            NO NULL : 标签名称
 	 * @param 	(Boolean)single         NO NULL : 成对标签还是单一标签，false 是成对标签
 	 * @param 	(Object)D             	NO NULL : 标签的属性
-	 * @param 	(String|Array)content            NULL : 内容
+	 * @param 	(String|Array)content      NULL : 内容
 	 * @return (String | Object) 返回标签字符串 可用document.write(); 或一个自定义Dom的对象
 	 * Example：
 	 *
 	 */
 	Basis.printTag=function(name,single,D,content){
 		single = single || false;
+		D = D || {};
 
 		if(!System.isString(arguments[0])){
 			throw new Error('Warning 缺少标签名称');
