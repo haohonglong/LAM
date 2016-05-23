@@ -2141,7 +2141,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2015-8-25
-	 * 修改日期：2016-2-25
+	 * 修改日期：2016-5-23
 	 * 名称： printTag
 	 * 功能：动态返回指定的标签
 	 * 说明：
@@ -2149,7 +2149,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	 * @param 	(String)name             NO NULL : 标签名称
 	 * @param 	(Boolean)single         NO NULL : 成对标签还是单一标签，false 是成对标签
 	 * @param 	(Object)D             	NO NULL : 标签的属性
-	 * @param 	(String)content            NULL : 内容
+	 * @param 	(String|Array)content            NULL : 内容
 	 * @return (String | Object) 返回标签字符串 可用document.write(); 或一个自定义Dom的对象
 	 * Example：
 	 *
@@ -2168,20 +2168,25 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 			if(System.arr_Object_key_has(key)){
 				continue;
 			}
-			attrs.push(key,'=','"',D[key],'"');
+			attrs.push(' ',key,'=','"',D[key],'"');
 
 			if(single || len-1!=i){
-				attrs.push(' ');
+				attrs.push('');
 			}
 			i++;
 		}
 		if(single){
-				tag=['<',name,' ',attrs.join(''),'/','>'];
+			tag=['<',name,attrs.join(''),'/','>'];
 		}else{
 			if(content){
-				tag=['<',name,' ',attrs.join(''),'>',content,'<','/',name,'>'];
+				if(System.isArray(content)){
+					tag=['<',name,attrs.join(''),'>',content.join(''),'<','/',name,'>'];
+				}else{
+					tag=['<',name,attrs.join(''),'>',content,'<','/',name,'>'];
+				}
+
 			}else{
-				tag=['<',name,' ',attrs.join(''),'>',		 '<','/',name,'>'];
+				tag=['<',name,attrs.join(''),'>',		 '<','/',name,'>'];
 			}
 
 		}
