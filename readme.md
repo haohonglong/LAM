@@ -565,35 +565,88 @@
 			Array.filter();
 
 	八、框架里的方法
-			1.LAMJS.main();
-			2.LAMJS.import();
-			3.LAMJS.config();
-			4.LAMJS.print();
+			LAMJS.main();
+			LAMJS.import();
+			LAMJS.config();
+			LAMJS.print();
 				LAMJS.print('s'[,1,'a',...]);
 				可以像python 的print 方法一样 ,会依次打印每个字符串，遇到逗号“,”会输出一个空格
 			
-			5.LAMJS.arr_isEmpty();
-			6.LAMJS.wait();
-			7.LAMJS.queues();
-			8.LAMJS.length();
-			9.LAMJS.proxy();
-			10.LAMJS.putIndexGetObjectTheValue();
-			11.LAMJS.list();
-			12.LAMJS.extends();
-			13.LAMJS.extend();
-			14.LAMJS.merge();
-			15.LAMJS.clone();
-			16.LAMJS.is();
-			17.LAMJS.log();
-			18.LAMJS.autoCenter();
-			19.LAMJS.template();
-			20.LAMJS.replaceTpl();
+			LAMJS.arr_isEmpty();
+			LAMJS.wait();
+			LAMJS.queues();
+			LAMJS.length();
+			LAMJS.proxy();
+			LAMJS.putIndexGetObjectTheValue();
+			LAMJS.list();
+			LAMJS.extends();
+			LAMJS.extend();
+			LAMJS.merge();
+			LAMJS.clone();
+			LAMJS.is();
+			LAMJS.log();
+			LAMJS.autoCenter();
+			LAMJS.template();
+			LAMJS.replaceTpl();
 			
-			21.LAMJS.Basis.printTag();
-			22.LAMJS.Basis.printScript();
-			23.LAMJS.Basis.printLink();
-			24.LAMJS.Basis.extends();
+			LAMJS.Basis.printTag();
+			LAMJS.Basis.printScript();
+			LAMJS.Basis.printLink();
+			LAMJS.Basis.extends();
+			
+			LAMJS.Html.tag(); //同LAMJS.Basis.printTag() 功能一样，建议用这个方法
+				返回创建指定标签的字符串 
+				第一参数是标签名称。第二参数，是否是单标签。第三参数是标签里的所有属性，没有的话就传个{}.第四个参数是标签里的内容，单标签没有内容可以省略这个参数。
+				System.Html.tag('p', false, {},'这是一个p标签');
+				上面的代码生成下面的字符
+					<p>这是一个p标签</p>
+				可以嵌套n个标签，方式如下：
+					System.Html.tag('nav', false,{},
+						System.Html.tag('ul', false, {'class': 'pagination'},
+								[
+									System.Html.tag('li', false, {},
+											System.Html.tag('a', false, {'href':'#','aria-label':'Previous'},
+													System.Html.tag('span', false, {'aria-hidden':'true'},'&laquo;')
+											)
+									),
+									System.Html.tag('li', false, {},
+											System.Html.tag('a', false, {'href':'#'},1)
+									),
+									System.Html.tag('li', false, {},
+											System.Html.tag('a', false, {'href':'#'},2)
+									),
+									System.Html.tag('li', false, {},
+											System.Html.tag('a', false, {'href':'#','aria-label':'Next'},
+													System.Html.tag('span', false, {'aria-hidden':'true'},'&laquo;')
+											)
+									)
 		
+		
+								]
+		
+		
+						)
+					);
+				
+				上面的代码生成下面的字符
+				
+				<nav>
+				  <ul class="pagination">
+					<li>
+					  <a href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					  </a>
+					</li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li>
+					  <a href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					  </a>
+					</li>
+				  </ul>
+				</nav>
+				
 		
 	九、错误机制
 			throw new Error(msg);
