@@ -609,12 +609,18 @@
 													System.Html.tag('span', false, {'aria-hidden':'true'},'&laquo;')
 											)
 									),
-									System.Html.tag('li', false, {},
-											System.Html.tag('a', false, {'href':'#'},1)
-									),
-									System.Html.tag('li', false, {},
-											System.Html.tag('a', false, {'href':'#'},2)
-									),
+									//用这种方式迭代相同的部分
+									(function(){
+										var arr=[];
+										for(var i=1;i<=5;i++){
+											arr.push(System.Html.tag('li', false, {},
+													System.Html.tag('a', false, {'href':'#'},i)
+											));
+		
+										}
+										return arr.join('');
+		
+									})(),
 									System.Html.tag('li', false, {},
 											System.Html.tag('a', false, {'href':'#','aria-label':'Next'},
 													System.Html.tag('span', false, {'aria-hidden':'true'},'&laquo;')
@@ -631,21 +637,24 @@
 				上面的代码生成下面的字符串
 				
 				<nav>
-				  <ul class="pagination">
-					<li>
-					  <a href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					  </a>
-					</li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li>
-					  <a href="#" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					  </a>
-					</li>
-				  </ul>
-				</nav>
+                  <ul class="pagination">
+                    <li>
+                      <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                      <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
 				
 		
 	九、错误机制
