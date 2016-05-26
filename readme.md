@@ -597,42 +597,48 @@
 			LAMJS.Html.tag(); //同LAMJS.Basis.printTag() 功能一样，建议用这个方法
 				返回创建指定标签的字符串 
 				第一参数是标签名称。第二参数，是否是单标签。第三参数是标签里的所有属性，没有的话就传个{}.第四个参数是标签里的内容，单标签没有内容可以省略这个参数。
-				System.Html.tag('p', false, {},'这是一个p标签');
+				LAMJS.Html.tag('p', false, {},'这是一个p标签');
 				上面的代码生成下面的字符串
 					<p>这是一个p标签</p>
 				可以嵌套n个标签，方式如下：
-					System.Html.tag('nav', false,{},
-						System.Html.tag('ul', false, {'class': 'pagination'},
-								[
-									System.Html.tag('li', false, {},
-											System.Html.tag('a', false, {'href':'#','aria-label':'Previous'},
-													System.Html.tag('span', false, {'aria-hidden':'true'},'&laquo;')
+				    LAMJS.main(function () {
+                        'use strict';
+                        var System = this;
+                        System.Html.tag('nav', false,{},
+								System.Html.tag('ul', false, {'class': 'pagination'},
+										[
+											System.Html.tag('li', false, {},
+													System.Html.tag('a', false, {'href':'#','aria-label':'Previous'},
+															System.Html.tag('span', false, {'aria-hidden':'true'},'&laquo;')
+													)
+											),
+											//用这种方式迭代相同的部分
+											(function(){
+												var arr=[];
+												for(var i=1;i<=5;i++){
+													arr.push(System.Html.tag('li', false, {},
+															System.Html.tag('a', false, {'href':'#'},i)
+													));
+				
+												}
+												return arr.join('');
+				
+											})(),
+											System.Html.tag('li', false, {},
+													System.Html.tag('a', false, {'href':'#','aria-label':'Next'},
+															System.Html.tag('span', false, {'aria-hidden':'true'},'&laquo;')
+													)
 											)
-									),
-									//用这种方式迭代相同的部分
-									(function(){
-										var arr=[];
-										for(var i=1;i<=5;i++){
-											arr.push(System.Html.tag('li', false, {},
-													System.Html.tag('a', false, {'href':'#'},i)
-											));
-		
-										}
-										return arr.join('');
-		
-									})(),
-									System.Html.tag('li', false, {},
-											System.Html.tag('a', false, {'href':'#','aria-label':'Next'},
-													System.Html.tag('span', false, {'aria-hidden':'true'},'&laquo;')
-											)
-									)
-		
-		
-								]
-		
-		
-						)
-					);
+				
+				
+										]
+				
+				
+								)
+							);
+                        
+                    });
+					
 				
 				上面的代码生成下面的字符串
 				
