@@ -1962,7 +1962,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 				'script':{
 					'Attribute':{
 						'type':'text/javascript',
-						//'async':async,
+						//'async':'async',
 						//'defer':'defer',
 						'charset':'utf-8'
 					}
