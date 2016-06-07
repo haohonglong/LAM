@@ -141,7 +141,7 @@
 		                'script':{
 		                    'Attribute':{
 		                        'type':'text/javascript',
-		                        //'async':true,
+		                        //'async':'async',
 		                        //'defer':'defer',
 		                        'charset':'utf-8'
 		                    }
@@ -192,7 +192,7 @@
 		         */
 		        'use':function(){
 		            this.render.create=true;
-		            this.render.default.script.Attribute.async=true;
+		            this.render.default.script.Attribute.async='async';
 		            this.render.default.script.Attribute.defer='defer';
 		        },
 		        /**
