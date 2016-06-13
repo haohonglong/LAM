@@ -306,40 +306,55 @@ window[GRN_LHH].main([window,window['document'],jQuery],function(window,document
 				functions[i].call(this,evt);//call的方法起到一个对象冒充的作用（把指向window对象变成指向当前对象）
 		}
 	};
-	//添加事件
-	Browser.addEvent=function(obj,evt,fn){
+
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：
+	 * 创建日期：2014-12-22
+	 * 修改日期：2014-12-23
+	 * 名称：Browser.mousewheel
+	 * 功能：给dom节点绑定指定事件
+	 * 说明：
+	 * 注意：
+	 * @param   (Dom)dom 			NO NULL :dom节点对象
+	 * @param   (String)evt 		NO NULL :事件类型
+	 * @param   (Function)fn 		NO NULL :绑定事件对象的函数
+	 * Example：
+	 */
+	Browser.addEvent=function(dom,evt,fn){
 		if("[object Opera]"===String(window.opera)){
-			obj.addEventListener(evt,function(evt){
+			dom.addEventListener(evt,function(evt){
 				evt.layerX=evt.offsetX;
 				evt.layerY=evt.offsetY;
 				fn.call(this,evt);
 			},false);
-		}else if(obj.addEventListener){
-			obj.addEventListener(evt,fn,false);
-		}else if(obj.attachEvent){
-			obj.attachEvent("on"+evt,function(){
+		}else if(dom.addEventListener){
+			dom.addEventListener(evt,fn,false);
+		}else if(dom.attachEvent){
+			dom.attachEvent("on"+evt,function(){
 				fn.call(this);
 			});
 		}else{
-			if(!obj.functions) obj.functions={};
+			if(!dom.functions) dom.functions={};
 			//检测有没有存储事件名的数组
-			if(!obj.functions[evt]) obj.functions[evt] = [];
-			var functions=obj.functions[evt];
+			if(!dom.functions[evt]) dom.functions[evt] = [];
+			var functions=dom.functions[evt];
 			for(var i=0,len=functions.length;i < len; i++){
-				if(functions[i] === fn) return obj;//判断之前是否有添加过要添加的事件监听函数
+				if(functions[i] === fn) return dom;//判断之前是否有添加过要添加的事件监听函数
 			}
 			//没添加就把函数保存到数组中
 			functions.push(fn);
 			//fn.index=functions.length-1;
-			if(System.isFunction(obj["on"+evt])){//检测是否已经注册过事件监听函数
-				if(obj["on"+evt] !== Browser.handler)
-					functions.push(obj["on"+evt]);//
+			if(System.isFunction(dom["on"+evt])){//检测是否已经注册过事件监听函数
+				if(dom["on"+evt] !== Browser.handler)
+					functions.push(dom["on"+evt]);//
 			}
-			obj["on"+evt]=function(){
+			dom["on"+evt]=function(){
 				Browser.handler.call(this,functions);
 			};
 		}
-		return obj;
+		return dom;
 	};
 	Browser.getDPI=function() {
 		var arrDPI = [];
