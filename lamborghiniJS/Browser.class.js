@@ -331,7 +331,7 @@ window[GRN_LHH].main([window,window['document'],jQuery],function(window,document
 			//没添加就把函数保存到数组中
 			functions.push(fn);
 			//fn.index=functions.length-1;
-			if(System.Basis.isFunction(obj["on"+evt])){//检测是否已经注册过事件监听函数
+			if(System.isFunction(obj["on"+evt])){//检测是否已经注册过事件监听函数
 				if(obj["on"+evt] !== Browser.handler)
 					functions.push(obj["on"+evt]);//
 			}

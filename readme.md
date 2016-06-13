@@ -594,6 +594,17 @@
 			LAMJS.Basis.printLink();
 			LAMJS.Basis.extends();
 			
+			LAMJS.Browser.bind();
+			LAMJS.Browser.fixEvt();
+			LAMJS.Browser.getBodyWH();
+			LAMJS.Browser.getScrollTop();
+			LAMJS.Browser.mousewheel();
+			LAMJS.Browser.setFixed();
+			LAMJS.Browser.resize();
+			LAMJS.Browser.setIEfixed();
+			LAMJS.Browser.getDPI();
+			LAMJS.Browser.addFavorite();
+			
 			LAMJS.Html.tag(); //同LAMJS.Basis.printTag() 功能一样，建议用这个方法
 				返回创建指定标签的字符串 
 				第一参数是标签名称。第二参数，是否是单标签。第三参数是标签里的所有属性，没有的话就传个{}.第四个参数是标签里的内容，单标签没有内容可以省略这个参数。
