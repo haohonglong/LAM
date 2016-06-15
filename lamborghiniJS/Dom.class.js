@@ -68,6 +68,23 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
 		'getNode':function(){
 			return this.node;
 		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-6-15
+		 * 修改日期：2016-6-15
+		 * 名称： getNode
+		 * 功能：获取元素的节点类型
+		 * 说明：
+		 * 注意：
+		 * @return (Number)
+		 * Example：
+		 *
+		 */
+		'getNodeType':function(node){
+			node = node || this.node;
+			return node.nodeType;
+		},
 
 		/**
 		 * @author: lhh
