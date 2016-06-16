@@ -33,9 +33,8 @@ window[GRN_LHH].main([window],function(window,undefined){
 
 
 	}
-	/*---------------------------------
-	 static mothed
-	 -------*/
+	/*static mothed
+	 ----------------------------------------*/
 
 
 

@@ -19,18 +19,20 @@ window[GRN_LHH].main([window],function(window,undefined){
 	 * 说明：
 	 * 注意：
 	 * @param 	(DocumentElement)theCanvas             NO NULL : canvas dom节点
+	 * @param 	(Object)Init             			   	  NULL : 初始化参数
 	 * @return (void)
 	 * Example：
 
 	 */
-	function Canvas(theCanvas,init){
+	function Canvas(theCanvas,Init){
 		System.Basis.extends.call(this,System.Browser);
 		__this__=this;
 		/*--------------------------------------------------------------------------------------------------*/
-
+		Init = Init || {};
 		this.team = [];
 		this.ctx;
 		this.theCanvas = theCanvas;
+		this.create(Init.type);
 
 	}
 
@@ -55,7 +57,6 @@ window[GRN_LHH].main([window],function(window,undefined){
 		'create':function(type){
 			type = type || '2d';
 			this.ctx = this.theCanvas.getContext(type);
-			// this.team.push(this.ctx);
 			return this;
 		},
 		/**
