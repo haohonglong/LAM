@@ -4,10 +4,11 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
 	System.is(System,'Browser','Dom');
 
 	var __this__=null;
-	function Dom(){
+	function Dom(tag,D){
 		System.Basis.extends.call(this,System.Browser);
 		__this__=this;
 		this.node=null;
+		this.create(tag,D);
 		this.fragment = document.createDocumentFragment();
 	}
 
@@ -505,6 +506,50 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
 				if(!D.hasOwnProperty(prop)) continue;
 				this.setStyle(nodes,prop,D[prop]);
 			}
+		},
+		/**
+		 *
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2016-6-16
+		 * 修改日期：2016-6-16
+		 * 名称：css
+		 * 功能：设置或获取
+		 * 说明：
+		 * 注意：
+		 * @param   (jQuery Object)$node 			NULL :jQuery object
+		 * @param   (Number)zIndex 			NULL :设置z-index
+		 * @return  (Number)
+		 * Example：
+		 */
+		zIndex: function( $node,zIndex ) {
+			$node = $node || $(this.node);
+			if ( zIndex !== undefined ) {
+				return this.css( "zIndex", zIndex );
+			}
+
+			if ( $node.length ) {
+				var elem = $( $node[ 0 ] ), position, value;
+				while ( elem.length && elem[ 0 ] !== document ) {
+					// Ignore z-index if position is set to a value where z-index is ignored by the browser
+					// This makes behavior of this function consistent across browsers
+					// WebKit always returns auto if the element is positioned
+					position = elem.css( "position" );
+					if ( position === "absolute" || position === "relative" || position === "fixed" ) {
+						// IE returns 0 when zIndex is not specified
+						// other browsers return a string
+						// we ignore the case of nested elements with an explicit value of 0
+						// <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
+						value = parseInt( elem.css( "zIndex" ), 10 );
+						if ( !isNaN( value ) && value !== 0 ) {
+							return value;
+						}
+					}
+					elem = elem.parent();
+				}
+			}
+
+			return 0;
 		},
 
 		/**
