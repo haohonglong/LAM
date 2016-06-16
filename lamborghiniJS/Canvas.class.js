@@ -7,6 +7,27 @@ window[GRN_LHH].main([window],function(window,undefined){
 
 	var __this__=null;
 
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2015-9-18
+	 * 修改日期：2015-9-18
+	 * 名称： create
+	 * 功能：创建画布
+	 * 说明：
+	 * 注意：
+	 * @param 	(String)Init.type     NULL :
+	 * @return (Canvas)
+	 * Example：
+
+	 */
+	function create(Init){
+		var type = Init.type || '2d';
+		this.ctx = this.theCanvas.getContext(type);
+		return this;
+	}
+
 
 	/**
 	 *
@@ -32,33 +53,16 @@ window[GRN_LHH].main([window],function(window,undefined){
 		this.team = [];
 		this.ctx;
 		this.theCanvas = theCanvas;
-		this.create(Init.type);
+		create.call(this,{
+			'type':Init.type
+		});
 
 	}
 
 	Canvas.prototype = {
 		'constructor':Canvas,
 		'__constructor':function(){},
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-9-18
-		 * 修改日期：2015-9-18
-		 * 名称： create
-		 * 功能：创建画布
-		 * 说明：
-		 * 注意：
-		 * @param 	(String)type     NULL :
-		 * @return (Object)
-		 * Example：
 
-		 */
-		'create':function(type){
-			type = type || '2d';
-			this.ctx = this.theCanvas.getContext(type);
-			return this;
-		},
 		/**
 		 *
 		 * @author: lhh
