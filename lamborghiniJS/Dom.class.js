@@ -514,7 +514,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
 		 * 创建日期：2016-6-16
 		 * 修改日期：2016-6-16
 		 * 名称：css
-		 * 功能：设置或获取
+		 * 功能：设置或获取 z-index
 		 * 说明：
 		 * 注意：
 		 * @param   (jQuery Object)$node 	NULL :jQuery object
