@@ -507,7 +507,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * 说明：
 		 * 注意：
 		 * @param   (Array)nodes 			NO NULL :dom节点集合
-		 * @param   ({})D 			        NO NULL :多个样式数据 {k:v[,...]}
+		 * @param   ({})D 			        NO NULL :多个样式数据 {k:v[,k:v[,...]]}
 		 * @return  (void)
 		 * Example：
 		 */
