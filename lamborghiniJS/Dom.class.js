@@ -234,6 +234,16 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			var node,name,value,
 				len=arguments.length;
 			switch (len){
+				case 1:
+					var D= arguments[0];
+					if(System.isObject(D)){
+						var k;
+						for(k in D){
+							this.attr(this.node,k,D[k]);
+						}
+					}
+
+					break;
 				case 3:
 					node=arguments[0] || this.node;
 					name=arguments[1];
