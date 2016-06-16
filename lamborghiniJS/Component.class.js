@@ -19,6 +19,11 @@ window[GRN_LHH].main([window],function(window,undefined){
 	System.is(System,'BiObject','Component');
 
 	var __this__=null;
+	System.merge(null,[{
+		'widget':function(){
+
+		}
+	}]);
 
 	function Component(){
 		System.Basis.extends.call(this,System.BiObject);
