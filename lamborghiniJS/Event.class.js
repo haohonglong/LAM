@@ -39,17 +39,17 @@ window[GRN_LHH].main([window],function(window,undefined){
         }
 
         switch(_e && _e.keyCode){
-            case 27:// 按 Esc
+            case Event.keyCode.ESCAPE:// 按 Esc
 
                 break;
             case 113:// 按 F2
 
                 break;
-            case 13:// enter 键
+            case Event.keyCode.ENTER:// enter 键
                 _e.keyCode=9;
                 return false;
                 break;
-            case 9:// Tab 键
+            case Event.keyCode.TAB:// Tab 键
 
                 break;
 
@@ -69,6 +69,31 @@ window[GRN_LHH].main([window],function(window,undefined){
 
 
     }
+    Event.keyCode= {
+        BACKSPACE: 8,
+        COMMA: 188,
+        DELETE: 46,
+        DOWN: 40,
+        END: 35,
+        ENTER: 13,
+        ESCAPE: 27,
+        HOME: 36,
+        LEFT: 37,
+        NUMPAD_ADD: 107,
+        NUMPAD_DECIMAL: 110,
+        NUMPAD_DIVIDE: 111,
+        NUMPAD_ENTER: 108,
+        NUMPAD_MULTIPLY: 106,
+        NUMPAD_SUBTRACT: 109,
+        PAGE_DOWN: 34,
+        PAGE_UP: 33,
+        PERIOD: 190,
+        RIGHT: 39,
+        SPACE: 32,
+        TAB: 9,
+        UP: 38
+    };
+
     Event.prototype = {
         'constructor':Event,
         '__constructor':function(){},
