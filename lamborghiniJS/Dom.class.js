@@ -517,7 +517,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
 		 * 功能：设置或获取
 		 * 说明：
 		 * 注意：
-		 * @param   (jQuery Object)$node 			NULL :jQuery object
+		 * @param   (jQuery Object)$node 	NULL :jQuery object
 		 * @param   (Number)zIndex 			NULL :设置z-index
 		 * @return  (Number)
 		 * Example：
