@@ -32,7 +32,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 	 * 			(Function)befor_fn		      				:NULL		resize之前
 	 * 			(Function)after_fn		      				:NULL		resize之后
 	 * 			(String)position		    			   	:NO NULL
-	 * 			(AutoLayout)parent		    			   	:NULL		关联的父包裹层
+	 * 			(AutoLayout)pDom		    			   	:NULL		关联的父包裹层
 	 * 			(Drag)drag		    			   			:NULL		拖拽的类
 	 *
 	 *  Example：

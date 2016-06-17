@@ -29,7 +29,7 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 	 * 			(Function)befor_fn		      				:NULL		resize之前
 	 * 			(Function)after_fn		      				:NULL		resize之后
 	 * 			(String)position		    			   	:NO NULL
-	 * 			(Layout)parent		    			   		:NULL		关联的父包裹层
+	 * 			(Layout)pDom		    			   		:NULL		关联的父包裹层
 	 * 			(Drag)drag		    			   			:NULL		拖拽的类
 	 *
 	 *  Example：
