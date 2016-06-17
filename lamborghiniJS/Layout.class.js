@@ -79,8 +79,6 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		this.vcount = System.isNumber(this.vcount) ? this.vcount < 1 ? 1 : this.vcount : 1;
 
 
-		this.margin = this.margin*(this.vcount-1);
-
 	}
 	Layout.prototype = {
 		'constructor':Layout,

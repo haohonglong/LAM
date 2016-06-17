@@ -120,8 +120,6 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 
 		//check
 		this.moveNumber = System.isNumber(this.moveNumber) ? this.moveNumber < 1 ? 1 : this.moveNumber : 1;
-		this.vcount = this.vcount > this.count ? this.count : this.vcount;
-
 
 	}
 	Slider.prototype = {
