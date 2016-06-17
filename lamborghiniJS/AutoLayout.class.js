@@ -163,17 +163,15 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 				this.befor_fn.apply(this,[]);
 			}
 			switch(this.position){
+				case 'all':
+					this.setViewHeight().setAllLiHeight((this.getViewHeight() - this.margin) /this.vcount).setUlHeight();
 				case 'left':
 					this.setViewWidth().setAllLiWidth( (this.getViewWidth()  - this.margin) /this.vcount).setUlWidth();
 					break;
 				case 'top':
 					this.setViewHeight().setAllLiHeight((this.getViewHeight() - this.margin) /this.vcount).setUlHeight();
 					break;
-				case 'all':
-					this.setViewWidth().setViewHeight();
-					this.setAllLiWidth( (this.getViewWidth()  - this.margin) /this.vcount).setUlWidth();
-					this.setAllLiHeight((this.getViewHeight() - this.margin) /this.vcount).setUlHeight();
-					break;
+
 				default:
 					throw new Error("参数不合法");
 					return this;
