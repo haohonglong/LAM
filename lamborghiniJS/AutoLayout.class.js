@@ -70,6 +70,8 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		this.changeValueWidth;
 		this.changeValueHeight;
 
+		this.parent = System.isObject(init.parent) ? init.parent : null;
+
 
 		//check
 
@@ -92,13 +94,19 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 * Example：
 		 */
 		'setViewWidth':function(width){
-			width = width || $(window).width();
-			this.changeValueWidth = width - this.width;
-			this.temps_w = this.temps_w + this.changeValueWidth;
-			if(this.temps_w > this.minWidth) {
-				this.$view.width(this.temps_w);
+			//如果有parent
+			if(this.parent && this.parent instanceof AutoLayout){
+
+			}else{
+				width = width || $(window).width();
+				this.changeValueWidth = width - this.width;
+				this.temps_w = this.temps_w + this.changeValueWidth;
+				if(this.temps_w > this.minWidth) {
+					this.$view.width(this.temps_w);
+				}
+				this.width  = width;
 			}
-			this.width  = width;
+
 
 			return this;
 
@@ -118,13 +126,19 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 * Example：
 		 */
 		'setViewHeight':function(height){
-			height = height || $(window).height();
-			this.changeValueHeight = height - this.height;
-			this.temps_h = this.temps_h + this.changeValueHeight;
-			if(this.temps_h > this.minHeight) {
-				this.$view.height(this.temps_h);
+			if(this.parent && this.parent instanceof AutoLayout){
+
+			}else{
+				height = height || $(window).height();
+				this.changeValueHeight = height - this.height;
+				this.temps_h = this.temps_h + this.changeValueHeight;
+				if(this.temps_h > this.minHeight) {
+					this.$view.height(this.temps_h);
+				}
+				this.height = height;
 			}
-			this.height = height;
+
+
 			return this;
 
 		},

@@ -74,6 +74,7 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		//需要拖拽的
 		this.Drag;
 
+		this.parent = null;
 
 		//check
 		this.vcount = System.isNumber(this.vcount) ? this.vcount < 1 ? 1 : this.vcount : 1;
