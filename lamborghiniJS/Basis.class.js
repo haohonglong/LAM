@@ -947,6 +947,7 @@ if(!GRN_LHH){
 		'Validation':{},
 		'Html': {},
 		'Browser': {},
+		'Widget': {},
 		'Template': {},
 		'Event': {},
 		'Dom': {},
@@ -968,7 +969,6 @@ if(!GRN_LHH){
 		'Tools': {},//(single)
 		'Css': {},
 		'FindParentObject': {},
-		'Widget': {},
 		'Tree': {},
 		'Sort': {},
 		'EditTables': {},

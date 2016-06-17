@@ -224,7 +224,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * 修改日期：2015-8-26
 		 * 名称： attr
 		 * 功能：节点元素属性的获取或设置操作
-		 * 说明：3: 添加 2:获取
+		 * 说明：3: 添加 2:获取 1:同3一样 不同的是参数只有一个Object
 		 * 注意：
 		 * @return (String | void)
 		 * Example：
