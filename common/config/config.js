@@ -142,6 +142,7 @@ if(!registerContainerConfiguration){
     var len;
     var data = scriptAttribute;
     var classPath=Config.getClassPath();
+    var ROOT=Config.Public.ROOT;
 
     //加载基础类
     var srcs =[
