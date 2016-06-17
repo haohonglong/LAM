@@ -11,8 +11,8 @@
         var __this__=null;
         System.is(System,'Controller','IndexController');
 
-        function IndexController(){
-            System.Basis.extends.call(this,System.Controller);
+        function IndexController(init){
+            System.Basis.extends.call(this,System.Controller,2,[init || {}]);
             __this__=this;
 
         }
