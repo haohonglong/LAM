@@ -73,9 +73,6 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 
 		//check
 
-		this.margin = this.margin*(this.vcount-1);
-
-
 	}
 	AutoLayout.prototype = {
 		'constructor':AutoLayout,
