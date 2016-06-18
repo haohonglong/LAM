@@ -64,13 +64,14 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 
 		this.maxWidth  			= init.maxWidth;
 		this.maxHeight  		= init.maxHeight;
-		this.minWidth  			= init.minWidth;
-		this.minHeight  		= init.minHeight;
+		this.minWidth  			= init.minWidth  || 0;
+		this.minHeight  		= init.minHeight || 0;
 		//屏幕改变前后的差值
 		this.changeValueWidth;
 		this.changeValueHeight;
 
 		this.parent = System.isObject(init.parent) ? init.parent : null;
+		this.margin = this.margin*(this.vcount-1);
 
 
 		//check
@@ -84,7 +85,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 * @author lhh
 		 * 产品介绍：
 		 * 创建日期：2015-10-22
-		 * 修改日期：2015-10-22
+		 * 修改日期：2016-6-19
 		 * 名称：setViewWidth
 		 * 功能：范围的宽度
 		 * 说明：
@@ -96,18 +97,21 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		'setViewWidth':function(width){
 			//如果有parent
 			if(this.parent && this.parent instanceof AutoLayout){
-
+				if(this.$li){
+					this.temps_w = this.width = this.parent.getLiWidth();
+				}else{
+					this.temps_w = this.width = this.parent.getViewWidth();
+				}
 			}else{
 				width = width || $(window).width();
 				this.changeValueWidth = width - this.width;
 				this.temps_w = this.temps_w + this.changeValueWidth;
-				if(this.temps_w > this.minWidth) {
-					this.$view.width(this.temps_w);
-				}
 				this.width  = width;
 			}
 
-
+			if(this.temps_w > this.minWidth) {
+				this.$view.width(this.temps_w);
+			}
 			return this;
 
 		},
@@ -116,7 +120,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 * @author lhh
 		 * 产品介绍：
 		 * 创建日期：2015-10-22
-		 * 修改日期：2015-10-22
+		 * 修改日期：2016-6-19
 		 * 名称：setViewHeight
 		 * 功能：范围的高度
 		 * 说明：
@@ -127,18 +131,21 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 */
 		'setViewHeight':function(height){
 			if(this.parent && this.parent instanceof AutoLayout){
-
+				if(this.$li){
+					this.temps_h = this.height = this.parent.getLiHeight();
+				}else{
+					this.temps_h = this.height = this.parent.getViewHeight();
+				}
 			}else{
 				height = height || $(window).height();
 				this.changeValueHeight = height - this.height;
 				this.temps_h = this.temps_h + this.changeValueHeight;
-				if(this.temps_h > this.minHeight) {
-					this.$view.height(this.temps_h);
-				}
 				this.height = height;
 			}
 
-
+			if(this.temps_h > this.minHeight) {
+				this.$view.height(this.temps_h);
+			}
 			return this;
 
 		},
@@ -159,6 +166,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 * Example：
 		 */
 		'resize':function(){
+
 			if(this.befor_fn && System.isFunction(this.befor_fn)){
 				this.befor_fn.apply(this,[]);
 			}

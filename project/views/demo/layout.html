@@ -11,9 +11,9 @@
         .sidbar{width:200px;position: absolute;top:0;left:0;background:red;}
         .sidbar2{width:200px;left:auto; right:0;background:blue;}
         .content{width:100%; margin-left:210px;background:green;margin:0 auto;overflow: hidden;}
-        #content1{margin:0;width:100%;background:#333;}
+        #content1{margin:0;width:100%;}
         .ul{width:100%;padding:0;}
-        .ul li{background:#ccc;height:150px;margin-right:10px;}
+        .ul li{background:#ccc;height:150px;margin-right:10px;overflow: hidden;}
         #ul2 li{background:#f60;}
 
     </style>
@@ -26,13 +26,13 @@
     <div class="sidbar"><include file="{{ROOT}}/project/controllers/include/test.html" dataType="html"></include></div>
 
     <div class="content" id="content">
-        <ul id="ul1" class="ul sectionFloat clearfix">
+        <ul id="ul1" class="ul sectionFloat clearfix" style="background: blue;">
             <li>
 
                 <div class="content" id="content1">
                     <ul id="ul2" class="ul sectionFloat clearfix">
-                        <li>{{D.title}}</li>
-                        <li>{{D.content}}</li>
+                        <li style="background: yellow">{{D.title}}</li>
+                        <li style="background:red;">{{D.content}}</li>
                     </ul>
 
                 </div>
@@ -56,25 +56,29 @@
 
 <script type="text/javascript">
     LAMJS.main(function(){
+        'use strict';
         var System=this;
-        var content,content1,ul1,ul2;
+
+        var content,content1,ul1,ul2,content2,ul3;
         function layout(){
             $('#content').width($(window).width()-($('.sidbar').width()+$('.sidbar2').width()+30));
 
 
             content=new System.AutoLayout({'$view':$('#content'),'minWidth':0,'position':'left'}).run();
 
+
+
             ul1=new System.AutoLayout({'$ul':$('#ul1'),'$view':$('#ul1'),'minWidth':0,'$li':$('#ul1 > li'),'vcount':$('#ul1 > li').length,'margin':10,'position':'left'}).run();
 
-            content1=new System.AutoLayout({'$view':$('#content1'),'minWidth':0,'position':'left'}).run();
+            content1=new System.AutoLayout({'$view':$('#content1'),'minWidth':0,'position':'left','parent':ul1}).run();
+            ul2=new System.AutoLayout({'parent':ul1,'$ul':$('#ul2'),'$view':$('#ul2'),'minWidth':0,'$li':$('#ul2 > li'),'vcount':$('#ul2 > li').length,'margin':10, 'position':'left'}).run();
 
-            ul2=new System.AutoLayout({'$ul':$('#ul2'),'$view':$('#ul2'),'minWidth':0,'$li':$('#ul2 li'),'vcount':$('#ul2 li').length,'margin':10,
-                'after_fn':function(){
-//                        console.log('ul1.temps_w : '+ul1.changeValueWidth)
-//                        this.setAllLiWidth(ul1.changeValueWidth/this.vcount);
-                },
-                'position':'left'
-            }).run();
+//            content2=new System.AutoLayout({'$view':$('#content2'),'minWidth':0,'position':'left','parent':ul2}).run();
+//            ul3=new System.AutoLayout({'parent':ul2,'$ul':$('#ul3'),'$view':$('#ul3'),'minWidth':0,'$li':$('#ul3 li'),'vcount':$('#ul3 li').length,'margin':10, 'position':'left'}).run();
+
+
+
+
         }
         $(function(){
 
@@ -88,9 +92,12 @@
 
         $(window).resize(function(){
             content.resize();
-            content1.resize();
             ul1.resize();
+            content1.resize();
             ul2.resize();
+//            content2.resize();
+//            ul3.resize();
+
 
         });
 

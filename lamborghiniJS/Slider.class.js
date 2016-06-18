@@ -119,6 +119,7 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 
 
 		//check
+		this.margin = this.margin*(this.vcount-1);
 		this.moveNumber = System.isNumber(this.moveNumber) ? this.moveNumber < 1 ? 1 : this.moveNumber : 1;
 
 	}

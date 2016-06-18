@@ -54,11 +54,14 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		};
 
 		var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
+		this.margin = this.margin*(this.vcount-1);
 
 		this.init = init;
 		this.$view  			= init.$view;
 		this.$ul  				= init.$ul;
 		this.$li  				= init.$li;
+		this.$liw  				= 0;
+		this.$lih  				= 0;
 		this.unit  				= init.unit;
 		this.margin  			= init.margin;
 		this.number  			= init.number;
@@ -189,11 +192,13 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 
 
 		'setAllLiWidth':function(width){
-			this.$li.css({width: Math.ceil(width) + this.unit});
+			this.$liw =  Math.ceil(width);
+			this.$li.css({width: this.$liw + this.unit});
 			return this;
 		},
 		'setAllLiHeight':function(height){
-			this.$li.css({height: Math.ceil(height) + this.unit});
+			this.$lih = Math.ceil(height);
+			this.$li.css({height: this.$lih + this.unit});
 			return this;
 		},
 		/**
