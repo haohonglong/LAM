@@ -54,7 +54,7 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		};
 
 		var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
-		this.margin = this.margin*(this.vcount-1);
+
 
 		this.init = init;
 		this.$view  			= init.$view;
@@ -63,7 +63,7 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		this.$liw  				= 0;
 		this.$lih  				= 0;
 		this.unit  				= init.unit;
-		this.margin  			= init.margin;
+		this.margin  			= init.margin || 0;
 		this.number  			= init.number;
 		this.vcount  			= init.vcount;
 		this.count  			= this.vcount;
@@ -81,6 +81,7 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 
 		//check
 		this.vcount = System.isNumber(this.vcount) ? this.vcount < 1 ? 1 : this.vcount : 1;
+		this.margin = this.margin*(this.vcount-1);
 
 
 	}

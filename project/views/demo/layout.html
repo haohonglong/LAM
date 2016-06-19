@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>{{title}}</title>
     <link rel="stylesheet" type="text/css" href="{{ROOT}}/project/public/common/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="{{ROOT}}/lib/css/global.css"/>
@@ -13,7 +14,7 @@
         .content{width:100%; margin-left:210px;background:green;margin:0 auto;overflow: hidden;}
         #content1{margin:0;width:100%;}
         .ul{width:100%;padding:0;}
-        .ul li{background:#ccc;height:150px;margin-right:10px;overflow: hidden;}
+        .ul li{background:#ccc;min-height:250px;overflow: hidden;}
         #ul2 li{background:#f60;}
 
     </style>
@@ -21,24 +22,44 @@
 </head>
 
 <body>
-
+<!--嵌套三层 每一层是一个对象-->
 <div id="container" class="">
     <div class="sidbar"><include file="{{ROOT}}/project/controllers/include/test.html" dataType="html"></include></div>
 
     <div class="content" id="content">
-        <ul id="ul1" class="ul sectionFloat clearfix" style="background: blue;">
-            <li>
+        <div class="P10">
+            <ul id="ul1" class="ul sectionFloat clearfix">
+                <li>
 
-                <div class="content" id="content1">
-                    <ul id="ul2" class="ul sectionFloat clearfix">
-                        <li style="background: yellow">{{D.title}}</li>
-                        <li style="background:red;">{{D.content}}</li>
-                    </ul>
+                    <div class="content" style="border:4px solid #f60;">
+                        <ul id="ul2" class="ul sectionFloat clearfix">
+                            <li style="background: yellow">
+                                <div class="content" style="border:4px solid #000;">
+                                    <ul id="ul3" class="ul sectionFloat clearfix">
+                                        <li style="background: yellow">
+                                            <div class="P10"> {{D.title}}</div>
+                                        </li>
+                                        <li style="background:deeppink;">
+                                            <div class="P10">{{D.content}}</div>
 
-                </div>
-            </li>
-            <li></li>
-        </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li style="background:lightseagreen;">
+                                <div class="P10">{{D.content}}</div>
+
+                            </li>
+                        </ul>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="H100 M20" style="background: #fff;">{{D.content}}</div>
+                </li>
+            </ul>
+        </div>
+
 
     </div>
     <div class="sidbar sidbar2">
@@ -62,19 +83,11 @@
         var content,content1,ul1,ul2,content2,ul3;
         function layout(){
             $('#content').width($(window).width()-($('.sidbar').width()+$('.sidbar2').width()+30));
-
-
             content=new System.AutoLayout({'$view':$('#content'),'minWidth':0,'position':'left'}).run();
 
-
-
-            ul1=new System.AutoLayout({'$ul':$('#ul1'),'$view':$('#ul1'),'minWidth':0,'$li':$('#ul1 > li'),'vcount':$('#ul1 > li').length,'margin':10,'position':'left'}).run();
-
-            content1=new System.AutoLayout({'$view':$('#content1'),'minWidth':0,'position':'left','parent':ul1}).run();
-            ul2=new System.AutoLayout({'parent':ul1,'$ul':$('#ul2'),'$view':$('#ul2'),'minWidth':0,'$li':$('#ul2 > li'),'vcount':$('#ul2 > li').length,'margin':10, 'position':'left'}).run();
-
-//            content2=new System.AutoLayout({'$view':$('#content2'),'minWidth':0,'position':'left','parent':ul2}).run();
-//            ul3=new System.AutoLayout({'parent':ul2,'$ul':$('#ul3'),'$view':$('#ul3'),'minWidth':0,'$li':$('#ul3 li'),'vcount':$('#ul3 li').length,'margin':10, 'position':'left'}).run();
+            ul1=new System.AutoLayout({'$ul':$('#ul1'),'$view':$('#ul1'),'minWidth':0,'$li':$('#ul1 > li'),'vcount':$('#ul1 > li').length,'position':'left'}).run();
+            ul2=new System.AutoLayout({'parent':ul1,'$ul':$('#ul2'),'$view':$('#ul2'),'minWidth':0,'$li':$('#ul2 > li'),'vcount':$('#ul2 > li').length, 'position':'left'}).run();
+            ul3=new System.AutoLayout({'parent':ul2,'$ul':$('#ul3'),'$view':$('#ul3'),'minWidth':0,'$li':$('#ul3 > li'),'vcount':$('#ul3 > li').length, 'position':'left'}).run();
 
 
 
@@ -93,10 +106,8 @@
         $(window).resize(function(){
             content.resize();
             ul1.resize();
-            content1.resize();
             ul2.resize();
-//            content2.resize();
-//            ul3.resize();
+            ul3.resize();
 
 
         });
