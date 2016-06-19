@@ -3,8 +3,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>{{title}}</title>
-	<link rel="stylesheet" type="text/css" href="{{ROOT}}/project/css/lib.css"/>
-	<link rel="stylesheet" type="text/css" href="{{ROOT}}/project/css/chess.css"/>
+	<link rel="stylesheet" type="text/css" href="{{ROOT}}/project/public/css/lib.css"/>
+	<link rel="stylesheet" type="text/css" href="{{ROOT}}/project/public/css/chess.css"/>
 	<style type="text/css">
 
 	</style>
@@ -17,7 +17,7 @@
 </html>
 <script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Canvas.class.js"></script>
 <script type="text/javascript" src="{{ROOT}}/lamborghiniJS/CanvasForm.class.js"></script>
-<script type="text/javascript" src="{{ROOT}}/project/js/Chess.class.js"></script>
+<script type="text/javascript" src="{{ROOT}}/project/public/js/Chess.class.js"></script>
 
 
 <script type="text/javascript">
@@ -29,14 +29,14 @@
 		var chess;
 
 		$(function(){
-			chess=new System.Html5.Chess($('#chess')[0],15).create();
-//			chess.add_watermark(ROOT+'/project/images/11.jpg',function(){
-//
-//			});
-
+			chess=new System.Html5.Chess($('#chess')[0],19);
 			chess
-					.draw()
-					.click();
+					.add_watermark(ROOT+'/project/images/11.jpg',function(){
+						chess
+								.draw()
+								.click();
+					});
+
 
 
 
