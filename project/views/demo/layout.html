@@ -26,7 +26,7 @@
 <div id="container" class="">
     <div class="sidbar"><include file="{{ROOT}}/project/controllers/include/test.html" dataType="html"></include></div>
 
-    <div class="content" id="content">
+    <div class="content over-h" id="content">
         <div class="P10">
             <ul id="ul1" class="ul sectionFloat clearfix">
                 <li>
@@ -83,11 +83,11 @@
         var content,content1,ul1,ul2,content2,ul3;
         function layout(){
             $('#content').width($(window).width()-($('.sidbar').width()+$('.sidbar2').width()+30));
-            content=new System.AutoLayout({'$view':$('#content'),'minWidth':0,'position':'left'}).run();
+            content=new System.AutoLayout({'$view':$('#content'),'position':'left'}).run();
 
-            ul1=new System.AutoLayout({'$ul':$('#ul1'),'$view':$('#ul1'),'minWidth':0,'$li':$('#ul1 > li'),'vcount':$('#ul1 > li').length,'position':'left'}).run();
-            ul2=new System.AutoLayout({'parent':ul1,'$ul':$('#ul2'),'$view':$('#ul2'),'minWidth':0,'$li':$('#ul2 > li'),'vcount':$('#ul2 > li').length, 'position':'left'}).run();
-            ul3=new System.AutoLayout({'parent':ul2,'$ul':$('#ul3'),'$view':$('#ul3'),'minWidth':0,'$li':$('#ul3 > li'),'vcount':$('#ul3 > li').length, 'position':'left'}).run();
+            ul1=new System.AutoLayout({'$ul':$('#ul1'),'$view':$('#ul1'),'$li':$('#ul1 > li'),'vcount':$('#ul1 > li').length,'position':'left'}).run();
+            ul2=new System.AutoLayout({'parent':ul1,'$ul':$('#ul2'),'$view':$('#ul2'),'$li':$('#ul2 > li'),'vcount':$('#ul2 > li').length, 'position':'left'}).run();
+            ul3=new System.AutoLayout({'parent':ul2,'$ul':$('#ul3'),'$view':$('#ul3'),'$li':$('#ul3 > li'),'vcount':$('#ul3 > li').length, 'position':'left'}).run();
 
 
 
