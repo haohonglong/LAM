@@ -10,8 +10,9 @@
         html,body,#container,.sidbar,.content{height:100%;}
         #container{}
         .sidbar{width:200px;position: absolute;top:0;left:0;background:red;}
-        .sidbar2{width:200px;left:auto; right:0;background:blue;}
-        .content{width:100%; margin-left:210px;background:green;margin:0 auto;overflow: hidden;}
+        .sidbar2{width:300px;left:auto; right:0;background:blue;}
+        #content{margin-left:210px;background:green;}
+        .content{width:100%;overflow: hidden;}
         #content1{margin:0;width:100%;}
         .ul{width:100%;padding:0;}
         .ul li{background:#ccc;min-height:250px;overflow: hidden;}
@@ -82,10 +83,10 @@
 
         var content,content1,ul1,ul2,content2,ul3;
         function layout(){
-            $('#content').width($(window).width()-($('.sidbar').width()+$('.sidbar2').width()+30));
+            $('#content').width($(window).width()-($('.sidbar').width()+$('.sidbar2').width()+20));
             content=new System.AutoLayout({'$view':$('#content'),'position':'left'}).run();
 
-            ul1=new System.AutoLayout({'$ul':$('#ul1'),'$view':$('#ul1'),'$li':$('#ul1 > li'),'vcount':$('#ul1 > li').length,'position':'left'}).run();
+            ul1=new System.AutoLayout({'parent':content,'$ul':$('#ul1'),'$view':$('#ul1'),'$li':$('#ul1 > li'),'vcount':$('#ul1 > li').length,'position':'left'}).run();
             ul2=new System.AutoLayout({'parent':ul1,'$ul':$('#ul2'),'$view':$('#ul2'),'$li':$('#ul2 > li'),'vcount':$('#ul2 > li').length, 'position':'left'}).run();
             ul3=new System.AutoLayout({'parent':ul2,'$ul':$('#ul3'),'$view':$('#ul3'),'$li':$('#ul3 > li'),'vcount':$('#ul3 > li').length, 'position':'left'}).run();
 

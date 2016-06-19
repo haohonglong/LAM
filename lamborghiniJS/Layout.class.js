@@ -1,11 +1,10 @@
 
-window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
+window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 	'use strict';
 	var System=this;
 
 	System.is(System,'Browser','Layout');
 	var __this__=null;
-	var $=jQuery;
 	/**
 	 * @author: lhh
 	 * 产品介绍：
@@ -41,8 +40,8 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		__this__ = this;
 		var defaults={
 			'$ul':null,
-			'$view':$('.Layout'),
-			'$li':$('.Layout'),
+			'$view':null,
+			'$li':null,
 			'count':1,
 			'vcount':1,
 			'position':'left',
@@ -137,6 +136,7 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		 * Example：
 		 */
 		'getLiWidth':function(){
+			if(!this.$li) return 0;
 			return this.$li.eq(0).outerWidth(true);
 		},
 
@@ -155,6 +155,7 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		 * Example：
 		 */
 		'getLiHeight':function(){
+			if(!this.$li) return 0;
 			return this.$li.eq(0).outerHeight(true);
 		},
 
@@ -172,6 +173,7 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		 * Example：
 		 */
 		'getAllLiWidth':function(){
+			if(!this.$li) return 0;
 			return this.getLiWidth()*this.count;
 		},
 		/**
@@ -188,16 +190,19 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		 * Example：
 		 */
 		'getAllLiHeight':function(){
+			if(!this.$li) return 0;
 			return this.getLiHeight()*this.count;
 		},
 
 
 		'setAllLiWidth':function(width){
+			if(!this.$li) return this;
 			this.$liw =  Math.ceil(width);
 			this.$li.css({width: this.$liw + this.unit});
 			return this;
 		},
 		'setAllLiHeight':function(height){
+			if(!this.$li) return this;
 			this.$lih = Math.ceil(height);
 			this.$li.css({height: this.$lih + this.unit});
 			return this;
@@ -216,9 +221,8 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		 * Example：
 		 */
 		'getUlWidth':function(){
-			if(this.$ul) {
-				return this.$ul.outerWidth();
-			}
+			if(!this.$ul) return this;
+			return this.$ul.outerWidth();
 			return this;
 		},
 		/**
@@ -235,9 +239,8 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		 * Example：
 		 */
 		'getUlHeight':function(){
-			if(this.$ul) {
-				return this.$ul.outerHeight();
-			}
+			if(!this.$ul) return this;
+			return this.$ul.outerHeight();
 			return this;
 		},
 
@@ -255,9 +258,8 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		 * Example：
 		 */
 		'setUlWidth':function(){
-			if(this.$ul) {
-				this.$ul.css({width: this.getAllLiWidth() + this.unit});
-			}
+			if(!this.$ul || !this.$li) return this;
+			this.$ul.css({width: this.getAllLiWidth() + this.unit});
 			return this;
 		},
 		/**
@@ -274,9 +276,8 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		 * Example：
 		 */
 		'setUlHeight':function(){
-			if(this.$ul) {
-				this.$ul.css({height: this.getAllLiHeight() + this.unit});
-			}
+			if(!this.$ul || !this.$li) return this;
+			this.$ul.css({height: this.getAllLiHeight() + this.unit});
 			return this;
 		},
 		

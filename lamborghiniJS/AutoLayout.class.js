@@ -44,8 +44,8 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		__this__ = this;
 		var defaults={
 			'$ul':null,
-			'$view':$('.AutoLayout'),
-			'$li':$('.AutoLayout'),
+			'$view':null,
+			'$li':null,
 			'count':1,
 			'vcount':1,
 			'maxWidth':null,
@@ -97,7 +97,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		'setViewWidth':function(width){
 			//如果有parent
 			if(this.parent && this.parent instanceof AutoLayout){
-				if(this.$li){
+				if(this.parent.$li){
 					this.temps_w = this.width = this.parent.getLiWidth();
 				}else{
 					this.temps_w = this.width = this.parent.getViewWidth();
@@ -131,7 +131,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 */
 		'setViewHeight':function(height){
 			if(this.parent && this.parent instanceof AutoLayout){
-				if(this.$li){
+				if(this.parent.$li){
 					this.temps_h = this.height = this.parent.getLiHeight();
 				}else{
 					this.temps_h = this.height = this.parent.getViewHeight();

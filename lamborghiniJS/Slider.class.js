@@ -1,11 +1,10 @@
 
-window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
+window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 	'use strict';
 	var System=this;
 
 	System.is(System,'Layout','Slider');
 	var __this__=null;
-	var $=jQuery;
 	/**
 	 * @author: lhh
 	 * 产品介绍：
