@@ -104,6 +104,8 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 		this.$autoHandler  		= init.$autoHandler;
 		this.$next 				= init.$next;
 		this.$pre  				= init.$pre;
+		this.vcount  			= init.vcount;
+		this.margin  			= init.margin;
 		this.moveNumber  		= init.moveNumber;
 		this.count  			= init.count;
 		this.current  			= init.current;
@@ -119,8 +121,8 @@ window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
 
 
 		//check
-		this.margin = this.margin*(this.vcount-1);
 		this.moveNumber = System.isNumber(this.moveNumber) ? this.moveNumber < 1 ? 1 : this.moveNumber : 1;
+		this.margin = this.margin*(this.vcount-1);
 
 	}
 	Slider.prototype = {

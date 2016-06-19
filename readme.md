@@ -1,5 +1,5 @@
 	name    ：LamborghiniJS(OOPJS)
-	version ：1.1.0
+	version ：1.1.1
 	author  ：lhh
 	创建日期 ：2015-8-19
 	修改日期 ：2016-5-10
