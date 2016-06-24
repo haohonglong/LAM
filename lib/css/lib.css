@@ -30,11 +30,29 @@ a{
     -o-transition:all 0.5s linear
 }
 
-/*点击切换移动动画*/
-.transition__toggle-click{
+/*移动动画*/
+.transition__move{
     -webkit-transition: all .2s ease;
     transition: all .2s ease;
 }
+
+/*移动动画-缓慢*/
+.transition__move--slow{
+    transition: left 0.5s,top 0.5s;
+    -moz-transition: left 0.5s,top 0.5s;
+    -webkit-transition: left 0.5s,top 0.5s;
+}
+
+
+
+/*X符号 旋转动画－旋转180度*/
+.transition__rotate{
+    transition: all 1s;
+    -moz-transition: all 1s;
+    -webkit-transition: all 1s;
+}
+
+
 
 
 
