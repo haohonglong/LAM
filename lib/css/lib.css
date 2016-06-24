@@ -36,12 +36,21 @@ a{
     transition: all .2s ease;
 }
 
-/*移动动画-缓慢*/
+/*移动动画-鼠标移入移除隐藏的信息切换时之间的效果-缓慢*/
 .transition__move--slow{
     transition: left 0.5s,top 0.5s;
     -moz-transition: left 0.5s,top 0.5s;
     -webkit-transition: left 0.5s,top 0.5s;
 }
+
+/*移动动画-底部遮罩层文字渐入渐出-缓慢*/
+.transition__move2--slow{
+    transition: bottom 0.8s;
+    -moz-transition: bottom 0.8s;
+    -webkit-transition: bottom 0.8s;
+    -o-transition: bottom 0.8s;
+}
+
 
 
 
