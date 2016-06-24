@@ -23,10 +23,15 @@ body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53;}
 ::selection {}
 
 /*文字有鼠标移入移除渐隐渐变的效果*/
-a{-webkit-transition:all 0.5s linear;-moz-transition:all 0.5s linear;-ms-transition:all 0.5s linear;-o-transition:all 0.5s linear}
+a{
+    -webkit-transition:all 0.5s linear;
+    -moz-transition:all 0.5s linear;
+    -ms-transition:all 0.5s linear;
+    -o-transition:all 0.5s linear
+}
 
 /*点击切换移动动画*/
-.toggle-click{
+.transition__toggle-click{
     -webkit-transition: all .2s ease;
     transition: all .2s ease;
 }
