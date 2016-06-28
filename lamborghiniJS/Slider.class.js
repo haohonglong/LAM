@@ -45,7 +45,6 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 
 	 */
 	function Slider(D){
-		System.Basis.extends.call(this,System.Layout,2,[D]);
 		__this__ = this;
 		var defaults={
 			'$view':$('.slider'),
@@ -98,6 +97,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		};
 
 		var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
+		System.Basis.extends.call(this,System.Layout,2,[init]);
 
 		this.timer  			= null;
 		this.$autoHandler  		= init.$autoHandler;

@@ -40,7 +40,6 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 
 	 */
 	function AutoLayout(D){
-		System.Basis.extends.call(this,System.Layout,2,[D]);
 		__this__ = this;
 		var defaults={
 			'$ul':null,
@@ -61,6 +60,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		};
 
 		var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
+		System.Basis.extends.call(this,System.Layout,2,[init]);
 
 		this.maxWidth  			= init.maxWidth;
 		this.maxHeight  		= init.maxHeight;

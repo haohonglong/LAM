@@ -38,7 +38,6 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 
 	 */
 	function Thumbnail(D){
-		System.Basis.extends.call(this,System.AutoLayout,2,[D]);
 		__this__ = this;
 		var defaults={
 			'$ul':null,
@@ -57,6 +56,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		};
 
 		var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
+		System.Basis.extends.call(this,System.AutoLayout,2,[init]);
 
 		this.baseWidth  		= init.baseWidth;
 		this.baseHeight  		= init.baseHeight;
