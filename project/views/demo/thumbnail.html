@@ -30,18 +30,23 @@
     <div class="content over-h" id="content">
         <div class="P10">
             <ul id="ul1" class="ul sectionFloat clearfix">
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
-                <li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>
+                <script type="text/javascript">
+                    LAMJS.main(function() {
+                        'use strict';
+                        var System = this;
+                        var tag=System.Html.tag;
+                        var li,arr=[];
+                        li=tag('li',{},
+                            tag('div',{'class':'H100 M10 P10','style':'background: #fff;'},'{{D.content}}')
+                        );
+                        for(var i=0;i<10;i++){
+                            arr.push(li);
+                        }
+                        System.print(arr.join(''));
+
+                    });
+                </script>
+                <!--<li><div class="H100 M10 P10" style="background: #fff;">{{D.content}}</div></li>-->
 
             </ul>
         </div>
