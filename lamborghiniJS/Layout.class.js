@@ -197,13 +197,13 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 
 		'setAllLiWidth':function(width){
 			if(!this.$li) return this;
-			this.$liw =  Math.ceil(width);
+			this.$liw =  width;
 			this.$li.css({width: this.$liw + this.unit});
 			return this;
 		},
 		'setAllLiHeight':function(height){
 			if(!this.$li) return this;
-			this.$lih = Math.ceil(height);
+			this.$lih = height;
 			this.$li.css({height: this.$lih + this.unit});
 			return this;
 		},
