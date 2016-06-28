@@ -16,12 +16,11 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 	 * 注意：
 	 * @params   (Object)init 			NO NULL :初始化参数
 	 *
-	 * 			(jQuery)$ul   								:NO NULL	缩略图外的包裹层
-	 * 			(jQuery)$li									:NO NULL	缩略图
-	 * 			(String)unit :'px | % | em [|...]',	  		:NO NULL	单位
 	 * 			(jQuery)$view		      				   	:NO NULL	缩略图外的包裹层
+	 * 			(jQuery)$li									:NO NULL	缩略图
 	 * 			(Number)baseWidth		      				:NO NULL	设定的宽度
 	 * 			(Number)baseHeight		      				:NO NULL	设定的高度
+	 * 			(String)unit :'px | % | em [|...]',	  		   :NULL	单位
 	 *
 	 *  Example：
 
@@ -30,12 +29,10 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 	function Thumbnail(D){
 		__this__ = this;
 		var defaults={
-			'$ul':null,
 			'$view':null,
 			'$li':null,
 			'baseWidth':200,
 			'baseHeight':150,
-			'position':'left',
 			'unit':'px'
 		};
 
@@ -45,9 +42,6 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		this.baseWidth  		= init.baseWidth;
 		this.baseHeight  		= init.baseHeight;
 
-
-
-		//check
 
 	}
 	Thumbnail.prototype = {
@@ -68,7 +62,6 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 * Example：
 		 */
 		'resize':function(){
-
 			var baseWidth  = this.baseWidth;
 			var baseHeight = this.baseHeight;
 

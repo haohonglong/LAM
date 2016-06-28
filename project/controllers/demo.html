@@ -38,6 +38,26 @@
                     }
                 });
             },
+            'thumbnailAction':function(){
+                new System.Template().render(views+'/thumbnail.html',{
+                    'ROOT':ROOT,
+                    'title':'布局demo',
+                    'D':{
+                        'title':'你好，世界！',
+                        'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
+                    }
+
+                },function(content){
+                    System.print(content);
+                    System.Html.include($('include'));
+
+                },{
+                    beforeSend:function(a,b){
+                        this.async=true;
+                    }
+                });
+            },
+
             'popLayerAction':function(){
                 new System.Template().render(views+'/popLayer.html',{
                     'ROOT':ROOT,

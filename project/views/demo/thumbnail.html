@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{{ROOT}}/project/public/common/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ROOT}}/lib/css/global.css"/>
+    <style type="text/css">
+        .w-page{}
+        html,body,#container,.sidbar,.content{height:100%;}
+        #container{}
+        .sidbar{width:200px;position: absolute;top:0;left:0;background:red;}
+        .sidbar2{width:300px;left:auto; right:0;background:blue;}
+        #content{margin-left:210px;background:green;}
+        .content{width:100%;overflow: hidden;}
+        #content1{margin:0;width:100%;}
+        .ul{width:100%;padding:0;}
+        .ul li{background:#ccc;min-height:250px;overflow: hidden;}
+        #ul2 li{background:#f60;}
+
+    </style>
+
+</head>
+
+<body>
+<!--嵌套三层 每一层是一个对象-->
+<div id="container" class="">
+    <div class="sidbar"><include file="{{ROOT}}/project/controllers/include/test.html" dataType="html"></include></div>
+
+    <div class="content over-h" id="content">
+        <div class="P10">
+            <ul id="ul1" class="ul sectionFloat clearfix">
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+                <li><div class="H100 M20 P10" style="background: #fff;">{{D.content}}</div></li>
+
+            </ul>
+        </div>
+
+
+    </div>
+    <div class="sidbar sidbar2">
+
+    </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Sport.class.js"></script>
+<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Layout.class.js"></script>
+<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/AutoLayout.class.js"></script>
+<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Thumbnail.class.js"></script>
+
+
+
+<script type="text/javascript">
+    LAMJS.main(function(){
+        'use strict';
+        var System=this;
+
+        var content,ul1;
+        function layout(){
+            $('#content').width($(window).width()-($('.sidbar').width()+$('.sidbar2').width()+20));
+
+            content=new System.AutoLayout({'$view':$('#content'),'position':'left'}).run();
+            ul1=new System.Thumbnail({'$view':$('#ul1'),'baseWidth':200,'baseHeight':150,'$li':$('#ul1 > li')}).run();
+
+
+
+
+
+        }
+        $(function(){
+
+            layout();
+
+        });
+
+
+
+
+
+        $(window).resize(function(){
+            content.resize();
+            ul1.resize();
+
+
+        });
+
+
+
+    });
+
+
+</script>
