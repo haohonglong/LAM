@@ -2161,13 +2161,15 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 			throw new Error('Warning 缺少标签名称');
 			return false;
 		}
-		single = single || false;
-		D = D || {};
+
 		if(System.isObject(arguments[1])){
 			content = arguments[2];
 			D = arguments[1];
 			single = false;
 		}
+
+		single = single || false;
+		D = D || {};
 
 		var attrs=[],key,tag,i= 0,len = System.length(D);
 		for(key in D){
