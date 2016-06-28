@@ -7,7 +7,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 	var __this__=null;
 	/**
 	 * @author: lhh
-	 * 产品介绍：
+	 * 产品介绍：缩略图 适应不同的分辨率显示
 	 * 创建日期：2015-10-25
 	 * 修改日期：2015-10-26
 	 * 名称：
