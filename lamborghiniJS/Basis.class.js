@@ -2142,7 +2142,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2015-8-25
-	 * 修改日期：2016-5-23
+	 * 修改日期：2016-6-28
 	 * 名称： printTag
 	 * 功能：动态返回指定的标签
 	 * 说明：
