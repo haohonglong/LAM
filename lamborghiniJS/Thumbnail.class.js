@@ -20,18 +20,8 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 	 * 			(jQuery)$li									:NO NULL	li
 	 * 			(String)unit :'px | % | em [|...]',	  		:NO NULL	单位
 	 * 			(jQuery)$view		      				   	:NO NULL	视图区显示的范围层
-	 * 			(Number)baseWidth		      				:NO NULL	最大的宽度
-	 * 			(Number)baseHeight		      				:NO NULL	最大的高度
-	 * 			(Number)vcount		      				   	:NO NULL	视图区限制显示多少张图片
-	 * 			(Number)count		      				   	:NO NULL	总共多少张图片
-	 * 			(Number)number		      				   	:NULL		$view／vcount－number
-	 * 			(Number)margin		      				   	:NULL		每个图片的额外加入的间距
-	 * 			(Number)current		      					:NULL		默认或当前图片的在第几张
-	 * 			(Function)befor_fn		      				:NULL		resize之前
-	 * 			(Function)after_fn		      				:NULL		resize之后
-	 * 			(String)position		    			   	:NO NULL
-	 * 			(Thumbnail)parent		    			   	:NULL		关联的父包裹层
-	 * 			(Drag)drag		    			   			:NULL		拖拽的类
+	 * 			(Number)baseWidth		      				:NO NULL	设定的宽度
+	 * 			(Number)baseHeight		      				:NO NULL	设定的高度
 	 *
 	 *  Example：
 
@@ -43,16 +33,10 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 			'$ul':null,
 			'$view':null,
 			'$li':null,
-			'count':1,
-			'vcount':1,
 			'baseWidth':200,
 			'baseHeight':150,
 			'position':'left',
-			'unit':'px',
-			'margin':0,
-			'befor_fn':null,
-			'after_fn':null,
-			'number':0
+			'unit':'px'
 		};
 
 		var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
