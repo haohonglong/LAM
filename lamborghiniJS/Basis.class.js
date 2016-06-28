@@ -939,6 +939,7 @@ if(!GRN_LHH){
 	 */
 	Interface= {
 		'Basis': {},
+		'BiObject': {},
 		'Component': {},
 		'Helper': {},
 		'Controller': {},
@@ -951,7 +952,6 @@ if(!GRN_LHH){
 		'Template': {},
 		'Event': {},
 		'Dom': {},
-		'BiObject': {},
 		'Cookie': {},
 		'Drag': {},
 		'Drag_xy': {},
@@ -963,6 +963,7 @@ if(!GRN_LHH){
 		'Roll': {},
 		'Layout': {},
 		'AutoLayout': {},
+		'Thumbnail': {},
 		'Slider': {},
 		'Sport': {},
 		'Tab': {},
