@@ -7,19 +7,19 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 	var __this__=null;
 	/**
 	 * @author: lhh
-	 * 产品介绍：缩略图 适应不同的分辨率显示
+	 * 产品介绍：
 	 * 创建日期：2015-10-25
 	 * 修改日期：2015-10-26
 	 * 名称：
-	 * 功能：自适应布局
+	 * 功能：缩略图 适应不同的分辨率显示
 	 * 说明：
-	 * 注意：position 必须添 top 或 left ;
+	 * 注意：
 	 * @params   (Object)init 			NO NULL :初始化参数
 	 *
-	 * 			(jQuery)$ul   								:NO NULL	ul
-	 * 			(jQuery)$li									:NO NULL	li
+	 * 			(jQuery)$ul   								:NO NULL	缩略图外的包裹层
+	 * 			(jQuery)$li									:NO NULL	缩略图
 	 * 			(String)unit :'px | % | em [|...]',	  		:NO NULL	单位
-	 * 			(jQuery)$view		      				   	:NO NULL	视图区显示的范围层
+	 * 			(jQuery)$view		      				   	:NO NULL	缩略图外的包裹层
 	 * 			(Number)baseWidth		      				:NO NULL	设定的宽度
 	 * 			(Number)baseHeight		      				:NO NULL	设定的高度
 	 *
@@ -60,7 +60,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 * 创建日期：2015-10-13
 		 * 修改日期：2015-10-13
 		 * 名称：resize
-		 * 功能：重新计算各图片的尺寸并根据移动前与移动后的差值跳转移动的位置
+		 * 功能：
 		 * 说明：
 		 * 注意：
 		 * @param:
