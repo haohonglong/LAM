@@ -34,7 +34,7 @@ window[GRN_LHH].main([window],function(window,undefined){
 	 *
 	 */
 	Html.tag=function(tag,single,D,content){
-		return System.Basis.printTag(tag,single,D||{},content);
+		return System.Basis.printTag(tag,single,D,content);
 	};
 	/**
 	 *
