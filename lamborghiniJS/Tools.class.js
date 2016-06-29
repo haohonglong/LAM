@@ -1104,7 +1104,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 * 产品介绍：
 		 * 创建日期：2016-6-29
 		 * 修改日期：2016-6-29
-		 * 名称：(int) getScale
+		 * 名称：getTable_col_count
 		 * 功能：统计指定表格中的哪一列所有统计
 		 * 说明：
 		 *
