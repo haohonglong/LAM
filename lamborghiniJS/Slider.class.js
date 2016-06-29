@@ -245,10 +245,10 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 
 			switch(this.position){
 				case 'left':
-					this.setAllLiWidth( (this.$view.outerWidth()  - this.margin) /this.vcount).setUlWidth();
+					this.setAllLiWidth( (this.$view.width()  - this.margin) /this.vcount).setUlWidth();
 					break;
 				case 'top':
-					this.setAllLiHeight((this.$view.outerHeight() - this.margin) /this.vcount).setUlHeight();
+					this.setAllLiHeight((this.$view.height() - this.margin) /this.vcount).setUlHeight();
 					break;
 				default:
 					throw new Error("错误!只能传('left' | 'top' ) 其中之一");

@@ -101,7 +101,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 * Example：
 		 */
 		'getViewWidth':function(){
-			return this.$view.outerWidth();
+			return this.$view.width();
 
 		},
 
@@ -118,7 +118,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 * Example：
 		 */
 		'getViewHeight':function(){
-			return this.$view.outerHeight();
+			return this.$view.height();
 
 		},
 
@@ -137,7 +137,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 */
 		'getLiWidth':function(){
 			if(!this.$li) return 0;
-			return this.$li.eq(0).outerWidth(true);
+			return this.$li.eq(0).width();
 		},
 
 
@@ -156,7 +156,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 */
 		'getLiHeight':function(){
 			if(!this.$li) return 0;
-			return this.$li.eq(0).outerHeight(true);
+			return this.$li.eq(0).height();
 		},
 
 		/**
@@ -222,7 +222,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 */
 		'getUlWidth':function(){
 			if(!this.$ul) return this;
-			return this.$ul.outerWidth();
+			return this.$ul.width();
 			return this;
 		},
 		/**
@@ -240,7 +240,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 */
 		'getUlHeight':function(){
 			if(!this.$ul) return this;
-			return this.$ul.outerHeight();
+			return this.$ul.h();
 			return this;
 		},
 
@@ -280,8 +280,8 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 			this.$ul.css({height: this.getAllLiHeight() + this.unit});
 			return this;
 		},
-		
-		
+
+
 
 		/**
 		 * @author lhh
