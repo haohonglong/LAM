@@ -1100,6 +1100,36 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 
 
 		/**
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2016-6-29
+		 * 修改日期：2016-6-29
+		 * 名称：(int) getScale
+		 * 功能：统计指定表格中的哪一列所有统计
+		 * 说明：
+		 *
+		 * 注意：
+		 * @param   (int)     n           		NO NULL :哪一列（0为第一列，依次类推）
+		 * @param   (String)  table           	NO NULL :哪个表格
+		 * @returns {number} 返回指定列所有行的统计数字
+		 * Example：getTable_col_count(5,'#table tbody')
+		 */
+		'getTable_col_count':function(n,table){
+			var datas=[],td,count=0;
+			table = table || 'table';
+			$(table+' tr').each(function(){
+				td=$(this).find('td').eq(n).text();
+				datas.push(parseFloat(td));
+			});
+			for(var i=0;i<datas.length;i++){
+				count+=datas[i];
+			}
+
+			return count;
+		},
+
+
+		/**
 		 *
 		 * @author lhh
 		 * 产品介绍：析构方法
