@@ -127,6 +127,115 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 	Slider.prototype = {
 		'constructor':Slider,
 		'__constructor':function(){},
+
+		/**
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2015-10-22
+		 * 修改日期：2015-10-22
+		 * 名称：getViewWidth
+		 * 功能：获取视图区显示的范围层的宽度
+		 * 说明：
+		 * 注意：
+		 * @return  (Number)
+		 * Example：
+		 */
+		'getViewWidth':function(){
+			return this.$view.outerWidth();
+
+		},
+
+		/**
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2015-10-22
+		 * 修改日期：2015-10-22
+		 * 名称：getViewHeight
+		 * 功能：获取视图区显示的范围层的高度度
+		 * 说明：
+		 * 注意：
+		 * @return  (Number)
+		 * Example：
+		 */
+		'getViewHeight':function(){
+			return this.$view.outerHeight();
+
+		},
+
+		/**
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2015-10-13
+		 * 修改日期：2015-10-13
+		 * 名称：getLiWidth
+		 * 功能：获取单个图片宽度
+		 * 说明：
+		 * 注意：
+		 * @param:
+		 * @return  (Number)
+		 * Example：
+		 */
+		'getLiWidth':function(){
+			return this.$li.eq(0).outerWidth(true);
+		},
+
+
+		/**
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2015-10-13
+		 * 修改日期：2015-10-13
+		 * 名称：getLiHeight
+		 * 功能：获取单个图片高度
+		 * 说明：
+		 * 注意：
+		 * @param:
+		 * @return  (Number)
+		 * Example：
+		 */
+		'getLiHeight':function(){
+			return this.$li.eq(0).outerHeight(true);
+		},
+
+
+		/**
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2015-10-13
+		 * 修改日期：2015-10-13
+		 * 名称：getUlWidth
+		 * 功能：获取包裹图片的移动层的宽度
+		 * 说明：
+		 * 注意：
+		 * @param:
+		 * @return  (Number | Object)
+		 * Example：
+		 */
+		'getUlWidth':function(){
+			if(this.$ul) {
+				return this.$ul.outerWidth();
+			}
+			return this;
+		},
+		/**
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2015-10-13
+		 * 修改日期：2015-10-13
+		 * 名称：getUlHeight
+		 * 功能：获取包裹图片的移动层的高度
+		 * 说明：
+		 * 注意：
+		 * @param:
+		 * @return  (Number | Object)
+		 * Example：
+		 */
+		'getUlHeight':function(){
+			if(this.$ul) {
+				return this.$ul.outerHeight();
+			}
+			return this;
+		},
 		/**
 		 * @author lhh
 		 * 产品介绍：
