@@ -3,7 +3,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 	'use strict';
 	var System=this;
 
-	System.is(System,'AutoLayout','Thumbnail');
+	System.is(System,'Layout','Thumbnail');
 	var __this__=null;
 	/**
 	 * @author: lhh
@@ -37,7 +37,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		};
 
 		var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
-		System.Basis.extends.call(this,System.AutoLayout,2,[init]);
+		System.Basis.extends.call(this,System.Layout,2,[init]);
 
 		this.baseWidth  		= init.baseWidth;
 		this.baseHeight  		= init.baseHeight;
@@ -84,6 +84,23 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 			return this;
 
 		},
+		/**
+		 *
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2015-9-29
+		 * 修改日期：2015-9-29
+		 * 名称：run
+		 * 功能：运行程序
+		 * 说明：
+		 * 注意：
+		 * @return  (AutoLayout)
+		 * Example：
+		 */
+		'run':function(){
+			this.resize();
+			return this;
+		},
 
 
 		/**
@@ -101,7 +118,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 */
 		'destructor':function(){}
 	};
-	System.extends(Thumbnail,System.AutoLayout,1);
+	System.extends(Thumbnail,System.Layout,1);
 	System['Thumbnail'] = Thumbnail;
 
 });
