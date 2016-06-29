@@ -1128,6 +1128,36 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 			return count;
 		},
 
+		/**
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2016-6-29
+		 * 修改日期：2016-6-29
+		 * 名称：fullScreen
+		 * 功能：全屏显示
+		 * 说明：
+		 *
+		 * 注意：
+		 * @param   (Dom)  docElm     NULL :dom 元素
+		 * @returns {void}
+		 * Example：
+		 */
+		'fullScreen': function(docElm){
+			docElm = docElm || document.documentElement;
+			if (docElm.requestFullscreen) {
+				docElm.requestFullscreen();
+			}
+			else if (docElm.msRequestFullscreen) {
+				docElm.msRequestFullscreen();
+			}
+			else if (docElm.mozRequestFullScreen) {
+				docElm.mozRequestFullScreen();
+			}
+			else if (docElm.webkitRequestFullScreen) {
+				docElm.webkitRequestFullScreen();
+			}
+		},
+
 
 		/**
 		 *
