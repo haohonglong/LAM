@@ -1150,10 +1150,10 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 			else if (docElm.msRequestFullscreen) {
 				docElm.msRequestFullscreen();
 			}
-			else if (docElm.mozRequestFullScreen) {
+			else if (docElm.mozRequestFullScreen) {//火狐
 				docElm.mozRequestFullScreen();
 			}
-			else if (docElm.webkitRequestFullScreen) {
+			else if (docElm.webkitRequestFullScreen) {//谷歌
 				docElm.webkitRequestFullScreen();
 			}
 		},
