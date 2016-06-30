@@ -1158,6 +1158,29 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 			}
 		},
 
+		/**
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2016-6-30
+		 * 修改日期：2016-6-30
+		 * 名称：setHtmlElementFontSize
+		 * 功能：设置html 字体大小 相当于 html{font-size:calc(100vw / 3.75)}
+		 * 说明：
+		 *
+		 * 注意：别忘了在resize 方法里面再调用这个方法
+		 * @param   (Dom)  element     NULL :dom 元素 默认html 元素
+		 * @returns {void}
+		 * Example：
+		 */
+		'setHtmlElementFontSize': function(element){
+			element = element || document.documentElement;
+			$(element).css({
+				'font-size':$(element).width()/3.75+'px'
+			});
+			//element['style']['fontSize']=
+			//	$(element).width()/3.75+'px';
+		},
+
 
 		/**
 		 *
