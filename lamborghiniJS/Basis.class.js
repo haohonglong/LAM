@@ -1868,6 +1868,14 @@ if(!GRN_LHH){
 		}
 	};
 
+
+
+	MySystem.String	 		= {};
+	MySystem.Number	 		= {};
+	MySystem.Array	 		= {};
+
+
+//check
 	MySystem.isset 	 		= isset_;
 	MySystem.empty 	 		= empty_;
 	MySystem.error 	 		= error;
