@@ -13,7 +13,7 @@
  * 
  */
 
-window[GRN_LHH].main(function(undefined){
+window[GRN_LHH].main([window,window.document],function(window,document,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Component','Helper');
@@ -25,7 +25,7 @@ window[GRN_LHH].main(function(undefined){
 						 * 产品介绍：
 						 * 创建日期：2015-6-25
 						 * 修改日期：2015-6-25
-						 * 名称：get_url_Param
+						 * 名称：get_url_param
 						 * 功能：根据指定的url参数获取相对应的参数值
 						 * 说明：
 						 * 注意：
@@ -33,7 +33,7 @@ window[GRN_LHH].main(function(undefined){
 						 * @return  String
 						 *
 						 */
-						'get_url_Param':function(name){
+						'get_url_param':function(name){
 							var search = document.location.search;
 							var pattern = new RegExp("[?&]"+name+"\=([^&]+)", "g");
 							var matcher = pattern.exec(search);

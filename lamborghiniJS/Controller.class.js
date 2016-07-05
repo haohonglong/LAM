@@ -13,13 +13,12 @@
  *
  */
 
-window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
+window[GRN_LHH].main([window,window.document,jQuery],function(window,document,$,undefined){
     'use strict';
     var System=this;
     System.is(System,'Component','Controller');
 
     var __this__=null;
-    var document=window.document;
     /**
      * @author lhh
      * 产品介绍：
