@@ -241,7 +241,7 @@ window[GRN_LHH].main([window,window.document,jQuery],
 		'canceleditCell':function(element, value, text) {
 			var $element = $(element);
 			$element.attr('value',value);
-			$element.attr('EditState','false');
+			$element.attr('edit-state','false');
 
 			if (text) {
 				element.innerHTML = text;
@@ -452,10 +452,10 @@ window[GRN_LHH].main([window,window.document,jQuery],
          */
 		'getTableData':function(table) {
 			var __this__ =this;
-			var tableData = new Array();
+			var tableData = [];
 			alert("行数：" + table.rows.length);
 			for (var i = 1; i < table.rows.length; i++) {
-				tableData.push(__this__.getRowData(tabProduct.rows[i]));
+				tableData.push(__this__.getRowData(table.rows[i]));
 			}
 
 			return tableData;
