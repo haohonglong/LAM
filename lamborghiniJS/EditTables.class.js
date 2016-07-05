@@ -12,41 +12,29 @@ window[GRN_LHH].main([window,window.document],function(window,document,undefined
 	var fixEvent = System.Browser.fixEvt;
 
 //设置多个表格可编辑
+	/**
+	 *
+	 * @param table
+	 * @param D
+	 * @constructor
+	 */
 	function EditTables(table,D) {
 		//无构造参数的方法
 		System.Basis.extends.call(this,System.Dom);
 		__this__=this;
 		var defaults={
-
+			'event':'click'
 		};
 		var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
 		var parent= table[0] || document;
 
-		this.table=table;
+		this.init   = init;
+		this.table  = table;
 		this.parent = parent;
 
-		//$('[data-input="add"]',table[0]).click(function(){
-		$(parent).on('click','[data-input="add"]',function(){
-			__this__.AddRow(table,1);
-		});
-		//$('[data-input="del"]',table[0]).click(function(){
-		$(parent).on('click','[data-input="del"]',function(){
-			__this__.DeleteRow(table,1);
-		});
-		//$('[data-input="reset"]',table[0]).click(function(){
-		$(parent).on('click','[data-input="reset"]',function(){
-			window.location.reload();
-		});
-		//$('[data-input="submit"]',table[0]).click(function(event){
-		$(parent).on('click','[data-input="submit"]',function(){
-			event = fixEvent(event);
-			__this__.GetTableData(table,1);
-			event.preventDefault();
-
-		});
+		this.run();
 
 
-		this.SetTableCanEdit(this.table);
 
 	}
 
@@ -54,6 +42,37 @@ window[GRN_LHH].main([window,window.document],function(window,document,undefined
 
 	EditTables.prototype = {
 		'constructor':EditTables,
+		/**
+		 *
+		 */
+		'run':function(){
+			var init = this.init;
+			var parent = this.parent;
+			var table = this.table;
+
+			//$('[data-input="add"]',table[0]).click(function(){
+			$(parent).on(init['event'],'[data-input="add"]',function(){
+				__this__.AddRow(table,1);
+			});
+			//$('[data-input="del"]',table[0]).click(function(){
+			$(parent).on(init['event'],'[data-input="del"]',function(){
+				__this__.DeleteRow(table,1);
+			});
+			//$('[data-input="reset"]',table[0]).click(function(){
+			$(parent).on(init['event'],'[data-input="reset"]',function(){
+				window.location.reload();
+			});
+			//$('[data-input="submit"]',table[0]).click(function(event){
+			$(parent).on(init['event'],'[data-input="submit"]',function(event){
+				event = fixEvent(event);
+				__this__.GetTableData(table,1);
+				event.preventDefault();
+
+			});
+
+
+			this.SetTableCanEdit(this.table);
+		},
 		//设置表格是可编辑的
 		'SetTableCanEdit':function(table) {
 			for (var i = 1; i < table.rows.length; i++) {
