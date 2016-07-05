@@ -4,7 +4,8 @@
  *
  **/
 
-window[GRN_LHH].main([window,window.document],function(window,document,undefined){
+window[GRN_LHH].main([window,window.document,jQuery],
+	         function(window,document,$,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Dom','EditTables');
@@ -46,9 +47,10 @@ window[GRN_LHH].main([window,window.document],function(window,document,undefined
 		 *
 		 */
 		'run':function(){
-			var init = this.init;
-			var parent = this.parent;
-			var table = this.table;
+			var __this__ = this;
+			var init     = this.init;
+			var parent   = this.parent;
+			var table    = this.table;
 
 			//$('[data-input="add"]',table[0]).click(function(){
 			$(parent).on(init['event'],'[data-input="add"]',function(){
