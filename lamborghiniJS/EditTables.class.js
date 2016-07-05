@@ -12,6 +12,13 @@ window[GRN_LHH].main([window,window.document,jQuery],
 		var __this__=null;
 		var fixEvent = System.Browser.fixEvt;
 
+		var defaultOptions = {
+			cloneProperties: ['padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right',
+				'text-align', 'font', 'font-size', 'font-family', 'font-weight',
+				'border', 'border-top', 'border-bottom', 'border-left', 'border-right'],
+			editor: $('<input>')
+		};
+
 		/**
 		 *设置多个表格可编辑
 		 * @param table
