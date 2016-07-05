@@ -4,7 +4,7 @@
  *
  **/
 
-window[GRN_LHH].main([window],function(window,undefined){
+window[GRN_LHH].main([window,window.document],function(window,document,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Dom','EditTables');
@@ -20,18 +20,25 @@ window[GRN_LHH].main([window],function(window,undefined){
 
 		};
 		var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
-		this.table=table;
+		var parent= table[0] || document;
 
-		$('[data-input="add"]',table[0]).click(function(){
+		this.table=table;
+		this.parent = parent;
+
+		//$('[data-input="add"]',table[0]).click(function(){
+		$(parent).on('click','[data-input="add"]',function(){
 			__this__.AddRow(table,1);
 		});
-		$('[data-input="del"]',table[0]).click(function(){
+		//$('[data-input="del"]',table[0]).click(function(){
+		$(parent).on('click','[data-input="del"]',function(){
 			__this__.DeleteRow(table,1);
 		});
-		$('[data-input="reset"]',table[0]).click(function(){
+		//$('[data-input="reset"]',table[0]).click(function(){
+		$(parent).on('click','[data-input="reset"]',function(){
 			window.location.reload();
 		});
-		$('[data-input="submit"]',table[0]).click(function(event){
+		//$('[data-input="submit"]',table[0]).click(function(event){
+		$(parent).on('click','[data-input="submit"]',function(){
 			event = fixEvent(event);
 			__this__.GetTableData(table,1);
 			event.preventDefault();
