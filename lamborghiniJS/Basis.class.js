@@ -1493,15 +1493,10 @@ if(!GRN_LHH){
 		 *
 		 */
 		'each':function( obj, callback ) {
-			var len, i = 0;
+			var i;
 
 			if ( isArray( obj ) ) {
-				len = obj.length;
-				for ( ; i < len; i++ ) {
-					if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
-						break;
-					}
-				}
+				return obj.each(callback);
 			} else {
 				for ( i in obj ) {
 					if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
