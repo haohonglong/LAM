@@ -171,11 +171,12 @@ window[GRN_LHH].main([window],function(window,undefined){
 		 * 注意：
 		 * @param   (Object)sub 			NO NULL :
 		 * @param   (Object)_super 			NO NULL :
+		 * @param  (Boolean)override 	   	   NULL :是否覆盖同名键名值,默认 false 是不覆盖
 		 * @return  (Object)						:返回继承完父类后的子类对象
 		 * Example：
 		 */
-		'extends': function( sub,_super) {
-			return System.merge(sub,[_super]);
+		'extends': function( sub,_super,override) {
+			return System.merge(sub,[_super],override);
 
 		},
 
