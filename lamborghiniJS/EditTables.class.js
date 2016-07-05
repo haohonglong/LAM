@@ -50,19 +50,19 @@ window[GRN_LHH].main([window,window.document,jQuery],
 				var parent   = this.parent;
 				var table    = this.table;
 
-				//$('[data-input="add"]',table[0]).click(function(){
+				$(parent).off(init['event'],'[data-input="add"]');
 				$(parent).on(init['event'],'[data-input="add"]',function(){
 					__this__.addRow(table,1);
 				});
-				//$('[data-input="del"]',table[0]).click(function(){
+				$(parent).off(init['event'],'[data-input="del"]');
 				$(parent).on(init['event'],'[data-input="del"]',function(){
 					__this__.deleteRow(table,1);
 				});
-				//$('[data-input="reset"]',table[0]).click(function(){
+				$(parent).off(init['event'],'[data-input="reset"]');
 				$(parent).on(init['event'],'[data-input="reset"]',function(){
 					window.location.reload();
 				});
-				//$('[data-input="submit"]',table[0]).click(function(event){
+				$(parent).off(init['event'],'[data-input="submit"]');
 				$(parent).on(init['event'],'[data-input="submit"]',function(event){
 					event = fixEvent(event);
 					__this__.getTableData(table,1);
