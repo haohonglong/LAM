@@ -52,11 +52,11 @@ window[GRN_LHH].main([window,window.document,jQuery],
 
 				//$('[data-input="add"]',table[0]).click(function(){
 				$(parent).on(init['event'],'[data-input="add"]',function(){
-					__this__.AddRow(table,1);
+					__this__.addRow(table,1);
 				});
 				//$('[data-input="del"]',table[0]).click(function(){
 				$(parent).on(init['event'],'[data-input="del"]',function(){
-					__this__.DeleteRow(table,1);
+					__this__.deleteRow(table,1);
 				});
 				//$('[data-input="reset"]',table[0]).click(function(){
 				$(parent).on(init['event'],'[data-input="reset"]',function(){
@@ -65,23 +65,23 @@ window[GRN_LHH].main([window,window.document,jQuery],
 				//$('[data-input="submit"]',table[0]).click(function(event){
 				$(parent).on(init['event'],'[data-input="submit"]',function(event){
 					event = fixEvent(event);
-					__this__.GetTableData(table,1);
+					__this__.getTableData(table,1);
 					event.preventDefault();
 
 				});
 
 
-				this.SetTableCanEdit(this.table);
+				this.setTableCanEdit(this.table);
 				return this;
 			},
 			//设置表格是可编辑的
-			'SetTableCanEdit':function(table) {
+			'setTableCanEdit':function(table) {
 				for (var i = 1; i < table.rows.length; i++) {
-					this.SetRowCanEdit(table.rows[i]);
+					this.setRowCanEdit(table.rows[i]);
 				}
 				return this;
 			},
-			'SetRowCanEdit':function(row) {
+			'setRowCanEdit':function(row) {
 				var __this__ =this;
 				System.each(row.cells,function(j){
 					//如果当前单元格指定了编辑类型，则表示允许编辑
@@ -93,12 +93,12 @@ window[GRN_LHH].main([window,window.document,jQuery],
 					}
 					if (editType) {
 						$(this.parent).on('click',this,function(event){
-							__this__.EditCell(this);
+							__this__.editCell(this);
 
 						});
 
 						//this.onclick = function () {
-						//	__this__.EditCell(this);
+						//	__this__.editCell(this);
 						//};
 					}
 				});
@@ -108,7 +108,7 @@ window[GRN_LHH].main([window,window.document,jQuery],
 
 			},
 			//设置指定单元格可编辑
-			'EditCell':function(element, editType) {
+			'editCell':function(element, editType) {
 				var $element = $(element);
 				editType = editType || $element.attr("EditType");
 				if (!editType) {
@@ -118,10 +118,10 @@ window[GRN_LHH].main([window,window.document,jQuery],
 
 				switch (editType) {
 					case "input-text":
-						this.CreateTextBox(element, element.innerHTML);
+						this.createTextBox(element, element.innerHTML);
 						break;
 					case "select":
-						this.CreateDropDownList(element);
+						this.createDropDownList(element);
 						break;
 					default:
 						break;
@@ -129,7 +129,7 @@ window[GRN_LHH].main([window,window.document,jQuery],
 				return this;
 			},
 			//为单元格创建可编辑输入框
-			'CreateTextBox':function(element, value) {
+			'createTextBox':function(element, value) {
 				var __this__ = this;
 				//检查编辑状态，如果已经是编辑状态，跳过
 				var $element = $(element);
@@ -141,21 +141,21 @@ window[GRN_LHH].main([window,window.document,jQuery],
 					}
 
 					//创建文本框
-					var input=System.Html.tag('input',true,{'type':'text','EditTables':'EditCell_TextBox','value':value});
+					var input=System.Html.tag('input',true,{'type':'text','EditTables':'editCell_TextBox','value':value});
 					var $input = $(input);
 					var textBox = $input[0];
 					//设置文本框的失去焦点事件
 					$input.on('blur',function(){
-						__this__.CancelEditCell(this.parentNode, this.value);
+						__this__.canceleditCell(this.parentNode, this.value);
 					}).focus().select();
 					//textBox.onblur = function () {
-					//	__this__.CancelEditCell(this.parentNode, this.value);
+					//	__this__.canceleditCell(this.parentNode, this.value);
 					//};
 					//textBox.focus();
 					//textBox.select();
 
 					//向当前单元格添加文本框
-					this.ClearChild(element);
+					this.clearChild(element);
 					$element.append($input);
 
 					//改变状态变量
@@ -165,7 +165,7 @@ window[GRN_LHH].main([window,window.document,jQuery],
 				return this;
 			},
 			//为单元格创建选择框
-			'CreateDropDownList':function(element, value) {
+			'createDropDownList':function(element, value) {
 				var __this__ = this;
 				var $element = $(element);
 				//检查编辑状态，如果已经是编辑状态，跳过
@@ -196,17 +196,17 @@ window[GRN_LHH].main([window,window.document,jQuery],
 						value = $element.attr("value");
 					}
 					//创建下接框
-					select=System.Html.tag('select',{'EditTables':'EditCell_DropDownList','value':value},options);
+					select=System.Html.tag('select',{'EditTables':'editCell_DropDownList','value':value},options);
 
 					var $select = $(select);
 					var box = $select[0];
 					//设置创建下接框的失去焦点事件
 					$select.on('blur',function(){
-						__this__.CancelEditCell(this.parentNode, this.value, this.options[this.selectedIndex].text);
+						__this__.canceleditCell(this.parentNode, this.value, this.options[this.selectedIndex].text);
 					}).focus();
 
 					//向当前单元格添加创建下接框
-					this.ClearChild(element);
+					this.clearChild(element);
 					$element.append($select);
 
 					//记录状态的改变
@@ -217,7 +217,7 @@ window[GRN_LHH].main([window,window.document,jQuery],
 
 			},
 			//取消单元格编辑状态
-			'CancelEditCell':function(element, value, text) {
+			'canceleditCell':function(element, value, text) {
 				var $element = $(element);
 				$element.attr('value',value);
 				$element.attr('EditState','false');
@@ -229,11 +229,11 @@ window[GRN_LHH].main([window,window.document,jQuery],
 				}
 
 				//检查是否有公式计算
-				this.CheckExpression(element.parentNode);
+				this.checkexpression(element.parentNode);
 				return this;
 			},
 			//清空指定对象的所有字节点
-			'ClearChild':function(element) {
+			'clearChild':function(element) {
 				element.innerHTML = "";
 				return this;
 			},
@@ -243,7 +243,7 @@ window[GRN_LHH].main([window,window.document,jQuery],
 			 * @param row
 			 * @returns {{}}
 			 */
-			'GetRowData':function(row) {
+			'getRowData':function(row) {
 				var rowData = {};
 				var name;
 
@@ -270,19 +270,19 @@ window[GRN_LHH].main([window,window.document,jQuery],
 			 * @param expn
 			 * @returns {EditTables}
 			 */
-			'CheckExpression':function(row,expn) {
+			'checkexpression':function(row,expn) {
 				var __this__ = this;
 				System.each(row.cells,function(j){
-					expn = row.parentNode.rows[0].cells[j].getAttribute("Expression");
+					expn = row.parentNode.rows[0].cells[j].getAttribute("expression");
 					//如指定了公式则要求计算
 					if (expn) {
-						var result = __this__.Expression(row, expn);
+						var result = __this__.expression(row, expn);
 						var format = row.parentNode.rows[0].cells[j].getAttribute("Format");
 						if (format) {
 							//如指定了格式，进行字值格式化
-							this.innerHTML = __this__.formatNumber(__this__.Expression(row, expn), format);
+							this.innerHTML = __this__.formatNumber(__this__.expression(row, expn), format);
 						} else {
-							this.innerHTML = __this__.Expression(row, expn);
+							this.innerHTML = __this__.expression(row, expn);
 						}
 					}
 				});
@@ -295,8 +295,8 @@ window[GRN_LHH].main([window,window.document,jQuery],
 			 * @param expn
 			 * @returns {Object}
 			 */
-			'Expression':function(row, expn) {
-				var rowData = this.GetRowData(row);
+			'expression':function(row, expn) {
+				var rowData = this.getRowData(row);
 				var name;
 				//循环代值计算
 				System.each(row.cells,function(j){
@@ -394,11 +394,11 @@ window[GRN_LHH].main([window,window.document,jQuery],
 			 * @param index
 			 * @returns {Node|*}
 			 */
-			'AddRow':function(table, index) {
+			'addRow':function(table, index) {
 				var lastRow = table.rows[table.rows.length - 1];
 				var newRow = lastRow.cloneNode(true);
 				table.tBodies[0].appendChild(newRow);
-				this.SetRowCanEdit(newRow);
+				this.setRowCanEdit(newRow);
 				return newRow;
 
 			},
@@ -408,7 +408,7 @@ window[GRN_LHH].main([window,window.document,jQuery],
 			 * @param index
 			 * @returns {EditTables}
 			 */
-			'DeleteRow':function(table, index) {
+			'deleteRow':function(table, index) {
 				for (var i = table.rows.length - 1; i > 0; i--) {
 					var chkOrder = table.rows[i].cells[0].firstChild;
 					if (chkOrder) {
@@ -427,12 +427,12 @@ window[GRN_LHH].main([window,window.document,jQuery],
 			 * @param table
 			 * @returns {Array}
 			 */
-			'GetTableData':function(table) {
+			'getTableData':function(table) {
 				var __this__ =this;
 				var tableData = [];
 				//console.log("行数：" + table.rows.length);
 				for (var i = 1; i < table.rows.length; i++) {
-					tableData.push(__this__.GetRowData(table.rows[i]));
+					tableData.push(__this__.getRowData(table.rows[i]));
 				}
 
 				return tableData;
