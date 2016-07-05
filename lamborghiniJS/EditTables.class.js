@@ -40,8 +40,6 @@ window[GRN_LHH].main([window,window.document,jQuery],
 
 			this.run();
 
-
-
 		}
 
 
@@ -466,6 +464,9 @@ window[GRN_LHH].main([window,window.document,jQuery],
 			}
 
 			return tableData;
+
+		},
+		'resize':function(){
 
 		},
 		/**
