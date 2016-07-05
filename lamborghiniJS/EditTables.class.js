@@ -83,21 +83,24 @@ window[GRN_LHH].main([window,window.document,jQuery],
 			},
 			'setRowCanEdit':function(row) {
 				var __this__ =this;
-				System.each(row.cells,function(j){
+				$.each(row.cells,function(k,v){
 					//如果当前单元格指定了编辑类型，则表示允许编辑
 					var editType = $(this).attr("EditType");
 					if (!editType) {
 						//如果当前单元格没有指定，则查看当前列是否指定
 						editType = $(this).closest('tr').attr('EditType');
-						//editType = row.parentNode.rows[0].cells[j].getAttribute("EditType");
+						//editType = row.parentNode.rows[0].cells[k].getAttribute("EditType");
 					}
 					if (editType) {
-						$(this.parent).on('click',this,function(event){
+						$(this).parent().off('click',this.tagName);
+						$(this).parent().on('click',this.tagName,function(event){
+							event = fixEvent(event);
+							event.preventDefault();
 							__this__.editCell(this);
-
 						});
 
 						//this.onclick = function () {
+						//	console.log(2222)
 						//	__this__.editCell(this);
 						//};
 					}
