@@ -1882,7 +1882,27 @@ if(!GRN_LHH){
 
 
 	MySystem.String	 		= {};
-	MySystem.Number	 		= {};
+	MySystem.Number	 		= {
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-6
+		 * 修改日期：2016-7-6
+		 * 名称：MySystem.Number.limit_num_len
+		 * 功能：限制数字位数
+		 * 说明：
+		 * 注意：
+		 *
+		 * @param n
+		 * @param limit
+		 * @returns {string}
+		 */
+		'limit_num_len':function (n,limit){
+			limit =limit || 9;
+			return n.toString().trim().substr(0,limit);
+		}
+	};
 	MySystem.Array	 		= {};
 
 
