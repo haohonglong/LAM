@@ -1458,24 +1458,40 @@ if(!GRN_LHH){
 		 * 功能：递归对象
 		 * 说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象位置
 		 * 注意：
-		 * @param 	(Object)D             	NO NULL : 对象
-		 * @param 	(Funtion)fn             NO NULL : 回调方法
-		 * @return ()
+		 * @param 	(Object)D             			NO NULL : 对象
+		 * @param 	(Funtion)callback             	NO NULL : 回调方法
+		 * @returns {Object}
 		 * Example：
 		 *
 		 */
-		'list':function(D,fn){
-			if(!isObject(D)){
-				return D;
-			}
-			for(var k in D){
-				if(D[k]){
-					this.list(D[k],fn);
+		'list':function(D,callback){
+			var loop,totalLoop;
+			totalLoop=loop=0;
+			var __this__ = this;
+			var list=function(D,callback){
+
+				if(!__this__.isObject(D) && !__this__.isArray(D)){
+					return D;
 				}
-				if(isFunction(fn)){
-					fn.call(D,k,D[k]);
+				if(!__this__.isFunction(callback)){
+					throw new Error('Warning 第二参数 必须是个callback');
 				}
-			}
+				//算出找到指定内容，所需要遍历的次数
+				loop++;
+				__this__.each(D,function(k,v){
+					totalLoop++;
+					if ( callback.call(D,k,v) === false ) {
+						console.log('共遍历----->'+loop+'<------次找到了')
+						return false;
+					}
+					//如果没找到，就继续递归搜索
+					if(v){
+						list(v,callback);
+					}
+				});
+			};
+			return {'data':list(D,callback),'totalLoop':totalLoop,'loop':loop};
+
 		},
 		/**
 		 * @author: lhh
@@ -1495,7 +1511,7 @@ if(!GRN_LHH){
 		'each':function( obj, callback ) {
 			var i;
 
-			if ( isArray( obj ) ) {
+			if ( this.isArray( obj ) ) {
 				return obj.each(callback);
 			} else {
 				for ( i in obj ) {
