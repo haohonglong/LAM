@@ -1894,8 +1894,8 @@ if(!GRN_LHH){
 		 * 说明：
 		 * 注意：
 		 *
-		 * @param n
-		 * @param limit
+		 * @param (Number)n				NO NULL : 要限制的数字
+		 * @param (Number)limit			NO NULL : 限制的位数，默认是9位
 		 * @returns {string}
 		 */
 		'limit_num_len':function (n,limit){
