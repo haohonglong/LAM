@@ -20,11 +20,7 @@ window[GRN_LHH].main([window,window.document,jQuery],
 	System.is(System,'Helper','Widget');
 
 	var __this__=null;
-	System.merge(null,[{
-		'Widget':function(){
 
-		}
-	}]);
 
 	function Widget(){
 		System.Basis.extends.call(this,System.Helper);

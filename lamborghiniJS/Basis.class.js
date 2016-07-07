@@ -944,11 +944,9 @@ if(!GRN_LHH){
 		'Helper': {},
 		'Controller': {},
 		'Model': {},
-		'View': {},
-		'Validation':{},
 		'Html': {},
 		'Browser': {},
-		'Widget': {},
+		'Css': {},
 		'Template': {},
 		'Event': {},
 		'Dom': {},
@@ -957,18 +955,17 @@ if(!GRN_LHH){
 		'Drag_xy': {},
 		'Error': {},
 		'FakeSelect': {},
+		'AutoLayout': {},
 		'Fsc': {},
 		'Linklist': {},
 		'PopupLayer': {},
 		'Roll': {},
 		'Layout': {},
-		'AutoLayout': {},
-		'Thumbnail': {},
 		'Slider': {},
 		'Sport': {},
-		'Tab': {},
 		'Tools': {},//(single)
-		'Css': {},
+		'Tab': {},
+		'Thumbnail': {},
 		'FindParentObject': {},
 		'Tree': {},
 		'Sort': {},
@@ -977,7 +974,10 @@ if(!GRN_LHH){
 			'Svg': {},
 			'Canvas': {},
 			'CanvasForm': {}//基本形
-		}
+		},
+		'View': {},
+		'Validation':{},
+		'Widget': {}
 	};
 
 	/**
