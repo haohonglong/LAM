@@ -13,7 +13,8 @@
  * 
  */
 
-window[GRN_LHH].main([window],function(window,undefined){
+window[GRN_LHH].main([window,window.document,jQuery],
+	function(window,document,$,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Helper','Widget');
@@ -41,6 +42,22 @@ window[GRN_LHH].main([window],function(window,undefined){
 
 	Widget.prototype = {
 		'constructor':Widget,
+		/**
+		 *
+		 * @author lhh
+		 * 产品介绍：输入框
+		 * 创建日期：2016-7-7
+		 * 修改日期：2016-7-7
+		 * 名称：input
+		 * 功能：在注销Widget对象时调用此方法
+		 * 说明：
+		 * 注意：
+		 * @return  ()
+		 * Example：
+		 */
+		'input':function(){
+
+		},
 
 
 		/**
