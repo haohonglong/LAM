@@ -26,9 +26,6 @@ window[GRN_LHH].main([window,window.document,jQuery],
 		System.Basis.extends.call(this,System.Helper);
 		__this__=this;
 
-		this.super = System.merge(System.super,[this]);
-
-
 	}
 	/*static mothed
 	 ----------------------------------------*/
@@ -51,9 +48,7 @@ window[GRN_LHH].main([window,window.document,jQuery],
 		 * @return  ()
 		 * Example：
 		 */
-		'input':function(){
-
-		},
+		'input':function(){},
 
 
 		/**
