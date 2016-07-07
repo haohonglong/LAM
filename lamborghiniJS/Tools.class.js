@@ -79,7 +79,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		 * 功能：选择下拉框触发 onchange 事件
 		 * 说明：
 		 * 注意：
-		 * @param   (String)D             NULL :
+		 * @param   (Object)D             NULL :
 		 * @param   (Function)callBack            NULL :
 		 * @return (void)
 		 *
