@@ -57,6 +57,44 @@ window[GRN_LHH].main(function(undefined){
 	 * Example：
 	 */
 	Validation.select = function(){};
+
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：提交表单
+	 * 创建日期：2016-7-7
+	 * 修改日期：2016-7-7
+	 * 名称：submit
+	 * 功能：提交表单时触发 onsubmit 事件
+	 * 说明：
+	 * 注意：
+	 * @param (jQuery)	D$self		NO NUll :
+	 * @param (Function)D.callback	NO NUll :
+	 */
+	Validation.submit = function (D){
+		var $self,callback;
+
+		var defaults={
+			'$self':null,
+			'callback':function(){},
+			'$message':$('.help-block')
+		};
+
+		var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
+		$self 	 	= init.$self;
+		callback 	 	= init.callback;
+
+		init.$message.text('');
+		var $form = $self ? $self.closest('form') : $('form');
+		$form.on('submit',function(event){
+			//如果验证通不过 返回 false
+			if(!callback(this)){
+				event.preventDefault();
+
+			}
+		}).trigger('submit');
+	};
+
 	Validation.prototype = {
 		'constructor':Validation,
 		'__constructor':function(){},
