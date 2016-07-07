@@ -71,6 +71,30 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 			return items;
 		},
 		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-7
+		 * 修改日期：2016-7-7
+		 * 名称： select_change
+		 * 功能：选择下拉框触发 onchange 事件
+		 * 说明：
+		 * 注意：
+		 * @param   (String)D             NULL :
+		 * @param   (Function)callBack            NULL :
+		 * @return (void)
+		 *
+		 */
+		'select_change':function(D,callBack){
+			$( "select" )
+				.change(function () {
+					$( "select option:selected" ).each(function() {
+						callBack.call(this);
+
+					});
+				})
+				.change();
+		},
+		/**
 		 * 创建日期：
 		 * 修改日期：2014-3-24
 		 * 名称：(vido) hide_or_show_area
