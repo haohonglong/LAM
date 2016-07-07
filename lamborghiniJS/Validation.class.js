@@ -29,7 +29,34 @@ window[GRN_LHH].main(function(undefined){
 		'email_2' : /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/,
 		'phone'   : /^(13[0-9]{9})|(15[89][0-9]{8})$/
 	};
-
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：输入框
+	 * 创建日期：2016-7-7
+	 * 修改日期：2016-7-7
+	 * 名称：input
+	 * 功能：
+	 * 说明：
+	 * 注意：
+	 * @return  ()
+	 * Example：
+	 */
+	Validation.input = function(){};
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：输入框
+	 * 创建日期：2016-7-7
+	 * 修改日期：2016-7-7
+	 * 名称：select
+	 * 功能：
+	 * 说明：
+	 * 注意：
+	 * @return  ()
+	 * Example：
+	 */
+	Validation.select = function(){};
 	Validation.prototype = {
 		'constructor':Validation,
 		'__constructor':function(){},
