@@ -1480,7 +1480,7 @@ if(!GRN_LHH){
 				loop++;
 				__this__.each(D,function(k,v){
 					totalLoop++;
-					if ( callback.call(D,k,v) === false ) {
+					if ( callback.call(D,k,v,D) === false ) {
 						console.log('共遍历----->'+loop+'<------次找到了')
 						return false;
 					}
