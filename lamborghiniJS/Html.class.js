@@ -41,7 +41,7 @@ window[GRN_LHH].main([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-1-15
-	 * 修改日期：2016-4-5
+	 * 修改日期：2016-7-8
 	 * 名称： getFile
 	 * 功能：返回指定的文件
 	 * 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象
@@ -56,21 +56,23 @@ window[GRN_LHH].main([window],function(window,undefined){
 	 * @param 	(Boolean) 	D.async               NULL :是否异步加载
 	 * @param 	(Boolean) 	D.cache           	  NULL :是否缓存默认true
 	 * @param 	(Function)	D.beforeSend       	  NULL :在发送数据之前执行的方法
+	 * @param 	(Function)	D.capture       	  NULL :可以在第一时间捕获返回的数据字符串，处理修改后返回
 	 * @param 	(Function)	D.callBack       	  NULL :返回到回调函数里的内容
 	 * @return ()
 	 * Example：
 	 *
 	 */
 	var getFile=function($dom,D,
-					 	  type,
-					      dataType,
-						  contentType,
-					      url,
-					      data,
-					 	  async,
-					 	  cache,
-						  beforeSend,
-					 	  callBack){
+						 type,
+						 dataType,
+						 contentType,
+						 url,
+						 data,
+						 async,
+						 cache,
+						 beforeSend,
+						 capture,
+						 callBack){
 		//如果第一个是对象且不是jQuery对象
 		if ($dom && System.isObject($dom) && !$dom.each) {
 			D = $dom;
@@ -85,7 +87,8 @@ window[GRN_LHH].main([window],function(window,undefined){
 		async 		= $dom && eval($dom.attr('async'))			|| D&&D.async ;
 		cache 		= $dom && eval($dom.attr('cache')) 			|| D&&D.cache ;
 		beforeSend 	= $dom && eval('('+$dom.attr('beforeSend')+')')	|| D&&D.beforeSend	||	0 ;
-		callBack 	= D&&D.callBack   || 0;
+		capture 	= $dom && eval('('+$dom.attr('capture')+')')	|| D&&D.capture		||	0 ;
+		callBack 	= $dom && eval('('+$dom.attr('callBack')+')')	|| D&&D.callBack	||	0 ;
 
 		$.ajax(System.template(url),{
 			type : 	  type,
@@ -103,8 +106,11 @@ window[GRN_LHH].main([window],function(window,undefined){
 				throw new Error("Warning :没有取到数据！！！note:也许是file属性的参数错了哦...");
 			},
 			success: function(content){
+				if(System.isFunction(capture)){
+					content = capture(content);
+				}
 				if(callBack && System.isFunction(callBack)){
-					callBack(content);
+					callBack.call($dom,content);
 				}else{
 					$dom.after(content).remove();
 				}
