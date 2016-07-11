@@ -83,7 +83,7 @@ window[GRN_LHH].main([window],function(window,undefined){
 		dataType 	= $dom && $dom.attr('dataType') 		|| D&&D.dataType 	||	"html";
 		contentType = $dom && $dom.attr('contentType') 		|| D&&D.contentType ||	"application/x-www-form-urlencoded; charset=UTF-8";
 		url  		= $dom && $dom.attr('file')  			|| D&&D.url;
-		type  		= $dom && $dom.attr('type')  			|| D&&D.type  	 	||	"POST";
+		type  		= $dom && $dom.attr('type')  			|| D&&D.type  	 	||	"GET";
 		async 		= $dom && eval($dom.attr('async'))			|| D&&D.async ;
 		cache 		= $dom && eval($dom.attr('cache')) 			|| D&&D.cache ;
 		beforeSend 	= $dom && eval('('+$dom.attr('beforeSend')+')')	|| D&&D.beforeSend	||	0 ;
