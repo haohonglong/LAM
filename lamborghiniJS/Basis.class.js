@@ -1497,18 +1497,32 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-2-29
-		 * 修改日期：2016-5-3
+		 * 修改日期：2016-7-11
 		 * 名称： each
 		 * 功能：遍历数组或对象
 		 * 说明：
 		 * 注意：
-		 * @param 	(Array | Object)arr     NO NULL :
-		 * @param 	(Funtion)callback             NO NULL : 回调方法
+		 * @param 	(Array | Object)arr     		NO NULL :
+		 * @param 	(Funtion)callback             	NO NULL : 回调方法
 		 * @return ()
 		 * Example：
 		 *
 		 */
 		'each':function( obj, callback ) {
+			if(!obj || !callback){
+				throw new Error('Warning : 两个参数是必传的');
+
+			}
+			if(!this.isObject(obj) && !this.isArray(obj)){
+				throw new Error('Warning '+obj+': 必须是个Object 或者 Array 类型！');
+				return obj;
+			}
+
+			if(!this.isFunction(callback)){
+				throw new Error('Warning :第二参数 必须是个callback！');
+				return obj;
+			}
+
 			var i;
 
 			if ( this.isArray( obj ) ) {
