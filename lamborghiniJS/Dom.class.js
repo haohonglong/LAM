@@ -209,9 +209,16 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			return node;
 		},
 		'delNodeMore':function(){//删除多个节点
-			for(var i=0;i<arguments.length;i++){
-				this.delNode(auguments[i]);
-			}
+			var __this___ = this;
+			System.each(arguments,function(k,v){
+				__this___.delNode(this);
+			});
+
+			//var node;
+			//for(var i=0;i<arguments.length;i++){
+			//	node = arguments[i];
+			//	this.delNode(node);
+			//}
 		},
 
 
