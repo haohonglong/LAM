@@ -47,7 +47,6 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			this.node=document.createElement(tag);
 			var k;
 			for(k in D){
-				//this.node[k] = D[k];
 				this.attr(this.node,k,D[k]);
 			}
 
