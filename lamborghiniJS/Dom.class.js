@@ -565,7 +565,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * 说明：
 		 * 注意：
 		 * @param   (String)searchClass 		NO NULL :要查找的类名称
-		 * @param   (Dom)node 					   NULL :dom节点
+		 * @param   (Dom)node 					   NULL :父级dom节点
 		 * @param   (String)tag 				   NULL :标签名称
 		 * @return  (Array)					返回匹配的节点集合
 		 * Example：
