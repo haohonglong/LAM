@@ -105,7 +105,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 				this.fragment = document.createDocumentFragment();
 			}
 			if(this.node){
-				this.fragment.appendChild(this.node);
+				this.appendTo(this.fragment);
 			}
 
 			return this;
@@ -319,12 +319,12 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-26
-		 * 修改日期：2015-8-26
+		 * 修改日期：2016-7-13
 		 * 名称： attr
 		 * 功能：节点元素属性的获取或设置操作
-		 * 说明：3: 添加 2:获取 1:同3一样 不同的是参数只有一个Object
+		 * 说明：3: 添加 2:两个参数String类型：设置 获取 1:参数String类型：获取 ；参数Object类型 设置
 		 * 注意：
-		 * @return (String | void)
+		 * @return (*)
 		 * Example：
 		 *
 		 */
@@ -339,6 +339,23 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 						for(k in D){
 							this.attr(this.node,k,D[k]);
 						}
+					}else if(System.isString(D)){
+						return this.attr(null,D);
+					}
+
+					break;
+				case 2:
+					if(System.isString(arguments[0]) && System.isString(arguments[1])){
+						this.attr(this.node,arguments[0],arguments[1]);
+						break;
+					}
+
+					node=arguments[0] || this.node;
+					name=arguments[1];
+					try{
+						return node.getAttribute(name);
+					}catch(e){
+						throw new Error("Warning without the method of getAttribute "+e.name);
 					}
 
 					break;
@@ -352,18 +369,11 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 						throw new Error("Warning without the method of setAttribute "+e.name);
 					}
 					break;
-				case 2:
-					node=arguments[0] || this.node;
-					name=arguments[1];
-					try{
-						return node.getAttribute(name);
-					}catch(e){
-						throw new Error("Warning without the method of setAttribute "+e.name);
-					}
 
-					break;
 				default:
 			}
+
+			return this;
 
 		},
 		/**
