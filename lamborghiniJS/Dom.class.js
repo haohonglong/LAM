@@ -56,8 +56,8 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-26
-		 * 修改日期：2016-1-8
-		 * 名称： getNode
+		 * 修改日期：2016-7-13
+		 * 名称： get
 		 * 功能：获取节点元素
 		 * 说明：
 		 * 注意：
@@ -65,15 +65,15 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * Example：
 		 *
 		 */
-		'getNode':function(){
+		'get':function(){
 			return this.node;
 		},
 		/**
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-6-15
-		 * 修改日期：2016-6-15
-		 * 名称： getNode
+		 * 修改日期：2016-7-13
+		 * 名称： getType
 		 * 功能：获取元素的节点类型
 		 * 说明：
 		 * 注意：
@@ -81,7 +81,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * Example：
 		 *
 		 */
-		'getNodeType':function(node){
+		'getType':function(node){
 			node = node || this.node;
 			return node.nodeType;
 		},
@@ -164,7 +164,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * @param logic
 		 * @returns {Node}
 		 */
-		'cloneNode':function(node,logic){
+		'clone':function(node,logic){
 			node = node || this.node;
 			if(logic)
 				return node.cloneNode(true);
@@ -368,6 +368,14 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		},
 		/**
 		 *
+		 * @param (String)s		NO NUll:
+		 * @returns {*}
+		 */
+		'find':function(s){
+
+		},
+		/**
+		 *
 		 * @param node
 		 * @returns {*}
 		 */
@@ -380,6 +388,8 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			}
 			return null;
 		},
+
+
 		/**
 		 *
 		 * @param node
@@ -634,7 +644,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * @param   (Array)nodes 			NO NULL :dom节点集合
 		 * @param   (String)attr 			NO NULL :要设置样式属性
 		 * @param   (String)value 			NO NULL :要设置样式属性的值
-		 * @return  (void)
+		 * @return  (*)
 		 * Example：
 		 */
 		'setStyle':function(nodes,attr,value){
@@ -642,6 +652,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			for(var i=0,len=nodes.length;i<len;i++){
 				nodes[i].style[attr]=value;
 			}
+			return this;
 		},
 		/**
 		 *
