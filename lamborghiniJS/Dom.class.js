@@ -158,6 +158,12 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			}
 			return this.fragment.childNodes.length > 1 ? this.fragment : this.fragment.removeChild(this.fragment.firstChild);
 		},
+		/**
+		 *
+		 * @param node
+		 * @param logic
+		 * @returns {Node}
+		 */
 		'cloneNode':function(node,logic){
 			node = node || this.node;
 			if(logic)
@@ -165,40 +171,121 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			else
 				return node.cloneNode(false);
 		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-12-08
+		 * 修改日期：2016-7-13
+		 * 名称： removeAttr
+		 * 功能：node 中删除指定的属性名及值
+		 * 说明：
+		 * 注意：
+		 * @param node
+		 * @param attrName
+		 * @returns {Dom}
+		 */
 		'removeAttr':function(node,attrName){
 			node = node || this.node;
 			node.removeAttribute(attrName);
+			return this;
 		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-7-13
+		 * 名称： hasAttr
+		 * 功能：node 中是否有指定的属性名
+		 * 说明：
+		 * 注意：
+		 * @param node
+		 * @param attrName
+		 * @returns {boolean}
+		 */
+		'hasAttr':function(node,attrName){
+			node = node || this.node;
+			return node.hasAttribute(attrName);
+		},
+		/**
+		 *
+		 * @param newNode
+		 * @param oldNode
+		 * @returns {Dom}
+		 */
 		'append':function(newNode,oldNode){
 			oldNode = oldNode || this.node;
 			oldNode.appendChild(newNode);
+			return this;
+
 		},
+		/**
+		 *
+		 * @param oldNode
+		 * @param newNode
+		 * @returns {Dom}
+		 */
 		'appendTo':function(oldNode,newNode){
 			newNode = newNode || this.node;
 			oldNode.appendChild(newNode);
+			return this;
 		},
-
+		/**
+		 *
+		 * @param node
+		 * @returns {string}
+		 */
 		'getNodeName':function(node){
 			node = node || this.node;
 			return node.nodeName;
 		},
+		/**
+		 *
+		 * @param node
+		 * @returns {Dom}
+		 */
 		'delNode':function(node){//在它的父节点调用removeChild 然后把它自身移除
 			node = node || this.node;
 			this.getParent(node).removeChild(node);
+			return this;
 		},
+		/**
+		 *
+		 * @param node
+		 * @returns {Node}
+		 */
 		'getParent':function(node){//获取当前节点的父节点
 			node = node || this.node;
 			return node.parentNode;
 		},
+		/**
+		 *
+		 * @param newNode
+		 * @param current
+		 * @returns {Dom}
+		 */
 		'replaceNode':function(newNode,current){//替换节点
 			newNode = newNode || this.node;
 			this.getParent(current).replaceChild(newNode , current);
+			return this;
 		},
+		/**
+		 *
+		 * @param newNode
+		 * @param current
+		 * @returns {Dom}
+		 */
 		'insertBefore':function(newNode , current){//在oldNode的父节点上调用insertBefore燃后把新节点插入它自身前面
 			newNode = newNode || this.node;
 			this.getParent(current).insertBefore(newNode , current);
+			return this;
 
 		},
+		/**
+		 *
+		 * @param node
+		 * @param newNode
+		 * @returns {*}
+		 */
 		'insertAfter':function(node,newNode){
 			newNode = newNode || this.node;
 			if(node.nextSibling){//如果node有下一个节点的话
@@ -208,11 +295,16 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			}
 			return node;
 		},
+		/**
+		 *
+		 * @returns {Dom}
+		 */
 		'delNodeMore':function(){//删除多个节点
 			var __this___ = this;
 			System.each(arguments,function(k,v){
 				__this___.delNode(this);
 			});
+			return this;
 
 			//var node;
 			//for(var i=0;i<arguments.length;i++){
@@ -274,6 +366,11 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			}
 
 		},
+		/**
+		 *
+		 * @param node
+		 * @returns {*}
+		 */
 		'firstChild':function(node){//查找下面的元素是不是节点元素
 			node = node || this.node;
 			if(node.firstChild){//有子节点的话
@@ -283,6 +380,11 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			}
 			return null;
 		},
+		/**
+		 *
+		 * @param node
+		 * @returns {*}
+		 */
 		'lastChild':function(node){//查找元素最后节点是不是节点元素
 			node = node || this.node;
 			if(node.lastChild){//有子节点的话
@@ -292,6 +394,11 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			}
 			return null;
 		},
+		/**
+		 *
+		 * @param node
+		 * @returns {*}
+		 */
 		'previousSibling':function(node){//查找前一个节点是否是元素节点排除所有非元素节点
 			node = node || this.node;
 			if(node.previousSibling){
@@ -303,6 +410,11 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			}
 			return null;
 		},
+		/**
+		 *
+		 * @param node
+		 * @returns {*}
+		 */
 		'nextSibling':function(node){
 			node = node || this.node;
 			if(node.nextSibling){
@@ -314,6 +426,11 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			}
 			return null;
 		},
+		/**
+		 *
+		 * @param nodes
+		 * @returns {Array}
+		 */
 		'filterSpaceNode':function(nodes){//过滤元素中包含的所有空白节点
 			var ret=[];
 			for(var i=0;i<nodes.length;i++){
@@ -323,7 +440,11 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			return ret;
 		},
 		'empty':function(){},
-
+		/**
+		 *
+		 * @param str
+		 * @returns {*}
+		 */
 		'$':function(str){
 			if(document.getElementById(str)){
 				return document.getElementById(str);
@@ -334,7 +455,12 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			}
 
 		},
-
+		/**
+		 *
+		 * @param node
+		 * @param attName
+		 * @returns {boolean}
+		 */
 		'findClass':function(node,attName){
 			node = node || this.node;
 			for(var i=0,len=node.attributes.length;i<len;i++){
@@ -343,7 +469,12 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			}
 			return false;
 		},
-		//取消HTML代码
+
+		/**
+		 * 取消HTML代码
+		 * @param $string
+		 * @returns {*}
+		 */
 		'shtmlspecialchars':function($string) {
 			var $p;
 			var $unallowed = {
@@ -359,8 +490,12 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		},
 
 
-
-
+		/**
+		 *
+		 * @param node
+		 * @param className
+		 * @returns {*}
+		 */
 		'addClass':function(node,className){//给指定元素添加类名
 			var names = node.className || this.attr(node,'class');
 			names = names.split(/\s+/);
@@ -368,6 +503,12 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			this.attr(node,'class',names.join(" "));
 			return node;
 		},
+		/**
+		 *
+		 * @param node
+		 * @param className
+		 * @returns {*}
+		 */
 		'delClass':function(node,className){
 			var names = node.className || this.attr(node,'class');
 			names = names.split(/\s+/);
