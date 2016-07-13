@@ -322,7 +322,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * 修改日期：2016-7-13
 		 * 名称： attr
 		 * 功能：节点元素属性的获取或设置操作
-		 * 说明：3: 添加 2:两个参数String类型：设置 获取 1:参数String类型：获取 ；参数Object类型 设置
+		 * 说明：3: 添加 2:两个参数String类型：添加；否则获取 1:参数String类型：获取 ；参数Object类型 设置
 		 * 注意：
 		 * @return (*)
 		 * Example：
