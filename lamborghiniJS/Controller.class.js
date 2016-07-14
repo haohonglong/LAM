@@ -59,7 +59,7 @@ window[GRN_LHH].main([window,window.document,jQuery],function(window,document,$,
 
         var file = Controller.get_url_name(init.file || 'file');
         if(!System.isFunction(this[file+'Action'])){
-            throw new Error('Warning \''+file+'Action\' method not exist');
+            throw new Error('Warning: \''+file+'Action\' method not exist');
             return this;
         }
         this[file+'Action']();
