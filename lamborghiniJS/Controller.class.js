@@ -23,7 +23,7 @@ window[GRN_LHH].main([window,window.document,jQuery],function(window,document,$,
      * @author lhh
      * 产品介绍：
      * 创建日期：2015-6-25
-     * 修改日期：2015-6-25
+     * 修改日期：2016-7-14
      * 名称：get_url_Param
      * 功能：根据指定的url参数获取相对应的参数值
      * 说明：
@@ -58,6 +58,10 @@ window[GRN_LHH].main([window,window.document,jQuery],function(window,document,$,
         init = init || {};
 
         var file = Controller.get_url_name(init.file || 'file');
+        if(!System.isFunction(this[file+'Action'])){
+            throw new Error('Warning \''+file+'Action\' method not exist');
+            return this;
+        }
         this[file+'Action']();
         this.file = file;
 
