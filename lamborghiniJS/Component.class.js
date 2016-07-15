@@ -182,6 +182,103 @@ window[GRN_LHH].main([window],function(window,undefined){
 
 		/**
 		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-15
+		 * 修改日期：2016-7-15
+		 * 名称：clone
+		 * 功能：克隆当前对象
+		 * 说明：
+		 * 注意：
+		 * @return  (Object)				:返回克隆后的新对象
+		 * Example：
+		 */
+		'clone': function() {
+			return System.clone(this);
+
+		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-15
+		 * 修改日期：2016-7-15
+		 * 名称：isclone
+		 * 功能：当前对象是克隆对象吗
+		 * 说明：
+		 * 注意：
+		 *
+		 * @returns {boolean}
+		 */
+		'isclone': function() {
+			return System.isclone(this);
+
+
+		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-15
+		 * 修改日期：2016-7-15
+		 * 名称：isitclone
+		 * 功能：当前对象是从它克隆来的？
+		 * 说明：
+		 * 注意：
+		 * @return  (Object)obj				:非克隆对象
+		 * @param obj
+		 * @returns {boolean}
+		 */
+		'isitclone': function(obj) {
+			if(!this.isclone()){
+				throw new Error("Warning: 当前对象不是克隆对象");
+
+			}
+			if(System.isclone(obj)){
+				throw new Error("Warning: 参数是克隆对象");
+
+			}
+			if(obj._hashCode === this._hashCode.split('_')[0]){
+				return true;
+			}else{
+				return false;
+			}
+
+		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-15
+		 * 修改日期：2016-7-15
+		 * 名称：iscurclone
+		 * 功能：是从当前对象克隆过来的吗
+		 * 说明：
+		 * 注意：
+		 * @return  (Object)obj				:克隆对象
+		 * @param obj
+		 * @returns {boolean}
+		 */
+		'iscurclone': function(obj) {
+			if(this.isclone()){
+				throw new Error("Warning: 当前对象是克隆对象");
+
+			}
+			if(!System.isclone(obj)){
+				throw new Error("Warning: 参数不是是克隆对象");
+
+			}
+			if(this._hashCode === obj._hashCode.split('_')[0]){
+				return true;
+			}else{
+				return false;
+			}
+
+		},
+
+		/**
+		 *
 		 * @author lhh
 		 * 产品介绍：析构方法
 		 * 创建日期：2015-4-2

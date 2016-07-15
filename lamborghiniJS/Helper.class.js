@@ -366,7 +366,6 @@ window[GRN_LHH].main([window,window.document],function(window,document,undefined
 		'init':function(){},
 		'create':function(){},
 		'add':function(){},
-		'clone':function(){},
 		'remove':function(){},
 		'set':function(){},
 		'get':function(){},
@@ -381,6 +380,8 @@ window[GRN_LHH].main([window,window.document],function(window,document,undefined
 		'find':function(){},
 		'replace':function(){},
 		'analysis':function(){},
+		'__constructor':function(){},
+
 		/**
 		 *
 		 * @author lhh
