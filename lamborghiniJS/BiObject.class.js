@@ -8,15 +8,19 @@ window[GRN_LHH].main([window],function(window,undefined){
 	function BiObject(){
 		System.Basis.extends.call(this);
 		__this__=this;
-		this._hashCode=BiObject._hashCodePrefix+Math.round(Math.random()*System.random)+BiObject._hashCodePrefix+BiObject._hashCodeCounter++;
+		this._hashCode=BiObject.generate();
 	}
 	BiObject._hashCodeCounter=1;
 	BiObject._hashCodePrefix="hc";
+	BiObject.generate=function(){
+		return BiObject._hashCodePrefix+Math.round(Math.random()*System.random)+BiObject._hashCodePrefix+BiObject._hashCodeCounter++;
+	};
 	BiObject.toHashCode=function(o){
 		if(o._hashCode!=null)
 			return o._hashCode;
 		return o._hashCode=BiObject._hashCodePrefix+Math.round(Math.random()*System.random)+BiObject._hashCodePrefix+BiObject._hashCodeCounter++;
 	};
+
 	BiObject.prototype={
 		'constructor':BiObject,
 		'__constructor':function(){},
@@ -26,6 +30,7 @@ window[GRN_LHH].main([window],function(window,undefined){
 		'getDisposed':function(){
 			return this._disposed;
 		},
+
 		'getId':function(){
 			return this._id;
 		},
