@@ -27,7 +27,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-26
-		 * 修改日期：2015-8-26
+		 * 修改日期：2016-7-15
 		 * 名称： create
 		 * 功能：创建节点元素
 		 * 说明：
@@ -47,7 +47,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			this.node=document.createElement(tag);
 			var k;
 			for(k in D){
-				this.attr(this.node,k,D[k]);
+				this.attr(k,D[k]);
 			}
 
 			return this;
