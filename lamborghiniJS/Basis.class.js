@@ -1687,7 +1687,7 @@ if(!GRN_LHH){
 		'clone': function(className) {
 			var obj;
 			obj = this.merge({},[className]);
-			obj['_hashCode'] += '_'+Math.round(Math.random()*this.random).toString();
+			obj['_hashCode'] += '_'+this.BiObject.generate();
 			return obj;
 
 		},
