@@ -1678,16 +1678,41 @@ if(!GRN_LHH){
 		 * 修改日期：2015-10-13
 		 * 名称：clone
 		 * 功能：对象克隆
-		 * 说明：
+		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
 		 * 注意：
 		 * @param   (Object)className 		NO NULL : 要克隆的类
 		 * @return  (Object)				:返回克隆后的新对象
 		 * Example：
 		 */
 		'clone': function(className) {
-			return this.merge({},[className]);
+			var obj;
+			obj = this.merge({},[className]);
+			obj['_hashCode'] += '_'+Math.round(Math.random()*this.random).toString();
+			return obj;
 
 		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-15
+		 * 修改日期：2016-7-15
+		 * 名称：isclone
+		 * 功能：检查对象是否是克隆对象
+		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
+		 * 注意：
+		 * @param   (Object)className 		NO NULL : 检查的对象
+		 * @returns {boolean}
+		 */
+		'isclone': function(obj) {
+			if(obj._hashCode.indexOf('_') != -1){
+				return true;
+			}else{
+				return false;
+			}
+
+		},
+
 		/**
 		 *
 		 * @author: lhh
@@ -2317,6 +2342,72 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	Basis.prototype={
 		'constructor': Basis,
 		'__constructor':function(){},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-15
+		 * 修改日期：2016-7-15
+		 * 名称：clone
+		 * 功能：克隆当前对象
+		 * 说明：
+		 * 注意：
+		 * @return  (Object)				:返回克隆后的新对象
+		 * Example：
+		 */
+		'clone': function() {
+			return System.clone(this);
+
+		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-15
+		 * 修改日期：2016-7-15
+		 * 名称：isclone
+		 * 功能：当前对象是克隆对象吗
+		 * 说明：
+		 * 注意：
+		 *
+ 		 * @returns {boolean}
+		 */
+		'isclone': function() {
+			return System.isclone(this);
+
+
+		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-15
+		 * 修改日期：2016-7-15
+		 * 名称：isitclone
+		 * 功能：当前对象是从它克隆来的？
+		 * 说明：
+		 * 注意：
+		 * @return  (Object)obj				:它对象
+		 * @param obj
+		 * @returns {boolean}
+		 */
+		'isitclone': function(obj) {
+			if(!this.isclone()){
+				throw new Error("Warning: 当前对象不是克隆对象");
+
+			}
+			if(System.isclone(obj)){
+				throw new Error("Warning: 参数是克隆对象");
+
+			}
+			if(obj._hashCode === this._hashCode.split('_')[0]){
+				return true;
+			}else{
+				return false;
+			}
+
+		},
 
 
 		/**
