@@ -18,7 +18,7 @@ window[GRN_LHH].main([window],function(window,undefined){
 	BiObject.toHashCode=function(o){
 		if(o._hashCode!=null)
 			return o._hashCode;
-		return o._hashCode=BiObject._hashCodePrefix+Math.round(Math.random()*System.random)+BiObject._hashCodePrefix+BiObject._hashCodeCounter++;
+		return o._hashCode=BiObject.generate();
 	};
 
 	BiObject.prototype={
