@@ -1367,18 +1367,29 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2014-12-23
-		 * 修改日期：2015-3-18
+		 * 修改日期：2016-7-19
 		 * 名称：length
 		 * 功能：获取对象成员的长度
 		 * 说明：
 		 * 注意：
-		 * @param   (Object)D 			   NULL :指定的对象
-		 * @return  (Number) 返回成员数量
-		 * Example：MySystem.length(D)
+		 * @param   (Object | Array | String)D 			   NULL :指定的对象
+		 * @returns {Number}
 		 */
-
 		'length':function(D){
-			return getObjectLength.call(D);
+			if(!isObject(D) && !isArray(D) && !isString(D)){
+				throw new Error('Warning 参数必须是Object 或 Array 或 String');
+				return -1;
+			}
+
+			if(isObject(D)){
+				return getObjectLength.call(D);
+			}
+
+			if(isArray(D) || isString(D)){
+				return D.length;
+
+			}
+
 		},
 
 		/**
