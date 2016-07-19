@@ -35,7 +35,6 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 	 * 			(Boolean)event		            			:NULL  		防止回调中定义的事件被重复定义
 	 * 			(Boolean)loop		            			:NULL  		循环轮播默认循环状态(true)
 	 * 			(Boolean)response	            			:NULL  		是否是自适应的,默认false
-	 * 			(Boolean | Object)sport		            	:NUL		是否animate
 	 * 			(Function)callback_event		            :NO NULL	有事件时调用这个方法
 	 * 			(Function)callback_resoult		            :NO NULL	自定义选择用什么方式运动
 	 * 			(Function)befor_fn		      				:NULL		resize之前
@@ -92,7 +91,6 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 			'time':2000,
 			'loop':true,
 			'current':0,
-			'sport':true,
 			'response':false
 		};
 
@@ -116,7 +114,7 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 		this.autoMove			= init.autoMove;
 		this.callback_resoult	= init.callback_resoult;
 		this.callback_event	    = init.callback_event;
-		this.sport  			= init.sport 	 || null;
+		this.Sport  			= null;
 
 
 		//check
@@ -267,9 +265,9 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 						var P={};
 						P[position]  = size+unit;
 						P['opacity'] = 'show';
-						if(this.sport && !notAnimate){
-							if(System.is(System,'Sport') && System.isObject(this.sport)){
-								this.sport.animate(this.$ul[0],P,unit,time);
+						if(this.Sport && !notAnimate){
+							if(System.Sport && this.Sport instanceof System.Sport){
+								this.Sport.animate(this.$ul[0],P,unit,time);
 
 							}else{
 								this.$ul.stop();
@@ -540,6 +538,44 @@ window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
 			},time);
 			return this;
 		},
+
+		/**
+		 *
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-19
+		 * 修改日期：2016-7-19
+		 * 名称：setSport
+		 * 功能：设置运动对象
+		 * 说明：
+		 * 注意：
+		 *
+ 		 * @param (Sport)Sport
+		 * @returns {Slider}
+		 */
+		'setSport':function(Sport){
+			this.Sport = Sport;
+			return this;
+		},
+		/**
+		 *
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-19
+		 * 修改日期：2016-7-19
+		 * 名称：getSport
+		 * 功能：获取运动对象
+		 * 说明：
+		 * 注意：
+		 * @return (Sport)
+		 * Example：
+		 */
+		'getSport':function(){
+			return this.Sport;
+		},
+
+
+
 		/**
 		 *
 		 * @author lhh
