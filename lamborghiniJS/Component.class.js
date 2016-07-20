@@ -24,9 +24,6 @@ window[GRN_LHH].main([window],function(window,undefined){
 		System.Basis.extends.call(this,System.BiObject);
 		__this__=this;
 
-		this.super = System.merge(System.super,[this]);
-
-
 	}
 	/*static mothed
 	 ----------------------------------------*/

@@ -1980,7 +1980,7 @@ if(!GRN_LHH){
 	MySystem.classPath='./';
 	MySystem.files=[];
 	MySystem.classes=[];
-	MySystem.super={};
+	MySystem.Super={};
 	MySystem.app=null;
 	MySystem.Object=Object.prototype;
 	MySystem.Function=Function.prototype;
@@ -2181,6 +2181,8 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 
 
 	function Basis(D){
+		this.Super = System.merge(System.Super,[this]);
+		this.Super.constructor = this.constructor;
 		__this__=this;
 		System.app=this;
 		this.Browser=null;
@@ -2189,6 +2191,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 				this.Browser=Browser;
 			}
 		};
+
 
 	}
 
@@ -2347,6 +2350,8 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 			return 0;
 		}
 		/*------------------------------*/
+
+
 
 	};
 

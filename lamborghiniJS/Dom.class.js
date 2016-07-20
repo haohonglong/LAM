@@ -8,6 +8,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		System.Basis.extends.call(this,System.Browser);
 		__this__=this;
 		this.node=null;
+		this.attributes=[];
 		this.create(tag,D);
 		this.fragment = document.createDocumentFragment();
 	}
@@ -45,6 +46,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 				return false;
 			}
 			this.node=document.createElement(tag);
+			this.attributes = this.node.attributes;
 			var k;
 			for(k in D){
 				this.attr(k,D[k]);
@@ -52,6 +54,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 
 			return this;
 		},
+
 		/**
 		 * @author: lhh
 		 * 产品介绍：
@@ -159,12 +162,19 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			return this.fragment.childNodes.length > 1 ? this.fragment : this.fragment.removeChild(this.fragment.firstChild);
 		},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-12-08
+		 * 修改日期：2015-12-08
+		 * 名称： innerHTML
+		 * 功能：克隆节点
+		 * 说明：logic true:下面的子孙节点一块克隆下来 ；false:只克隆当前节点 (默认)
+		 * 注意：
 		 * @param node
 		 * @param logic
 		 * @returns {Node}
 		 */
-		'clone':function(node,logic){
+		'clone':function(logic,node){
 			node = node || this.node;
 			if(logic)
 				return node.cloneNode(true);
@@ -180,31 +190,42 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * 功能：node 中删除指定的属性名及值
 		 * 说明：
 		 * 注意：
-		 * @param node
-		 * @param attrName
+		 * @param name	NO NULL:属性名字
+		 * @param node	   NULL:节点
 		 * @returns {Dom}
 		 */
-		'removeAttr':function(node,attrName){
+		'removeAttr':function(name,node){
 			node = node || this.node;
-			node.removeAttribute(attrName);
+			node.removeAttribute(name);
 			return this;
 		},
 		/**
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-7-13
-		 * 修改日期：2016-7-13
+		 * 修改日期：2016-7-20
 		 * 名称： hasAttr
 		 * 功能：node 中是否有指定的属性名
 		 * 说明：
 		 * 注意：
-		 * @param node
-		 * @param attrName
+		 * @param name	NO NULL:属性名字
+		 * @param node	   NULL:节点
 		 * @returns {boolean}
 		 */
-		'hasAttr':function(node,attrName){
+		'hasAttr':function(name,node,
+						   attributes){
 			node = node || this.node;
-			return node.hasAttribute(attrName);
+			if(node.hasAttribute){
+				return node.hasAttribute(name);
+			}else{
+				attributes =node && node.attributes || this.attributes;
+				for(var i=0,len=attributes.length;i<len;i++){
+					if(attributes[i].nodeName === name)
+						return true;
+				}
+				return false;
+			}
+
 		},
 		/**
 		 *
@@ -475,20 +496,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 			}
 
 		},
-		/**
-		 *
-		 * @param node
-		 * @param attName
-		 * @returns {boolean}
-		 */
-		'findClass':function(node,attName){
-			node = node || this.node;
-			for(var i=0,len=node.attributes.length;i<len;i++){
-				if(node.attributes[i].nodeName==attName)
-					return true;
-			}
-			return false;
-		},
+
 
 		/**
 		 * 取消HTML代码
