@@ -2341,8 +2341,9 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 				System.extends.call(this,null,superClass,type,arg);
 			}
 			//保存父类数据,在子类中要调用父类方法可用： （this.Super.父类成员）
-			this.Super = System.merge(System.Super,[this]);
-			this.Super.constructor = superClass.prototype.constructor;
+			//this.Super = System.merge(System.Super,[this]);
+			this.Super 	= superClass.prototype;
+			this.Super.constructor 	= superClass.prototype.constructor;
 
 
 			//如果它下面的子类已经设置了浏览器就不再设置浏览器
