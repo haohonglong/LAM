@@ -2181,8 +2181,6 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 
 
 	function Basis(D){
-		this.Super = System.merge(System.Super,[this]);
-		this.Super.constructor = this.constructor;
 		__this__=this;
 		System.app=this;
 		this.Browser=null;
@@ -2327,7 +2325,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	 * @param   (Function)superClass   	NO NULL :父类名称
 	 * @param   (String)type 			NO NULL :1:原型链继承;默认2:对象冒充方式继承
 	 * @param   ([])arg 			   	   NULL :继承父类时传的构造参数
-	 * @return  (void)
+	 * @return  {*}
 	 * Example：
 	 *		Basis.extends.call(this,superClass,type,[a,b,c,...]);
 	 */
@@ -2342,12 +2340,17 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 			if(!this.setBrowser){
 				System.extends.call(this,null,superClass,type,arg);
 			}
+
+			this.Super = System.merge(System.Super,[this]);
+			this.Super.constructor = superClass.prototype.constructor;
+
+
 			//如果它下面的子类已经设置了浏览器就不再设置浏览器
 			// if(Browser && (typeof Browser  !='undefined') && !this.Browser) this.setBrowser(Browser);
 
 		}else{
 			throw new Error(["Warning nothing the",superClass].join(' '));
-			return 0;
+			return this;
 		}
 		/*------------------------------*/
 
