@@ -2340,7 +2340,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 			if(!this.setBrowser){
 				System.extends.call(this,null,superClass,type,arg);
 			}
-
+			//保存父类数据,在子类中要调用父类方法可用： （this.Super.父类成员）
 			this.Super = System.merge(System.Super,[this]);
 			this.Super.constructor = superClass.prototype.constructor;
 
