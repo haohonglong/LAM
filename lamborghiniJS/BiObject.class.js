@@ -30,6 +30,14 @@ window[GRN_LHH].main([window],function(window,undefined){
 		'getDisposed':function(){
 			return this._disposed;
 		},
+		/**
+		 *
+		 * @returns {*}
+		 */
+		'hashCode':function(){
+			return this._hashCode;
+		},
+
 
 		'getId':function(){
 			return this._id;
