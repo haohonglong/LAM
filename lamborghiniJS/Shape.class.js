@@ -3,7 +3,7 @@
 window[GRN_LHH].main([window],function(window,undefined){
 	'use strict';
 	var System=this;
-	System.is(System.Html5,'Canvas','CanvasForm');
+	System.is(System.Html5,'Canvas','Shape');
 
 	var __this__=null;
 
@@ -23,15 +23,15 @@ window[GRN_LHH].main([window],function(window,undefined){
 	 * Example：
 
 	 */
-	function CanvasForm(theCanvas,init){
+	function Shape(theCanvas,init){
 		System.Basis.extends.call(this,System.Html5.Canvas,2,[theCanvas,init]);
 		__this__=this;
 
 
 	}
 
-	CanvasForm.prototype = {
-		'constructor':CanvasForm,
+	Shape.prototype = {
+		'constructor':Shape,
 		'__constructor':function(){},
 
 		/**
@@ -442,7 +442,7 @@ window[GRN_LHH].main([window],function(window,undefined){
 		 * 创建日期：2015-4-2
 		 * 修改日期：2015-4-2
 		 * 名称：destructor
-		 * 功能：在注销CanvasForm对象时调用此方法
+		 * 功能：在注销Shape对象时调用此方法
 		 * 说明：
 		 * 注意：
 		 * @return  ()						:
@@ -452,7 +452,7 @@ window[GRN_LHH].main([window],function(window,undefined){
 
 	};
 
-	System.extends(CanvasForm,System.Html5.Canvas,1);
-	System['Html5']['CanvasForm'] = CanvasForm;
+	System.extends(Shape,System.Html5.Canvas,1);
+	System['Html5']['Shape'] = Shape;
 
 });

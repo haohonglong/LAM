@@ -357,7 +357,7 @@
         		'Html5':{
         			'Svg'		:function(){},
         			'Canvas'	:function(){},
-        			'CanvasForm':function(){}
+        			'Shape':function(){}
         		}
         	}
 

@@ -973,7 +973,7 @@ if(!GRN_LHH){
 		'Html5': {
 			'Svg': {},
 			'Canvas': {},
-			'CanvasForm': {}//基本形
+			'Shape': {}//基本形
 		},
 		'View': {},
 		'Validation':{},

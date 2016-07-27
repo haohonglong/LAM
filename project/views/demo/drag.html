@@ -31,7 +31,7 @@
 <script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Tools.class.js"></script>
 <script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Tab.class.js"></script>
 <script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Canvas.class.js"></script>
-<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/CanvasForm.class.js"></script>
+<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Shape.class.js"></script>
 
 
 <script type="text/javascript">
@@ -185,10 +185,10 @@
 				p1.beginPath().moveTo(150,0).bezierCurveTo(0,125,300,175,150,300).strokeStyle('#000').stroke();
 			}
 
-			var p=new System.Html5.CanvasForm(document.getElementById("box3"));
-			var p1=new System.Html5.CanvasForm(document.getElementById("box4"));
-			var p6=new System.Html5.CanvasForm(document.getElementById("box6"));
-			var p7=new System.Html5.CanvasForm(document.getElementById("box7"));
+			var p=new System.Html5.Shape(document.getElementById("box3"));
+			var p1=new System.Html5.Shape(document.getElementById("box4"));
+			var p6=new System.Html5.Shape(document.getElementById("box6"));
+			var p7=new System.Html5.Shape(document.getElementById("box7"));
 
 			triangle();
 			bezier();
