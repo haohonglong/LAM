@@ -547,6 +547,8 @@
 		2.原型链式继承
 			System.extends(className,superName,1);
 			上面这句必须放在类框架代码块末尾；(参考 二、开发约定 里的 类结构)
+		3.子类调用父类的成员方法
+			this.Super.父类成员方法();
 
 	七、原始对象的原型链上扩充的方法列表
 			Function.method();
