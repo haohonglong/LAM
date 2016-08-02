@@ -297,10 +297,10 @@ window[GRN_LHH].main([window,window['document'],jQuery],function(window,document
 	};
 
 	//绑定事件的句柄
-	Browser.handler=function(Event,functions){//哪个事件发生了？
-		var evt=Browser.fixEvt(Event);
-		//evt.type :当前 Event 对象表示的事件的名称
-		var functions=functions[evt.type];//
+	Browser.handler=function(even,functions){//哪个事件发生了？
+		var evt=Browser.fixEvt(even);
+		//evt.type :当前 even 对象表示的事件的名称
+		functions=functions[evt.type];//
 		for(var i=0,len=functions.length;i<len;i++){
 			if(functions[i])
 				functions[i].call(this,evt);//call的方法起到一个对象冒充的作用（把指向window对象变成指向当前对象）
@@ -350,8 +350,8 @@ window[GRN_LHH].main([window,window['document'],jQuery],function(window,document
 				if(dom["on"+evt] !== Browser.handler)
 					functions.push(dom["on"+evt]);//
 			}
-			dom["on"+evt]=function(){
-				Browser.handler.call(this,functions);
+			dom["on"+evt]=function(even){
+				Browser.handler.apply(this,[even,functions]);
 			};
 		}
 		return dom;
