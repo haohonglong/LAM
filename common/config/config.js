@@ -153,6 +153,7 @@ if(!registerContainerConfiguration){
         classPath+'/loadcommon.class.js',
         classPath+'/Component.class.js',
         classPath+'/Helper.class.js',
+        classPath+'/Event.class.js',
         classPath+'/Browser.class.js',
         classPath+'/Dom.class.js',
         classPath+'/Html.class.js',

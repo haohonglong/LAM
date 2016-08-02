@@ -22,10 +22,11 @@ window[GRN_LHH].main([window],function(window,undefined){
     'use strict';
     var System=this;
     System.is(System,'Drag','Drag_xy');
+    System.is(System,'Event');
 
     var __this__=null;
 
-    var fixEvt = System.Browser.fixEvt;
+    var fixEvt = System.Event.fixEvt;
 
     //是否到最后了
     var whetherToLast=function(coord,that){

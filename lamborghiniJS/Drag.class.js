@@ -29,11 +29,12 @@ window[GRN_LHH].main([window],function(window,undefined){
     'use strict';
     var System=this;
     System.is(System,'Browser','Drag');
+    System.is(System,'Event');
 
     var __this__=null;
 
     //事件兼容类方法
-    var fixEvt=System.Browser.fixEvt;
+    var fixEvt=System.Event.fixEvt;
     //初始化限制范围左边和上边的溢出检测变量
     var getRealStyle=function(e,key){//（对象，属性名）获取当前的style元素里的css属性值
         return e.currentStyle? e.currentStyle[key] : document.defaultView.getComputedStyle(e,false)[key];
