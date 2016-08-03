@@ -7,10 +7,10 @@
 
 产品介绍：
 
-	LamborghiniJS 不是插件，是一种javascript OO思想实现的类库，它可以为应用框架的搭建做更好的基础服务。
+	LamborghiniJS 不是插件，是一种javascript OO思想实现的类库，它可以为生产应用框架做更好的基础服务。
 	LamborghiniJS 的诞生初衷是自2013年起,为解决自己工作方便写的小工具,发展到现在的一个类库思想实现.
 	LamborghiniJS 的目的:继承、覆写、重用！ 少写重复性的代码,封装已通过测试功能的成熟代码,便于以后开发中复用.
-	LamborghiniJS 里有接口的概念,每一个类都要通过命名空间去调用.每定义一个类名,都要先定义一个同名的接口名(参考 二、开发约定 类结构)
+	LamborghiniJS 里有接口的概念,每一个类都要通过命名空间去调用.(参考 二、开发约定 类结构)
 	LamborghiniJS 里有沙箱机制(参考 十四、沙箱)
 	LamborghiniJS 里有hashcode概念（参考 十五、hashcode）
 	LamborghiniJS 里有模版标签概念（参考 十八、模版标签）
@@ -699,8 +699,8 @@
 				LAMJS.isFloat(); 
         	
         	2.文件类型检测
-        		LAMJS.is();//检查父类是否存在，子类是否已定义过了
-        		LAMJS.isClassFile(); 
+        		LAMJS.is(namespace,superClass,class);//检查父类是否存在(不存在 抛异常)，当前定义的类是否已定义过了(已定义过 抛异常)
+        		LAMJS.isClassFile();//检测文件名是否包含'.class'关键字 
 
 	十一、基础类非独立浏览器环境（浏览器有专用的类）， 可应用服务器nodejs 。
 	十二、说明格式
