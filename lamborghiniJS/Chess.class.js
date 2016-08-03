@@ -1,11 +1,9 @@
 /**
- * 五子棋
+ * 棋盘
  */
-LAMJS.main([
-	window
-],function(window){
+window[GRN_LHH].main([window],function(window,undefined){
 	var System=this;
-	System.is(System.Html5,'CanvasForm','Chess');
+	System.is(System.Html5,'Shape','Chess');
 	var __this__=null;
 	//棋盘行列数
 	var num = 15;
@@ -18,7 +16,7 @@ LAMJS.main([
 	var wins=[];
 
 	function Chess(dom,n){
-		System.Basis.extends.call(this,System.Html5.CanvasForm,2,[dom]);
+		System.Basis.extends.call(this,System.Html5.Shape,2,[dom]);
 		__this__=this;
 		num = n || 15;
 		this.aLength = (num-1)*w;
@@ -189,7 +187,7 @@ LAMJS.main([
 
 		}
 	};
-	System.extends(Chess,System.Html5.CanvasForm,1);
+	System.extends(Chess,System.Html5.Shape,1);
 	System['Html5']['Chess'] = Chess;
 
 });
