@@ -110,7 +110,7 @@
                 'count':$('.img').length,
                 'unit':'px',
                 'margin':5,
-                'moveNumber':3,
+                'moveNumber':1,
                 'vcount':2,
                 'position':'left',
                 'autoMove':function(that,$autoHandler){
@@ -140,9 +140,10 @@
                     }
 
 
-                },
-                'sport':true
-            }).run();
+                }
+            });
+            slider.setSport(true);
+            slider.run();
         }
 
 
