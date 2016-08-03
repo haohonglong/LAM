@@ -67,9 +67,7 @@ window[GRN_LHH].main([window],function(window,undefined){
 		}
 	};
 
-	Fsc.getAjax=function() {
-		return myAjax;
-	};
+	Fsc.Ajax = myAjax;
 
 
 
