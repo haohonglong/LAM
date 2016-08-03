@@ -22,7 +22,7 @@ window[GRN_LHH].main([window],function(window,undefined){
 
 	var myAjax = {
 		// XMLHttpRequest IE7+, Firefox, Chrome, Opera, Safari ；  ActiveXObject IE6, IE5
-		xhr: window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'),
+		xhr: window.XMLHttpRequest ? createStandardXHR() : createActiveXHR(),
 		get: function (url, callback) {
 			this.xhr.open('get', url);
 			this.onreadystatechange(callback, this.xhr);
