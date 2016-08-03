@@ -974,7 +974,8 @@ if(!GRN_LHH){
 		'Html5': {
 			'Svg': {},
 			'Canvas': {},
-			'Shape': {}//基本形
+			'Shape': {},//基本形
+			'Chess': {}//棋盘类
 		},
 		'View': {},
 		'Validation':{},

@@ -356,11 +356,12 @@
         		'FindParentObject'	:function(){},
         		'Widget'			:function(){},
                 'Tree'				:function(){},
-        		'Html5':{
-        			'Svg'		:function(){},
-        			'Canvas'	:function(){},
-        			'Shape':function(){}
-        		}
+        		'Html5': {
+					'Svg': function(){},
+					'Canvas': function(){},
+					'Shape': function(){},//基本形
+					'Chess': function(){}//棋盘类
+				},
         	}
 
 			类结构:(继承参考 六、继承)
