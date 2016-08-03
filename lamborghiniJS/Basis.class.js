@@ -103,7 +103,7 @@ if(!GRN_LHH){
 	var MySystem = {};
 	var Function;
 	//对象里禁用的关键字
-	var arr_Object_key=['length','list'];
+	var arr_Object_key=['_hashCode','length','list'];
 
 	if(window){
 		Function = window.Function;
@@ -659,11 +659,12 @@ if(!GRN_LHH){
 	 */
 	var arr_Object_key_has=function(key){
 		arr_Object_key = MySystem.arr_Object_key || arr_Object_key;
-		if(arr_Object_key.indexOf(key) != -1){
-			return true;
-		}else{
-			return false;
+		for(var i= 0,len=arr_Object_key.length;i < len;i++){
+			if(key === arr_Object_key[i]){
+				return true;
+			}
 		}
+		return false;
 	};
 
 
@@ -2133,7 +2134,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	};
 
 
-	System.arr_Object_key=['length','list'];
+	System.arr_Object_key=null;
 	var __this__=null;
 
 
@@ -2232,7 +2233,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2015-8-25
-	 * 修改日期：2016-6-28
+	 * 修改日期：2016-8-3
 	 * 名称： printTag
 	 * 功能：动态返回指定的标签
 	 * 说明：
@@ -2261,35 +2262,29 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 		single = single || false;
 		D = D || {};
 
-		var attrs=[],key,tag,i= 0,len = System.length(D);
-		for(key in D){
+		var tag=[];
+		tag.push('<',name);
+		for(var key in D){
 			if(System.arr_Object_key_has(key)){
 				continue;
 			}
-			attrs.push(' ',key,'=','"',D[key],'"');
-
-			if(single || len-1!=i){
-				attrs.push('');
-			}
-			i++;
+			tag.push(' ',key,'="',D[key],'"');
 		}
+
 		if(single){
-			tag=['<',name,attrs.join(''),'/','>'];
+			tag.push(' />');
 		}else{
+			tag.push('>');
 			if(content){
 				if(System.isArray(content)){
-					tag=['<',name,attrs.join(''),'>',content.join(''),'<','/',name,'>'];
+					tag.push(content.join(''));
 				}else{
-					tag=['<',name,attrs.join(''),'>',content,'<','/',name,'>'];
+					tag.push(content);
 				}
-
-			}else{
-				tag=['<',name,attrs.join(''),'>',		 '<','/',name,'>'];
 			}
-
+			tag.push('</',name,'>');
 		}
 		return tag.join('');
-
 	};
 
 	Basis.printScript=function(D){
