@@ -2,24 +2,25 @@
 	version ：1.1.1
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-5-10
+	修改日期 ：2016-8-3
 
 
 产品介绍：
 
-	LamborghiniJS 不是插件，是一种javascript OOP的思想实现的类库，它可以为应用框架的搭建做更好的基础服务。
+	LamborghiniJS 不是插件，是一种javascript OO思想实现的类库，它可以为应用框架的搭建做更好的基础服务。
 	LamborghiniJS 的诞生初衷是自2013年起,为解决自己工作方便写的小工具,发展到现在的一个类库思想实现.
-	LamborghiniJS 的目的:少写重复性的代码,封装已通过测试功能的成熟代码,便于以后开发中复用.
-	LamborghiniJS 里有接口的概念,每一个类都要通过接口去调用.每定义一个类名,都要先定义一个同名的接口名(参考 二、开发约定 类结构)
+	LamborghiniJS 的目的:继承、覆写、重用！ 少写重复性的代码,封装已通过测试功能的成熟代码,便于以后开发中复用.
+	LamborghiniJS 里有接口的概念,每一个类都要通过命名空间去调用.每定义一个类名,都要先定义一个同名的接口名(参考 二、开发约定 类结构)
 	LamborghiniJS 里有沙箱机制(参考 十四、沙箱)
 	LamborghiniJS 里有hashcode概念（参考 十五、hashcode）
 	LamborghiniJS 里有模版标签概念（参考 十八、模版标签）
 	LamborghiniJS 里有MVC概念（参考 十九、MVC）
 
-	现有选项卡、拖拽、常用工具、弹出层、幻灯、html5绘图基础类的实例．
+	现有选项卡、拖拽、常用工具、弹出层、幻灯、棋盘、缩略图、自适应布局、html5绘图基础类的实例．
 	如要根据项目需求要修改或扩展现有的这些实例，正确的方法是：
 		1.创建一个子类继承父类(现有的实例的类)
 		2.覆写父类里的成员(属性和方法)
+		3.子类可调用父类成员方法
 	(继承参考 六、继承)
 
 
@@ -226,6 +227,7 @@
 				classPath+'/loadcommon.class.js',
 				classPath+'/Component.class.js',
 				classPath+'/Helper.class.js',
+				classPath+'/Event.class.js',
 				classPath+'/Browser.class.js',
 				classPath+'/Dom.class.js',
 				classPath+'/Html.class.js',
@@ -611,39 +613,39 @@
 			LAMJS.Browser.getDPI();
 			LAMJS.Browser.addFavorite();
 			
-			LAMJS.Html.tag(); //同LAMJS.Basis.printTag() 功能一样，建议用这个方法
+			LAMJS.Html.tag(); //同LAMJS.Basis.printTag() 功能一样，建议用LAMJS.Html.tag()
 				返回创建指定标签的字符串 
-				第一参数是标签名称。第二参数，是否是单标签。第三参数是标签里的所有属性，没有的话就传个{}.第四个参数是标签里的内容，单标签没有内容可以省略这个参数。
-				LAMJS.Html.tag('p', false, {},'这是一个p标签');
+				第一参数是标签名称。第二参数，是否是单标签 true | false (默认可不填)。第三参数是标签里的所有属性，（没有的话就传个{}）.第四个参数是标签里的内容（没有内容可以省略这个参数）。
+				LAMJS.Html.tag('p', {},'这是一个p标签');
 				上面的代码生成下面的字符串
 					<p>这是一个p标签</p>
 				可以嵌套n个标签，方式如下：
 				    LAMJS.main(function () {
                         'use strict';
                         var System = this;
-                        System.Html.tag('nav', false,{},
-								System.Html.tag('ul', false, {'class': 'pagination'},
+                        System.Html.tag('nav',{},
+								System.Html.tag('ul', {'class': 'pagination'},
 										[
-											System.Html.tag('li', false, {},
-													System.Html.tag('a', false, {'href':'#','aria-label':'Previous'},
-															System.Html.tag('span', false, {'aria-hidden':'true'},'&laquo;')
+											System.Html.tag('li', {},
+													System.Html.tag('a',{'href':'#','aria-label':'Previous'},
+															System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
 													)
 											),
 											//用这种方式迭代相同的部分
 											(function(){
 												var arr=[];
 												for(var i=1;i<=5;i++){
-													arr.push(System.Html.tag('li', false, {},
-															System.Html.tag('a', false, {'href':'#'},i)
+													arr.push(System.Html.tag('li', {},
+															System.Html.tag('a', {'href':'#'},i)
 													));
 				
 												}
 												return arr.join('');
 				
 											})(),
-											System.Html.tag('li', false, {},
-													System.Html.tag('a', false, {'href':'#','aria-label':'Next'},
-															System.Html.tag('span', false, {'aria-hidden':'true'},'&laquo;')
+											System.Html.tag('li', {},
+													System.Html.tag('a', {'href':'#','aria-label':'Next'},
+															System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
 													)
 											)
 				
@@ -697,7 +699,7 @@
 				LAMJS.isFloat(); 
         	
         	2.文件类型检测
-        		LAMJS.is();
+        		LAMJS.is();//检查父类是否存在，子类是否已定义过了
         		LAMJS.isClassFile(); 
 
 	十一、基础类非独立浏览器环境（浏览器有专用的类）， 可应用服务器nodejs 。
