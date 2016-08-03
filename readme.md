@@ -626,33 +626,31 @@
                         var System = this;
                         System.Html.tag('nav',{},
 								System.Html.tag('ul', {'class': 'pagination'},
-										[
-											System.Html.tag('li', {},
+										(function(){
+											var arr=[];
+											var li;
+											li =System.Html.tag('li', {},
 													System.Html.tag('a',{'href':'#','aria-label':'Previous'},
 															System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
 													)
-											),
-											//用这种方式迭代相同的部分
-											(function(){
-												var arr=[];
-												for(var i=1;i<=5;i++){
-													arr.push(System.Html.tag('li', {},
-															System.Html.tag('a', {'href':'#'},i)
-													));
-				
-												}
-												return arr.join('');
-				
-											})(),
-											System.Html.tag('li', {},
+											);
+											
+											arr.push(li);
+											
+											for(var i=1;i<=5;i++){
+												arr.push(System.Html.tag('li', {},
+														System.Html.tag('a', {'href':'#'},i)
+												));
+			
+											}
+											li = System.Html.tag('li', {},
 													System.Html.tag('a', {'href':'#','aria-label':'Next'},
 															System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
 													)
-											)
-				
-				
-										]
-				
+											);
+											arr.push(li);
+											return arr;
+										})()
 				
 								)
 							);
