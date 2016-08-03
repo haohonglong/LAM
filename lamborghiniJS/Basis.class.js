@@ -2294,7 +2294,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 
 	Basis.printScript=function(D){
 
-		return Basis.printTag('script',false,D);
+		return Basis.printTag('script',D);
 		//<script src="aa.js" type="text/javascript"></script>
 	};
 
