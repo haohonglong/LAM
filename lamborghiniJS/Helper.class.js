@@ -20,10 +20,6 @@ window[GRN_LHH].main([window,window.document],function(window,document,undefined
 	var __this__=null;
 
 	System.merge(null,[{
-						'Date':{
-							'SimpleDateFormat':Date.prototype.format
-						},
-
 						/**
 						 * @author lhh
 						 * 产品介绍：
