@@ -15,24 +15,7 @@ window[GRN_LHH].main([window],function(window,undefined){
 
 	}
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2015-8-25
-	 * 修改日期：2016-8-4
-	 * 名称： Html.tag
-	 * 功能：动态返回指定的标签
-	 * 说明：
-	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(String)tag             NO NULL : 标签名称
-	 * @param 	(Boolean)single         NO NULL : 成对标签还是单一标签，false 是成对标签
-	 * @param 	(Object)D             	NO NULL : 标签的属性
-	 * @param 	(String|Array)content            NULL : 内容
-	 * @return (String) 返回标签字符串 可用document.write();输出
-	 * Example：
-	 *
-	 */
+
 	Html.tag = System.Basis.printTag;
 	/**
 	 *
