@@ -178,16 +178,16 @@ a{
 .linkRose a:hover.linkRose:hover{color:#e80274!important;}
 
 /*文字样式*/
-.__i__Font,          .__i__Font a{color: #666;font-size: 12px;}
-.__i__Font-grey,     .__i__Font-grey a{color: #ccc;}
-.__i__Font-333,      .__i__Font-333 a{color: #333;}
-.__i__Font-f60,      .__i__Font-f60 a{color: #f60;}
-.__i__Font-lightgrey,.__i__Font-lightgrey a{color: #999;}
-.__i__Font-ccc,      .__i__Font-ccc a{color: #ccc;}
-.__i__Font-red,      .__i__Font-red a{color: #cc0000;}
-.__i__Font-white,    .__i__Font-white a{color: #fff;}
-.__i__Font-green,    .__i__Font-green a{color: #41bd39;}
-.__i__Font-blue,     .__i__Font-blue a{color: #33a5f7;}
+.__i__font,          .__i__font a{color: #666;font-size: 12px;}
+.__i__font-grey,     .__i__font-grey a{color: #ccc;}
+.__i__font-333,      .__i__font-333 a{color: #333;}
+.__i__font-f60,      .__i__font-f60 a{color: #f60;}
+.__i__font-lightgrey,.__i__font-lightgrey a{color: #999;}
+.__i__font-ccc,      .__i__font-ccc a{color: #ccc;}
+.__i__font-red,      .__i__font-red a{color: #cc0000;}
+.__i__font-white,    .__i__font-white a{color: #fff;}
+.__i__font-green,    .__i__font-green a{color: #41bd39;}
+.__i__font-blue,     .__i__font-blue a{color: #33a5f7;}
 
 /*传统标题*/
 h1,h2,h3,h4,h5,h6{font-family:"Microsoft Yahei";font-weight:bold;letter-spacing:normal;}
