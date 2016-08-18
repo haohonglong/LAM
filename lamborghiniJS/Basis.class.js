@@ -1318,13 +1318,11 @@ if(!GRN_LHH){
 		'import':function(url,baseUrl,suffix,System){
 			suffix = suffix || '.js';
 			try {
-				if(importScripts){
-					url.each(function(){
-						var e=this;
-						e+=suffix;
-						baseUrl ? importScripts(baseUrl+e) : importScripts(e);
-					});
-				}
+				url.each(function(){
+					var e=this;
+					e+=suffix;
+					baseUrl ? importScripts(baseUrl+e) : importScripts(e);
+				});
 
 
 			} catch (e) {
