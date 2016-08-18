@@ -18,7 +18,6 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
     'use strict';
     var System=this;
 
-    var dom=null;
     var html,head,body, m,meta, s,script, l,link;
     var create;
     var append;
@@ -30,12 +29,15 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
 
     System.is(System,'Basis','Loadcommon');
 
-
-    var CMyDom=function(){//创建Dom 对象
-        if(dom) return dom;
+    /**
+     *
+     * @returns {*|Dom}
+     * @constructor
+     */
+    function CMyDom(){//创建Dom 对象
         System.is(System,'Dom');
-        dom = new System.Dom();
-    };
+        return new System.Dom();
+    }
 
 
 
@@ -120,12 +122,8 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
          *
          *
          */
-        'getPath':function(D){
-            CMyDom();
-            initDom();
-            this.replace_tpl(D);
+        'getPath':function(D){},
 
-        },
         /**
          *
          * @author: lhh
@@ -186,10 +184,10 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                             continue;
                         }else{
 
-                            var A = System.clone(sAttribute);
+                            var A = System.clone(sAttribute,1);
                             A['src'] = src;
                             if(create){
-                                node = System.Basis.createTag('script',A);
+                                node = CMyDom().create('script',A);
                                 node.script=true;
                             }else{
                                 node = System.Basis.printScript(A);
@@ -212,7 +210,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                         }else{
                             System.merge(js,[sAttribute]);
                             if(create){
-                                node = System.Basis.createTag('script',js);
+                                node = CMyDom().create('script',js);
                                 node.script=true;
                             }else{
                                 node = System.Basis.printScript(js);
@@ -239,10 +237,10 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                         href = baseUrl ? baseUrl+css+suffix : css+suffix;
                         //是否已加载过了
                         if(System.files.indexOf(href) != -1){continue;}
-                        var A = System.clone(cAttribute);
+                        var A = System.clone(cAttribute,1);
                         A['href'] = href;
                         if(create){
-                            node = System.Basis.createTag('link',A);
+                            node = CMyDom().create('link',A);
                             node.style=true;
                         }else{
                             node = System.Basis.printLink(A);
@@ -259,7 +257,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                         System.merge(css,[cAttribute]);
 
                         if(create){
-                            node = System.Basis.createTag('link',css);
+                            node = CMyDom().create('link',css);
                             node.style=true;
                         }else{
                             node = System.Basis.printLink(css);

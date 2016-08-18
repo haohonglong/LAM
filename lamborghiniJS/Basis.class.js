@@ -1694,13 +1694,16 @@ if(!GRN_LHH){
 		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
 		 * 注意：
 		 * @param   (Object)className 		NO NULL : 要克隆的类
+		 * @param   (Number)not_generate 	   	   NULL : 是否生成_hashCode,默认生成;1 不生成
 		 * @return  (Object)				:返回克隆后的新对象
 		 * Example：
 		 */
-		'clone': function(className) {
+		'clone': function(className,not_generate) {
 			var obj;
 			obj = this.merge({},[className]);
-			obj['_hashCode'] += '_'+this.BiObject.generate();
+			if(!not_generate){
+				obj['_hashCode'] += '_'+this.BiObject.generate();
+			}
 			return obj;
 
 		},
@@ -2214,7 +2217,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	 * 注意：
 	 * @param 	(String)tag             NO NULL : 标签名称
 	 * @param 	(Object)D             	NO NULL : 标签的属性
-	 * @return (Dom)
+	 * @return ({System.Dom})
 	 * Example：
 	 *
 	 */

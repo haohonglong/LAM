@@ -8,29 +8,27 @@
 	<!--<script type="text/javascript" js="../js/system/config.js"></script>-->
 	<script type="text/javascript" src="config.js"></script>
 
+
 <script type="text/javascript">
-LAMJS.main(function(){
-	var System=this;
-
-	System.import([
-		'/Browser.class',
-		'/Drag.class',
-		'/Dom.class',
-		'/Tools.class',
-		'/Tab.class',
-		'/Canvas.class',
-		'/CanvasForm.class'
-	],System.classPath);
-
-});
+	LAMJS.main(function(){
+		this.import([
+			'/Browser.class',
+			'/Drag.class',
+			'/Dom.class',
+			'/Tools.class',
+			'/Tab.class',
+			'/Canvas.class',
+			'/Shape.class'
+		],this.classPath);
+	});
 </script>
 
 
 <script type="text/javascript">
-
-	LAMJS.main([window],function(window,undefined){
+	LAMJS.wait(function(){
 		var System=this;
-		window.onload=function(){
+		$(function(){
+
 
 			new System.Drag(document.getElementById("box5"),{'noText':true});
 			new System.Drag(document.getElementById("box3"),{'noText':true});
@@ -88,6 +86,7 @@ LAMJS.main(function(){
 			sector_4.eAngle=240;
 
 			function triangle(){
+				console.log(p6.triangle)
 				p6.triangle().closePath().stroke().fill('red');
 
 			}
@@ -174,24 +173,22 @@ LAMJS.main(function(){
 				p1.beginPath().moveTo(150,0).bezierCurveTo(0,125,300,175,150,300).strokeStyle('#000').stroke();
 			}
 
-			var p=new System.Html5.CanvasForm(document.getElementById("box3")).create();
-			var p1=new System.Html5.CanvasForm(document.getElementById("box4")).create();
-			var p6=new System.Html5.CanvasForm(document.getElementById("box6")).create();
-			var p7=new System.Html5.CanvasForm(document.getElementById("box7")).create();
+			var p=new System.Html5.Shape(document.getElementById("box3")).create();
+			var p1=new System.Html5.Shape(document.getElementById("box4")).create();
+			var p6=new System.Html5.Shape(document.getElementById("box6")).create();
+			var p7=new System.Html5.Shape(document.getElementById("box7")).create();
 
 			triangle();
 			bezier();
 			case1();
 			polygon();
-//		case2();
+			case2();
+		});
 
 
+	},5000);
 
 
-
-		};
-
-	});
 </script>
 
 

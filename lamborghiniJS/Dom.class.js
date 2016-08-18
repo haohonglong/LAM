@@ -9,7 +9,10 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		__this__=this;
 		this.node=null;
 		this.attributes=[];
-		this.create(tag,D);
+		//构造有参数时
+		if(arguments.length){
+			this.create(tag,D);
+		}
 		this.fragment = document.createDocumentFragment();
 	}
 
