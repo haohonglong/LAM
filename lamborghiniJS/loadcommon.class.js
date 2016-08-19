@@ -279,7 +279,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
          * 名称：print
          * 功能：显示load() 里的文件
          * 创建日期：2015-9-2
-         * 修改日期：2015-9-2
+         * 修改日期：2016-8-19
          * 说明：
          * 调用方式：
          */
@@ -297,7 +297,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                                 this.insertAfter(s[i-1]);
                             }
                         }
-                        //3秒后移除添加的script 节点
+                        //3秒后依次移除添加的script 节点
                         System.wait([this],function(node){
                             node.delNode();
                         },this.timer);
@@ -364,7 +364,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
         }
 
     };
-    System['Loadcommon']=new Loadcommon();
+    System['Loadcommon'] = System['Loader'] =new Loadcommon();
 
 
 });
