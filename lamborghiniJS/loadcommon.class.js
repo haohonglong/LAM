@@ -286,7 +286,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
         'print':function(){
             System.each(files,function(i){
                 if(System.isObject(this)){
-                    this.timer = i*1000+3000;
+                    this.timer = i*1000;
                     if(this.script){
                         if('after' === append){
                             this.appendTo(body);
