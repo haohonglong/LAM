@@ -2112,7 +2112,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 		 */
 		'use':function(){
 			this.render.create=true;
-			this.render.default.script.Attribute.async=true;
+			this.render.default.script.Attribute.async='true';
 			this.render.default.script.Attribute.defer='defer';
 		},
 		/**
@@ -2120,7 +2120,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 		 */
 		'unuse':function(){
 			this.render.create=false;
-			this.render.default.script.Attribute.async=false;
+			this.render.default.script.Attribute.async='false';
 			this.render.default.script.Attribute.defer='';
 		},
 		'getClassPath':function(){
