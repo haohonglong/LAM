@@ -8,7 +8,7 @@
  * LamborghiniJS 0.3 pre
  * @author：lhh
  * 创建日期:2015/3/20	
- * 修改日期:2015/7/15	
+ * 修改日期:2016/8/19
  * 名称：基类
  * 功能：服务于派生类
  * 命名空间接口定义: var GRN_LHH='interfaceName';
@@ -43,8 +43,8 @@ if(!GRN_LHH){
 
 })(typeof window !== "undefined" ? window : this,GRN_LHH,function(W,namespace,undefined){
 	'use strict';
-	var version="1.1.1";
-
+	var version="1.1.2";
+	var Interface,System;
 	/**
 	 *
 	 * @author: lhh
@@ -86,12 +86,12 @@ if(!GRN_LHH){
 	 * @return  (Boolean)
 	 * Example：isFloat(2.5)
 	 */
-	var isFloat=function(n){
+	function isFloat(n){
 		if(n.toString().indexOf('.') != -1){
 			return true;
 		}
 		return false;
-	};
+	}
 
 
 
@@ -99,8 +99,7 @@ if(!GRN_LHH){
 	if(!alert){
 		alert=console.log;
 	}
-	var Interface;
-	var MySystem = {};
+
 	var Function;
 	//对象里禁用的关键字
 	var arr_Object_key=['_hashCode','length','list'];
@@ -117,8 +116,1083 @@ if(!GRN_LHH){
 		String   = {};
 		Array    = {};
 	}
+//interface
+//==================================================================================
 
 
+	/**
+	 * @author: lhh
+	 * 产品介绍：所有类的接口
+	 * 创建日期：2015-9-6
+	 * 修改日期：2015-9-6
+	 * 名称：Interface
+	 * 功能：
+
+	 * 说明：
+	 * 注意：
+	 */
+	Interface= {
+		'Basis': {},
+		'BiObject': {},
+		'Component': {},
+		'Helper': {},
+		'Controller': {},
+		'Model': {},
+		'Html': {},
+		'Browser': {},
+		'Css': {},
+		'Template': {},
+		'Event': {},
+		'Dom': {},
+		'Cookie': {},
+		'Drag': {},
+		'Drag_xy': {},
+		'Error': {},
+		'FakeSelect': {},
+		'AutoLayout': {},
+		'Fsc': {},
+		'Linklist': {},
+		'PopupLayer': {},
+		'Roll': {},
+		'Layout': {},
+		'Slider': {},
+		'Sport': {},
+		'Tools': {},//(single)
+		'Tab': {},
+		'Thumbnail': {},
+		'FindParentObject': {},
+		'Tree': {},
+		'Sort': {},
+		'EditTables': {},
+		'Html5': {
+			'Svg': {},
+			'Canvas': {},
+			'Shape': {},//基本形
+			'Chess': {}//棋盘类
+		},
+		'View': {},
+		'Validation':{},
+		'Widget': {}
+	};
+
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2014-12-23
+	 * 修改日期：2015-7-10
+	 * 名称：System
+	 * 功能：
+	 * 属性列表:
+	 *			guid
+	 *			app
+	 *			classes
+	 * 方法列表:
+	 *			isset
+	 *			empty
+	 *			isNumeric
+	 *			error
+	 *			isType
+	 *			isObject
+	 *			isString
+	 *			isArray
+	 *			isFunction
+	 *			contains
+	 *			main
+	 *			run
+	 *			wait
+	 *			then
+	 *			config
+	 *			define
+	 *			print
+	 *			import
+	 *			length
+	 *			proxy
+	 *			isEmptyObject
+	 *			arr_isEmpty
+	 *			queues
+	 *			putIndexGetObjectTheValue
+	 *			list
+	 *			is
+	 *			log
+	 *			defined
+	 *			merge
+	 *			clone
+	 *			extends
+	 *			extend
+	 *			extends_f
+	 *			override
+	 *			autoCenter
+	 *			isClassFile
+	 *			template
+	 *			findTpl
+	 *			replaceTpl
+	 *			analysisVar
+	 *			getRootPath
+	 * 对象列表:
+	 *			Function
+	 *			Date
+	 *			String
+	 *			Array
+	 * 说明：System对象已继承了上面定义对象里的所有方法
+	 * 注意：
+	 */
+	System = {
+		"version": version,
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-12-23
+		 * 修改日期：2016-4-11
+		 * 名称：System.main
+		 * 功能：程序主方法
+		 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
+		 * 注意：不能链式调用，如要链式调用，用 System.then方法
+		 * @param   (Array)args 			   NULL :传入的参数
+		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
+		 * @return  (Object) 返回callback 里的返回值
+		 * Example：
+		 */
+		'main':function(args,callback){
+			if (!arguments.length) {
+				throw new Error('Warning 至少要有一个参数');
+				return this;
+			}
+			if(isFunction(args)) {
+				callback = args;
+				args = undefined;
+			}
+
+			if(args && !isArray(args)){
+				throw new Error('Warning args 必须是数组类型');
+				return this;
+			}
+			if (!isFunction(callback) ) {
+				throw new Error('Warning 参数必须要有一个 Function 类型');
+				return this;
+			}
+
+			if(isArray(args)){
+				return callback.apply(this,args);
+			}else{
+				return callback.call(this);
+			}
+
+
+		},
+
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-1-21
+		 * 修改日期：2016-4-11
+		 * 名称：System.run
+		 * 功能：与main方法功类似,改变标签渲染方式, 用document.createElement()生成标签
+		 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
+		 * 注意：
+		 * @param   (Array)args 			NO NULL :传入的参数
+		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
+		 * @return  (Object) 返回callback 里的返回值
+		 * Example：
+		 */
+		'run':function(args,callback){
+			if(isFunction(args)) {
+				callback = args;
+				args = undefined;
+			}
+			if(args){
+				return this.use().main(args,callback);
+			}else{
+				return this.use().main(callback);
+			}
+
+		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-12-22
+		 * 修改日期：2016-4-11
+		 * 名称：System.wait
+		 * 功能：一直是链式调用，总是返回当前命名空间对象，
+		 * 说明：与main方法功类似,不同的是每隔规定的时间数再去调用传进来的函数
+		 * 注意：
+		 * @param   (Array)args 			   NULL :传入的参数
+		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
+		 * @param   (Number)time 			   NULL :等待执行的时间
+		 * @return  (System)
+		 * Example：
+		 */
+		'wait':function(args,callback,time){
+			var self=this;
+			if(isFunction(args)) {
+				time=callback;
+				callback = args;
+				args = undefined;
+			}
+			if(isFunction(callback)) {
+				time=time || 3000;
+				if(callback.timer){
+					clearTimeout(fn.timer);
+				}
+				callback.timer = setTimeout(function(){
+					if(isArray(args)){
+						self.main(args,callback);
+					}else{
+						self.main(callback);
+					}
+
+				}, time);
+			}
+			return this;
+		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-4-11
+		 * 修改日期：2016-4-11
+		 * 名称：System.then
+		 * 功能：一直是链式调用，总是返回当前命名空间对象，
+		 * 说明：跟main方法类似，不同的是main 返回的是callback里的返回值。
+		 * 注意：
+		 * @param   (Array)args 			   NULL :传入的参数
+		 * @param   (Function)callback 		NO NULL :要执行的操作
+		 * @return  (System)
+		 * Example：
+		 */
+		'then':function(args,callback){
+			var self=this;
+			if(isFunction(args)) {
+				callback = args;
+				args = undefined;
+			}
+			if(isFunction(callback)) {
+				if(isArray(args)){
+					self.main(args,callback);
+				}else{
+					self.main(callback);
+				}
+
+			}
+			return this;
+		},
+
+
+
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-1-18
+		 * 修改日期：2016-3-22
+		 * 名称：System.use
+		 * 功能：用createElement 创建标签并且设为异步
+		 * 说明：
+		 * 注意：
+		 * @return  (System)
+		 * Example：
+		 */
+		'use':function(){
+			this.Config.use();
+			return this;
+		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-1-18
+		 * 修改日期：2016-3-22
+		 * 名称：System.unuse
+		 * 功能：用document.write() 创建标签并且设为非异步
+		 * 说明：
+		 * 注意：
+		 * @return  (System)
+		 * Example：
+		 */
+		'unuse':function(){
+			this.Config.unuse();
+			return this;
+		},
+
+
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-11-22
+		 * 修改日期：2015-11-24
+		 * 名称：System.modules
+		 * 功能：模块
+		 * 说明：
+		 * 注意：
+		 * Example：
+		 */
+		'modules':{
+			/**
+			 * @author: lhh
+			 * 产品介绍：
+			 * 创建日期：2015-11-22
+			 * 修改日期：2015-11-24
+			 * 名称：System.modules.exports
+			 * 功能：
+			 * 说明：
+			 * 注意：
+			 * Example：
+			 */
+			'exports':{}
+		},
+
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-9-15
+		 * 修改日期：2015-9-15
+		 * 名称：System.config
+		 * 功能：配置类加载文件
+		 * 说明：
+		 * 注意：
+		 * @param   (Object)D 			NO NULL :传入的参数
+		 * @return  (voide)						:
+		 * Example：
+		 */
+		'config':function(D){},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-9-21
+		 * 修改日期：2015-9-21
+		 * 名称：System.define
+		 * 功能：
+		 * 说明：
+		 * 注意：
+		 * @param   (Object)D 			NO NULL :传入的参数
+		 * @return  (voide)						:
+		 * Example：
+		 */
+		'define':function(D){},
+
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-9-16
+		 * 修改日期：2016-2-23
+		 * 名称：System.print
+		 * 功能：输出
+		 * 说明：
+		 * 注意：
+		 * @param   (Object)D 			NO NULL :传入的参数
+		 * @return  (voide)						:
+		 * Example：
+		 * 		System.print('s'[,1,'a',...])
+		 */
+		'print':function(){
+			var arr=prints.apply(Array,arguments);
+
+			document.write(arr.join(' '));
+		},
+
+
+
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-8-27
+		 * 修改日期：2015-8-27
+		 * 名称：import
+		 * 功能：导入指定的js文件
+		 * 说明：System 参数不用传
+		 * 注意：
+		 * @param   (Array)url 			    NO NULL :要加载js文件
+		 * @param   (String)baseUrl 		       NULL :文件路径
+		 * @param   (String)suffix 		       NULL :文件后缀名
+		 * @param   (Object)System 			   NULL :命名空间
+		 * @return  (Object) this 返回当前对象可以链式调用import方法
+		 * Example：
+		 */
+		'import':function(url,baseUrl,suffix,System){
+			suffix = suffix || '.js';
+			try {
+				if(importScripts){
+					url.each(function(){
+						var e=this;
+						e+=suffix;
+						baseUrl ? importScripts(baseUrl+e) : importScripts(e);
+					});
+				}
+
+
+			} catch (e) {
+				//throw new Error(e.message);
+				System = System || this;
+				System.Loadcommon.load({
+					'baseUrl':baseUrl || null,
+					'js':url,
+					'suffix':suffix
+				}).print();
+			}
+			return this;
+		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-12-20
+		 * 修改日期：2014-12-20
+		 * 名称：queues
+		 * 功能：队列
+		 * 说明：
+		 * 注意：
+		 * @param   (Array)arr          NO NULL :
+		 * @param   (Number)n           NO NULL :算时间差的值
+		 * @param   (Function)fn        NO NULL :
+		 * Example：
+		 */
+		'queues':function(arr,n,fn){
+			if(!isFunction(fn)) return -1;
+			var time=0;
+			for(var i=0,len=arr.length; i<len; i++){
+				time = n*i;
+				fn.call(arr[i],time,i);
+
+			}
+		},
+
+
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-12-23
+		 * 修改日期：2016-7-19
+		 * 名称：length
+		 * 功能：获取对象成员的长度
+		 * 说明：
+		 * 注意：
+		 * @param   (Object | Array | String)D 			   NULL :指定的对象
+		 * @returns {Number}
+		 */
+		'length':function(D){
+			if(!isObject(D) && !isArray(D) && !isString(D)){
+				throw new Error('Warning 参数必须是Object 或 Array 或 String');
+				return -1;
+			}
+
+			if(isObject(D)){
+				return getObjectLength.call(D);
+			}
+
+			if(isArray(D) || isString(D)){
+				return D.length;
+
+			}
+
+		},
+
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-12-23
+		 * 修改日期：2015-3-18
+		 * 名称：proxy
+		 * 功能：改变指定对象里的this指向
+		 * 说明：
+		 * 注意：
+		 * @param   (Function)fn       NO NULL :将要被改变作用域的函数
+		 * @param   (Object)context    NO NULL :一个object，那个函数的作用域会被设置到这个object上来。
+		 * @return  ()
+		 * Example：
+		 */
+		'proxy': function( fn, context ) {
+			if (isString(context)){
+				var tmp = fn[ context ];
+				context = fn;
+				fn = tmp;
+			}
+
+			// Quick check to determine if target is callable, in the spec
+			// this throws a TypeError, but we will just return undefined.
+			if ( !isFunction( fn ) ) {
+				return undefined;
+			}
+
+			// Simulated bind
+			var args = slice.call( arguments, 2 ),
+				proxy = function() {
+					return fn.apply( context, args.concat( slice.call( arguments ) ) );
+				};
+
+			// Set the guid of unique handler to the same of original handler, so it can be removed
+			proxy.guid = fn.guid = fn.guid || proxy.guid || System.guid++;
+
+			return proxy;
+		},
+		/**
+		 *
+		 * @author：lhh
+		 * 功能：输入一个键值对应的个数返回对应的值
+		 * 名称：putIndexGetObjectTheValue
+		 * 创建日期：2014.6.15
+		 * 修改日期：2016.2.25
+		 * @param (Object)D 		NO NULL :
+		 * @param (int)n 			NO NULL :
+		 * @return ()
+		 */
+		'putIndexGetObjectTheValue':function(D,n){
+			var i= 0,k;
+			//输入的一定是对象和数字
+			if(isObject(D) && isNumeric(n)){
+				//防止输入的下标大于对象的长度
+				if(getObjectLength.call(D) >= n){
+					for(k in D){
+						if(i==n){
+							return D[k];
+						}else{
+							i++;
+						}
+					}
+				}
+
+			}
+			return false;
+		},
+
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-8-26
+		 * 修改日期：2016-7-8
+		 * 名称： list
+		 * 功能：递归对象
+		 * 说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象位置
+		 * 注意：
+		 * @param 	(Object)D             			NO NULL : 对象
+		 * @param 	(Funtion)callback             	NO NULL : 回调方法
+		 * @returns {Object}
+		 * Example：
+		 *
+		 */
+		'list':function(D,callback){
+			var loop,totalLoop;
+			totalLoop=loop=0;
+			var __this__ = this;
+			var list=function(D,callback){
+
+				if(!__this__.isObject(D) && !__this__.isArray(D)){
+					return D;
+				}
+				if(!__this__.isFunction(callback)){
+					throw new Error('Warning 第二参数 必须是个callback');
+				}
+				//算出找到指定内容，所需要遍历的次数
+				loop++;
+				__this__.each(D,function(k,v){
+					totalLoop++;
+					if (false === callback.call(D,k,v,D)) {
+						console.log('共遍历----->'+loop+'<------次找到了')
+						return false;
+					}
+					//如果没找到，就继续递归搜索
+					if(v){
+						list(v,callback);
+					}
+				});
+			};
+			return {'data':list(D,callback),'totalLoop':totalLoop,'loop':loop};
+
+		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-2-29
+		 * 修改日期：2016-7-11
+		 * 名称： each
+		 * 功能：遍历数组或对象
+		 * 说明：
+		 * 注意：
+		 * @param 	(Array | Object)arr     		NO NULL :
+		 * @param 	(Funtion)callback             	NO NULL : 回调方法
+		 * @return ()
+		 * Example：
+		 *
+		 */
+		'each':function( obj, callback ) {
+			if(!obj || !callback){
+				throw new Error('Warning : 两个参数是必传的');
+
+			}
+			if(!this.isObject(obj) && !this.isArray(obj)){
+				throw new Error('Warning '+obj+': 必须是个Object 或者 Array 类型！');
+				return obj;
+			}
+
+			if(!this.isFunction(callback)){
+				throw new Error('Warning :第二参数 必须是个callback！');
+				return obj;
+			}
+
+			var i;
+
+			if ( this.isArray( obj ) ) {
+				return obj.each(callback);
+			} else {
+				for ( i in obj ) {
+					if (false === callback.call( obj[ i ], i, obj[ i ])) {
+						break;
+					}
+				}
+			}
+
+			return obj;
+		},
+
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-3-18
+		 * 修改日期：2015-3-20
+		 * 名称：System.extends
+		 * 功能：子类继承父类对象
+		 * 说明：System类范围内
+		 * 注意：这里的this指向的不是 System 对象
+		 * @param   (Object)this 			NO NULL :子类对象
+		 * @param   (Function)subClass 		   NULL :子类名称
+		 * @param   (Function)superClass   	NO NULL :父类名称
+		 * @param   (String)type 			NO NULL :1:原型链反射继承;2(默认):对象冒充方式继承
+		 * @param   ([])args 			   	   NULL :继承父类时传的构造参数
+		 * @return  (void)
+		 * Example：
+		 *		对象冒充方式继承:System.extends.call(this,subClass,superClass,type,[,extraParameters]);
+		 *		原型链继承:System.extends(subClass,superClass,type);
+		 */
+		'extends':function(subClass,superClass,type,args){
+			type=type || 2;
+			args = args || [];
+			switch(type){
+				case 1:
+					for(var key in superClass.prototype){
+						if(!subClass.prototype[key]){
+							subClass.prototype[key]=superClass.prototype[key];
+						}
+					}
+					break;
+				case 2:
+					if(args && isArray(args) && args.length > 0){//传构造参数
+						superClass.apply(this,args);
+					}else{//无构造参数
+						superClass.call(this);
+					}
+					break;
+
+
+				default:
+					throw new Error('Warning type 非法类型');
+					return false;
+
+			}
+
+
+		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-7-23
+		 * 修改日期：2015-7-23
+		 * 名称：System.extend
+		 * 功能：Extends a child object from a parent object using classical inheritance
+		 * pattern.
+		 * 说明：
+		 * 注意：
+		 * @param   (Object)subClass 			NO NULL :子类
+		 * @param   (Object)superClass 			NO NULL :父类
+		 * @return  (Function) 函数原型
+		 * Example：
+
+		 *
+		 */
+		'extend': function() {
+			// proxy used to establish prototype chain
+			var F = function() {};
+			// extend subClass from superClass
+			return function(subClass, superClass) {
+				F.prototype = superClass.prototype;
+				subClass.prototype = new F();
+				subClass.prototype.constructor = subClass;
+
+				subClass.superClass = superClass.prototype;
+				if(superClass.prototype.constructor === Object.prototype.constructor){
+					superClass.prototype.constructor = superClass;
+				}
+
+			};
+		}(),
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-3-27
+		 * 修改日期：2015-3-27
+		 * 名称：merge
+		 * 功能：一个或多个对象合并成一个指定的对象
+		 * 说明：默认同名的键值前面的不会被覆盖
+		 * 注意：
+		 * @param  (Object)target  		NO NULL :target 合并后的对象。null 代表合并到命名空间这个对象里
+		 * @param  (Array)args   		NO NULL :要合并对象的集合
+		 * @param  (Boolean)override 	   NULL :是否覆盖同名键名值,默认 false 是不覆盖
+		 * @return  (target ｜ this) 返回合并后的对象
+		 * Example：
+		 *		System.merge({},[A[,...]],false);
+		 */
+		'merge':function(target,args,override){
+			if(!isArray(args)){
+				throw new Error('Warning args 不是一个数组');
+				return false;
+			}
+			var len  = args.length;
+			if(arguments.length < 2){
+				throw new Error('Warning 最少要传2个参数');
+				return false;
+			}
+
+			override = override || false;
+			target   = target   || this;
+			var key;
+			var i=0;
+			if(!len){
+				throw new Error('Warning args不能为空');
+				return false;
+			}
+
+
+			for(;i<len; i++){
+				for(key in args[i]){
+					if(!override && (key in target)) {continue;}
+					target[key] = args[i][key];
+				}
+			}
+
+			return target;
+		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-10-13
+		 * 修改日期：2015-10-13
+		 * 名称：clone
+		 * 功能：对象克隆
+		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
+		 * 注意：
+		 * @param   (Object)className 		NO NULL : 要克隆的类
+		 * @param   (Number)not_generate 	   	   NULL : 是否生成_hashCode,默认生成;1 不生成
+		 * @return  (Object)				:返回克隆后的新对象
+		 * Example：
+		 */
+		'clone': function(className,not_generate) {
+			var obj;
+			obj = this.merge({},[className]);
+			if(!not_generate){
+				obj['_hashCode'] += '_'+this.BiObject.generate();
+			}
+			return obj;
+
+		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-15
+		 * 修改日期：2016-7-15
+		 * 名称：isclone
+		 * 功能：检查对象是否是克隆对象
+		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
+		 * 注意：
+		 * @param   (Object)className 		NO NULL : 检查的对象
+		 * @returns {boolean}
+		 */
+		'isclone': function(obj) {
+			if(obj._hashCode.indexOf('_') != -1){
+				return true;
+			}else{
+				return false;
+			}
+
+		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-02-17
+		 * 修改日期：2016-02-17
+		 * 名称：checkout
+		 * 功能：
+		 * 说明：
+		 * 注意：
+		 * Example：
+		 */
+		'checkout': function() {},
+
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-3-18
+		 * 修改日期：2015-3-18
+		 * 名称：System.extends_f
+		 * 功能：在指定对象的原型链上动态扩充方法
+		 * 说明：调用call方法改变this指针
+		 * 注意：不调用call方法，就是在W.System对象上扩充方法
+		 * @param   (Object)this 			NO NULL :指定对象
+		 * @param   (String)name   			NO NULL :扩充的方法名称
+		 * @param   (Function)fn 			NO NULL :方法原型
+		 * @return  (Object) 返回扩充的对象
+		 * Example：
+		 *		在Basis 的原型上扩充一个set方法
+		 *		System.extends_f.call(Basis,'set',function(){});
+		 *
+		 *		在W.System 的原型上扩充一个set方法
+		 *		System.extends_f('set',function(){});
+		 *
+		 */
+		'extends_f':function(name,fn){
+			if(!this.prototype[name]){
+				this.prototype[name] = fn;
+			}
+			return this;
+		},
+
+
+
+
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：覆写方法
+		 * 创建日期：
+		 * 修改日期：
+		 * 名称： System.override
+		 * 功能：
+		 * 说明：
+		 * 注意：
+		 * @param   (Function)old_fn 	 NO NULL :
+		 * @param 	(Function)new_fn     NO NULL :
+		 * Example：返回原有的方法原型
+		 *
+		 */
+		'override':function(old_fn,new_fn){
+			var old=old_fn;
+			old_fn=new_fn;
+			return old;
+		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍： class文件检验器
+		 * 创建日期：2015-8-18
+		 * 修改日期：2015-8-21
+		 * 名称： System.is
+		 * 功能：检测System是否合法，检测要使用的类是否已加载过；检测要定义的类名称之前是否已注册过。
+		 * 说明：子类继承父类之前调用此方法检测父类之前是否有加载过，如果填写第三参数可检测当前的类是否跟之前的类重名了
+		 * 注意：
+		 * @param  (Object)System 	       		NO NULL : 命名空间
+		 * @param 	(String)useClassName     	NO NULL : 要使用的类名称
+		 * @param 	(String)className         	　　NULL : 当前类的名称
+		 * @return (Boolean)
+		 * Example：
+		 *
+		 */
+		'is':function(System,useClassName,className){
+			if(!(useClassName in System)){
+
+				throw new Error(["Warning ",System," is not a legitimate object or ","'",useClassName,"'"," is not a legitimate"].join(''));
+				return false;
+			}
+			className = className || null;
+			if(!isFunction (System[useClassName])){
+				throw new Error(["Warning cannot find the class file ","'/",useClassName,".class'"].join(''));
+				return false;
+			}
+			if(!empty(className) && isFunction (System[className])) {
+				throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
+				return false;
+			}
+
+			return true;
+
+
+		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-11-09
+		 * 修改日期：2015-11-09
+		 * 名称： System.defined
+		 * 功能：检查变量名是否已定义了
+		 * 说明：
+		 * 注意：
+		 * @param  (Object)System 	       		NO NULL : 命名空间
+		 * @param  (String)name         	　　	NO NULL : 变量名
+		 * @param  (Object)M	         	　　	NO NULL : 提示出错信息
+		 * @return (Boolean)
+		 * Example：
+		 *
+		 */
+		'defined':function(System,name,M){
+			var defaults={
+				'line':'行号',
+				'message':'message'
+			};
+
+
+			if(arguments.length !== 3) {
+				throw new Error("Warning 缺少参数。");
+				return false;
+			}
+			if(!isObject(M)) {
+				throw new Error("Warning 缺少错误提示信息");
+				return false;
+			}
+			M = isObject(M) ? this.merge({},[M,defaults]) : defaults;
+
+			if(!empty(name) && System[name]) {
+				throw new Error(["Warning the name ","'",name,"'"," is already defined, at ","'",M.line,"'"," line tip: ","-> ",M.message].join(''));
+				return true;
+			}
+
+			return false;
+
+
+		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-11-09
+		 * 修改日期：2015-11-09
+		 * 名称： System.log
+		 * 功能：调试工具
+		 * 说明：
+		 * 注意：
+		 * @param  (Object)M	         	　　	NO NULL : 提示出错信息
+		 * @return (Boolean)
+		 * Example：
+		 *
+		 */
+		'log':function(M){
+			var defaults={
+				'line':'行号',
+				'message':'message'
+			};
+			M = isObject(M) ? this.merge({},[M,defaults]) : defaults;
+			throw new Error(["Warning: at ","'",M.line,"'"," line tip: -> ",M.message].join(''));
+		},
+
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-11-27
+		 * 修改日期：2014-11-27
+		 * 名称：System.autoCenter
+		 * 功能：元素自定垂直居中容器中间
+		 * 说明：
+		 * 注意：
+		 * @param(Number) 		NO NULL : W  容器宽
+		 * @param(Number) 		NO NULL : w  元素宽
+		 * @param(Number) 		NO NULL : H  容器高
+		 * @param(Number) 		NO NULL : h  元素高
+		 * @param(Number) 		NULL 	: p  有padding值时
+		 * @return (Object) 返回居中位置的xy 坐标
+		 * Example：
+		 *		System.autoCenter(500,10,500,10,0);
+		 */
+		'autoCenter':function(W,w,H,h,p){
+			p=p || 0;
+			W=parseInt(W);
+			w=parseInt(w);
+			H=parseInt(H);
+			h=parseInt(h);
+			p=parseInt(p);
+			if(!W || !w || !H || !h) return 0;
+			return {'x':parseInt((W-w-p)/2),'y':parseInt((H-h-p)/2)};
+		}
+	};
+
+
+
+	System.String	 		= {};
+	System.Number	 		= {
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-6
+		 * 修改日期：2016-7-6
+		 * 名称：System.Number.limit_num_len
+		 * 功能：限制数字位数
+		 * 说明：
+		 * 注意：
+		 *
+		 * @param (Number)n				NO NULL : 要限制的数字
+		 * @param (Number)limit			NO NULL : 限制的位数，默认是9位
+		 * @returns {string}
+		 */
+		'limit_num_len':function (n,limit){
+			limit =limit || 9;
+			return n.toString().trim().substr(0,limit);
+		}
+	};
+	System.Array	 		= {};
+
+
+//check
+	System.isset 	 		= isset_;
+	System.empty 	 		= empty_;
+	System.error 	 		= error;
+	System.isEmptyObject 	= isEmptyObject;
+	System.arr_isEmpty 	= arr_isEmpty;
+	System.isType 	= isType;
+	System.isObject 	= isObject;
+	System.isString 	= isString;
+	System.isArray 	= isArray;
+	System.isFunction = isFunction;
+
+	System.arr_Object_key_has = arr_Object_key_has;
+	System.contains = contains;
+	//check Number
+	System.isNumber = System.isNumeric 	= isNumeric;
+	System.isFloat 	= isFloat;
+
+	System.Config=null;
+	System.random=10000;
+	System.guid=0;
+	System.classPath='./';
+	System.files=[];
+	System.classes=[];
+	System.Super={};
+	System.app=null;
+	System.Object=Object.prototype;
+	System.Function=Function.prototype;
+	System.Date=Date.prototype;
+	System.String=String.prototype;
+	System.Array=Array.prototype;
+
+	System.printf=prints;
+
+
+
+
+
+//==================================================================================
 
 
 
@@ -629,7 +1703,7 @@ if(!GRN_LHH){
 	 * @return  (Number) 返回对象里成员数量
 	 * Example：
 	 */
-	var getObjectLength=function(){
+	function getObjectLength(){
 		if(Object.keys){
 			return Object.keys(this).length;
 		}
@@ -640,7 +1714,7 @@ if(!GRN_LHH){
 			n++;
 		}
 		return n-1;
-	};
+	}
 
 
 	/**
@@ -657,15 +1731,15 @@ if(!GRN_LHH){
 	 * Example：
 	 *
 	 */
-	var arr_Object_key_has=function(key){
-		arr_Object_key = MySystem.arr_Object_key || arr_Object_key;
+	function arr_Object_key_has(key){
+		arr_Object_key = System.arr_Object_key || arr_Object_key;
 		for(var i= 0,len=arr_Object_key.length;i < len;i++){
 			if(key === arr_Object_key[i]){
 				return true;
 			}
 		}
 		return false;
-	};
+	}
 
 
 
@@ -845,15 +1919,14 @@ if(!GRN_LHH){
 
 		var a = arguments,
 			l = a.length,
-			i = 0,
-			undef;
+			i = 0;
 
-		if (l === 0) {
+		if (!l) {
 			throw new Error('Warning Empty isset');
 		}
 
 		while (i !== l) {
-			if (a[i] === undef || a[i] === null) {
+			if (!isset_(a[i])) {
 				return false;
 			}
 			i++;
@@ -882,8 +1955,8 @@ if(!GRN_LHH){
 		//   example 5: empty({'aFunc' : function () { alert('humpty'); } });
 		//   returns 5: false
 
-		var undef, key, i, len;
-		var emptyValues = [undef, null, false, 0, '', '0'];
+		var key, i, len;
+		var emptyValues = [undefined, null, false, 0, '', '0'];
 
 		for (i = 0, len = emptyValues.length; i < len; i++) {
 			if (mixed_var === emptyValues[i]) {
@@ -891,7 +1964,7 @@ if(!GRN_LHH){
 			}
 		}
 
-		if (typeof mixed_var === 'object') {
+		if (System.isObject(mixed_var)) {
 			for (key in mixed_var) {
 				//if (mixed_var.hasOwnProperty(key)) {
 				return false;
@@ -927,1077 +2000,8 @@ if(!GRN_LHH){
 
 
 
-	/**
-	 * @author: lhh
-	 * 产品介绍：所有类的接口
-	 * 创建日期：2015-9-6
-	 * 修改日期：2015-9-6
-	 * 名称：Interface
-	 * 功能：
 
-	 * 说明：
-	 * 注意：
-	 */
-	Interface= {
-		'Basis': {},
-		'BiObject': {},
-		'Component': {},
-		'Helper': {},
-		'Controller': {},
-		'Model': {},
-		'Html': {},
-		'Browser': {},
-		'Css': {},
-		'Template': {},
-		'Event': {},
-		'Dom': {},
-		'Cookie': {},
-		'Drag': {},
-		'Drag_xy': {},
-		'Error': {},
-		'FakeSelect': {},
-		'AutoLayout': {},
-		'Fsc': {},
-		'Linklist': {},
-		'PopupLayer': {},
-		'Roll': {},
-		'Layout': {},
-		'Slider': {},
-		'Sport': {},
-		'Tools': {},//(single)
-		'Tab': {},
-		'Thumbnail': {},
-		'FindParentObject': {},
-		'Tree': {},
-		'Sort': {},
-		'EditTables': {},
-		'Html5': {
-			'Svg': {},
-			'Canvas': {},
-			'Shape': {},//基本形
-			'Chess': {}//棋盘类
-		},
-		'View': {},
-		'Validation':{},
-		'Widget': {}
-	};
-
-	/**
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2014-12-23
-	 * 修改日期：2015-7-10
-	 * 名称：MySystem
-	 * 功能：
-	 * 属性列表:
-	 *			guid
-	 *			app
-	 *			classes
-	 * 方法列表:
-	 *			isset
-	 *			empty
-	 *			isNumeric
-	 *			error
-	 *			isType
-	 *			isObject
-	 *			isString
-	 *			isArray
-	 *			isFunction
-	 *			contains
-	 *			main
-	 *			run
-	 *			wait
-	 *			then
-	 *			config
-	 *			define
-	 *			print
-	 *			import
-	 *			length
-	 *			proxy
-	 *			isEmptyObject
-	 *			arr_isEmpty
-	 *			queues
-	 *			putIndexGetObjectTheValue
-	 *			list
-	 *			is
-	 *			log
-	 *			defined
-	 *			merge
-	 *			clone
-	 *			extends
-	 *			extend
-	 *			extends_f
-	 *			override
-	 *			autoCenter
-	 *			isClassFile
-	 *			template
-	 *			findTpl
-	 *			replaceTpl
-	 *			analysisVar
-	 *			getRootPath
-	 * 对象列表:
-	 *			Function
-	 *			Date
-	 *			String
-	 *			Array
-	 * 说明：MySystem对象已继承了上面定义对象里的所有方法
-	 * 注意：
-	 */
-	MySystem={
-		"version": version,
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2014-12-23
-		 * 修改日期：2016-4-11
-		 * 名称：MySystem.main
-		 * 功能：程序主方法
-		 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
-		 * 注意：不能链式调用，如要链式调用，用 MySystem.then方法
-		 * @param   (Array)args 			   NULL :传入的参数
-		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
-		 * @return  (Object) 返回callback 里的返回值
-		 * Example：
-		 */
-		'main':function(args,callback){
-			if (0 === arguments.length) {
-				throw new Error('Warning 至少要有一个参数');
-				return this;
-			}
-			if(isFunction(args)) {
-				callback = args;
-				args = undefined;
-			}
-
-			if(args && !isArray(args)){
-				throw new Error('Warning args 必须是数组类型');
-				return this;
-			}
-			if (!isFunction(callback) ) {
-				throw new Error('Warning 参数必须要有一个 Function 类型');
-				return this;
-			}
-
-			if(isArray(args)){
-				return callback.apply(this,args);
-			}else{
-				return callback.call(this);
-			}
-
-
-		},
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-1-21
-		 * 修改日期：2016-4-11
-		 * 名称：MySystem.run
-		 * 功能：与main方法功类似,改变标签渲染方式, 用document.createElement()生成标签
-		 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
-		 * 注意：
-		 * @param   (Array)args 			NO NULL :传入的参数
-		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
-		 * @return  (Object) 返回callback 里的返回值
-		 * Example：
-		 */
-		'run':function(args,callback){
-			if(isFunction(args)) {
-				callback = args;
-				args = undefined;
-			}
-			if(args){
-				return this.use().main(args,callback);
-			}else{
-				return this.use().main(callback);
-			}
-
-		},
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2014-12-22
-		 * 修改日期：2016-4-11
-		 * 名称：MySystem.wait
-		 * 功能：一直是链式调用，总是返回当前命名空间对象，
-		 * 说明：与main方法功类似,不同的是每隔规定的时间数再去调用传进来的函数
-		 * 注意：
-		 * @param   (Array)args 			   NULL :传入的参数
-		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
-		 * @param   (Number)time 			   NULL :等待执行的时间
-		 * @return  (MySystem)
-		 * Example：
-		 */
-		'wait':function(args,callback,time){
-			var self=this;
-			if(isFunction(args)) {
-				time=callback;
-				callback = args;
-				args = undefined;
-			}
-			if(isFunction(callback)) {
-				time=time || 3000;
-				if(callback.timer){
-					clearTimeout(fn.timer);
-				}
-				callback.timer = setTimeout(function(){
-					if(isArray(args)){
-						self.main(args,callback);
-					}else{
-						self.main(callback);
-					}
-
-				}, time);
-			}
-			return this;
-		},
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-4-11
-		 * 修改日期：2016-4-11
-		 * 名称：MySystem.then
-		 * 功能：一直是链式调用，总是返回当前命名空间对象，
-		 * 说明：跟main方法类似，不同的是main 返回的是callback里的返回值。
-		 * 注意：
-		 * @param   (Array)args 			   NULL :传入的参数
-		 * @param   (Function)callback 		NO NULL :要执行的操作
-		 * @return  (MySystem)
-		 * Example：
-		 */
-		'then':function(args,callback){
-			var self=this;
-			if(isFunction(args)) {
-				callback = args;
-				args = undefined;
-			}
-			if(isFunction(callback)) {
-				if(isArray(args)){
-					self.main(args,callback);
-				}else{
-					self.main(callback);
-				}
-
-			}
-			return this;
-		},
-
-
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-1-18
-		 * 修改日期：2016-3-22
-		 * 名称：MySystem.use
-		 * 功能：用createElement 创建标签并且设为异步
-		 * 说明：
-		 * 注意：
-		 * @return  (MySystem)
-		 * Example：
-		 */
-		'use':function(){
-			this.Config.use();
-			return this;
-		},
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-1-18
-		 * 修改日期：2016-3-22
-		 * 名称：MySystem.unuse
-		 * 功能：用document.write() 创建标签并且设为非异步
-		 * 说明：
-		 * 注意：
-		 * @return  (MySystem)
-		 * Example：
-		 */
-		'unuse':function(){
-			this.Config.unuse();
-			return this;
-		},
-
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-11-22
-		 * 修改日期：2015-11-24
-		 * 名称：MySystem.modules
-		 * 功能：模块
-		 * 说明：
-		 * 注意：
-		 * Example：
-		 */
-		'modules':{
-			/**
-			 * @author: lhh
-			 * 产品介绍：
-			 * 创建日期：2015-11-22
-			 * 修改日期：2015-11-24
-			 * 名称：MySystem.modules.exports
-			 * 功能：
-			 * 说明：
-			 * 注意：
-			 * Example：
-			 */
-			'exports':{}
-		},
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-9-15
-		 * 修改日期：2015-9-15
-		 * 名称：MySystem.config
-		 * 功能：配置类加载文件
-		 * 说明：
-		 * 注意：
-		 * @param   (Object)D 			NO NULL :传入的参数
-		 * @return  (voide)						:
-		 * Example：
-		 */
-		'config':function(D){},
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-9-21
-		 * 修改日期：2015-9-21
-		 * 名称：MySystem.define
-		 * 功能：
-		 * 说明：
-		 * 注意：
-		 * @param   (Object)D 			NO NULL :传入的参数
-		 * @return  (voide)						:
-		 * Example：
-		 */
-		'define':function(D){},
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-9-16
-		 * 修改日期：2016-2-23
-		 * 名称：MySystem.print
-		 * 功能：输出
-		 * 说明：
-		 * 注意：
-		 * @param   (Object)D 			NO NULL :传入的参数
-		 * @return  (voide)						:
-		 * Example：
-		 * 		MySystem.print('s'[,1,'a',...])
-		 */
-		'print':function(){
-			var arr=prints.apply(Array,arguments);
-
-			document.write(arr.join(' '));
-		},
-
-
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-8-27
-		 * 修改日期：2015-8-27
-		 * 名称：import
-		 * 功能：导入指定的js文件
-		 * 说明：System 参数不用传
-		 * 注意：
-		 * @param   (Array)url 			    NO NULL :要加载js文件
-		 * @param   (String)baseUrl 		       NULL :文件路径
-		 * @param   (String)suffix 		       NULL :文件后缀名
-		 * @param   (Object)System 			   NULL :命名空间
-		 * @return  (Object) this 返回当前对象可以链式调用import方法
-		 * Example：
-		 */
-		'import':function(url,baseUrl,suffix,System){
-			suffix = suffix || '.js';
-			try {
-				if(importScripts){
-					url.each(function(){
-						var e=this;
-						e+=suffix;
-						baseUrl ? importScripts(baseUrl+e) : importScripts(e);
-					});
-				}
-
-
-			} catch (e) {
-				//throw new Error(e.message);
-				System = System || this;
-				System.Loadcommon.load({
-					'baseUrl':baseUrl || null,
-					'js':url,
-					'suffix':suffix
-				}).print();
-			}
-			return this;
-		},
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2014-12-20
-		 * 修改日期：2014-12-20
-		 * 名称：queues
-		 * 功能：队列
-		 * 说明：
-		 * 注意：
-		 * @param   (Array)arr          NO NULL :
-		 * @param   (Number)n           NO NULL :算时间差的值
-		 * @param   (Function)fn        NO NULL :
-		 * Example：
-		 */
-		'queues':function(arr,n,fn){
-			if(!isFunction(fn)) return -1;
-			var time=0;
-			for(var i=0,len=arr.length; i<len; i++){
-				time = n*i;
-				fn.call(arr[i],time,i);
-
-			}
-		},
-
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2014-12-23
-		 * 修改日期：2016-7-19
-		 * 名称：length
-		 * 功能：获取对象成员的长度
-		 * 说明：
-		 * 注意：
-		 * @param   (Object | Array | String)D 			   NULL :指定的对象
-		 * @returns {Number}
-		 */
-		'length':function(D){
-			if(!isObject(D) && !isArray(D) && !isString(D)){
-				throw new Error('Warning 参数必须是Object 或 Array 或 String');
-				return -1;
-			}
-
-			if(isObject(D)){
-				return getObjectLength.call(D);
-			}
-
-			if(isArray(D) || isString(D)){
-				return D.length;
-
-			}
-
-		},
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2014-12-23
-		 * 修改日期：2015-3-18
-		 * 名称：proxy
-		 * 功能：改变指定对象里的this指向
-		 * 说明：
-		 * 注意：
-		 * @param   (Function)fn       NO NULL :将要被改变作用域的函数
-		 * @param   (Object)context    NO NULL :一个object，那个函数的作用域会被设置到这个object上来。
-		 * @return  ()
-		 * Example：
-		 */
-		'proxy': function( fn, context ) {
-			if (isString(context)){
-				var tmp = fn[ context ];
-				context = fn;
-				fn = tmp;
-			}
-
-			// Quick check to determine if target is callable, in the spec
-			// this throws a TypeError, but we will just return undefined.
-			if ( !isFunction( fn ) ) {
-				return undefined;
-			}
-
-			// Simulated bind
-			var args = slice.call( arguments, 2 ),
-				proxy = function() {
-					return fn.apply( context, args.concat( slice.call( arguments ) ) );
-				};
-
-			// Set the guid of unique handler to the same of original handler, so it can be removed
-			proxy.guid = fn.guid = fn.guid || proxy.guid || MySystem.guid++;
-
-			return proxy;
-		},
-		/**
-		 *
-		 * @author：lhh
-		 * 功能：输入一个键值对应的个数返回对应的值
-		 * 名称：putIndexGetObjectTheValue
-		 * 创建日期：2014.6.15
-		 * 修改日期：2016.2.25
-		 * @param (Object)D 		NO NULL :
-		 * @param (int)n 			NO NULL :
-		 * @return ()
-		 */
-		'putIndexGetObjectTheValue':function(D,n){
-			var i= 0,k;
-			//输入的一定是对象和数字
-			if(isObject(D) && isNumeric(n)){
-				//防止输入的下标大于对象的长度
-				if(getObjectLength.call(D) >= n){
-					for(k in D){
-						if(i==n){
-							return D[k];
-						}else{
-							i++;
-						}
-					}
-				}
-
-			}
-			return false;
-		},
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-8-26
-		 * 修改日期：2016-7-8
-		 * 名称： list
-		 * 功能：递归对象
-		 * 说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象位置
-		 * 注意：
-		 * @param 	(Object)D             			NO NULL : 对象
-		 * @param 	(Funtion)callback             	NO NULL : 回调方法
-		 * @returns {Object}
-		 * Example：
-		 *
-		 */
-		'list':function(D,callback){
-			var loop,totalLoop;
-			totalLoop=loop=0;
-			var __this__ = this;
-			var list=function(D,callback){
-
-				if(!__this__.isObject(D) && !__this__.isArray(D)){
-					return D;
-				}
-				if(!__this__.isFunction(callback)){
-					throw new Error('Warning 第二参数 必须是个callback');
-				}
-				//算出找到指定内容，所需要遍历的次数
-				loop++;
-				__this__.each(D,function(k,v){
-					totalLoop++;
-					if ( callback.call(D,k,v,D) === false ) {
-						console.log('共遍历----->'+loop+'<------次找到了')
-						return false;
-					}
-					//如果没找到，就继续递归搜索
-					if(v){
-						list(v,callback);
-					}
-				});
-			};
-			return {'data':list(D,callback),'totalLoop':totalLoop,'loop':loop};
-
-		},
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-2-29
-		 * 修改日期：2016-7-11
-		 * 名称： each
-		 * 功能：遍历数组或对象
-		 * 说明：
-		 * 注意：
-		 * @param 	(Array | Object)arr     		NO NULL :
-		 * @param 	(Funtion)callback             	NO NULL : 回调方法
-		 * @return ()
-		 * Example：
-		 *
-		 */
-		'each':function( obj, callback ) {
-			if(!obj || !callback){
-				throw new Error('Warning : 两个参数是必传的');
-
-			}
-			if(!this.isObject(obj) && !this.isArray(obj)){
-				throw new Error('Warning '+obj+': 必须是个Object 或者 Array 类型！');
-				return obj;
-			}
-
-			if(!this.isFunction(callback)){
-				throw new Error('Warning :第二参数 必须是个callback！');
-				return obj;
-			}
-
-			var i;
-
-			if ( this.isArray( obj ) ) {
-				return obj.each(callback);
-			} else {
-				for ( i in obj ) {
-					if ( callback.call( obj[ i ], i, obj[ i ] ) === false ) {
-						break;
-					}
-				}
-			}
-
-			return obj;
-		},
-
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-3-18
-		 * 修改日期：2015-3-20
-		 * 名称：MySystem.extends
-		 * 功能：子类继承父类对象
-		 * 说明：MySystem类范围内
-		 * 注意：这里的this指向的不是 MySystem 对象
-		 * @param   (Object)this 			NO NULL :子类对象
-		 * @param   (Function)subClass 		   NULL :子类名称
-		 * @param   (Function)superClass   	NO NULL :父类名称
-		 * @param   (String)type 			NO NULL :1:原型链反射继承;2(默认):对象冒充方式继承
-		 * @param   ([])args 			   	   NULL :继承父类时传的构造参数
-		 * @return  (void)
-		 * Example：
-		 *		对象冒充方式继承:MySystem.extends.call(this,subClass,superClass,type,[,extraParameters]);
-		 *		原型链继承:MySystem.extends(subClass,superClass,type);
-		 */
-		'extends':function(subClass,superClass,type,args){
-			type=type || 2;
-			args = args || [];
-			switch(type){
-				case 1:
-					for(var key in superClass.prototype){
-						if(!subClass.prototype[key]){
-							subClass.prototype[key]=superClass.prototype[key];
-						}
-					}
-					break;
-				case 2:
-					if(args && isArray(args) && args.length > 0){//传构造参数
-						superClass.apply(this,args);
-					}else{//无构造参数
-						superClass.call(this);
-					}
-					break;
-
-
-				default:
-					throw new Error('Warning type 非法类型');
-					return false;
-
-			}
-
-
-		},
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-7-23
-		 * 修改日期：2015-7-23
-		 * 名称：MySystem.extend
-		 * 功能：Extends a child object from a parent object using classical inheritance
-		 * pattern.
-		 * 说明：
-		 * 注意：
-		 * @param   (Object)subClass 			NO NULL :子类
-		 * @param   (Object)superClass 			NO NULL :父类
-		 * @return  (Function) 函数原型
-		 * Example：
-
-		 *
-		 */
-		'extend': function() {
-			// proxy used to establish prototype chain
-			var F = function() {};
-			// extend subClass from superClass
-			return function(subClass, superClass) {
-				F.prototype = superClass.prototype;
-				subClass.prototype = new F();
-				subClass.prototype.constructor = subClass;
-
-				subClass.superClass = superClass.prototype;
-				if(superClass.prototype.constructor === Object.prototype.constructor){
-					superClass.prototype.constructor = superClass;
-				}
-
-			};
-		}(),
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-3-27
-		 * 修改日期：2015-3-27
-		 * 名称：merge
-		 * 功能：一个或多个对象合并成一个指定的对象
-		 * 说明：默认同名的键值前面的不会被覆盖
-		 * 注意：
-		 * @param  (Object)target  		NO NULL :target 合并后的对象。null 代表合并到命名空间这个对象里
-		 * @param  (Array)args   		NO NULL :要合并对象的集合
-		 * @param  (Boolean)override 	   NULL :是否覆盖同名键名值,默认 false 是不覆盖
-		 * @return  (target ｜ this) 返回合并后的对象
-		 * Example：
-		 *		MySystem.merge({},[A[,...]],false);
-		 */
-		'merge':function(target,args,override){
-			if(!isArray(args)){
-				throw new Error('Warning args 不是一个数组');
-				return false;
-			}
-			var len  = args.length;
-			if(arguments.length < 2){
-				throw new Error('Warning 最少要传2个参数');
-				return false;
-			}
-
-			override = override || false;
-			target   = target   || this;
-			var key;
-			var i=0;
-			if(0 === len){
-				throw new Error('Warning args不能为空');
-				return false;
-			}
-
-
-			for(;i<len; i++){
-				for(key in args[i]){
-					if(!override && (key in target)) {continue;}
-					target[key] = args[i][key];
-				}
-			}
-
-			return target;
-		},
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-10-13
-		 * 修改日期：2015-10-13
-		 * 名称：clone
-		 * 功能：对象克隆
-		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
-		 * 注意：
-		 * @param   (Object)className 		NO NULL : 要克隆的类
-		 * @param   (Number)not_generate 	   	   NULL : 是否生成_hashCode,默认生成;1 不生成
-		 * @return  (Object)				:返回克隆后的新对象
-		 * Example：
-		 */
-		'clone': function(className,not_generate) {
-			var obj;
-			obj = this.merge({},[className]);
-			if(!not_generate){
-				obj['_hashCode'] += '_'+this.BiObject.generate();
-			}
-			return obj;
-
-		},
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-7-15
-		 * 修改日期：2016-7-15
-		 * 名称：isclone
-		 * 功能：检查对象是否是克隆对象
-		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
-		 * 注意：
-		 * @param   (Object)className 		NO NULL : 检查的对象
-		 * @returns {boolean}
-		 */
-		'isclone': function(obj) {
-			if(obj._hashCode.indexOf('_') != -1){
-				return true;
-			}else{
-				return false;
-			}
-
-		},
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-02-17
-		 * 修改日期：2016-02-17
-		 * 名称：checkout
-		 * 功能：
-		 * 说明：
-		 * 注意：
-		 * Example：
-		 */
-		'checkout': function() {},
-
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-3-18
-		 * 修改日期：2015-3-18
-		 * 名称：MySystem.extends_f
-		 * 功能：在指定对象的原型链上动态扩充方法
-		 * 说明：调用call方法改变this指针
-		 * 注意：不调用call方法，就是在W.MySystem对象上扩充方法
-		 * @param   (Object)this 			NO NULL :指定对象
-		 * @param   (String)name   			NO NULL :扩充的方法名称
-		 * @param   (Function)fn 			NO NULL :方法原型
-		 * @return  (Object) 返回扩充的对象
-		 * Example：
-		 *		在Basis 的原型上扩充一个set方法
-		 *		MySystem.extends_f.call(Basis,'set',function(){});
-		 *
-		 *		在W.MySystem 的原型上扩充一个set方法
-		 *		MySystem.extends_f('set',function(){});
-		 *
-		 */
-		'extends_f':function(name,fn){
-			if(!this.prototype[name]){
-				this.prototype[name] = fn;
-			}
-			return this;
-		},
-
-
-
-
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：覆写方法
-		 * 创建日期：
-		 * 修改日期：
-		 * 名称： MySystem.override
-		 * 功能：
-		 * 说明：
-		 * 注意：
-		 * @param   (Function)old_fn 	 NO NULL :
-		 * @param 	(Function)new_fn     NO NULL :
-		 * Example：返回原有的方法原型
-		 *
-		 */
-		'override':function(old_fn,new_fn){
-			var old=old_fn;
-			old_fn=new_fn;
-			return old;
-		},
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍： class文件检验器
-		 * 创建日期：2015-8-18
-		 * 修改日期：2015-8-21
-		 * 名称： MySystem.is
-		 * 功能：检测System是否合法，检测要使用的类是否已加载过；检测要定义的类名称之前是否已注册过。
-		 * 说明：子类继承父类之前调用此方法检测父类之前是否有加载过，如果填写第三参数可检测当前的类是否跟之前的类重名了
-		 * 注意：
-		 * @param  (Object)System 	       		NO NULL : 命名空间
-		 * @param 	(String)useClassName     	NO NULL : 要使用的类名称
-		 * @param 	(String)className         	　　NULL : 当前类的名称
-		 * @return (Boolean)
-		 * Example：
-		 *
-		 */
-		'is':function(System,useClassName,className){
-			if(!(useClassName in System)){
-
-				throw new Error(["Warning ",System," is not a legitimate object or ","'",useClassName,"'"," is not a legitimate"].join(''));
-				return false;
-			}
-			className = className || null;
-			if(!isFunction (System[useClassName])){
-				throw new Error(["Warning cannot find the class file ","'/",useClassName,".class'"].join(''));
-				return false;
-			}
-			if(!empty(className) && isFunction (System[className])) {
-				throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
-				return false;
-			}
-
-			return true;
-
-
-		},
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-11-09
-		 * 修改日期：2015-11-09
-		 * 名称： MySystem.defined
-		 * 功能：检查变量名是否已定义了
-		 * 说明：
-		 * 注意：
-		 * @param  (Object)System 	       		NO NULL : 命名空间
-		 * @param  (String)name         	　　	NO NULL : 变量名
-		 * @param  (Object)M	         	　　	NO NULL : 提示出错信息
-		 * @return (Boolean)
-		 * Example：
-		 *
-		 */
-		'defined':function(System,name,M){
-			var defaults={
-				'line':'行号',
-				'message':'message'
-			};
-
-
-			if(arguments.length !== 3) {
-				throw new Error("Warning 缺少参数。");
-				return false;
-			}
-			if(!isObject(M)) {
-				throw new Error("Warning 缺少错误提示信息");
-				return false;
-			}
-			M = isObject(M) ? this.merge({},[M,defaults]) : defaults;
-
-			if(!empty(name) && System[name]) {
-				throw new Error(["Warning the name ","'",name,"'"," is already defined, at ","'",M.line,"'"," line tip: ","-> ",M.message].join(''));
-				return true;
-			}
-
-			return false;
-
-
-		},
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-11-09
-		 * 修改日期：2015-11-09
-		 * 名称： MySystem.log
-		 * 功能：调试工具
-		 * 说明：
-		 * 注意：
-		 * @param  (Object)M	         	　　	NO NULL : 提示出错信息
-		 * @return (Boolean)
-		 * Example：
-		 *
-		 */
-		'log':function(M){
-			var defaults={
-				'line':'行号',
-				'message':'message'
-			};
-			M = isObject(M) ? this.merge({},[M,defaults]) : defaults;
-			throw new Error(["Warning: at ","'",M.line,"'"," line tip: -> ",M.message].join(''));
-		},
-
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2014-11-27
-		 * 修改日期：2014-11-27
-		 * 名称：MySystem.autoCenter
-		 * 功能：元素自定垂直居中容器中间
-		 * 说明：
-		 * 注意：
-		 * @param(Number) 		NO NULL : W  容器宽
-		 * @param(Number) 		NO NULL : w  元素宽
-		 * @param(Number) 		NO NULL : H  容器高
-		 * @param(Number) 		NO NULL : h  元素高
-		 * @param(Number) 		NULL 	: p  有padding值时
-		 * @return (Object) 返回居中位置的xy 坐标
-		 * Example：
-		 *		MySystem.autoCenter(500,10,500,10,0);
-		 */
-		'autoCenter':function(W,w,H,h,p){
-			p=p || 0;
-			W=parseInt(W);
-			w=parseInt(w);
-			H=parseInt(H);
-			h=parseInt(h);
-			p=parseInt(p);
-			if(!W || !w || !H || !h) return 0;
-			return {'x':parseInt((W-w-p)/2),'y':parseInt((H-h-p)/2)};
-		}
-	};
-
-
-
-	MySystem.String	 		= {};
-	MySystem.Number	 		= {
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-7-6
-		 * 修改日期：2016-7-6
-		 * 名称：MySystem.Number.limit_num_len
-		 * 功能：限制数字位数
-		 * 说明：
-		 * 注意：
-		 *
-		 * @param (Number)n				NO NULL : 要限制的数字
-		 * @param (Number)limit			NO NULL : 限制的位数，默认是9位
-		 * @returns {string}
-		 */
-		'limit_num_len':function (n,limit){
-			limit =limit || 9;
-			return n.toString().trim().substr(0,limit);
-		}
-	};
-	MySystem.Array	 		= {};
-
-
-//check
-	MySystem.isset 	 		= isset_;
-	MySystem.empty 	 		= empty_;
-	MySystem.error 	 		= error;
-	MySystem.isEmptyObject 	= isEmptyObject;
-	MySystem.arr_isEmpty 	= arr_isEmpty;
-	MySystem.isType 	= isType;
-	MySystem.isObject 	= isObject;
-	MySystem.isString 	= isString;
-	MySystem.isArray 	= isArray;
-	MySystem.isFunction = isFunction;
-
-	MySystem.arr_Object_key_has = arr_Object_key_has;
-	MySystem.contains = contains;
-	//check Number
-	MySystem.isNumber = MySystem.isNumeric 	= isNumeric;
-	MySystem.isFloat 	= isFloat;
-
-	MySystem.Config=null;
-	MySystem.random=10000;
-	MySystem.guid=0;
-	MySystem.classPath='./';
-	MySystem.files=[];
-	MySystem.classes=[];
-	MySystem.Super={};
-	MySystem.app=null;
-	MySystem.Object=Object.prototype;
-	MySystem.Function=Function.prototype;
-	MySystem.Date=Date.prototype;
-	MySystem.String=String.prototype;
-	MySystem.Array=Array.prototype;
-
-	MySystem.printf=prints;
-
-
-
-	return MySystem.merge(null,[Interface]);
+	return System.merge(null,[Interface]);
 });
 
 /*
@@ -2150,7 +2154,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	 * 产品介绍：
 	 * 创建日期：2015-8-02
 	 * 修改日期：2015-8-02
-	 * 名称：MySystem.isClassFile
+	 * 名称：System.isClassFile
 	 * 功能：检查是否是类文件
 	 * 说明：
 	 * 注意：

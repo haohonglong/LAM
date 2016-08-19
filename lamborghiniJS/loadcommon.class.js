@@ -284,8 +284,9 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
          * 调用方式：
          */
         'print':function(){
-            files.each(function(i){
+            System.each(files,function(i){
                 if(System.isObject(this)){
+                    this.timer = i*1000+3000;
                     if(this.script){
                         if('after' === append){
                             this.appendTo(body);
@@ -299,7 +300,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                         //3秒后移除添加的script 节点
                         System.wait([this],function(node){
                             node.delNode();
-                        });
+                        },this.timer);
 
                     }
                     else if(this.style){
