@@ -200,7 +200,7 @@
 		         */
 		        'unuse':function(){
 		            this.render.create=false;
-		            this.render.default.script.Attribute.async=false;
+		            this.render.default.script.Attribute.async='false';
 		            this.render.default.script.Attribute.defer='';
 		        },
 		        'getClassPath':function(){
