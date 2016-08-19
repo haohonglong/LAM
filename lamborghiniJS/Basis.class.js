@@ -496,7 +496,7 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-27
-		 * 修改日期：2015-8-27
+		 * 修改日期：2016-8-19
 		 * 名称：import
 		 * 功能：导入指定的js文件
 		 * 说明：System 参数不用传
@@ -511,7 +511,7 @@ if(!GRN_LHH){
 		'import':function(url,baseUrl,suffix,System){
 			suffix = suffix || '.js';
 			try {
-				if(importScripts){
+				if(System.isset(importScripts) && System.isFunction(importScripts)){
 					url.each(function(){
 						var e=this;
 						e+=suffix;
