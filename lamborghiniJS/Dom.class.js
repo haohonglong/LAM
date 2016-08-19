@@ -369,9 +369,13 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 
 					break;
 				case 2:
-					if(System.isString(arguments[0]) && System.isString(String(arguments[1]))){
+					if(System.isString(arguments[0])){
 						this.attr(this.node,arguments[0],arguments[1]);
 						break;
+					}
+
+					if(!arguments[0].getAttribute){
+						arguments[0] = null;
 					}
 
 					node=arguments[0] || this.node;
