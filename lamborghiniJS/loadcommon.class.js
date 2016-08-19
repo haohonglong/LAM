@@ -296,6 +296,10 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                                 this.insertAfter(s[i-1]);
                             }
                         }
+                        //3秒后移除添加的script 节点
+                        System.wait([this],function(node){
+                            node.delNode();
+                        });
 
                     }
                     else if(this.style){
@@ -305,6 +309,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                             this.insertAfter(l[i-1]);
                         }
                     }
+
                 }else{
                     System.print(this);
                 }
