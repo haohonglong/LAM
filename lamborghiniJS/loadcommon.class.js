@@ -180,7 +180,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                         //是否已加载过了
                         if(this.classisexist(js)){continue;}
                         src = baseUrl ? baseUrl+js+suffix : js+suffix;
-                        if(System.classes.indexOf(js) != -1 || System.files.indexOf(src) != -1){
+                        if(System.classes.indexOf(js) != -1 || System.fileExisted(src)){
                             continue;
                         }else{
 
@@ -205,7 +205,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                         if(this.classisexist(js.src)){continue;}
                         js.src = baseUrl ? baseUrl+js.src+suffix : js.src+suffix;
 
-                        if(System.classes.indexOf(js.src) != -1 || System.files.indexOf(js.src) != -1){
+                        if(System.classes.indexOf(js.src) != -1 || System.fileExisted(js.src)){
                             continue;
                         }else{
                             System.merge(js,[sAttribute]);
@@ -236,7 +236,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                     if(System.isString(css)){
                         href = baseUrl ? baseUrl+css+suffix : css+suffix;
                         //是否已加载过了
-                        if(System.files.indexOf(href) != -1){continue;}
+                        if(System.fileExisted(href)){continue;}
                         var A = System.clone(cAttribute,1);
                         A['href'] = href;
                         if(create){
@@ -253,7 +253,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                         css.rel = css.rel || rel;
                         css.href = baseUrl ? baseUrl+css.href+suffix : css.href+suffix;
                         //是否已加载过了
-                        if(System.files.indexOf(css.href) != -1){continue;}
+                        if(System.fileExisted(css.href)){continue;}
                         System.merge(css,[cAttribute]);
 
                         if(create){
@@ -297,10 +297,14 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                                 this.insertAfter(s[i-1]);
                             }
                         }
-                        //3秒后依次移除添加的script 节点
-                        System.wait([this],function(node){
-                            node.delNode();
-                        },this.timer);
+                        //加载后要依次移除添加的script 节点
+                        if(System.Config.render.remove){
+                            //3秒后依次移除添加的script 节点
+                            System.wait([this],function(node){
+                                node.delNode();
+                            },this.timer);
+                        }
+
 
                     }
                     else if(this.style){

@@ -2056,6 +2056,8 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 			'fragment':null,
 			//true : document.createElement(); false :document.write();
 			'create':false,
+			//加载后要是否要移除添加过的script 节点
+			'remove':true,
 			'append':'after',
 			'default':{
 				'script':{
@@ -2186,6 +2188,27 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 
 		//这个类文件没有加载过
 		return false;
+	};
+
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-8-20
+	 * 修改日期：2016-8-20
+	 * 名称：System.fileExisted
+	 * 功能：检查系统加载器里的文件是否已加载过
+	 * 说明：
+	 * 注意：
+	 * @param file
+	 * @returns {boolean}
+	 */
+	System.fileExisted=function(file) {
+		if(-1 === System.files.indexOf(file)){
+			return false;
+		}else{
+			return true;
+		}
 	};
 
 

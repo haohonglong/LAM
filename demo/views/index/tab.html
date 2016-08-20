@@ -2,21 +2,22 @@
 <html lang="zh-cn">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>拖拽实例</title>
-	<link href="../../../lib/css/lib.css" rel="stylesheet" />
+<title>选项卡实例</title>
 	<script type="text/javascript" src="config.js"></script>
 	<script type="text/javascript">
-		LAMJS.wait(function(){
+		LAMJS.wait([
+			LAMJS.Config.Public.ROOT
+		],function(ROOT) {
 			LAMJS.run(function() {
 				'use strict';
 				var System = this;
 				System.Loadcommon.
 						load({
-							'baseUrl':_ROOT_+'/lib/css',
+							'baseUrl':ROOT+'/lib/css',
 							'suffix':'.css',
 							'rel':'stylesheet',
 							'css':[
-								'/lib'
+								 '/lib'
 							]
 						})
 						.print();
@@ -29,9 +30,8 @@
 				'use strict';
 				var System=this;
 				System.import([
-					'/Browser.class',
-					'/Tab.class'
-				],System.classPath);
+					'/lamborghiniJS/Tab.class'
+				],ROOT);
 
 			});
 		});

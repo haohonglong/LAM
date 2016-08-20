@@ -343,12 +343,15 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-26
-		 * 修改日期：2016-7-13
+		 * 修改日期：2016-8-20
 		 * 名称： attr
 		 * 功能：节点元素属性的获取或设置操作
-		 * 说明：3: 添加 2:两个参数String类型：添加；否则获取 1:参数String类型：获取 ；参数Object类型 设置
+		 * 说明：
+			 3: 添加(node,String,String)
+			 2:两个参数String类型：添加；否则获取(String,String)
+			 1:参数String类型：获取 ；参数Object类型 设置(String|{})
 		 * 注意：
-		 * @return (*)
+		 * @returns {*}
 		 * Example：
 		 *
 		 */
@@ -370,7 +373,7 @@ window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefin
 					break;
 				case 2:
 					if(System.isString(arguments[0])){
-						this.attr(this.node,arguments[0],arguments[1]);
+						this.attr(this.node,arguments[0],String(arguments[1]));
 						break;
 					}
 
