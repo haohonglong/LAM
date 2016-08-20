@@ -124,22 +124,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
          */
         'getPath':function(D){},
 
-        /**
-         *
-         * @author: lhh
-         * 名称：(void) classisexist
-         * 功能：检查类文件是否已加载过
-         *  创建日期：2015.8.01
-         *  修改日期：2015.8.01
-         *  Example：
-         *
-         *
-         *
-         *
-         */
-        'classisexist':function(path){
-            return System.isClassFile(path);
-        },
+
         /**
          *
          * @author: lhh
@@ -193,7 +178,9 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                             }
 
                             files.push(node);
-                            System.classes.push(js);
+                            if(System.isClassFile(src)){
+                                System.classes.push(src);
+                            }
                             System.files.push(src);
                         }
 
@@ -214,7 +201,9 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                                 node = System.Basis.printScript(js);
                             }
                             files.push(node);
-                            System.classes.push(js);
+                            if(System.isClassFile(js.src)){
+                                System.classes.push(js.src);
+                            }
                             System.files.push(js.src);
                         }
 

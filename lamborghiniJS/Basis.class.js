@@ -2178,9 +2178,9 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 				arr=path.split(".");
 				className=arr[0];
 				//这个类文件已经加载过了
-				if(System.isFunction(System[className])){
+				//if(System.isFunction(System[className])){
 					return true;
-				}
+				//}
 			}
 		}
 
