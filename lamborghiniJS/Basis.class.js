@@ -1562,22 +1562,9 @@ if(!GRN_LHH){
 			var i=0;
 			var a   = this.clone();
 			var len = arr.length;
-			//被合并的数组里是否与当前数组重复了
-			var find =function(v){
-				var i = a.length;
-				if(i > 0){
-					while ( --i ) {
-						if(a[i] === v){
-							return true;
-						}
-					}
-				}
-
-				return false;
-			};
 
 			while ( i< len ) {
-				if(override && find(arr[i])){
+				if(override && a.in_array(arr[i])){
 					i++;
 					continue;
 				}
@@ -1587,6 +1574,37 @@ if(!GRN_LHH){
 			return a;
 		});
 	}
+
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016.8.20
+	 * 修改日期：2016.8.20
+	 * 名称：in_array
+	 * 功能：搜索数组中是否存在指定的值
+	 * 说明：
+	 * 注意：
+	 * @param   (String)search				NO NULL : 必需。规定要在数组搜索的值。
+	 * @param   (Array)array				NO NULL : 必需。规定要搜索的数组。
+	 * 调用方式：
+	 * @return  (Boolean)
+	 * Example：
+	 */
+
+
+
+	if(!Array.prototype.in_array){
+		Array.method('in_array',function(search,array){
+			array = array || this;
+			if(-1 === array.indexOf(search)){
+				return false;
+			}
+			return true;
+		});
+	}
+
+
 
 
 
@@ -2204,11 +2222,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	 * @returns {boolean}
 	 */
 	System.fileExisted=function(file) {
-		if(-1 === System.files.indexOf(file)){
-			return false;
-		}else{
-			return true;
-		}
+		return System.files.in_array(file);
 	};
 
 

@@ -62,7 +62,7 @@ if(!registerContainerConfiguration){
             //true : document.createElement(); false :document.write();
             'create':false,
             //加载后是否要移除添加过的script 节点
-            'remove':true,
+            'remove':false,
             'append':'after',
             'default':{
                 'script':{
@@ -138,6 +138,7 @@ if(!registerContainerConfiguration){
 
 
 (function(Config){
+    var files=[];
     var tag = "script";
     var scriptAttribute = Config.render.default.script.Attribute;
     var i = 0;
@@ -180,6 +181,7 @@ if(!registerContainerConfiguration){
             attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
         }
         for(i=0,len = srcs.length;i < len; i++){
+            files.push(srcs[i]);
             document.write('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
 
         }
@@ -197,9 +199,15 @@ if(!registerContainerConfiguration){
         }else{
             window[GRN_LHH].main(function(){
                 var System=this;
+
+                System.each(System.files = System.files.merge(files),function(){
+                    if(System.isClassFile(this)){
+                        System.classes.push(this);
+                    }
+                });
             });
         }
-    },5000);
+    },2500);
     //=================================================================================================================================
 
 
