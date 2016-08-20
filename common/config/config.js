@@ -62,7 +62,7 @@ if(!registerContainerConfiguration){
             //true : document.createElement(); false :document.write();
             'create':false,
             //加载后是否要移除添加过的script 节点
-            'remove':false,
+            'remove':true,
             'append':'after',
             'default':{
                 'script':{
