@@ -1585,8 +1585,8 @@ if(!GRN_LHH){
 	 * 功能：搜索数组中是否存在指定的值
 	 * 说明：
 	 * 注意：
-	 * @param   (String)search				NO NULL : 必需。规定要在数组搜索的值。
-	 * @param   (Array)array				NO NULL : 必需。规定要搜索的数组。
+	 * @param   (String|Number|Boolean|Object|Array)search		NO NULL : 必需。规定要在数组搜索的值。
+	 * @param   (Array)array						   			   NULL : 规定要搜索的数组。
 	 * 调用方式：
 	 * @return  (Boolean)
 	 * Example：
