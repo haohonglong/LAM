@@ -136,7 +136,7 @@
 		            'fragment':null,
 		            //true : document.createElement(); false :document.write();
 		            'create':false,
-		            //加载后要是否要移除添加过的script 节点
+		            //加载后是否要移除添加过的script 节点
                     'remove':true,
 		            'append':'after',
 		            'default':{
