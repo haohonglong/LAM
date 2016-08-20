@@ -177,10 +177,9 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                 for (i=0,len=D.js.length;i<len;i++){
                     var js=D.js[i];
                     if(System.isString(js)){
-                        //是否已加载过了
-                        if(this.classisexist(js)){continue;}
                         src = baseUrl ? baseUrl+js+suffix : js+suffix;
-                        if(System.classes.indexOf(js) != -1 || System.fileExisted(src)){
+                        //是否已加载过了
+                        if(System.fileExisted(src)){
                             continue;
                         }else{
 
@@ -201,11 +200,10 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
 
 
                     }else if(System.isObject(js)){
-                        //是否已加载过了
-                        if(this.classisexist(js.src)){continue;}
                         js.src = baseUrl ? baseUrl+js.src+suffix : js.src+suffix;
 
-                        if(System.classes.indexOf(js.src) != -1 || System.fileExisted(js.src)){
+                        //是否已加载过了
+                        if(System.fileExisted(js.src)){
                             continue;
                         }else{
                             System.merge(js,[sAttribute]);
@@ -236,35 +234,43 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                     if(System.isString(css)){
                         href = baseUrl ? baseUrl+css+suffix : css+suffix;
                         //是否已加载过了
-                        if(System.fileExisted(href)){continue;}
-                        var A = System.clone(cAttribute,1);
-                        A['href'] = href;
-                        if(create){
-                            node = CMyDom().create('link',A);
-                            node.style=true;
+                        if(System.fileExisted(href)){
+                            continue;
                         }else{
-                            node = System.Basis.printLink(A);
+                            var A = System.clone(cAttribute,1);
+                            A['href'] = href;
+                            if(create){
+                                node = CMyDom().create('link',A);
+                                node.style=true;
+                            }else{
+                                node = System.Basis.printLink(A);
+                            }
+
+                            files.push(node);
+                            System.files.push(href);
                         }
 
-                        files.push(node);
-                        System.files.push(href);
 
                     }else if(System.isObject(css)){
                         css.rel = css.rel || rel;
                         css.href = baseUrl ? baseUrl+css.href+suffix : css.href+suffix;
                         //是否已加载过了
-                        if(System.fileExisted(css.href)){continue;}
-                        System.merge(css,[cAttribute]);
-
-                        if(create){
-                            node = CMyDom().create('link',css);
-                            node.style=true;
+                        if(System.fileExisted(css.href)){
+                            continue;
                         }else{
-                            node = System.Basis.printLink(css);
-                        }
+                            System.merge(css,[cAttribute]);
 
-                        files.push(node);
-                        System.files.push(css.href);
+                            if(create){
+                                node = CMyDom().create('link',css);
+                                node.style=true;
+                            }else{
+                                node = System.Basis.printLink(css);
+                            }
+
+                            files.push(node);
+                            System.files.push(css.href);
+
+                        }
 
                     }
 
