@@ -2248,12 +2248,15 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 		return System.files.in_array(file);
 	};
 
-	//把加载的基础文件放在加载器里
-	System.each(System.files = System.Config.files,function(){
-		if(System.isClassFile(this)){
-			System.classes.push(this);
-		}
-	});
+	if(System.Config.files){
+		//把加载的基础文件放在加载器里
+		System.each(System.files = System.Config.files,function(){
+			if(System.isClassFile(this)){
+				System.classes.push(this);
+			}
+		});
+	}
+
 
 
 	function Basis(D){
