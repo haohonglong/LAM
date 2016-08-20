@@ -56,6 +56,27 @@ if(!registerContainerConfiguration){
             'rightLimit':'}}'
         },
         'files':[],
+        //配置基础文件
+        'autoLoadFile':function(){
+            var ROOT = this.Public.ROOT;
+            var classPath=this.getClassPath();
+            return [
+                classPath+'/jQuery/jquery.js',
+                classPath+'/Basis.class.js',
+                //classPath+'/Base.class.js',
+                classPath+'/BiObject.class.js',
+                classPath+'/loadcommon.class.js',
+                classPath+'/Component.class.js',
+                classPath+'/Helper.class.js',
+                classPath+'/Event.class.js',
+                classPath+'/Browser.class.js',
+                classPath+'/Dom.class.js',
+                classPath+'/Html.class.js',
+                classPath+'/Template.class.js',
+                classPath+'/Controller.class.js'
+            ];
+        },
+
         //标签的渲染方式
         'render':{
             //输出标签的方式 ()
@@ -111,26 +132,25 @@ if(!registerContainerConfiguration){
                 Config.render.fragment.appendChild(node);
 
                 return fragment;
+            },
+            /**
+             * 用createElement 创建标签并且设为异步
+             */
+            'use':function(){
+                this.create=true;
+                this.default.script.Attribute.async='async';
+                this.default.script.Attribute.defer='defer';
+            },
+            /**
+             * 用document.write() 创建标签并且设为非异步
+             */
+            'unuse':function(){
+                this.create=false;
+                this.default.script.Attribute.async='false';
+                this.default.script.Attribute.defer='';
             }
-
         },
         'init':{},
-        /**
-         * 用createElement 创建标签并且设为异步
-         */
-        'use':function(){
-            this.render.create=true;
-            this.render.default.script.Attribute.async='async';
-            this.render.default.script.Attribute.defer='defer';
-        },
-        /**
-         * 用document.write() 创建标签并且设为非异步
-         */
-        'unuse':function(){
-            this.render.create=false;
-            this.render.default.script.Attribute.async='false';
-            this.render.default.script.Attribute.defer='';
-        },
         'getClassPath':function(){
             return this.vendorPath;
         }
@@ -139,6 +159,7 @@ if(!registerContainerConfiguration){
 
 
 (function(Config){
+    Config.files = Config.files || [];
     var tag = "script";
     var scriptAttribute = Config.render.default.script.Attribute;
     var i = 0;
@@ -148,21 +169,7 @@ if(!registerContainerConfiguration){
     var ROOT=Config.Public.ROOT;
 
     //加载基础类
-    var srcs =[
-        classPath+'/jQuery/jquery.js',
-        classPath+'/Basis.class.js',
-        //classPath+'/Base.class.js',
-        classPath+'/BiObject.class.js',
-        classPath+'/loadcommon.class.js',
-        classPath+'/Component.class.js',
-        classPath+'/Helper.class.js',
-        classPath+'/Event.class.js',
-        classPath+'/Browser.class.js',
-        classPath+'/Dom.class.js',
-        classPath+'/Html.class.js',
-        classPath+'/Template.class.js',
-        classPath+'/Controller.class.js'
-    ];
+    var srcs =Config.autoLoadFile();
     //=================================================================================================================================
     if(Config.render.create){
         window.setTimeout(function(){
@@ -181,8 +188,12 @@ if(!registerContainerConfiguration){
             attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
         }
         for(i=0,len = srcs.length;i < len; i++){
-            Config.files.push(srcs[i]);
+            //确保每个文件只加载一次
+            if(!(-1 === Config.files.indexOf(srcs[i]))){
+                continue;
+            }
             document.write('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
+            Config.files.push(srcs[i]);
 
         }
     }
@@ -199,8 +210,6 @@ if(!registerContainerConfiguration){
         }else{
             window[GRN_LHH].main(function(){
                 var System=this;
-
-
             });
         }
     },5000);

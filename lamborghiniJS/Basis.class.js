@@ -394,7 +394,7 @@ if(!GRN_LHH){
 		 * Example：
 		 */
 		'use':function(){
-			this.Config.use();
+			this.Config.render.use();
 			return this;
 		},
 		/**
@@ -410,7 +410,7 @@ if(!GRN_LHH){
 		 * Example：
 		 */
 		'unuse':function(){
-			this.Config.unuse();
+			this.Config.render.unuse();
 			return this;
 		},
 
@@ -2069,6 +2069,27 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 			'rightLimit':'}}'
 		},
 		'files':[],
+		//配置基础文件
+		'autoLoadFile':function(){
+			var ROOT = this.Public.ROOT;
+			var classPath=this.getClassPath();
+			return [
+				classPath+'/jQuery/jquery.js',
+				classPath+'/Basis.class.js',
+				//classPath+'/Base.class.js',
+				classPath+'/BiObject.class.js',
+				classPath+'/loadcommon.class.js',
+				classPath+'/Component.class.js',
+				classPath+'/Helper.class.js',
+				classPath+'/Event.class.js',
+				classPath+'/Browser.class.js',
+				classPath+'/Dom.class.js',
+				classPath+'/Html.class.js',
+				classPath+'/Template.class.js',
+				classPath+'/Controller.class.js'
+			];
+		},
+
 		//标签的渲染方式
 		'render':{
 			//输出标签的方式 ()
@@ -2109,7 +2130,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 				var node;
 				var k;
 				var fragment;
-				var Config = defaultConfig;
+				var Config = registerContainerConfiguration;
 				node=document.createElement(tag);
 
 				for(k in D){
@@ -2124,26 +2145,25 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 				Config.render.fragment.appendChild(node);
 
 				return fragment;
+			},
+			/**
+			 * 用createElement 创建标签并且设为异步
+			 */
+			'use':function(){
+				this.create=true;
+				this.default.script.Attribute.async='async';
+				this.default.script.Attribute.defer='defer';
+			},
+			/**
+			 * 用document.write() 创建标签并且设为非异步
+			 */
+			'unuse':function(){
+				this.create=false;
+				this.default.script.Attribute.async='false';
+				this.default.script.Attribute.defer='';
 			}
-
 		},
 		'init':{},
-		/**
-		 * 用createElement 创建标签并且设为异步
-		 */
-		'use':function(){
-			this.render.create=true;
-			this.render.default.script.Attribute.async='true';
-			this.render.default.script.Attribute.defer='defer';
-		},
-		/**
-		 * 用document.write() 创建标签并且设为非异步
-		 */
-		'unuse':function(){
-			this.render.create=false;
-			this.render.default.script.Attribute.async='false';
-			this.render.default.script.Attribute.defer='';
-		},
 		'getClassPath':function(){
 			return this.vendorPath;
 		}
@@ -2229,7 +2249,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	};
 
 	//把加载的基础文件放在加载器里
-	System.each(System.files = System.files.merge(System.Config.files),function(){
+	System.each(System.files = System.Config.files,function(){
 		if(System.isClassFile(this)){
 			System.classes.push(this);
 		}
