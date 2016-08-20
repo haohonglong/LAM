@@ -2068,6 +2068,7 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 			'leftLimit':'{{',
 			'rightLimit':'}}'
 		},
+		'files':[],
 		//标签的渲染方式
 		'render':{
 			//输出标签的方式 ()
@@ -2156,6 +2157,8 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	//hashcode 随机种子
 	System.random 	 = Config.random || 10000;
 
+
+
 	var CMyDom=function(){//创建Dom 对象
 		System.is(System,'Dom');
 		return new System.Dom();
@@ -2224,6 +2227,13 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 	System.fileExisted=function(file) {
 		return System.files.in_array(file);
 	};
+
+	//把加载的基础文件放在加载器里
+	System.each(System.files = System.files.merge(System.Config.files),function(){
+		if(System.isClassFile(this)){
+			System.classes.push(this);
+		}
+	});
 
 
 	function Basis(D){

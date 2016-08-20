@@ -93,24 +93,25 @@
 		if(!GRN_LHH){
 		    var GRN_LHH='System';
 		}
+		
 		//js获取项目根路径，如： http://localhost:8083/uimcardprj
-        function getRootPath(){
-            //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
-            var curWwwPath=window.document.location.href;
-            //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
-            var pathName=window.document.location.pathname;
-            var pos=curWwwPath.indexOf(pathName);
-            //获取主机地址，如： http://localhost:8083
-            var localhostPaht=curWwwPath.substring(0,pos);
-            //获取带"/"的项目名，如：/uimcardprj
-            var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
-            return(localhostPaht+projectName);
-        }
-        
-        if(!_ROOT_){
-            var _ROOT_ = getRootPath();
-        
-        }
+		function getRootPath(){
+		    //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+		    var curWwwPath=window.document.location.href;
+		    //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+		    var pathName=window.document.location.pathname;
+		    var pos=curWwwPath.indexOf(pathName);
+		    //获取主机地址，如： http://localhost:8083
+		    var localhostPaht=curWwwPath.substring(0,pos);
+		    //获取带"/"的项目名，如：/uimcardprj
+		    var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+		    return(localhostPaht+projectName);
+		}
+		
+		if(!_ROOT_){
+		    var _ROOT_ = getRootPath();
+		
+		}
 		
 		
 		var common = _ROOT_+'/common';
@@ -130,6 +131,7 @@
 		            'leftLimit':'{{',
 		            'rightLimit':'}}'
 		        },
+		        'files':[],
 		        //标签的渲染方式
 		        'render':{
 		            //输出标签的方式 ()
@@ -137,7 +139,7 @@
 		            //true : document.createElement(); false :document.write();
 		            'create':false,
 		            //加载后是否要移除添加过的script 节点
-                    'remove':true,
+		            'remove':true,
 		            'append':'after',
 		            'default':{
 		                'script':{
@@ -213,7 +215,6 @@
 		
 		
 		(function(Config){
-		    var files=[];
 		    var tag = "script";
 		    var scriptAttribute = Config.render.default.script.Attribute;
 		    var i = 0;
@@ -256,7 +257,7 @@
 		            attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
 		        }
 		        for(i=0,len = srcs.length;i < len; i++){
-		            files.push(srcs[i]);
+		            Config.files.push(srcs[i]);
 		            document.write('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
 		
 		        }
@@ -275,18 +276,16 @@
 		            window[GRN_LHH].main(function(){
 		                var System=this;
 		
-		                System.each(System.files = System.files.merge(files),function(){
-		                    if(System.isClassFile(this)){
-		                        System.classes.push(this);
-		                    }
-		                });
+		
 		            });
 		        }
-		    },2500);
+		    },5000);
 		    //=================================================================================================================================
 		
 		
 		})(registerContainerConfiguration);
+		
+
 		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 		
         根据下面三条修改上面对应的参数
