@@ -223,6 +223,7 @@ if(!GRN_LHH){
 	 *			override
 	 *			autoCenter
 	 *			isClassFile
+	 *			fileExisted
 	 *			template
 	 *			findTpl
 	 *			replaceTpl
@@ -1137,7 +1138,7 @@ if(!GRN_LHH){
 		 * 产品介绍：
 		 * 创建日期：2016-7-6
 		 * 修改日期：2016-7-6
-		 * 名称：System.Number.limit_num_len
+		 * 名称：System.Number.limit
 		 * 功能：限制数字位数
 		 * 说明：
 		 * 注意：
@@ -1146,12 +1147,33 @@ if(!GRN_LHH){
 		 * @param (Number)limit			NO NULL : 限制的位数，默认是9位
 		 * @returns {string}
 		 */
-		'limit_num_len':function (n,limit){
+		'limit':function (n,limit){
 			limit =limit || 9;
 			return n.toString().trim().substr(0,limit);
 		}
 	};
-	System.Array	 		= {};
+	System.Array	 		= {
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016.8.21
+		 * 修改日期：2016.8.21
+		 * 名称：System.Array.in_array
+		 * 功能：搜索数组中是否存在指定的值
+		 * 说明：
+		 * 注意：
+		 * @param   (String|Number|Boolean|Object|Array)search		NO NULL : 必需。规定要在数组搜索的值。
+		 * @param   (Array)array						   			NO NULL : 必需, 规定要搜索的数组。
+		 * 调用方式：
+		 * @return  (Boolean)
+		 * Example：
+		 */
+
+		'in_array':function(serch,array){
+			return Array.in_array.call(array,serch);
+		}
+	};
 
 
 //check
@@ -1279,7 +1301,7 @@ if(!GRN_LHH){
 	 */
 	if(!String.prototype.findStr){
 		String.method('findStr',function(){
-			if(" " === this) {
+			if(System.empty(this)) {
 				return false;
 			}
 			return this.match(/[^\d]*/i);
@@ -1322,7 +1344,7 @@ if(!GRN_LHH){
 	 */
 	if(!String.prototype.compareTwoStr){
 		String.method('compareTwoStr',function(s){
-			if(" " === this || " " === s) {
+			if(System.empty(this) || System.empty(s)) {
 				return false;
 			}
 			var s1,s2;
@@ -1515,7 +1537,7 @@ if(!GRN_LHH){
 				arr = arr || this;
 			}
 
-			if(!isFunction(fn)){
+			if(!System.isFunction(fn)){
 				return arr;
 			}
 

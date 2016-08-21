@@ -570,11 +570,14 @@
 
 	七、原始对象的原型链上扩充的方法列表
 			Function.method();
+			
 			Date.format();
+			
 			String.trim();
 			String.filterChar();
 			String.findStr();
 			String.compareTwoStr(s);
+			
 			Array.indexOf();
 			Array.lastIndexOf();
 			Array.remove();
@@ -587,6 +590,7 @@
 			Array.remove();
 			Array.each();
 			Array.filter();
+			Array.in_array();
 
 	八、框架里的方法
 			LAMJS.main();
@@ -612,6 +616,7 @@
 			LAMJS.autoCenter();
 			LAMJS.template();
 			LAMJS.replaceTpl();
+			LAMJS.fileExisted();
 			
 			LAMJS.Basis.printTag();
 			LAMJS.Basis.printScript();
