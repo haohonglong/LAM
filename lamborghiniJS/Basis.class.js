@@ -1366,7 +1366,7 @@ if(!GRN_LHH){
 	 * 创建日期：2014-12-22
 	 * 修改日期：2015-10-28
 	 * 名称：indexOf
-	 * 功能：返回一个数组元素的下标，返回下标
+	 * 功能：在指定的数组中查找对应的元素如果有，就返回元素在数组里的的下标，否则就放回-1
 	 * 说明：
 	 * 注意：
 	 * @param   (val)d
@@ -1384,11 +1384,19 @@ if(!GRN_LHH){
 	}
 
 	/**
-	 * 返回一个数组元素的下标，返回下标
-	 * @param val
-	 * @returns {Number}
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2014-12-22
+	 * 修改日期：2015-10-28
+	 * 名称：lastIndexOf
+	 * 功能：在指定的数组中查找对应的元素如果有，就返回元素在数组里的的下标，否则就放回-1
+	 * 说明：同indexOf一样不同的是，从数组尾部开始检索
+	 * 注意：
+	 * @param   (val)d
+	 * @returns   (Number)
+	 * Example：
 	 */
-
 	if(!Array.prototype.lastIndexOf){
 		Array.method('lastIndexOf',function(d){
 			for(var i=this.length-1;i>=0;i--){
@@ -1434,8 +1442,46 @@ if(!GRN_LHH){
 		});
 	}
 
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016.8.20
+	 * 修改日期：2016.8.20
+	 * 名称：in_array
+	 * 功能：搜索数组中是否存在指定的值
+	 * 说明：
+	 * 注意：
+	 * @param   (String|Number|Boolean|Object|Array)search		NO NULL : 必需。规定要在数组搜索的值。
+	 * @param   (Array)array						   			   NULL : 规定要搜索的数组。
+	 * 调用方式：
+	 * @return  (Boolean)
+	 * Example：
+	 */
+	if(!Array.prototype.in_array){
+		Array.method('in_array',function(search,array){
+			array = array || this;
+			if(-1 === array.indexOf(search)){
+				return false;
+			}
+			return true;
+		});
+	}
 
-
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2014-12-22
+	 * 修改日期：2015-10-28
+	 * 名称：contains
+	 * 功能：数组中是否包括指定的元素
+	 * 说明：等同in_array 功能
+	 * 注意：
+	 * @param   (val)d
+	 * @returns   (Boolean)
+	 * Example：
+	 */
 	if(!Array.prototype.contains){
 		Array.method('contains',function(d){
 			return this.indexOf(d) != -1;
@@ -1504,10 +1550,11 @@ if(!GRN_LHH){
 	if(!Array.prototype.insertBefore){
 		Array.method('insertBefore',function(d,d2){
 			var i=this.indexOf(d2);
-			if(i== -1)
+			if(i== -1) {
 				this.push(d);
-			else
-				this.splice(i,0,d);
+			}else {
+				this.splice(i, 0, d);
+			}
 		});
 	}
 
@@ -1597,34 +1644,7 @@ if(!GRN_LHH){
 		});
 	}
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2016.8.20
-	 * 修改日期：2016.8.20
-	 * 名称：in_array
-	 * 功能：搜索数组中是否存在指定的值
-	 * 说明：
-	 * 注意：
-	 * @param   (String|Number|Boolean|Object|Array)search		NO NULL : 必需。规定要在数组搜索的值。
-	 * @param   (Array)array						   			   NULL : 规定要搜索的数组。
-	 * 调用方式：
-	 * @return  (Boolean)
-	 * Example：
-	 */
 
-
-
-	if(!Array.prototype.in_array){
-		Array.method('in_array',function(search,array){
-			array = array || this;
-			if(-1 === array.indexOf(search)){
-				return false;
-			}
-			return true;
-		});
-	}
 
 
 
