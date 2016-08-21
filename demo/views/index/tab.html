@@ -8,33 +8,25 @@
 		LAMJS.wait([
 			LAMJS.Config.Public.ROOT
 		],function(ROOT) {
-			LAMJS.run(function() {
-				'use strict';
-				var System = this;
-				System.Loadcommon.
-						load({
-							'baseUrl':ROOT+'/lib/css',
-							'suffix':'.css',
-							'rel':'stylesheet',
-							'css':[
-								 '/lib'
-							]
-						})
-						.print();
+			'use strict';
+			var System = this;
+			System.use();
+			System.Loadcommon.
+					load({
+						'baseUrl':ROOT+'/lib/css',
+						'suffix':'.css',
+						'rel':'stylesheet',
+						'css':[
+							'/lib'
+						]
+					})
+					.print();
 
 
-			});
-
-
-			LAMJS.run(function(){
-				'use strict';
-				var System=this;
-				System.import([
-					'/lamborghiniJS/Tab.class'
-				],ROOT);
-
-			});
-		});
+			System.import([
+				'/lamborghiniJS/Tab.class'
+			],ROOT);
+		},2000);
 
 
 
@@ -48,6 +40,7 @@
 		'use strict';
 		var System=this;
 		$(function(){
+			$('[data-controller=body]').show();
 			new System.Tab({
 				'list':$('.list li'),
 				'event':'click',
@@ -70,7 +63,7 @@
 		});
 
 
-	},5000);
+	});
 
 </script>
 
@@ -84,14 +77,17 @@
 </head>
 
 <body>
-<ul class="list sectionFloat clearfix">
-	<li class="cur">111</li>
-	<li>222</li>
-	<li>333</li>
-</ul>
-<div class="block">11111</div>
-<div class="block hide">22222</div>
-<div class="block hide">33333</div>
+<div data-controller="body" class="hide">
+	<ul class="list sectionFloat clearfix">
+		<li class="cur">111</li>
+		<li>222</li>
+		<li>333</li>
+	</ul>
+	<div class="block">11111</div>
+	<div class="block hide">22222</div>
+	<div class="block hide">33333</div>
+
+</div>
 
 </body>
 </html>
