@@ -2214,8 +2214,8 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 
 	System.merge(Config,[defaultConfig]);
 
-	System.Config 	 = Config;
-	System.classPath = Config.getClassPath();
+	System.Config 	 = System.clone(Config,1);
+	System.classPath = System.Config.getClassPath();
 	//hashcode 随机种子
 	System.random 	 = Config.random || 10000;
 
