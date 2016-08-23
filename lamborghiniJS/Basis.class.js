@@ -492,9 +492,9 @@ if(!GRN_LHH){
 		 * 说明：System 参数不用传
 		 * 注意：
 		 * @param   (Array)url 			    NO NULL :要加载js文件
-		 * @param   (String)baseUrl 		       NULL :文件路径
+		 * @param   (String)baseUrl 		   NULL :文件路径
 		 * @param   (String)suffix 		       NULL :文件后缀名
-		 * @return  (Object) this 返回当前对象可以链式调用import方法
+		 * @return  {System} 返回当前对象可以链式调用import方法
 		 * Example：
 		 */
 		'import':function(url,baseUrl,suffix){
