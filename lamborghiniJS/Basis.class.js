@@ -96,7 +96,7 @@ if(!GRN_LHH){
 	 * 注意：不能链式调用，如要链式调用，用 System.then方法
 	 * @param   (Array)args 			   NULL :传入的参数
 	 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
-	 * @return  (Object) 返回callback 里的返回值
+	 * @return  {*} 返回callback 里的返回值
 	 * Example：
 	 */
 	function runtime(args,callback){
@@ -312,14 +312,14 @@ if(!GRN_LHH){
 		 * Example：
 		 */
 		'main':function(args,callback){
-			this.run(args,callback);
+			return this.run(args,callback);
 		},
 		/**
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2014-12-23
 		 * 修改日期：2016-8-23
-		 * 名称：System.main
+		 * 名称：System.run
 		 * 功能：程序主方法
 		 * 说明：
 		 * 注意：
@@ -329,7 +329,7 @@ if(!GRN_LHH){
 		 * Example：
 		 */
 		'run':function(args,callback){
-			runtime.apply(this,[args,callback]);
+			return runtime.apply(this,[args,callback]);
 		},
 
 
