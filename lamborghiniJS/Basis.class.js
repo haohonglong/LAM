@@ -62,6 +62,9 @@ if(!GRN_LHH){
 	 */
 	function isType(type) {
 		return function(obj) {
+			if('Object' === type && obj.nodeType){
+				return false;
+			}
 			return {}.toString.call(obj) == "[object " + type + "]";
 		};
 	}
