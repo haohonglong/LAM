@@ -168,13 +168,13 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                             continue;
                         }else{
 
-                            var A = System.clone(sAttribute);
-                            A['src'] = src;
+                            var attr = System.clone(sAttribute);
+                            attr['src'] = src;
                             if(create){
-                                node = CMyDom().create('script',A);
+                                node = CMyDom().create('script',attr);
                                 node.script=true;
                             }else{
-                                node = System.Basis.printScript(A);
+                                node = System.Basis.printScript(attr);
                             }
 
                             files.push(node);
@@ -226,13 +226,13 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                         if(System.fileExisted(href)){
                             continue;
                         }else{
-                            var A = System.clone(cAttribute);
-                            A['href'] = href;
+                            var attr = System.clone(cAttribute);
+                            attr['href'] = href;
                             if(create){
-                                node = CMyDom().create('link',A);
+                                node = CMyDom().create('link',attr);
                                 node.style=true;
                             }else{
-                                node = System.Basis.printLink(A);
+                                node = System.Basis.printLink(attr);
                             }
 
                             files.push(node);
