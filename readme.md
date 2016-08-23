@@ -284,7 +284,7 @@
 		        if(!window[GRN_LHH]) {
 		            alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
 		        }else{
-		            window[GRN_LHH].main(function(){
+		            window[GRN_LHH].run(function(){
 		                var System=this;
 		            });
 		        }
@@ -385,7 +385,7 @@
 
 			类结构:(继承参考 六、继承)
 
-				window[GRN_LHH].main([window],function(window,undefined){
+				window[GRN_LHH].run([window],function(window,undefined){
                         'use strict';
                         var System=this;
                         System.import([class]).import([class],System.classPath);
@@ -396,7 +396,7 @@
 				
 
 			Example:
-				window[GRN_LHH].main([window],function(window,undefined){
+				window[GRN_LHH].run([window],function(window,undefined){
 					'use strict';
 					var System=this;
 					System.is(System,'superName','className');
@@ -593,7 +593,7 @@
 			Array.in_array();
 
 	八、框架里的方法
-			LAMJS.main();
+			LAMJS.run();
 			LAMJS.import();
 			LAMJS.config();
 			LAMJS.print();
@@ -642,7 +642,7 @@
 				上面的代码生成下面的字符串
 					<p>这是一个p标签</p>
 				可以嵌套n个标签，方式如下：
-				    LAMJS.main(function () {
+				    LAMJS.run(function () {
                         'use strict';
                         var System = this;
                         System.Html.tag('nav',{},
@@ -748,7 +748,7 @@
 	
 	十四、沙箱(Sandbox)
 		
-		LAMJS.main()是LamborghiniJS 的沙箱机制 
+		LAMJS.run()是LamborghiniJS 的沙箱机制 
 		LAMJS.run() 是改变创建标签机制 用document.createElement() 
 		沙箱的作用防止全局变量污染
 		
@@ -819,7 +819,7 @@
 				//controllers/index.html
 				
 				Controller 范例一、
-						    LAMJS.main([
+						    LAMJS.run([
 									LAMJS.Config.Public.ROOT,
 									LAMJS.Config.Public.ROOT+'/project/views/index'
 								],function(ROOT,views) {
@@ -874,7 +874,7 @@
 	                                                            
 	                                                            
 	            Controller 范例二、(面向对象方式)
-	            		LAMJS.main([
+	            		LAMJS.run([
                             LAMJS.Config.Public.ROOT,
                             LAMJS.Config.Public.ROOT+'/project/views/index'
                         ],function(ROOT,views) {
