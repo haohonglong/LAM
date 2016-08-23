@@ -208,7 +208,7 @@ if(!registerContainerConfiguration){
         if(!window[GRN_LHH]) {
             alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
         }else{
-            LAMJS.main([
+            LAMJS.run([
                     LAMJS.Config.Public.ROOT
                 ],function(ROOT) {
                 var System=this;

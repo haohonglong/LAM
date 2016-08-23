@@ -1,6 +1,6 @@
 //加载基础类
 
-LAMJS.main([
+LAMJS.run([
     LAMJS.Config.Public.ROOT
 ],function(ROOT) {
     'use strict';
