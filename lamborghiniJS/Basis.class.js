@@ -669,7 +669,7 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-26
-		 * 修改日期：2016-7-8
+		 * 修改日期：2016-8-23
 		 * 名称： list
 		 * 功能：递归对象
 		 * 说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象位置
@@ -696,7 +696,7 @@ if(!GRN_LHH){
 				loop++;
 				__this__.each(D,function(k,v){
 					totalLoop++;
-					if (false === callback.call(D,k,v,loop,totalLoop)) {
+					if (false === callback.apply(D,[k,v,loop,totalLoop])) {
 						console.log('共遍历----->'+loop+'<------次找到了')
 						return false;
 					}
