@@ -9,7 +9,7 @@
  * @param	        mask 	 (jQuery)      NULL : //弹出层下的蒙版jQuery对象
  * @param 			padding  (Number)    NULL : callBack 有padding值时
  * Example:
-		  window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
+		  window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 					var System=this;
 
 					var pop=new System.PopupLayer({
@@ -38,7 +38,7 @@
 		});
  */
 
- window[GRN_LHH].main([window,jQuery],function(window,jQuery,undefined){
+ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 	 'use strict';
 	 var System=this;
 	 System.is(System,'Browser','PopupLayer');

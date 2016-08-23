@@ -1,4 +1,4 @@
-window[GRN_LHH].main([window,document,jQuery],function(window,document,$,undefined){
+window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Browser','Dom');

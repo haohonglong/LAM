@@ -1,5 +1,5 @@
 
-window[GRN_LHH].main([window],function(window,undefined){
+window[GRN_LHH].run([window],function(window,undefined){
 	var System=this;
 	System.is(System,'Helper','Sort');
 

@@ -2135,7 +2135,7 @@ if(!GRN_LHH){
  ==========================================================================================
 */
 
-window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
+window[GRN_LHH].run([window,registerContainerConfiguration],function(W,Config){
 	'use strict';
 	var System=this;
 	//js获取项目根路径，如： http://localhost:8083/uimcardprj

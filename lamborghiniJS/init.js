@@ -1,6 +1,6 @@
 //加载基础类
 
-window[GRN_LHH].main(function(){
+window[GRN_LHH].run(function(){
     'use strict';
     var System=this;
     System.root={

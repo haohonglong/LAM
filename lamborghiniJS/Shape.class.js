@@ -1,6 +1,6 @@
 
 //基本形
-window[GRN_LHH].main([window],function(window,undefined){
+window[GRN_LHH].run([window],function(window,undefined){
 	'use strict';
 	var System=this;
 	System.is(System.Html5,'Canvas','Shape');

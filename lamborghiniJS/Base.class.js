@@ -4,7 +4,7 @@
 	License: http://www.opensource.org/licenses/mit-license.php
 */
 
-window[GRN_LHH].main(function(){
+window[GRN_LHH].run(function(){
 	'use strict';
 	var System=this;
 	System.is(System,'Basis','Base');

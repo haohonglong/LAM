@@ -14,7 +14,7 @@
  * 
  */
 
-window[GRN_LHH].main([window,jQuery],function(window,$,undefined){
+window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	'use strict';
 	var System=this;
 

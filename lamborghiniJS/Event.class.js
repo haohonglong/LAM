@@ -1,5 +1,5 @@
 
-window[GRN_LHH].main([window,window['document']],function(window,document,undefined){
+window[GRN_LHH].run([window,window['document']],function(window,document,undefined){
     'use strict';
     var System=this;
     System.is(System,'Helper','Event');

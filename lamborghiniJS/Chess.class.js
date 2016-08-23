@@ -1,7 +1,7 @@
 /**
  * 棋盘
  */
-window[GRN_LHH].main([window],function(window,undefined){
+window[GRN_LHH].run([window],function(window,undefined){
 	var System=this;
 	System.is(System.Html5,'Shape','Chess');
 	var __this__=null;
