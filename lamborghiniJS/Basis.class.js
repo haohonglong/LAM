@@ -62,9 +62,6 @@ if(!GRN_LHH){
 	 */
 	function isType(type) {
 		return function(obj) {
-			if('Object' === type && obj.nodeType){
-				return false;
-			}
 			return {}.toString.call(obj) == "[object " + type + "]";
 		};
 	}
@@ -73,6 +70,21 @@ if(!GRN_LHH){
 	var isString = isType("String");
 	var isArray = Array.isArray || isType("Array");
 	var isFunction = isType("Function");
+
+	// Used for trimming whitespace
+	var trimLeft = /^\s+/,
+		trimRight = /\s+$/,
+
+	// Save a reference to some core methods
+
+		toString = Object.prototype.toString,
+		hasOwn = Object.prototype.hasOwnProperty,
+		push = Array.prototype.push,
+		slice = Array.prototype.slice,
+		trim = String.prototype.trim,
+		indexOf = Array.prototype.indexOf;
+
+
 
 	/**
 	 *
@@ -216,6 +228,7 @@ if(!GRN_LHH){
 	 *			putIndexGetObjectTheValue
 	 *			list
 	 *			is
+	 *			isPlainObject
 	 *			log
 	 *			defined
 	 *			merge
@@ -246,7 +259,25 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2014-12-23
-		 * 修改日期：2016-4-11
+		 * 修改日期：2016-8-23
+		 * 名称：System.main
+		 * 功能：程序主方法
+		 * 说明：
+		 * 注意：
+		 * @param   (Array)args 			   NULL :传入的参数
+		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
+		 * @return  (Object) 返回callback 里的返回值
+		 * Example：
+		 */
+		'main':function(args,callback){
+			this.run(args,callback);
+		},
+
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-12-23
+		 * 修改日期：2016-8-23
 		 * 名称：System.main
 		 * 功能：程序主方法
 		 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
@@ -256,7 +287,7 @@ if(!GRN_LHH){
 		 * @return  (Object) 返回callback 里的返回值
 		 * Example：
 		 */
-		'main':function(args,callback){
+		'run':function(args,callback){
 			if (!arguments.length) {
 				throw new Error('Warning 至少要有一个参数');
 				return this;
@@ -281,34 +312,6 @@ if(!GRN_LHH){
 				return callback.call(this);
 			}
 
-
-		},
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-1-21
-		 * 修改日期：2016-4-11
-		 * 名称：System.run
-		 * 功能：与main方法功类似,改变标签渲染方式, 用document.createElement()生成标签
-		 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
-		 * 注意：
-		 * @param   (Array)args 			NO NULL :传入的参数
-		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
-		 * @return  (Object) 返回callback 里的返回值
-		 * Example：
-		 */
-		'run':function(args,callback){
-			if(isFunction(args)) {
-				callback = args;
-				args = undefined;
-			}
-			if(args){
-				return this.use().main(args,callback);
-			}else{
-				return this.use().main(callback);
-			}
-
 		},
 
 		/**
@@ -316,7 +319,7 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2014-12-22
-		 * 修改日期：2016-4-11
+		 * 修改日期：2016-8-23
 		 * 名称：System.wait
 		 * 功能：一直是链式调用，总是返回当前命名空间对象，
 		 * 说明：与main方法功类似,不同的是每隔规定的时间数再去调用传进来的函数
@@ -340,12 +343,7 @@ if(!GRN_LHH){
 					clearTimeout(fn.timer);
 				}
 				callback.timer = setTimeout(function(){
-					if(isArray(args)){
-						self.main(args,callback);
-					}else{
-						self.main(callback);
-					}
-
+					self.run(args,callback);
 				}, time);
 			}
 			return this;
@@ -356,7 +354,7 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-4-11
-		 * 修改日期：2016-4-11
+		 * 修改日期：2016-8-23
 		 * 名称：System.then
 		 * 功能：一直是链式调用，总是返回当前命名空间对象，
 		 * 说明：跟main方法类似，不同的是main 返回的是callback里的返回值。
@@ -367,19 +365,7 @@ if(!GRN_LHH){
 		 * Example：
 		 */
 		'then':function(args,callback){
-			var self=this;
-			if(isFunction(args)) {
-				callback = args;
-				args = undefined;
-			}
-			if(isFunction(callback)) {
-				if(isArray(args)){
-					self.main(args,callback);
-				}else{
-					self.main(callback);
-				}
-
-			}
+			this.run(args,callback);
 			return this;
 		},
 
@@ -508,11 +494,10 @@ if(!GRN_LHH){
 		 * @param   (Array)url 			    NO NULL :要加载js文件
 		 * @param   (String)baseUrl 		       NULL :文件路径
 		 * @param   (String)suffix 		       NULL :文件后缀名
-		 * @param   (Object)System 			   NULL :命名空间
 		 * @return  (Object) this 返回当前对象可以链式调用import方法
 		 * Example：
 		 */
-		'import':function(url,baseUrl,suffix,System){
+		'import':function(url,baseUrl,suffix){
 			suffix = suffix || '.js';
 			try {
 				if(System.isset(importScripts) && System.isFunction(importScripts)){
@@ -526,7 +511,6 @@ if(!GRN_LHH){
 
 			} catch (e) {
 				//throw new Error(e.message);
-				System = System || this;
 				System.Loadcommon.load({
 					'baseUrl':baseUrl || null,
 					'js':url,
@@ -738,6 +722,7 @@ if(!GRN_LHH){
 			if ( this.isArray( obj ) ) {
 				return obj.each(callback);
 			} else {
+				if(!System.isPlainObject(obj)) return obj;
 				for ( i in obj ) {
 					if (false === callback.call( obj[ i ], i, obj[ i ])) {
 						break;
@@ -1030,6 +1015,48 @@ if(!GRN_LHH){
 			return true;
 
 
+		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-8-23
+		 * 修改日期：2016-8-23
+		 * 名称： System.defined
+		 * 功能：是否是纯对象
+		 * 说明：摘抄jQuery isPlainObject()
+		 * 注意：
+		 * @param obj
+		 * @returns {boolean}
+		 */
+		isPlainObject: function( obj ) {
+			var key;
+
+			if ( !obj || !System.isObject(obj) || obj.nodeType) {
+				return false;
+			}
+
+			try {
+
+				// Not own constructor property must be Object
+				if ( obj.constructor &&
+					!hasOwn.call( obj, "constructor" ) &&
+					!hasOwn.call( obj.constructor.prototype, "isPrototypeOf" ) ) {
+					return false;
+				}
+			} catch ( e ) {
+
+				// IE8,9 Will throw exceptions on certain host objects #9897
+				return false;
+			}
+
+
+
+			// Own properties are enumerated firstly, so to speed up,
+			// if last one is own, then all properties are own.
+			for ( key in obj ) {}
+
+			return key === undefined || hasOwn.call( obj, key );
 		},
 
 		/**
@@ -1863,28 +1890,6 @@ if(!GRN_LHH){
 	//		}
 	//	});
 	//}
-
-
-
-
-
-
-
-	// Used for trimming whitespace
-	var trimLeft = /^\s+/,
-		trimRight = /\s+$/,
-
-	// Save a reference to some core methods
-
-		toString = Object.prototype.toString,
-		hasOwn = Object.prototype.hasOwnProperty,
-		push = Array.prototype.push,
-		slice = Array.prototype.slice,
-		trim = String.prototype.trim,
-		indexOf = Array.prototype.indexOf;
-
-
-
 
 
 	(function(){
