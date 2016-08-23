@@ -893,7 +893,7 @@ if(!GRN_LHH){
 					if(!override && (key in target)) {continue;}
 					var value = args[i][key];
 					if(deep && System.isObject(value) && System.isPlainObject(value)){
-						target[key] = System.merge(deep,{},[value]);
+						target[key] = System.merge(deep,{},[target[key],value],override);
 					}else{
 						target[key] = value;
 					}
