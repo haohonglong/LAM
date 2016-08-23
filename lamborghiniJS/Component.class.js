@@ -71,7 +71,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-10-9
-		 * 修改日期：2015-10-9
+		 * 修改日期：2016-8-23
 		 * 名称：sort
 		 * 功能：排序功能
 		 * 说明：反序用reverse()方法
@@ -111,7 +111,10 @@ window[GRN_LHH].run([window],function(window,undefined){
 					n2 = y;
 				}
 
-				return sortFn(n1,n2);
+				return sortFn(
+								 String(n1).filterChar()
+								,String(n2).filterChar()
+				);
 			});
 
 			return arr;
@@ -127,6 +130,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * 功能：合并多个对象方法到当前的类里
 		 * 说明：默认同名方法名不会被覆盖
 		 * 注意：除了语法错误外，如果合并的方法没起作用，是因为与原有方法重名了
+		 * @param  (Boolean)deep  		   NULL :是否要深度拷贝对象
 		 * @param  (Array)args   		NO NULL :要合并对象的集合
 		 * @param  (Boolean)override 	   NULL :是否覆盖同名键名值,默认 false 是不覆盖
 		 * @return  (Object) 当前对象
@@ -134,26 +138,13 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * Example：
 		 */
 		'merge':function(args,override){
-			if(!System.isArray(args)){
-				throw new Error('args 不适一个数组');
-				return false;
+			var deep;
+			if(System.isBoolean(args)){
+				deep = args;
+				args = arguments[1];
+				override = arguments[2];
 			}
-			var len  = args.length;
-			if(len < 1){
-				throw new Error('没有传参数');
-				return false;
-			}
-			var key;
-			var i=0;
-			override = override || false;
-
-			for(; i<len; i++){
-				for(key in args[i]){
-					if(!override && (key in this)) {continue;}
-					this[key] = args[i][key];
-				}
-			}
-
+			System.merge(deep || false,this,args,override || false);
 			return this;
 		},
 		/**
