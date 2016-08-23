@@ -696,7 +696,7 @@ if(!GRN_LHH){
 				loop++;
 				__this__.each(D,function(k,v){
 					totalLoop++;
-					if (false === callback.call(D,k,v,D)) {
+					if (false === callback.call(D,k,v,loop,totalLoop)) {
 						console.log('共遍历----->'+loop+'<------次找到了')
 						return false;
 					}
