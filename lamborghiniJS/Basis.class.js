@@ -351,19 +351,18 @@ if(!GRN_LHH){
 		 * Example：
 		 */
 		'wait':function(args,callback,time){
-			var self=this;
-			if(isFunction(args)) {
+			if(System.isFunction(args)) {
 				time=callback;
 				callback = args;
 				args = undefined;
 			}
-			if(isFunction(callback)) {
+			if(System.isFunction(callback)) {
 				time=time || 3000;
 				if(callback.timer){
 					clearTimeout(fn.timer);
 				}
 				callback.timer = setTimeout(function(){
-					self.run(args,callback);
+					System.run(args,callback);
 				}, time);
 			}
 			return this;
