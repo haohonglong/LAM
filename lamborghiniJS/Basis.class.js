@@ -70,6 +70,9 @@ if(!GRN_LHH){
 	var isString = isType("String");
 	var isArray = Array.isArray || isType("Array");
 	var isFunction = isType("Function");
+	var isBoolean = function(type){
+		return ("boolean" === typeof type);
+	};
 
 	// Used for trimming whitespace
 	var trimLeft = /^\s+/,
@@ -841,11 +844,12 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-3-27
-		 * 修改日期：2015-3-27
+		 * 修改日期：2016-8-23
 		 * 名称：merge
 		 * 功能：一个或多个对象合并成一个指定的对象
 		 * 说明：默认同名的键值前面的不会被覆盖
 		 * 注意：
+		 * @param  (Boolean)deep  		   NULL :是否要深度拷贝对象
 		 * @param  (Object)target  		NO NULL :target 合并后的对象。null 代表合并到命名空间这个对象里
 		 * @param  (Array)args   		NO NULL :要合并对象的集合
 		 * @param  (Boolean)override 	   NULL :是否覆盖同名键名值,默认 false 是不覆盖
@@ -854,6 +858,16 @@ if(!GRN_LHH){
 		 *		System.merge({},[A[,...]],false);
 		 */
 		'merge':function(target,args,override){
+			var deep;
+
+			if (System.isBoolean(target)) {
+				deep = target;
+				target = arguments[1];
+				args   = arguments[2];
+				override   = arguments[3];
+			}else{
+				deep = false;
+			}
 			if(!isArray(args)){
 				throw new Error('Warning args 不是一个数组');
 				return false;
@@ -877,7 +891,13 @@ if(!GRN_LHH){
 			for(;i<len; i++){
 				for(key in args[i]){
 					if(!override && (key in target)) {continue;}
-					target[key] = args[i][key];
+					var value = args[i][key];
+					if(deep && System.isObject(value) && System.isPlainObject(value)){
+						target[key] = System.merge(deep,{},[value]);
+					}else{
+						target[key] = value;
+					}
+
 				}
 			}
 
@@ -889,21 +909,28 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-10-13
-		 * 修改日期：2015-10-13
+		 * 修改日期：2016-8-23
 		 * 名称：clone
 		 * 功能：对象克隆
 		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
 		 * 注意：
+		 * @param   (Boolean)deep  		   	   NULL :是否要深度拷贝对象
 		 * @param   (Object)className 		NO NULL : 要克隆的类
-		 * @param   (Number)not_generate 	   	   NULL : 是否生成_hashCode,默认生成;1 不生成
 		 * @return  (Object)				:返回克隆后的新对象
 		 * Example：
 		 */
-		'clone': function(className,not_generate) {
+		'clone': function(className) {
+			var deep;
+			if (System.isBoolean(className)) {
+				deep = className;
+				className = arguments[1];
+			}else{
+				deep = false;
+			}
 			var obj;
-			obj = this.merge({},[className]);
-			if(!not_generate){
-				obj['_hashCode'] += '_'+this.BiObject.generate();
+			obj = System.merge(deep,{},[className]);
+			if(obj['_hashCode']){
+				obj['_hashCode'] += '_'+System.BiObject.generate();
 			}
 			return obj;
 
@@ -1235,6 +1262,7 @@ if(!GRN_LHH){
 	System.isString 	= isString;
 	System.isArray 	= isArray;
 	System.isFunction = isFunction;
+	System.isBoolean = isBoolean;
 
 	System.arr_Object_key_has = arr_Object_key_has;
 	System.contains = contains;
@@ -2237,13 +2265,10 @@ window[GRN_LHH].main([window,registerContainerConfiguration],function(W,Config){
 		}
 	};
 
-
-	System.merge(Config,[defaultConfig]);
-
-	System.Config 	 = System.clone(Config,1);
+	System.Config 	 = System.merge(true,{},[Config,defaultConfig]);
 	System.classPath = System.Config.getClassPath();
 	//hashcode 随机种子
-	System.random 	 = Config.random || 10000;
+	System.random 	 = System.Config.random || 10000;
 
 
 

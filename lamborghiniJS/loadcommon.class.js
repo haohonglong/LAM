@@ -131,7 +131,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
          * 名称： load
          * 功能：动态创建js,css 标签引入公共文件
          *  创建日期：2014.9.9
-         *  修改日期：2014.9.9
+         *  修改日期：2016.823
          *  说明：js 和 css 也可任选其一
          *  * @params   (Object)D 			NO NULL :初始化参数
          *
@@ -168,7 +168,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                             continue;
                         }else{
 
-                            var A = System.clone(sAttribute,1);
+                            var A = System.clone(sAttribute);
                             A['src'] = src;
                             if(create){
                                 node = CMyDom().create('script',A);
@@ -226,7 +226,7 @@ window[GRN_LHH].main([window,document],function(window,document,undefined){
                         if(System.fileExisted(href)){
                             continue;
                         }else{
-                            var A = System.clone(cAttribute,1);
+                            var A = System.clone(cAttribute);
                             A['href'] = href;
                             if(create){
                                 node = CMyDom().create('link',A);
