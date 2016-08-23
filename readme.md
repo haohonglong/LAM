@@ -612,6 +612,7 @@
 			LAMJS.merge();
 			LAMJS.clone();
 			LAMJS.is();
+			LAMJS.isPlainObject();
 			LAMJS.log();
 			LAMJS.autoCenter();
 			LAMJS.template();

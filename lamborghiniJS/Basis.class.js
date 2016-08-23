@@ -85,6 +85,48 @@ if(!GRN_LHH){
 		indexOf = Array.prototype.indexOf;
 
 
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2014-12-23
+	 * 修改日期：2016-8-23
+	 * 名称：runtime
+	 * 功能：run 时执行的方法
+	 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
+	 * 注意：不能链式调用，如要链式调用，用 System.then方法
+	 * @param   (Array)args 			   NULL :传入的参数
+	 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
+	 * @return  (Object) 返回callback 里的返回值
+	 * Example：
+	 */
+	function runtime(args,callback){
+		if (!arguments.length) {
+			throw new Error('Warning 至少要有一个参数');
+			return this;
+		}
+		if(isFunction(args)) {
+			callback = args;
+			args = undefined;
+		}
+
+		if(args && !isArray(args)){
+			throw new Error('Warning args 必须是数组类型');
+			return this;
+		}
+		if (!isFunction(callback) ) {
+			throw new Error('Warning 参数必须要有一个 Function 类型');
+			return this;
+		}
+
+		if(isArray(args)){
+			return callback.apply(this,args);
+		}else{
+			return callback.call(this);
+		}
+
+	}
+
+
 
 	/**
 	 *
@@ -272,7 +314,6 @@ if(!GRN_LHH){
 		'main':function(args,callback){
 			this.run(args,callback);
 		},
-
 		/**
 		 * @author: lhh
 		 * 产品介绍：
@@ -280,39 +321,18 @@ if(!GRN_LHH){
 		 * 修改日期：2016-8-23
 		 * 名称：System.main
 		 * 功能：程序主方法
-		 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
-		 * 注意：不能链式调用，如要链式调用，用 System.then方法
+		 * 说明：
+		 * 注意：
 		 * @param   (Array)args 			   NULL :传入的参数
 		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
 		 * @return  (Object) 返回callback 里的返回值
 		 * Example：
 		 */
 		'run':function(args,callback){
-			if (!arguments.length) {
-				throw new Error('Warning 至少要有一个参数');
-				return this;
-			}
-			if(isFunction(args)) {
-				callback = args;
-				args = undefined;
-			}
-
-			if(args && !isArray(args)){
-				throw new Error('Warning args 必须是数组类型');
-				return this;
-			}
-			if (!isFunction(callback) ) {
-				throw new Error('Warning 参数必须要有一个 Function 类型');
-				return this;
-			}
-
-			if(isArray(args)){
-				return callback.apply(this,args);
-			}else{
-				return callback.call(this);
-			}
-
+			runtime.apply(this,[args,callback]);
 		},
+
+
 
 		/**
 		 *
@@ -1157,7 +1177,6 @@ if(!GRN_LHH){
 			return {'x':parseInt((W-w-p)/2),'y':parseInt((H-h-p)/2)};
 		}
 	};
-
 
 
 	System.String	 		= {};
