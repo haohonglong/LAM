@@ -940,7 +940,7 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-7-15
-		 * 修改日期：2016-7-15
+		 * 修改日期：2016-8-23
 		 * 名称：isclone
 		 * 功能：检查对象是否是克隆对象
 		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
@@ -949,10 +949,10 @@ if(!GRN_LHH){
 		 * @returns {boolean}
 		 */
 		'isclone': function(obj) {
-			if(obj._hashCode.indexOf('_') != -1){
-				return true;
-			}else{
+			if(-1 === obj._hashCode.indexOf('_')){
 				return false;
+			}else{
+				return true;
 			}
 
 		},

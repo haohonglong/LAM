@@ -125,7 +125,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-14
-		 * 修改日期：2015-8-14
+		 * 修改日期：2016-8-23
 		 * 名称：merge
 		 * 功能：合并多个对象方法到当前的类里
 		 * 说明：默认同名方法名不会被覆盖
@@ -157,6 +157,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * 功能：动态继承对象
 		 * 说明：
 		 * 注意：
+		 * @param  (Boolean)deep  		   NULL :是否要深度拷贝对象
 		 * @param   (Object)sub 			NO NULL :
 		 * @param   (Object)_super 			NO NULL :
 		 * @param  (Boolean)override 	   	   NULL :是否覆盖同名键名值,默认 false 是不覆盖
@@ -164,7 +165,13 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * Example：
 		 */
 		'extends': function( sub,_super,override) {
-			return System.merge(sub,[_super],override);
+			var deep;
+			if(System.isBoolean(sub)){
+				deep = sub;
+				_super = arguments[1];
+				override = arguments[2];
+			}
+			return System.merge(deep || false,sub,[_super],override || false);
 
 		},
 
