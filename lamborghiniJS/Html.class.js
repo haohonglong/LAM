@@ -91,9 +91,15 @@ window[GRN_LHH].run([window],function(window,undefined){
 					content = capture(content);
 				}
 				if(callBack && System.isFunction(callBack)){
-					callBack.call($dom,content);
+					if($dom){
+						callBack.call($dom,content);
+					}else{
+						callBack(content);
+					}
 				}else{
-					$dom.after(content).remove();
+					if($dom){
+						$dom.after(content).remove();
+					}
 				}
 
 			}
