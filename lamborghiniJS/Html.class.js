@@ -22,7 +22,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-1-15
-	 * 修改日期：2016-7-8
+	 * 修改日期：2016-8-23
 	 * 名称： getFile
 	 * 功能：返回指定的文件
 	 * 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象
@@ -60,16 +60,16 @@ window[GRN_LHH].run([window],function(window,undefined){
 			$dom = undefined;
 		}
 
-		data  		= $dom && $dom.attr('data')  			|| D&&D.data  	 	||	{};
-		dataType 	= $dom && $dom.attr('dataType') 		|| D&&D.dataType 	||	"html";
-		contentType = $dom && $dom.attr('contentType') 		|| D&&D.contentType ||	"application/x-www-form-urlencoded; charset=UTF-8";
-		url  		= $dom && $dom.attr('file')  			|| D&&D.url;
-		type  		= $dom && $dom.attr('type')  			|| D&&D.type  	 	||	"POST";
-		async 		= $dom && eval($dom.attr('async'))			|| D&&D.async ;
-		cache 		= $dom && eval($dom.attr('cache')) 			|| D&&D.cache ;
-		beforeSend 	= $dom && eval('('+$dom.attr('beforeSend')+')')	|| D&&D.beforeSend	||	0 ;
-		capture 	= $dom && eval('('+$dom.attr('capture')+')')	|| D&&D.capture		||	0 ;
-		callBack 	= $dom && eval('('+$dom.attr('callBack')+')')	|| D&&D.callBack	||	0 ;
+		data  		= $dom && eval('('+$dom.attr('data')+')')			|| D&&D.data  	 	||	{};
+		dataType 	= $dom && $dom.attr('dataType') 					|| D&&D.dataType 	||	"html";
+		contentType = $dom && $dom.attr('contentType') 					|| D&&D.contentType ||	"application/x-www-form-urlencoded; charset=UTF-8";
+		url  		= $dom && $dom.attr('file')  						|| D&&D.url;
+		type  		= $dom && $dom.attr('type')  						|| D&&D.type  	 	||	"POST";
+		async 		= $dom && eval($dom.attr('async'))					|| D&&D.async ;
+		cache 		= $dom && eval($dom.attr('cache')) 					|| D&&D.cache ;
+		beforeSend 	= $dom && eval('('+$dom.attr('beforeSend')+')')		|| D&&D.beforeSend	||	0 ;
+		capture 	= $dom && eval('('+$dom.attr('capture')+')')		|| D&&D.capture		||	0 ;
+		callBack 	= $dom && eval('('+$dom.attr('callBack')+')')		|| D&&D.callBack	||	0 ;
 
 		$.ajax(System.template(url),{
 			type : 	  type,
