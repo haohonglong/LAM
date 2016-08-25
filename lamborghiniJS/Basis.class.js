@@ -668,7 +668,7 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-26
-		 * 修改日期：2016-8-23
+		 * 修改日期：2016-8-25
 		 * 名称： list
 		 * 功能：递归对象
 		 * 说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象位置
@@ -685,7 +685,7 @@ if(!GRN_LHH){
 			var __this__ = this;
 			var list=function(D,callback){
 
-				if(!__this__.isObject(D) && !__this__.isArray(D)){
+				if(!__this__.isArray(D) && !__this__.isPlainObject(D)){
 					return D;
 				}
 				if(!__this__.isFunction(callback)){
@@ -693,7 +693,7 @@ if(!GRN_LHH){
 				}
 				//算出找到指定内容，所需要遍历的次数
 				loop++;
-				__this__.each(D,function(k,v){
+				return __this__.each(D,function(k,v){
 					totalLoop++;
 					if (false === callback.apply(D,[k,v,loop,totalLoop])) {
 						console.log('共遍历----->'+loop+'<------次找到了')
@@ -701,7 +701,7 @@ if(!GRN_LHH){
 					}
 					//如果没找到，就继续递归搜索
 					if(v){
-						list(v,callback);
+						return list(v,callback);
 					}
 				});
 			};
