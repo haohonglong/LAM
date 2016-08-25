@@ -342,7 +342,7 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2014-12-22
-		 * 修改日期：2016-8-23
+		 * 修改日期：2016-8-25
 		 * 名称：System.wait
 		 * 功能：一直是链式调用，总是返回当前命名空间对象，
 		 * 说明：与main方法功类似,不同的是每隔规定的时间数再去调用传进来的函数
@@ -361,11 +361,10 @@ if(!GRN_LHH){
 			}
 			if(System.isFunction(callback)) {
 				time=time || 3000;
-				if(callback.timer){
-					clearTimeout(fn.timer);
-				}
+
 				callback.timer = setTimeout(function(){
 					System.run(args,callback);
+					clearTimeout(callback.timer);
 				}, time);
 			}
 			return this;
