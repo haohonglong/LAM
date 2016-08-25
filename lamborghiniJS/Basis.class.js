@@ -121,7 +121,7 @@ if(!GRN_LHH){
 			return this;
 		}
 
-		if(isArray(args)){
+		if(args && System.isArray(args)){
 			return callback.apply(this,args);
 		}else{
 			return callback.call(this);
@@ -355,8 +355,8 @@ if(!GRN_LHH){
 		 */
 		'wait':function(args,callback,time){
 			if(System.isFunction(args)) {
-				time=callback;
 				callback = args;
+				time=arguments[1];
 				args = undefined;
 			}
 			if(System.isFunction(callback)) {
