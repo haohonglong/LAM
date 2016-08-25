@@ -685,7 +685,7 @@ if(!GRN_LHH){
 			var __this__ = this;
 			var list=function(D,callback){
 
-				if(!__this__.isArray(D) && !__this__.isPlainObject(D)){
+				if(!__this__.isArray(D) && !__this__.isObject(D)){
 					return D;
 				}
 				if(!__this__.isFunction(callback)){
@@ -708,6 +708,7 @@ if(!GRN_LHH){
 			return {'data':list(D,callback),'totalLoop':totalLoop,'loop':loop};
 
 		},
+
 		/**
 		 * @author: lhh
 		 * 产品介绍：
