@@ -604,6 +604,7 @@
 			LAMJS.wait();
 			LAMJS.queues();
 			LAMJS.length();
+			LAMJS.eval();
 			LAMJS.proxy();
 			LAMJS.putIndexGetObjectTheValue();
 			LAMJS.list();

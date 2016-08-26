@@ -263,6 +263,7 @@ if(!GRN_LHH){
 	 *			then
 	 *			config
 	 *			define
+	 *			eval
 	 *			print
 	 *			import
 	 *			length
@@ -480,6 +481,23 @@ if(!GRN_LHH){
 		 * Example：
 		 */
 		'define':function(D){},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-8-26
+		 * 修改日期：2016-8-26
+		 * 名称：System.eval
+		 * 功能：对表达式字符串，或 json 进行eval 再处理
+		 * 说明：
+		 * 注意：
+		 * @param   {*}expression 			NO NULL :表达式字符串
+		 * @return  {*}								:
+		 * Example：
+		 */
+		'eval':function(expression){
+			return eval('('+expression+')');
+		},
+
 
 		/**
 		 * @author: lhh
