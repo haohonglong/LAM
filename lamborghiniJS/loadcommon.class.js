@@ -279,46 +279,43 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 调用方式：
          */
         'print':function(){
-            var print=false;
-            System.each(files,function(i){
-                if(System.isObject(this)){
-                    this.timer = i*1000;
-                    if(this.script){
-                        if('after' === append){
-                            this.appendTo(body);
-                        }else{
-                            if(0 === i){
-                                this.insertBefore(null,head.firstChild);
+
+            if(!System.Config.render.create){//document.write() 方式引入外部文件(.js|.css)
+                System.print(files.join(''));
+            }else{
+                System.each(files,function(i){
+                    if(System.isObject(this)){
+                        this.timer = i*1000;
+                        if(this.script){
+                            if('after' === append){
+                                this.appendTo(body);
                             }else{
-                                this.insertAfter(s[i-1]);
+                                if(0 === i){
+                                    this.insertBefore(null,head.firstChild);
+                                }else{
+                                    this.insertAfter(s[i-1]);
+                                }
+                            }
+                            //加载后要依次移除添加的script 节点
+                            if(System.Config.render.remove){
+                                //3秒后依次移除添加的script 节点
+                                System.wait([this],function(node){
+                                    node.delNode();
+                                },this.timer);
+                            }
+
+
+                        }else if(this.style){
+                            if(0 === i){
+                                this.insertAfter(s[s.length-1]);
+                            }else{
+                                this.insertAfter(l[i-1]);
                             }
                         }
-                        //加载后要依次移除添加的script 节点
-                        if(System.Config.render.remove){
-                            //3秒后依次移除添加的script 节点
-                            System.wait([this],function(node){
-                                node.delNode();
-                            },this.timer);
-                        }
-
 
                     }
-                    else if(this.style){
-                        if(0 === i){
-                            this.insertAfter(s[s.length-1]);
-                        }else{
-                            this.insertAfter(l[i-1]);
-                        }
-                    }
 
-                }else{
-                    print = true;
-                    return true;
-                }
-
-            });
-            if(print){
-                System.print(files.join(''));
+                });
             }
 
             this.remove();
