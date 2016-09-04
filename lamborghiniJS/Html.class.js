@@ -319,6 +319,50 @@ window[GRN_LHH].run([window],function(window,undefined){
 	Html.style=function(D,content){
 		return Html.tag('style',D,content);
 	};
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-9-4
+	 * 修改日期：2016-9-4
+	 * 名称： a
+	 * 功能：
+	 * 说明：
+	 * 注意：length 是关键字 属性里禁止使用
+	 * @param 	(String)href   			NO  NULL : 连接地址
+	 * @param 	(Object)D             	NO NULL : 标签的属性
+	 * @param 	(String|Array)content      NULL : 内容
+	 * @return (String)
+	 * Example：
+	 *
+	 */
+	Html.a=function(href,D,content){
+		D.href = href;
+		return Html.tag('a',D,content);
+	};
+
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-9-4
+	 * 修改日期：2016-9-4
+	 * 名称： img
+	 * 功能：
+	 * 说明：
+	 * 注意：length 是关键字 属性里禁止使用
+	 * @param 	(String)src      NO NULL : 图片 路径
+	 * @param 	(Object)D        NO NULL : 标签的属性
+	 * @return (String)
+	 * Example：
+	 *
+	 */
+	Html.img=function(src,D){
+		D.src = src;
+		return Html.tag('img',true,D);
+	};
+
+
 
 
 	Html.prototype = {
