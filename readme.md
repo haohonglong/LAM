@@ -703,8 +703,13 @@
                   </ul>
                 </nav>
                 
+            LAMJS.Html.renderTagAttributes();
             LAMJS.Html.scriptFile();
             LAMJS.Html.linkFile();
+            LAMJS.Html.script();
+            LAMJS.Html.style();
+            LAMJS.Html.a();
+            LAMJS.Html.img();
 				
 		
 	九、错误机制
