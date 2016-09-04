@@ -286,19 +286,54 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	/**
 	 *
-	 * @param D
-	 * @returns {String}
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-9-4
+	 * 修改日期：2016-9-4
+	 * 名称： scriptFile
+	 * 功能：
+	 * 说明：
+	 * 注意：length 是关键字 属性里禁止使用
+	 * @param 	(Object)D        NO NULL : 标签的属性
+	 * @param 	(String)src      NO NULL : 路径
+	 * @return (String)
+	 * Example：
+	 *
 	 */
-	Html.scriptFile=function(D){
+	Html.scriptFile=function(D,src){
+		if(!D){
+			D = {};
+		}
+		if(src){
+			D.src = src;
+		}
+		D.type = D.type || 'text/javascript';
 		return Html.tag('script',D);
 	};
 
 	/**
 	 *
-	 * @param D
-	 * @returns {String}
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-9-4
+	 * 修改日期：2016-9-4
+	 * 名称： a
+	 * 功能：
+	 * 说明：
+	 * 注意：length 是关键字 属性里禁止使用
+	 * @param 	(Object)D             	NO NULL : 标签的属性
+	 * @param 	(String)href   			NO  NULL : 连接地址
+	 * @return (String)
+	 * Example：
+	 *
 	 */
-	Html.linkFile=function(D){
+	Html.linkFile=function(D,href){
+		if(!D){
+			D = {};
+		}
+		if(href){
+			D.href = href;
+		}
 		return Html.tag('link',true,D);
 	};
 	/**
@@ -318,6 +353,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 *
 	 */
 	Html.script=function(D,content){
+		D.type = D.type || 'text/javascript';
 		return Html.tag('script',D,content);
 	};
 	/**
@@ -337,6 +373,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 *
 	 */
 	Html.style=function(D,content){
+		D.type = D.type || 'text/css';
 		return Html.tag('style',D,content);
 	};
 	/**

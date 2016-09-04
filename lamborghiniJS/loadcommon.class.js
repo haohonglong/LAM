@@ -174,7 +174,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 node = CMyDom().create('script',attr);
                                 node.script=true;
                             }else{
-                                node = System.Html.scriptFile(attr);
+                                node = System.Html.scriptFile(attr,src);
                             }
 
                             files.push(node);
@@ -232,7 +232,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 node = CMyDom().create('link',attr);
                                 node.style=true;
                             }else{
-                                node = System.Html.linkFile(attr);
+                                node = System.Html.linkFile(attr,href);
                             }
 
                             files.push(node);
