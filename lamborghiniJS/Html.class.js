@@ -203,14 +203,38 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 
 	};
-
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-9-4
+	 * 修改日期：2016-9-4
+	 * 名称： Html.renderTagAttributes
+	 * 功能：
+	 * 说明：
+	 * 注意：length 是关键字 属性里禁止使用
+	 * @param 	(Object)D             	NO NULL : 标签的属性
+	 * @return (String) 返回属性符串
+	 * Example：
+	 *
+	 */
+	Html.renderTagAttributes = function(D){
+		var attrs=[];
+		for(var key in D){
+			if(System.arr_Object_key_has(key)){
+				continue;
+			}
+			attrs.push(' ',key,'="',D[key],'"');
+		}
+		return attrs.join('');
+	};
 
 	/**
 	 *
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2015-8-25
-	 * 修改日期：2016-8-3
+	 * 修改日期：2016-9-4
 	 * 名称： tag
 	 * 功能：动态返回指定的标签
 	 * 说明：
@@ -241,12 +265,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 		var tag=[];
 		tag.push('<',name);
-		for(var key in D){
-			if(System.arr_Object_key_has(key)){
-				continue;
-			}
-			tag.push(' ',key,'="',D[key],'"');
-		}
+		//拼接属性
+		tag.push(Html.renderTagAttributes(D));
 
 		if(single){
 			tag.push(' />');
