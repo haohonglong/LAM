@@ -279,6 +279,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 调用方式：
          */
         'print':function(){
+            var print=false;
             System.each(files,function(i){
                 if(System.isObject(this)){
                     this.timer = i*1000;
@@ -311,10 +312,15 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                     }
 
                 }else{
-                    System.print(this);
+                    print = true;
+                    return true;
                 }
 
             });
+            if(print){
+                System.print(files.join(''));
+            }
+
             this.remove();
 
         },

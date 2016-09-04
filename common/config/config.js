@@ -167,6 +167,7 @@ if(!registerContainerConfiguration){
     var data = scriptAttribute;
     var classPath=Config.getClassPath();
     var ROOT=Config.Public.ROOT;
+    var files=[];
 
     //加载基础类
     var srcs =Config.autoLoadFile();
@@ -192,10 +193,11 @@ if(!registerContainerConfiguration){
             if(!(-1 === Config.files.indexOf(srcs[i]))){
                 continue;
             }
-            document.write('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
+            files.push('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
             Config.files.push(srcs[i]);
 
         }
+        document.write(files.join(''));
     }
 
     //=================================================================================================================================
