@@ -2,7 +2,7 @@
 	version ：1.1.2
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-8-20
+	修改日期 ：2016-9-4
 
 
 产品介绍：
@@ -624,11 +624,8 @@
 			LAMJS.replaceTpl();
 			LAMJS.fileExisted();
 			
-			LAMJS.Basis.printTag();
-			LAMJS.Basis.printScript();
-			LAMJS.Basis.printLink();
 			LAMJS.Basis.extends();
-			
+		
 			LAMJS.Browser.bind();
 			LAMJS.Browser.fixEvt();
 			LAMJS.Browser.getBodyWH();
@@ -640,7 +637,7 @@
 			LAMJS.Browser.getDPI();
 			LAMJS.Browser.addFavorite();
 			
-			LAMJS.Html.tag(); //同LAMJS.Basis.printTag() 功能一样，建议用LAMJS.Html.tag()
+			LAMJS.Html.tag(); 
 				返回创建指定标签的字符串 
 				第一参数是标签名称。第二参数，是否是单标签 true | false (默认可不填)。第三参数是标签里的所有属性，（没有的话就传个{}）.第四个参数是标签里的内容（没有内容可以省略这个参数）。
 				LAMJS.Html.tag('p', {},'这是一个p标签');
@@ -705,6 +702,9 @@
                     </li>
                   </ul>
                 </nav>
+                
+            LAMJS.Html.scriptFile();
+            LAMJS.Html.linkFile();
 				
 		
 	九、错误机制

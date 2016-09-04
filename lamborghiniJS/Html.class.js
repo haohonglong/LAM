@@ -16,7 +16,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	}
 
 
-	Html.tag = System.Basis.printTag;
+
 	/**
 	 *
 	 * @author: lhh
@@ -205,6 +205,120 @@ window[GRN_LHH].run([window],function(window,undefined){
 	};
 
 
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2015-8-25
+	 * 修改日期：2016-8-3
+	 * 名称： tag
+	 * 功能：动态返回指定的标签
+	 * 说明：
+	 * 注意：length 是关键字 属性里禁止使用
+	 * @param 	(String)name            NO NULL : 标签名称
+	 * @param 	(Boolean)single            NULL : 成对标签还是单一标签，false 是成对标签
+	 * @param 	(Object)D             	NO NULL : 标签的属性
+	 * @param 	(String|Array)content      NULL : 内容
+	 * @return (String) 返回标签字符串
+	 * Example：
+	 *
+	 */
+	Html.tag = function(name,single,D,content){
+
+		if(!System.isString(arguments[0])){
+			throw new Error('Warning 缺少标签名称');
+			return false;
+		}
+
+		if(System.isObject(arguments[1])){
+			content = arguments[2];
+			D = arguments[1];
+			single = false;
+		}
+
+		single = single || false;
+		D = D || {};
+
+		var tag=[];
+		tag.push('<',name);
+		for(var key in D){
+			if(System.arr_Object_key_has(key)){
+				continue;
+			}
+			tag.push(' ',key,'="',D[key],'"');
+		}
+
+		if(single){
+			tag.push(' />');
+		}else{
+			tag.push('>');
+			if(content){
+				if(System.isArray(content)){
+					tag.push(content.join(''));
+				}else{
+					tag.push(content);
+				}
+			}
+			tag.push('</',name,'>');
+		}
+		return tag.join('');
+	};
+
+	/**
+	 *
+	 * @param D
+	 * @returns {String}
+	 */
+	Html.scriptFile=function(D){
+		return Html.tag('script',D);
+	};
+
+	/**
+	 *
+	 * @param D
+	 * @returns {String}
+	 */
+	Html.linkFile=function(D){
+		return Html.tag('link',true,D);
+	};
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-9-4
+	 * 修改日期：2016-9-4
+	 * 名称： script
+	 * 功能：
+	 * 说明：
+	 * 注意：length 是关键字 属性里禁止使用
+	 * @param 	(Object)D             	NO NULL : 标签的属性
+	 * @param 	(String|Array)content      NULL : 内容
+	 * @return (String)
+	 * Example：
+	 *
+	 */
+	Html.script=function(D,content){
+		return Html.tag('script',D,content);
+	};
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-9-4
+	 * 修改日期：2016-9-4
+	 * 名称： style
+	 * 功能：
+	 * 说明：
+	 * 注意：length 是关键字 属性里禁止使用
+	 * @param 	(Object)D             	NO NULL : 标签的属性
+	 * @param 	(String|Array)content      NULL : 内容
+	 * @return (String)
+	 * Example：
+	 *
+	 */
+	Html.style=function(D,content){
+		return Html.tag('style',D,content);
+	};
 
 
 	Html.prototype = {
@@ -215,53 +329,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		},
 
 		'html':function(obj){
-			/**
-			 {
-                'content':'内容',
-                'select':'list'
 
-            }
-
-			 */
-			var content=[],html='';
-
-			switch(obj['select']){
-				case 'content':
-
-					content.push(html);
-					break;
-
-				case 'list':
-
-					content.push(html);
-					break;
-
-				case 'title':
-
-					content.push(html);
-					break;
-
-				case 'form':
-
-					content.push(html);
-					break;
-
-				case 'table':
-
-					content.push(html);
-					break;
-				case 'box':
-
-					content.push(html);
-					break;
-
-
-				default:
-
-			}
-
-
-			return content.join();
 		},
 
 		'empty':function(){},

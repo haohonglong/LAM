@@ -3,7 +3,7 @@
  * @author: lhh
  * 产品介绍： 文件加载器
  * 创建日期：2014.9.9     
- * 修改日期：2015.11.23
+ * 修改日期：2016.9.4
  * 名称：Loadcommon
  * 功能：动态引入js;css;less 文件
  * 说明 :
@@ -130,8 +130,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * @author: lhh
          * 名称： load
          * 功能：动态创建js,css 标签引入公共文件
-         *  创建日期：2014.9.9
-         *  修改日期：2016.823
+         *  创建日期：2014-9-9
+         *  修改日期：2016.9-4
          *  说明：js 和 css 也可任选其一
          *  * @params   (Object)D 			NO NULL :初始化参数
          *
@@ -174,7 +174,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 node = CMyDom().create('script',attr);
                                 node.script=true;
                             }else{
-                                node = System.Basis.printScript(attr);
+                                node = System.Html.scriptFile(attr);
                             }
 
                             files.push(node);
@@ -198,7 +198,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 node = CMyDom().create('script',js);
                                 node.script=true;
                             }else{
-                                node = System.Basis.printScript(js);
+                                node = System.Html.scriptFile(js);
                             }
                             files.push(node);
                             if(System.isClassFile(js.src)){
@@ -232,7 +232,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 node = CMyDom().create('link',attr);
                                 node.style=true;
                             }else{
-                                node = System.Basis.printLink(attr);
+                                node = System.Html.linkFile(attr);
                             }
 
                             files.push(node);
@@ -253,7 +253,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 node = CMyDom().create('link',css);
                                 node.style=true;
                             }else{
-                                node = System.Basis.printLink(css);
+                                node = System.Html.linkFile(css);
                             }
 
                             files.push(node);
@@ -274,7 +274,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 名称：print
          * 功能：显示load() 里的文件
          * 创建日期：2015-9-2
-         * 修改日期：2016-8-19
+         * 修改日期：2016-9-4
          * 说明：
          * 调用方式：
          */
