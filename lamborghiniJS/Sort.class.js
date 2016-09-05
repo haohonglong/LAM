@@ -346,7 +346,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-10-9
-		 * 修改日期：2015-10-9
+		 * 修改日期：2016-9-5
 		 * 名称：html
 		 * 功能：输出html内容
 		 * 说明：
@@ -361,7 +361,13 @@ window[GRN_LHH].run([window],function(window,undefined){
 			arr = arr || this.data;
 
 			arr.each(function(){
-				__this__.setData('<a href="'+this['url']+'" target="_blank" title="'+this['url']+'" class="before">{'+this.name+' ｜ '+this.pice+'}</a>');
+				var self=this;
+				var a=System.Html.a(this['url'],{
+													 'target':'_blank'
+													,'title':self['url']
+													,'class':'before'
+												},'{'+this.name+' ｜ '+this.pice+'}');
+				__this__.setData(a);
 
 			});
 			return this;
