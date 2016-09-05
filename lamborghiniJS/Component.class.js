@@ -32,9 +32,36 @@ window[GRN_LHH].run([window],function(window,undefined){
 	/**
 	 * @author: lhh
 	 * 产品介绍：
-	 * 创建日期：2015-12-31
-	 * 修改日期：2015-12-31
+	 * 创建日期：2016-9-5
+	 * 修改日期：2016-9-5
 	 * 名称：Component.bubbleSort
+	 * 功能：冒泡排序
+	 * 说明：反序用reverse()方法
+	 * 注意：在原数组上排序
+	 * @param 	([])arr             			NO NULL :要排序的数组
+	 * @return  ([])
+	 * Example
+	 *
+	 *
+	 */
+	Component.bubbleSort=function(arr){
+		for(var i= 0, j,len=arr.length;i < len;i++){
+			for (j = i+1; j < len; j++) {
+				if(arr[i]>arr[j]){
+					var tmp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = tmp;
+				}
+			}
+		}
+		return arr;
+	};
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2015-12-31
+	 * 修改日期：2016-9-5
+	 * 名称：Component.bubbleSort_key
 	 * 功能：冒泡排序
 	 * 说明：反序用reverse()方法
 	 * 注意：在原数组上排序
@@ -49,7 +76,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 *
 	 *
 	 */
-	Component.bubbleSort=function(arr,key){
+	Component.bubbleSort_key=function(arr,key){
 		for(var i= 0, j,len=arr.length;i < len;i++){
 			for (j = i+1; j < len; j++) {
 				if(arr[i][key]>arr[j][key]){
@@ -61,6 +88,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		}
 		return arr;
 	};
+
 	/**
 	 * @author: lhh
 	 * 产品介绍：
