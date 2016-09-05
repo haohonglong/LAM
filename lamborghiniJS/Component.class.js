@@ -34,6 +34,50 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 产品介绍：
 	 * 创建日期：2016-9-5
 	 * 修改日期：2016-9-5
+	 * 名称：Component.quicksort
+	 * 功能：快速排序
+	 * 说明：反序用reverse()方法
+	 * 注意：在原数组上排序
+	 * @param 	([])array             			NO NULL :要排序的数组
+	 * @return  ([])
+	 * Example
+	 *
+	 *
+	 */
+	Component.quicksort=function(array){
+		function sort(prev, numsize){
+			var nonius = prev;
+			var j = numsize -1;
+			var flag = array[prev];
+			if ((numsize - prev) > 1) {
+				while(nonius < j){
+					for(; nonius < j; j--){
+						if (array[j] < flag) {
+							array[nonius++] = array[j];　//a[i] = a[j]; i += 1;
+							break;
+						};
+					}
+					for( ; nonius < j; nonius++){
+						if (array[nonius] > flag){
+							array[j--] = array[nonius];
+							break;
+						}
+					}
+				}
+				array[nonius] = flag;
+				sort(0, nonius);
+				sort(nonius + 1, numsize);
+			}
+		}
+		sort(0, array.length);
+
+		return array;
+	};
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-9-5
+	 * 修改日期：2016-9-5
 	 * 名称：Component.bubbleSort
 	 * 功能：冒泡排序
 	 * 说明：反序用reverse()方法
@@ -56,6 +100,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		}
 		return arr;
 	};
+
 	/**
 	 * @author: lhh
 	 * 产品介绍：
