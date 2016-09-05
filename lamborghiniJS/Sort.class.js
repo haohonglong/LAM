@@ -164,7 +164,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 						if (array[j] < flag) {
 							array[nonius++] = array[j];　//a[i] = a[j]; i += 1;
 							break;
-						};
+						}
 					}
 					for( ; nonius < j; nonius++){
 						if (array[nonius] > flag){
