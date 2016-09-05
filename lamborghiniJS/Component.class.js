@@ -176,40 +176,14 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 功能：归并排序
 	 * 说明：
 	 * 注意：
-	 * @param 	([])arr             			NO NULL :要排序的数组
+	 * @param 	([])array             			NO NULL :要排序的数组
 	 * @return  ([])
 	 * Example：
 	 *
 	 *
 	 */
-	Component.mergeSort=function(arr){
-		var len = arr.length;
-		var L=[];
-		var R=[];
-		var M =[];
-		if(len/2 >0 && len!==2){//个数不是2且大于2
-			System.each(arr,function(i,item){
-				if(i < len/2){
-					L.push(item);
-					L=Component.mergeSort(L);
-				}else{
-					R.push(item);
-					R=Component.mergeSort(R);
-				}
-				M.merge(L).merge(R);
-			});
-			return M;
-		}else{
-			if(2 === len){// swap arr
-				var tem;
-				if(arr[0] > arr[1]){
-					tem =arr[0];
-					arr[0] = arr[1];
-					arr[1] = tem;
-				}
-			}
-			return arr;
-		}
+	Component.mergeSort=function(array){
+		var len = array.length;
 	};
 
 	/**
