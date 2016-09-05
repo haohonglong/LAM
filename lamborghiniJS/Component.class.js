@@ -34,6 +34,39 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 产品介绍：
 	 * 创建日期：2016-9-5
 	 * 修改日期：2016-9-5
+	 * 名称：Component.insertSort
+	 * 功能：插入排序
+	 * 说明：反序用reverse()方法
+	 * 注意：在原数组上排序
+	 * @param 	([])array             			NO NULL :要排序的数组
+	 * @return  ([])
+	 * Example
+	 *
+	 *
+	 */
+	Component.insertSort=function(array){
+		var len=array.length,temp;
+
+		for(var i=1;i<len;i++){
+			for(var j=i;j>0;j--){
+				if(array[j]<array[j-1]){
+					temp=array[j];
+					array[j]=array[j-1];
+					array[j-1]=temp;
+				}else{
+
+					break;
+				}
+			}
+		}
+		return array;
+
+	};
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-9-5
+	 * 修改日期：2016-9-5
 	 * 名称：Component.quicksort
 	 * 功能：快速排序
 	 * 说明：反序用reverse()方法
