@@ -28,97 +28,141 @@ window[GRN_LHH].run([window],function(window,undefined){
 	/*static mothed
 	 ----------------------------------------*/
 
+	Component.swap=function(A,B){};
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2015-12-31
+	 * 修改日期：2015-12-31
+	 * 名称：Component.bubbleSort
+	 * 功能：冒泡排序
+	 * 说明：反序用reverse()方法
+	 * 注意：在原数组上排序
+	 * @param 	([])arr             			NO NULL :要排序的数组
+	 * @param 	(String)key             		NO NULL :排序关键字
+	 * @return  ([])
+	 * Example：
+	 * 		[{'price':22}
+	 * 		,{'price':5}
+	 * 		,{'price':50}
+	 * 		]
+	 *
+	 *
+	 */
+	Component.bubbleSort=function(arr,key){
+		for(var i= 0, j,len=arr.length;i < len;i++){
+			for (j = i+1; j < len; j++) {
+				if(arr[i][key]>arr[j][key]){
+					var tmp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = tmp;
+				}
+			}
+		}
+		return arr;
+	};
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-9-5
+	 * 修改日期：2016-9-5
+	 * 名称：Component.mergeSort
+	 * 功能：归并排序
+	 * 说明：
+	 * 注意：
+	 * @param 	([])arr             			NO NULL :要排序的数组
+	 * @return  ([])
+	 * Example：
+	 *
+	 *
+	 */
+	Component.mergeSort=function(arr){
+		var len = arr.length;
+		var L=[];
+		var R=[];
+		var M =[];
+		if(len/2 >0 && len!==2){//个数不是2且大于2
+			System.each(arr,function(i,item){
+				if(i < len/2){
+					L.push(item);
+					L=Component.mergeSort.mergeSort(L);
+				}else{
+					R.push(item);
+					R=Component.mergeSort.mergeSort(R);
+				}
+				M.merge(L).merge(R);
+			});
+		}else{
+			if(2 === len){// swap arr
+				var tem;
+				if(arr[0] > arr[1]){
+					tem =arr[0];
+					arr[0] = arr[1];
+					arr[1] = tem;
+				}
+			}
+			return arr;
+		}
+	};
+
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2015-10-9
+	 * 修改日期：2016-8-23
+	 * 名称：Component.sort
+	 * 功能：排序功能
+	 * 说明：反序用reverse()方法
+	 * 注意：
+	 * @param 	([])arr             			NO NULL :
+	 * @param 	(String)key             		NO NULL :
+	 * @param 	(Function)sortFn             	   NULL :排序函数
+	 * @param 	(Function)error       	   		   NULL :
+	 * @return  ([])
+	 * Example：
+	 *
+	 *
+	 */
+	Component.sort=function(arr,key,sortFn,error){
+		var sorts=function(a, b){
+			if(System.isNumber(a) && System.isNumber(b)) {
+				if (System.isFloat(a) || System.isFloat(b)) {
+					return parseFloat(a) - parseFloat(b);
+				} else {
+					return parseInt(a) - parseInt(b);
+				}
+			}else{
+				throw new Error('排序元素不是数字型');
+				return;
+			}
+		};
+
+		sortFn = sortFn || sorts;
+
+		var n1,n2;
+		arr.sort(function(x,y){
+			if(System.isObject(x) && System.isObject(y)){
+				n1 = x[key];
+				n2 = y[key];
+			}else{
+				n1 = x;
+				n2 = y;
+			}
+
+			return sortFn(
+				String(n1).filterChar()
+				,String(n2).filterChar()
+			);
+		});
+
+		return arr;
+	};
 
 
 
 	Component.prototype = {
 		'constructor':Component,
-		'swap':function(A,B){
-			var C;
-			C = A;
-			A = B;
-			B = C;
-		},
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-12-31
-		 * 修改日期：2015-12-31
-		 * 名称：bubbleSort
-		 * 功能：冒泡排序
-		 * 说明：反序用reverse()方法
-		 * 注意：在原数组上排序
-		 * @param 	([])arr             			NO NULL :要排序的数组
-		 * @param 	(String)key             		NO NULL :排序关键字
-		 * @return  ([])
-		 * Example：
-		 *
-		 *
-		 */
-		'bubbleSort':function(arr,key){
-			for(var i= 0, j,len=arr.length;i < len;i++){
-				for (j = i+1; j < len; j++) {
-					if(arr[i][key]>arr[j][key]){
-						var tmp = arr[i];
-						arr[i] = arr[j];
-						arr[j] = tmp;
-					}
-				}
-			}
-			return arr;
-		},
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-10-9
-		 * 修改日期：2016-8-23
-		 * 名称：sort
-		 * 功能：排序功能
-		 * 说明：反序用reverse()方法
-		 * 注意：
-		 * @param 	([])arr             			NO NULL :
-		 * @param 	(String)key             		NO NULL :
-		 * @param 	(Function)sortFn             	   NULL :排序函数
-		 * @param 	(Function)error       	   		   NULL :
-		 * @return  ([])
-		 * Example：
-		 *
-		 *
-		 */
-		'sort':function(arr,key,sortFn,error){
-			var sorts=function(a, b){
-				if(System.isNumber(a) && System.isNumber(b)) {
-					if (System.isFloat(a) || System.isFloat(b)) {
-						return parseFloat(a) - parseFloat(b);
-					} else {
-						return parseInt(a) - parseInt(b);
-					}
-				}else{
-					throw new Error('排序元素不是数字型');
-					return;
-				}
-			};
 
-			sortFn = sortFn || sorts;
-
-			var n1,n2;
-			arr.sort(function(x,y){
-				if(System.isObject(x) && System.isObject(y)){
-					n1 = x[key];
-					n2 = y[key];
-				}else{
-					n1 = x;
-					n2 = y;
-				}
-
-				return sortFn(
-								 String(n1).filterChar()
-								,String(n2).filterChar()
-				);
-			});
-
-			return arr;
-		},
 
 		/**
 		 *
