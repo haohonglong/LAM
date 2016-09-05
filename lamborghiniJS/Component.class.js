@@ -45,20 +45,34 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 *
 	 */
 	Component.insertSort=function(array){
-		var len=array.length,temp;
-
-		for(var i=1;i<len;i++){
-			for(var j=i;j>0;j--){
-				if(array[j]<array[j-1]){
-					temp=array[j];
-					array[j]=array[j-1];
-					array[j-1]=temp;
-				}else{
-
-					break;
+		var len=array.length,temp,minIndex;
+		for(var i=0;i<len;i++){
+			minIndex = i;
+			for(var j=i+1;j<len;j++){
+				if(array[j] < array[minIndex]){
+					minIndex = j;
 				}
 			}
+			if(i != minIndex){
+				temp = array[i];
+				array[i] = array[minIndex];
+				array[minIndex] = temp;
+
+			}
 		}
+		//下面的和上面的功能一样
+		//for(var i=1;i<len;i++){
+		//	for(var j=i;j>0;j--){
+		//		if(array[j]<array[j-1]){
+		//			temp=array[j];
+		//			array[j]=array[j-1];
+		//			array[j-1]=temp;
+		//		}else{
+        //
+		//			break;
+		//		}
+		//	}
+		//}
 		return array;
 
 	};
