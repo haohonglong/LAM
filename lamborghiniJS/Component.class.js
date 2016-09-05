@@ -85,13 +85,14 @@ window[GRN_LHH].run([window],function(window,undefined){
 			System.each(arr,function(i,item){
 				if(i < len/2){
 					L.push(item);
-					L=Component.mergeSort.mergeSort(L);
+					L=Component.mergeSort(L);
 				}else{
 					R.push(item);
-					R=Component.mergeSort.mergeSort(R);
+					R=Component.mergeSort(R);
 				}
 				M.merge(L).merge(R);
 			});
+			return M;
 		}else{
 			if(2 === len){// swap arr
 				var tem;
