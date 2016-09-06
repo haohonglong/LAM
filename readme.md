@@ -74,7 +74,7 @@
 				LAMJS.run(function() {
 					'use strict';
 					var System=this;
-					var ROOT = System.Config.Public.ROOT
+					var ROOT = System.Config.Public.ROOT//这里的ROOT代表上名配置的项目根目录
 					// doing here coded ....
 				});
 			</script>
