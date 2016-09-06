@@ -67,8 +67,8 @@
 	使用：
 		1.给全局变量_ROOT_ 分配路径
 			<script type="text/javascript">var _ROOT_ = '../..'</script>
-		2.引入主配置文件（具体配置参考 一、配置）
-			<script type="text/javascript" src="./config.js"></script>
+		2.引入主配置文件,文件的位置可以随便放，也可放在项目根目录（具体配置参考 一、配置）
+			<script type="text/javascript" src="./common/config/config.js"></script>
 		3.可以使用LAMJS对象了。
 			<script type="text/javascript">
 				LAMJS.run(function() {
@@ -609,7 +609,7 @@
 			LAMJS.print('s'[,1,'a',...]);
 			
 			LAMJS.arr_isEmpty();
-			LAMJS.wait();
+			LAMJS.wait();//在延时的时间后在执行，默认时间是3秒
 			LAMJS.queues();
 			LAMJS.length();
 			LAMJS.eval();
