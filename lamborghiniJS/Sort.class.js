@@ -86,7 +86,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 *
 	 *
 	 */
-	Sort.selectSort=function(array){
+	Sort.selectionSort=function(array){
 		var len=array.length,temp,minIndex;
 		for(var i=0;i<len;i++){
 			minIndex = i;
