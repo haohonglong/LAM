@@ -215,10 +215,10 @@ if(!GRN_LHH){
         if(!window[GRN_LHH]) {
             alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
         }else{
-            LAMJS.run([
-                LAMJS.Config.Public.ROOT
-            ],function(ROOT) {
+            LAMJS.run(function() {
+                'use strict';
                 var System=this;
+                var ROOT = System.Config.Public.ROOT
             });
         }
     },5000);

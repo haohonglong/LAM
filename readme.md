@@ -69,6 +69,15 @@
 			<script type="text/javascript">var _ROOT_ = '../..'</script>
 		2.引入主配置文件（具体配置参考 一、配置）
 			<script type="text/javascript" src="./config.js"></script>
+		3.可以使用LAMJS对象了。
+			<script type="text/javascript">
+				LAMJS.run(function() {
+					'use strict';
+					var System=this;
+					var ROOT = System.Config.Public.ROOT
+					// doing here coded ....
+				});
+			</script>
 		
 
 	一、配置
