@@ -2177,6 +2177,8 @@ window[GRN_LHH].run([window],function(W,Config){
 		'vendorPath':_ROOT_+'/lamborghiniJS',
 		'Public':{
 			'ROOT':_ROOT_
+			,'COMMON':_ROOT_+'/common'
+			,'PLUGINS':_ROOT_+'/plugins'
 		},
 		//hashcode 随机种子
 		'random':10000,
@@ -2247,7 +2249,6 @@ window[GRN_LHH].run([window],function(W,Config){
 				var node;
 				var k;
 				var fragment;
-				var Config = registerContainerConfiguration;
 				node=document.createElement(tag);
 
 				for(k in D){

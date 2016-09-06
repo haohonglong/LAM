@@ -18,7 +18,7 @@ if(!GRN_LHH){
     var GRN_LHH='System';
 }
 
-(function(global,namespace,System){
+(function(global,namespace,System,Config){
     'use strict';
     //js获取项目根路径，如： http://localhost:8083/uimcardprj
     function getRootPath(){
@@ -42,7 +42,7 @@ if(!GRN_LHH){
 
 
 
-    System.Configuration={
+    Config = System.Configuration = {
         'vendorPath':_ROOT_+'/lamborghiniJS',
         'Public':{
              'ROOT':_ROOT_
@@ -118,7 +118,6 @@ if(!GRN_LHH){
                 var node;
                 var k;
                 var fragment;
-                var Config = registerContainerConfiguration;
                 node=document.createElement(tag);
 
                 for(k in D){

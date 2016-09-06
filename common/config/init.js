@@ -1,13 +1,9 @@
 //加载基础类
 
-LAMJS.run([
-    LAMJS.Config.Public.ROOT
-],function(ROOT) {
+LAMJS.run(function() {
     'use strict';
     var System=this;
-    System.root={
-        'path':ROOT
-    };
+    var ROOT = System.Config.Public.ROOT;
     System.import([
         '/BiObject.class',
         '/Component.class',
