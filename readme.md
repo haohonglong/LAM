@@ -16,8 +16,9 @@
 	LamborghiniJS 里有模版标签概念（参考 十八、模版标签）
 	LamborghiniJS 里有MVC概念（参考 十九、MVC）
 
-	现有选项卡、拖拽、常用工具、弹出层、幻灯、棋盘、缩略图、自适应布局、html5绘图基础类的实例．
-	如要根据项目需求要修改或扩展现有的这些实例，正确的方法是：
+	现有的实例：
+		选项卡、拖拽、常用工具、弹出层、幻灯、棋盘、缩略图、自适应布局、html5绘图基础类
+	如要根据项目需求要修改或扩展现有的这些实例，要这样做：
 		1.创建一个子类继承父类(现有的实例的类)
 		2.覆写父类里的成员(属性和方法)
 	(继承参考 六、继承)
@@ -60,34 +61,18 @@
 
 
 类库声明：
-
+	
 类库说明：
+	
+	使用：
+		1.给全局变量_ROOT_ 分配路径
+			<script type="text/javascript">var _ROOT_ = '../..'</script>
+		2.引入主配置文件（具体配置参考 一、配置）
+			<script type="text/javascript" src="./config.js"></script>
+		
 
 	一、配置
-		
-		一次配置即可搞定!
-		<script type="text/javascript" src="./config.js"></script>
-		config.js 分为两个，一个是当前配置文件(对应当前的视图或控制器的位置)，一个是主配置文件。
-		当前配置文件是跟视图文件或者控制器文件在同级目录里，
-		当前配置文件的作用：
-			1.配置项目主目录路径（_ROOT_ 变量）
-			2.引入主配置文件
-		当前配置文件的配置：这里只修改_ROOT_ 变量值其余都不用动
-		内容如下：
-		>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-			if(!_ROOT_){
-	            var _ROOT_ = '../..';
-	        
-	        }
-	        (function(){
-	            var tag = "script",attrs=[],src;
-	            attrs.push('type="text/javascript"');
-	            src=_ROOT_+'/config.js';
-	        
-	            document.write('<',tag,' ',attrs.join(' '),'src=','"',src,'"','>','<','/',tag,'>');
-	        })();
-		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-	    主配置文件在项目的根目录里，（只有这个文件是跟项目绑定的）
+		只有主配置文件跟项目绑定的,类库文件可以在开发过程中任何时候，更改到其它地方（多个项目公用一个类库文件夹，此时类库文件夹就可移动项目文件夹外面）,移动后只要重新修改主配置文件 vendorPath 的值即可。
 	    主配置文件配置： 参考 二、开发约定
 	    内容如下：
 
@@ -313,7 +298,7 @@
 		
         根据下面三条修改上面对应的参数
 			1.修改 GRN_LHH 的值
-			2.修改 registerContainerConfiguration.vendorPath 的值
+			2.修改 System.Configuration.vendorPath 的值
 
 
 		'config.js'文件里做的事情是：
@@ -339,7 +324,7 @@
         
         1.全局常量:字符大写，俩边各一个下横线
         	expmple:
-        		_ROOT_  设置项目的根目录
+        		_ROOT_  = '项目根目录';
         2.全局变量:字符小写
         	
         3.对象里的私有属性
@@ -608,11 +593,11 @@
 
 	八、框架里的方法
 			LAMJS.run();
+			LAMJS.use();   用document.createElement() 引入js,css 
+            LAMJS.unuse(); 用document.write() 引入js,css
 			LAMJS.import();
 			LAMJS.config();
-			LAMJS.print();
-				LAMJS.print('s'[,1,'a',...]);
-				可以像python 的print 方法一样 ,会依次打印每个字符串，遇到逗号“,”会输出一个空格
+			LAMJS.print('s'[,1,'a',...]);
 			
 			LAMJS.arr_isEmpty();
 			LAMJS.wait();
@@ -769,8 +754,9 @@
 	十四、沙箱(Sandbox)
 		
 		LAMJS.run()是LamborghiniJS 的沙箱机制 
-		LAMJS.run() 是改变创建标签机制 用document.createElement() 
 		沙箱的作用防止全局变量污染
+		
+		
 		
 	
 	十五、hashcode
