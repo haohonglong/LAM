@@ -317,9 +317,9 @@
 			4.加载初始化文件(或是init.js)
 			5.检测框架文件路径加载是否正确
 
-		'init.js'文件里做的事情是：加载通用的js
+		'init.js'文件里做的事情是：加载每个页面通用的js文件
 
-		具体应用类加载都在页面里进行设置 (参考五、应用 里的 文件引入方式)
+		 (参考五、应用 里的 文件引入方式)
 
 
 	二、开发约定
@@ -454,15 +454,16 @@
 	三、功能模块扩充
 		功能独立 易于扩充 不影响原有功能
 		1.接口里的merge方法
-			window['interfaceName'].merge(target,args,override);
+			window['interfaceName'].merge([true,]target,args[,override]);
 			上面这个方法作用是：一个或多个对象合并成一个指定的对象,默认同名的键值前面的不会被覆盖。
 			参数说明：
-				@param :(Object)target   合并后的对象。null 代表给命名空间本身进行扩展，
-				@param :(Array)args   	 要合并对象的集合
-				@param :(Boolean)override 是否覆盖同名键名值,默认 false 是不覆盖
+				@param : (Boolean)deep  		   NULL :是否要深度拷贝对象(可填)
+				@param :(Object)target   合并后的对象。null 代表给命名空间本身进行扩展，(必填)
+				@param :(Array)args   	 要合并对象的集合(必填)
+				@param :(Boolean)override 是否覆盖同名键名值,默认 false 是不覆盖(可填)
 			返回合并后的类
 		2.克隆对象(clone)
-			window['interfaceName'].clone(target);
+			window['interfaceName'].clone([true,]target);
 		3.实例化后，晚期扩充成员的方法
 			var obj=new window['interfaceName'].classNme();
 			obj.merge(args,override);
