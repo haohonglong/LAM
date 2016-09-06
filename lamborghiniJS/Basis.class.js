@@ -36,7 +36,7 @@ if(!GRN_LHH){
 }
 (function(global,namespace,factory,undefined){
 	'use strict';
-	if(global[namespace]){
+	if('version' in global[namespace]){
 		return;
 	}
 	global['LAMJS'] = global['LamborghiniJS_20150910123700_'] = global[namespace] = factory(global,namespace);
@@ -2133,7 +2133,7 @@ if(!GRN_LHH){
 
 
 
-	return System.merge(null,[Interface]);
+	return System.merge(null,[Interface,W[namespace]]);
 });
 
 /*
@@ -2153,9 +2153,12 @@ if(!GRN_LHH){
  ==========================================================================================
 */
 
-window[GRN_LHH].run([window,registerContainerConfiguration],function(W,Config){
+window[GRN_LHH].run([window],function(W,Config){
 	'use strict';
 	var System=this;
+
+	Config = System.Configuration;
+
 	//js获取项目根路径，如： http://localhost:8083/uimcardprj
 	function getRootPath(){
 		//获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp

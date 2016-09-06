@@ -18,35 +18,36 @@ if(!GRN_LHH){
     var GRN_LHH='System';
 }
 
-//js获取项目根路径，如： http://localhost:8083/uimcardprj
-function getRootPath(){
-    //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
-    var curWwwPath=window.document.location.href;
-    //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
-    var pathName=window.document.location.pathname;
-    var pos=curWwwPath.indexOf(pathName);
-    //获取主机地址，如： http://localhost:8083
-    var localhostPaht=curWwwPath.substring(0,pos);
-    //获取带"/"的项目名，如：/uimcardprj
-    var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
-    return(localhostPaht+projectName);
-}
+(function(global,namespace,System){
+    'use strict';
+    //js获取项目根路径，如： http://localhost:8083/uimcardprj
+    function getRootPath(){
+        //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+        var curWwwPath=window.document.location.href;
+        //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+        var pathName=window.document.location.pathname;
+        var pos=curWwwPath.indexOf(pathName);
+        //获取主机地址，如： http://localhost:8083
+        var localhostPaht=curWwwPath.substring(0,pos);
+        //获取带"/"的项目名，如：/uimcardprj
+        var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+        return(localhostPaht+projectName);
+    }
 
-if(!_ROOT_){
-    var _ROOT_ = getRootPath();
+    if(!global._ROOT_){
+        global._ROOT_ = getRootPath();
 
-}
-
-
-var common = _ROOT_+'/common';
-var plugins = _ROOT_+'/plugins';
+    }
 
 
-if(!registerContainerConfiguration){
-    var registerContainerConfiguration={
+
+
+    System.Configuration={
         'vendorPath':_ROOT_+'/lamborghiniJS',
         'Public':{
-            'ROOT':_ROOT_
+             'ROOT':_ROOT_
+            ,'COMMON':_ROOT_+'/common'
+            ,'PLUGINS':_ROOT_+'/plugins'
         },
         //hashcode 随机种子
         'random':10000,
@@ -155,10 +156,15 @@ if(!registerContainerConfiguration){
             return this.vendorPath;
         }
     };
-}
 
+    global[namespace] = System;
 
-(function(Config){
+})(window,GRN_LHH,{});
+
+//加载初始化文件
+(function(System,Config){
+    'use strict';
+    Config=System.Configuration;
     Config.files = Config.files || [];
     var tag = "script";
     var scriptAttribute = Config.render.default.script.Attribute;
@@ -211,8 +217,8 @@ if(!registerContainerConfiguration){
             alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
         }else{
             LAMJS.run([
-                    LAMJS.Config.Public.ROOT
-                ],function(ROOT) {
+                LAMJS.Config.Public.ROOT
+            ],function(ROOT) {
                 var System=this;
             });
         }
@@ -220,7 +226,8 @@ if(!registerContainerConfiguration){
     //=================================================================================================================================
 
 
-})(registerContainerConfiguration);
+})(window[GRN_LHH]);
+
 
 
 
