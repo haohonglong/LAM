@@ -2,7 +2,7 @@
 	version ：1.1.2
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-9-6
+	修改日期 ：2016-9-7
 
 
 产品介绍：
@@ -38,7 +38,7 @@
 						|-config.js  #项目配置文件
 						|-init.js  #每个页面公用的.js文件
 				|-lamborghiniJS  #lamborghiniJS 核心类库文件
-				|-project  	 #项目文件
+				|-project  	 #项目demo文件
 					|-common #公共文件
 					|-controllers #控制器渲染对应的页面
 					|-views   #项目中所有页面
@@ -119,7 +119,7 @@
 		
 		
 		
-			Config = System.Configuration = {
+			Config = System.Config = {
 				'vendorPath':_ROOT_+'/lamborghiniJS',
 				'Public':{
 					 'ROOT':_ROOT_
@@ -240,7 +240,7 @@
 		//加载初始化文件
 		(function(System,Config){
 			'use strict';
-			Config=System.Configuration;
+			Config=System.Config;
 			Config.files = Config.files || [];
 			var tag = "script";
 			var scriptAttribute = Config.render.default.script.Attribute;
@@ -289,13 +289,13 @@
 			//5秒之后检测lamborghiniJS基础类文件是否加载成功
 			//=================================================================================================================================
 			window.setTimeout(function(){
-				if(!window[GRN_LHH]) {
+				if(!LAMJS){
 					alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
 				}else{
-					LAMJS.run([
-						LAMJS.Config.Public.ROOT
-					],function(ROOT) {
+					LAMJS.run(function() {
+						'use strict';
 						var System=this;
+						var ROOT = System.Config.Public.ROOT
 					});
 				}
 			},5000);

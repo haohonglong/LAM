@@ -2286,7 +2286,7 @@ window[GRN_LHH].run([window],function(W,Config){
 		}
 	};
 
-	System.merge(true,System.Config,[Config]);
+	System.merge(System.Config,[Config]);
 	System.classPath = System.Config.getClassPath();
 	//hashcode 随机种子
 	System.random 	 = System.Config.random || 10000;
