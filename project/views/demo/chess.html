@@ -3,11 +3,28 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>{{title}}</title>
-	<link rel="stylesheet" type="text/css" href="{{ROOT}}/project/public/css/lib.css"/>
-	<link rel="stylesheet" type="text/css" href="{{ROOT}}/project/public/css/chess.css"/>
-	<style type="text/css">
+	<script type="text/javascript">
+		LAMJS.run(function() {
+			'use strict';
+			var System=this;
+			var ROOT = System.Config.Public.ROOT;
+			System.Loadcommon
+					.load({
+						'baseUrl':ROOT+'/project/public/css',
+						'css':[
+								 '/lib'
+								,'/chess'
+						]
+					}).print();
 
-	</style>
+
+			System.import([
+					 '/Canvas.class'
+					,'/Shape.class'
+					,'/Chess.class'
+			],System.classPath);
+		});
+	</script>
 </head>
 
 <body>
@@ -15,14 +32,11 @@
 
 </body>
 </html>
-<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Canvas.class.js"></script>
-<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Shape.class.js"></script>
-<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Chess.class.js"></script>
 
 
 <script type="text/javascript">
 
-	LAMJS.main([
+	LAMJS.run([
 		LAMJS.Config.Public.ROOT
 	],function(ROOT) {
 		var System=this;

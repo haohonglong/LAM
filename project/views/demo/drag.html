@@ -3,6 +3,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>{{title}}</title>
+	<script type="text/javascript">
+		LAMJS.run(function() {
+			'use strict';
+			var System=this;
+			var ROOT = System.Config.Public.ROOT;
+
+			System.import([
+				 '/Drag.class'
+				,'/Tools.class'
+				,'/Tab.class'
+				,'/Canvas.class'
+				,'/Shape.class'
+			],System.classPath);
+		});
+	</script>
 <style type="text/css">
 .abs{position:absolute;top:0;left:0;}
 .box{width:50px;height:50px;background:red;}
@@ -27,16 +42,12 @@
 
 </body>
 </html>
-<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Drag.class.js"></script>
-<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Tools.class.js"></script>
-<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Tab.class.js"></script>
-<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Canvas.class.js"></script>
-<script type="text/javascript" src="{{ROOT}}/lamborghiniJS/Shape.class.js"></script>
+
 
 
 <script type="text/javascript">
 
-	LAMJS.main([
+	LAMJS.run([
 		LAMJS.Config.Public.ROOT
 	],function(ROOT) {
 		var System=this;
