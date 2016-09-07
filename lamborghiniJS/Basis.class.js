@@ -8,7 +8,7 @@
  * LamborghiniJS 0.3 pre
  * @author：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-9-4
+ * 修改日期:2016-9-7
  * 名称：基类
  * 功能：服务于派生类
  * 命名空间接口定义: var GRN_LHH='interfaceName';
@@ -2133,7 +2133,7 @@ if(!GRN_LHH){
 
 
 
-	return System.merge(null,[Interface,W[namespace]]);
+	return System.merge(null,[Interface,W[namespace]],true);
 });
 
 /*
@@ -2157,7 +2157,6 @@ window[GRN_LHH].run([window],function(W,Config){
 	'use strict';
 	var System=this;
 
-	Config = System.Configuration;
 
 	//js获取项目根路径，如： http://localhost:8083/uimcardprj
 	function getRootPath(){
@@ -2173,7 +2172,7 @@ window[GRN_LHH].run([window],function(W,Config){
 		return(localhostPaht+projectName);
 	}
 	var _ROOT_ = getRootPath();
-	var defaultConfig={
+	Config={
 		'vendorPath':_ROOT_+'/lamborghiniJS',
 		'Public':{
 			'ROOT':_ROOT_
@@ -2287,12 +2286,10 @@ window[GRN_LHH].run([window],function(W,Config){
 		}
 	};
 
-	System.Config 	 = System.merge(true,{},[Config,defaultConfig]);
+	System.merge(true,System.Config,[Config]);
 	System.classPath = System.Config.getClassPath();
 	//hashcode 随机种子
 	System.random 	 = System.Config.random || 10000;
-
-
 
 	var CMyDom=function(){//创建Dom 对象
 		System.is(System,'Dom');
