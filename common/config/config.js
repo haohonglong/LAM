@@ -218,7 +218,7 @@ if(!GRN_LHH){
             LAMJS.run(function() {
                 'use strict';
                 var System=this;
-                var ROOT = System.Config.Public.ROOT
+                var ROOT = System.Config.Public.ROOT;
             });
         }
     },5000);
