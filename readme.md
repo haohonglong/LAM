@@ -75,7 +75,7 @@
 				LAMJS.run(function() {
 					'use strict';
 					var System=this;
-					var ROOT = System.Config.Public.ROOT//这里的ROOT代表上名配置的项目根目录
+					var ROOT = System.Config.Public.ROOT;//这里的ROOT代表上名配置的项目根目录
 					// doing here coded ....
 				});
 			</script>
@@ -512,8 +512,8 @@
 			1.下面这种不仅适合脚本文件和样式文件的引入还适合less文件的引入。load方法是加载指定的文件到加载器中，load方法可以链式调用多个不同类型文件，当调用到print方法的时候才会一次性从加载器里输出到页面中
 				LAMJS['Loadcommon']
 					.load({
-						'baseUrl':jsPath,
-						'suffix':'.js',
+						'baseUrl':jsPath,//baseUrl 默认是 项目的根目录（_ROOT_）
+						'suffix':'.js',//
 						'js':[
 							'/Helper.class',
 							'/Browser.class',
@@ -547,6 +547,8 @@
 					}).print();
 				上面依次输出的是js、css、less文件
 				用对象的方式可以传自定义参数
+				
+				
 
 
 
@@ -564,6 +566,8 @@
 						'/Tools.class',
 						'/PaintBase.class'
 					],classPath);
+					
+					classPath 不填的话 默认是 项目的根目录（_ROOT_）
 
 				或者像下面这样可以添加自定义参数
 				System
