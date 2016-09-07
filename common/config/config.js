@@ -42,7 +42,7 @@ if(!GRN_LHH){
 
 
 
-    Config = System.Configuration = {
+    Config = System.Config = {
         'vendorPath':_ROOT_+'/lamborghiniJS',
         'Public':{
              'ROOT':_ROOT_
@@ -163,7 +163,7 @@ if(!GRN_LHH){
 //加载初始化文件
 (function(System,Config){
     'use strict';
-    Config=System.Configuration;
+    Config=System.Config;
     Config.files = Config.files || [];
     var tag = "script";
     var scriptAttribute = Config.render.default.script.Attribute;
@@ -212,7 +212,7 @@ if(!GRN_LHH){
     //5秒之后检测lamborghiniJS基础类文件是否加载成功
     //=================================================================================================================================
     window.setTimeout(function(){
-        if(!window[GRN_LHH]) {
+        if(!LAMJS){
             alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
         }else{
             LAMJS.run(function() {
