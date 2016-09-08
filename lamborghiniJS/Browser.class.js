@@ -340,6 +340,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	 * 名称：Browser.setElemAutoCenter
 	 * 创建日期：2016-9-8
 	 * 修改日期：2016-9-8
+	 * @param   $div(jQuery obj) NO NULL : //被居中的容器
 	 * @param 	padding(intger)     NULL :容器的padding 值
 	 * @return  (void)
 	 * 调用方式：
