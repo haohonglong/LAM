@@ -2,7 +2,7 @@
 	version ：1.1.2
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-9-7
+	修改日期 ：2016-9-8
 
 
 产品介绍：
@@ -631,25 +631,26 @@
 			Array.in_array();
 
 	八、框架里的方法
-			LAMJS.run();
-			LAMJS.wait();//在延时的时间后在执行，默认时间是3秒
+			LAMJS.run(function(){});//
+			LAMJS.then(function(){});// 
+			LAMJS.wait(function(){});//在延时的时间后在执行，默认时间是3秒
 			LAMJS.use();   用document.createElement() 引入js,css 
             LAMJS.unuse(); 用document.write() 引入js,css
 			LAMJS.import();//导入js 文件
 			LAMJS.print('s'[,1,'a',...]);
 			
 			LAMJS.arr_isEmpty();
-			LAMJS.queues();
-			LAMJS.length();
-			LAMJS.eval();
+			LAMJS.queues();//队列
+			LAMJS.length();//获取对象成员的长度
+			LAMJS.eval();//对表达式字符串，或 json 进行eval 再处理
 			LAMJS.proxy();
 			LAMJS.putIndexGetObjectTheValue();
-			LAMJS.list();//递归对象
+			LAMJS.list();//递归对象 如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象为止
 			LAMJS.extends();
 			LAMJS.extend();
-			LAMJS.merge();// 多个对象合并一个对象
+			LAMJS.merge();// 一个或多个对象合并成一个指定的对象,默认同名的键值前面的不会被覆盖
 			LAMJS.clone();//克隆对象
-			LAMJS.is();//类检测方法
+			LAMJS.is();//类检测方法 检测父类是否已注册过。检测子类名称是否与已注册的类名重名了
 			LAMJS.isPlainObject();//是否是纯对象
 			LAMJS.log();
 			LAMJS.autoCenter();
@@ -827,9 +828,8 @@
                                      这里就可以设置一个beforeSend回调函数，其余的参数都可以在这个函数里设置,
                                      在beforeSend回调函数里设置file 参数 要换成 url 参数。
                                      函数里的两个参数请参考jQuery Ajax API。
-                      模板标签 {{LAMJS.Config.Public.ROOT}}，这里的 LAMJS.Config.Public.ROOT 是变量，LAMJS会解析换成变量的值。{{LAMJS.Config.Public.ROOT}} 跟{{_ROOT_}}意思相同，都是项目根目录位置
-                      这里推荐使用LAMJS.Config.Public.ROOT 以为 _ROOT_ 是全局变量容易被外部人为修改。（_ROOT_ 的值修改 不会影响到 LAMJS.Config.Public.ROOT 的值）。
-                      note:模板标签里一定要放已定义过的变量才能被解析正常工作，否则将会报错，不能正常工作！
+                 {{LAMJS.Config.Public.ROOT}}（ 参考 十八、模版标签 3）
+                  
                 
 			2.先要加载Html.class 类文件
 				//run方法可以修改创建tag方式 
@@ -848,9 +848,17 @@
 	十八、模版标签
 				 查找解析指定元素属性里的模板标签
 					 1.定义元素属性值里的模板标签 
-					    <link rel="stylesheet" type="text/css" href="{{_ROOT_}}/project/common/css/bootstrap.css"/>
-					 2.解析模板标签 (模板标签就是js 变量名称)
+					    <link rel="stylesheet" type="text/css" href="{{LAMJS.Config.Public.ROOT}}/project/common/css/bootstrap.css"/>
+					    
+					 2.解析模板标签 
 					    LAMJS.replaceTpl('link','href');
+					    
+					 3.模板标签: {{LAMJS.Config.Public.ROOT}}
+                        这里的 LAMJS.Config.Public.ROOT 是变量(模板标签就是js 变量名称)，LAMJS会解析换成变量的值。{{LAMJS.Config.Public.ROOT}} 跟{{_ROOT_}}意思相同，都是项目根目录位置
+                         这里推荐使用LAMJS.Config.Public.ROOT 以为 _ROOT_ 是全局变量容易被外部人为修改。（_ROOT_ 的值修改 不会影响到 LAMJS.Config.Public.ROOT 的值）。
+                         note:模板标签里一定要放已定义过的变量才能被解析正常工作，否则将会报错，不能正常工作！
+                        模板标签分隔符设置与修改   （参考 二十、配置参数 一、模板标签分隔符设置与修改）
+                         
 					    
 				 
 				 note:  用MVC方式渲染页面就不用这种方式，MVC渲染请参考 十九、MVC。
