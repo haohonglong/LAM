@@ -337,7 +337,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	 *
 	 * @author lhh
 	 * 功能：窗口重新调整大小
-	 * 名称：Browser.elemAutoCenter
+	 * 名称：Browser.setElemAutoCenter
 	 * 创建日期：2016-9-8
 	 * 修改日期：2016-9-8
 	 * @param 	padding(intger)     NULL :容器的padding 值
@@ -345,7 +345,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	 * 调用方式：
 	 *
 	 */
-	Browser.elemAutoCenter=function($div,pandding){
+	Browser.setElemAutoCenter=function($div,pandding){
 		if('fixed' != $div.css('position') && 'absolute' != $div.css('position')){
 			$div.css('position','absolute');
 
