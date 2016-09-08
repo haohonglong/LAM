@@ -670,6 +670,7 @@
 			LAMJS.Browser.setIEfixed();
 			LAMJS.Browser.getDPI();
 			LAMJS.Browser.addFavorite();
+			LAMJS.Browser.setElemAutoCenter();//
 			
 			LAMJS.Html.tag(); 
 				返回创建指定标签的字符串 
