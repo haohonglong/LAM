@@ -2452,11 +2452,19 @@ window[GRN_LHH].run([window],function(W,Config){
 			//保存父类数据,在子类中要调用父类方法可用： （this.Super.父类成员）
 			//this.Super = System.merge({},[superClass.prototype]);
 
+			this.Super 	= superClass.prototype;
+			this.Super.constructor 	= superClass.prototype.constructor;
+
 
 			//这样方式保存父类成员以后可能会出错误的，暂时还没想到解决的办法
-			this.Super 	= new superClass();
-			this.Super.prototype 	= superClass.prototype;
-			this.Super.constructor 	= superClass.prototype.constructor;
+			//if(arg){
+			//	console.log(111)
+			//	this.Super 	= superClass.prototype;
+			//	this.Super.constructor 	= superClass.prototype.constructor;
+			//}else{
+			//	console.log(2222)
+			//	this.Super 	= new superClass();
+			//}
 
 			//如果它下面的子类已经设置了浏览器就不再设置浏览器
 			// if(Browser && (typeof Browser  !='undefined') && !this.Browser) this.setBrowser(Browser);
