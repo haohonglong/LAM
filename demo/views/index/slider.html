@@ -6,9 +6,11 @@
     <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript">
 
-        LAMJS.main(function() {
+        LAMJS.run(function() {
             'use strict';
             var System = this;
+
+
             System.Loadcommon.
                     load({
                         'baseUrl':System.Config.Public.ROOT+'/demo',
@@ -19,6 +21,12 @@
                         ]
                     })
                     .print();
+
+            System.import([
+                '/Sport.class',
+                '/Layout.class',
+                '/Slider.class'
+            ],System.classPath);
 
 
         });
@@ -68,30 +76,10 @@
 <script type="text/javascript">
 
 
-    LAMJS
-            .run(function(){
-                this.Html.include($('include'));
-                return this;
-            })
-            .wait(function(){
-                'use strict';
-                var System=this;
-
-
-                System.import([
-                    '/Sport.class',
-                    '/Layout.class',
-                    '/Slider.class'
-                ],System.classPath);
-            },500);
-</script>
-
-<script type="text/javascript">
-
-
-    LAMJS.wait(function(){
+    LAMJS.run(function(){
         'use strict';
         var System=this;
+        this.Html.include($('include'));
         var slider;
 
 

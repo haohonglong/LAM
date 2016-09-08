@@ -271,9 +271,8 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 
 							}else{
 								this.$ul.stop();
-								if(!this.$ul.is(':animated')) {
-									this.$ul.animate(P,time);
-								}
+								this.$ul.animate(P,time);
+								//if(!this.$ul.is(':animated')) {}
 
 							}
 
