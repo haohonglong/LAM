@@ -2454,9 +2454,9 @@ window[GRN_LHH].run([window],function(W,Config){
 
 
 			//这样方式保存父类成员以后可能会出错误的，暂时还没想到解决的办法
-			this.Super 	= new superClass(arg || null);
-			//this.Super.prototype 	= superClass.prototype;
-			//this.Super.constructor 	= superClass.prototype.constructor;
+			this.Super 	= new superClass();
+			this.Super.prototype 	= superClass.prototype;
+			this.Super.constructor 	= superClass.prototype.constructor;
 
 			//如果它下面的子类已经设置了浏览器就不再设置浏览器
 			// if(Browser && (typeof Browser  !='undefined') && !this.Browser) this.setBrowser(Browser);
