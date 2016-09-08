@@ -337,7 +337,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	 *
 	 * @author lhh
 	 * 功能：窗口重新调整大小
-	 * 名称：private resize
+	 * 名称：Browser.elemAutoCenter
 	 * 创建日期：2016-9-8
 	 * 修改日期：2016-9-8
 	 * @param 	padding(intger)     NULL :容器的padding 值
@@ -345,14 +345,18 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	 * 调用方式：
 	 *
 	 */
-	function resize(pandding){
-		var size=System.autoCenter($(window).width(),this.width(),
-			$(window).height(),this.height(),pandding || 0);
+	Browser.elemAutoCenter=function($div,pandding){
+		if('fixed' != $div.css('position') && 'absolute' != $div.css('position')){
+			$div.css('position','absolute');
+
+		}
+		var size=System.autoCenter($(window).width(),$div.width(),
+			$(window).height(),$div.height(),pandding || 0);
 		this.css({'top':size.y+'px',
 			'left':size.x+'px'
 		});
 
-	}
+	};
 
 	/**
 	 *
