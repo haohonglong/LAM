@@ -818,7 +818,7 @@
 			2.根据占位符里file参数请求另一个页面，然后替换掉当前占位符
 		警告:有些浏览器要支持跨域才可以!!!，解决方法：在服务器环境里运行
 		步骤：
-			1.自定义标签:<include file="./include/header.html" 
+			1.自定义标签:<include file="{{LAMJS.Config.Public.ROOT}}/views/include/header.html" 
 								  beforeSend="function(a,b){
 		                              this.dataType='html';
                                       this.async=true;
@@ -827,6 +827,9 @@
                                      这里就可以设置一个beforeSend回调函数，其余的参数都可以在这个函数里设置,
                                      在beforeSend回调函数里设置file 参数 要换成 url 参数。
                                      函数里的两个参数请参考jQuery Ajax API。
+                      模板标签 {{LAMJS.Config.Public.ROOT}}，这里的 LAMJS.Config.Public.ROOT 是变量，LAMJS会解析换成变量的值。{{LAMJS.Config.Public.ROOT}} 跟{{_ROOT_}}意思相同，都是项目根目录位置
+                      这里推荐使用LAMJS.Config.Public.ROOT 以为 _ROOT_ 是全局变量容易被外部人为修改。（_ROOT_ 的值修改 不会影响到 LAMJS.Config.Public.ROOT 的值）。
+                      note:模板标签里一定要放已定义过的变量才能被解析正常工作，否则将会报错，不能正常工作！
                 
 			2.先要加载Html.class 类文件
 				//run方法可以修改创建tag方式 
