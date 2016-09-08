@@ -225,7 +225,9 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 			top-=scrollTop;
 		}
 		if(animate){
+			$elem.stop();
 			$elem.animate({'top':top});
+
 
 		}else{
 			$elem.css({'top':top});
