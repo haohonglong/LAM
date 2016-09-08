@@ -337,6 +337,27 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	 *
 	 * @author lhh
 	 * 功能：窗口重新调整大小
+	 * 名称：private resize
+	 * 创建日期：2016-9-8
+	 * 修改日期：2016-9-8
+	 * @param 	padding(intger)     NULL :容器的padding 值
+	 * @return  (void)
+	 * 调用方式：
+	 *
+	 */
+	function resize(pandding){
+		var size=System.autoCenter($(window).width(),this.width(),
+			$(window).height(),this.height(),pandding || 0);
+		this.css({'top':size.y+'px',
+			'left':size.x+'px'
+		});
+
+	}
+
+	/**
+	 *
+	 * @author lhh
+	 * 功能：窗口重新调整大小
 	 * 名称：Browser.resize
 	 * 创建日期：2014-11-28
 	 * 修改日期：2014-11-28
