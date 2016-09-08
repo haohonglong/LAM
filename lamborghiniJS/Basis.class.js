@@ -2425,7 +2425,7 @@ window[GRN_LHH].run([window],function(W,Config){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2015-3-18
-	 * 修改日期：2015-3-19
+	 * 修改日期：2016-9-8
 	 * 名称：Basis.extends
 	 * 功能：继承Basis类
 	 * 说明：Basis类静态方法。 调用call方法改变this指针
@@ -2450,7 +2450,10 @@ window[GRN_LHH].run([window],function(W,Config){
 				System.extends.call(this,null,superClass,type,arg);
 			}
 			//保存父类数据,在子类中要调用父类方法可用： （this.Super.父类成员）
-			//this.Super = System.merge(System.Super,[this]);
+			//this.Super = System.merge({},[superClass.prototype]);
+
+			//this.Super 	= new superClass();
+
 			this.Super 	= superClass.prototype;
 			this.Super.constructor 	= superClass.prototype.constructor;
 
