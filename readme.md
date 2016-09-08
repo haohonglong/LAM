@@ -632,26 +632,25 @@
 
 	八、框架里的方法
 			LAMJS.run();
+			LAMJS.wait();//在延时的时间后在执行，默认时间是3秒
 			LAMJS.use();   用document.createElement() 引入js,css 
             LAMJS.unuse(); 用document.write() 引入js,css
-			LAMJS.import();
-			LAMJS.config();
+			LAMJS.import();//导入js 文件
 			LAMJS.print('s'[,1,'a',...]);
 			
 			LAMJS.arr_isEmpty();
-			LAMJS.wait();//在延时的时间后在执行，默认时间是3秒
 			LAMJS.queues();
 			LAMJS.length();
 			LAMJS.eval();
 			LAMJS.proxy();
 			LAMJS.putIndexGetObjectTheValue();
-			LAMJS.list();
+			LAMJS.list();//递归对象
 			LAMJS.extends();
 			LAMJS.extend();
-			LAMJS.merge();
-			LAMJS.clone();
-			LAMJS.is();
-			LAMJS.isPlainObject();
+			LAMJS.merge();// 多个对象合并一个对象
+			LAMJS.clone();//克隆对象
+			LAMJS.is();//类检测方法
+			LAMJS.isPlainObject();//是否是纯对象
 			LAMJS.log();
 			LAMJS.autoCenter();
 			LAMJS.template();
