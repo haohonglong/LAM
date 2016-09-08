@@ -336,26 +336,28 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	/**
 	 *
 	 * @author lhh
-	 * 功能：窗口重新调整大小
+	 * 功能：让元素水平垂直居中
 	 * 名称：Browser.setElemAutoCenter
 	 * 创建日期：2016-9-8
 	 * 修改日期：2016-9-8
-	 * @param   $div(jQuery obj) NO NULL : //被居中的容器
-	 * @param 	padding(intger)     NULL :容器的padding 值
+	 * @param   $div{jQuery} NO NULL : //被居中的容器
+	 * @param 	padding{int}    NULL :容器的padding 值
 	 * @return  (void)
 	 * 调用方式：
 	 *
 	 */
 	Browser.setElemAutoCenter=function($div,pandding){
+		$div = $div || this;
 		if('fixed' != $div.css('position') && 'absolute' != $div.css('position')){
 			$div.css('position','absolute');
 
 		}
 		var size=System.autoCenter($(window).width(),$div.width(),
 			$(window).height(),$div.height(),pandding || 0);
-		this.css({'top':size.y+'px',
-			'left':size.x+'px'
-		});
+		$div.css({
+					'top' :size.y+'px',
+			      	'left':size.x+'px'
+				});
 
 	};
 
@@ -367,7 +369,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	 * 创建日期：2014-11-28
 	 * 修改日期：2014-11-28
 	 * @param	        $div(jQuery obj) NO NULL : //被居中的容器
-	 * @param(Object) 	fn(Function)        NULL : callBack
+	 * @param(Object) 	fn(Function)     NO NULL : callBack
 	 * @return  (Function) 时时计算垂直水平居中的函数原型
 	 * 调用方式：
 		 Browser.resize($('div'),function(){
@@ -451,7 +453,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 		 */
 		'autoScreenCenter':function($div,pandding,fn){
 			pandding = pandding || 0;
-			if('fixed' != $div.css('position')){
+			if('fixed' != $div.css('position') && 'absolute' != $div.css('position')){
 				$div.css('position','absolute');
 
 			}
@@ -460,11 +462,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 				if(System.isFunction(fn)){
 					fn.call($div,$window);
 				}else{
-					var size=System.autoCenter($window.w,this.width(),
-						$window.h,this.height(),pandding);
-					this.css({'top':size.y+'px',
-						'left':size.x+'px'
-					});
+					Browser.setElemAutoCenter($div,pandding);
 				}
 			});
 			this.setFixed($div);
