@@ -2,7 +2,7 @@
 	version ：1.1.2
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-9-8
+	修改日期 ：2016-9-9
 
 
 产品介绍：
@@ -854,8 +854,8 @@
 					    LAMJS.replaceTpl('link','href');
 					    
 					 3.模板标签: {{LAMJS.Config.Public.ROOT}}
-                        这里的 LAMJS.Config.Public.ROOT 是变量(模板标签就是js 变量名称)，LAMJS会解析换成变量的值。{{LAMJS.Config.Public.ROOT}} 跟{{_ROOT_}}意思相同，都是项目根目录位置
-                         这里推荐使用LAMJS.Config.Public.ROOT 以为 _ROOT_ 是全局变量容易被外部人为修改。（_ROOT_ 的值修改 不会影响到 LAMJS.Config.Public.ROOT 的值）。
+                        这里的 LAMJS.Config.Public.ROOT 是变量(模板标签里内容就是js 变量)，LAMJS会解析换成变量的值。{{LAMJS.Config.Public.ROOT}} 跟{{_ROOT_}}意思相同，都是项目根目录位置
+                         这里推荐使用LAMJS.Config.Public.ROOT 因为 _ROOT_ 是全局变量容易被外部人为修改。（_ROOT_ 的值修改 不会影响到 LAMJS.Config.Public.ROOT 的值）。
                          note:模板标签里一定要放已定义过的变量才能被解析正常工作，否则将会报错，不能正常工作！
                         模板标签分隔符设置与修改   （参考 二十、配置参数 一、模板标签分隔符设置与修改）
                          

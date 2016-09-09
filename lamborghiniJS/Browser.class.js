@@ -205,8 +205,8 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	};
 	Browser.befor_scrollTop = 0;
 	/**
-	 * 创建日期：
-	 * 修改日期：
+	 * 创建日期：2014/12/1
+	 * 修改日期：2016-9-8
 	 * 名称： fixed_element
 	 * 功能： 固定元素 （模拟css fixed 功能）
 	 * @param (jQuery)$elem 被fixed 的元素
@@ -443,7 +443,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 
 		/**
 		 * 创建日期：2014/11/28
-		 * 修改日期：2015/11/10
+		 * 修改日期：2016-9-8
 		 * 名称：autoScreenCenter
 		 * 功能：自动居中屏幕，回调函数可以不传，传过回调函数后就能在一个指定范围中垂直居中对齐
 		 * @param	$div(jQuery obj) NO NULL : //被居中的容器
