@@ -379,7 +379,7 @@ if(!GRN_LHH){
 		 * 修改日期：2016-8-23
 		 * 名称：System.then
 		 * 功能：一直是链式调用，总是返回当前命名空间对象，
-		 * 说明：跟main方法类似，不同的是main 返回的是callback里的返回值。
+		 * 说明：跟run方法类似，不同的是run 返回的是callback里的返回值。
 		 * 注意：
 		 * @param   (Array)args 			   NULL :传入的参数
 		 * @param   (Function)callback 		NO NULL :要执行的操作
