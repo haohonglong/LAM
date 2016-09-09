@@ -672,8 +672,9 @@
 			LAMJS.Browser.addFavorite();
 			LAMJS.Browser.setElemAutoCenter();//
 			
+			返回创建指定标签的字符串 
 			LAMJS.Html.tag(); 
-				返回创建指定标签的字符串 
+				
 				第一参数是标签名称。第二参数，是否是单标签 true | false (默认可不填)。第三参数是标签里的所有属性，（没有的话就传个{}）.第四个参数是标签里的内容（没有内容可以省略这个参数）。
 				LAMJS.Html.tag('p', {},'这是一个p标签');
 				上面的代码生成下面的字符串
