@@ -2,7 +2,7 @@
 	version ：1.1.2
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-9-8
+	修改日期 ：2016-9-9
 
 
 产品介绍：
@@ -30,12 +30,15 @@
 	文件夹结构：
 			|-LAM      		 #项目根目录
 				|-demo 		 #
+					|-views	 #html文件
+						|-index	 #html文件
+							|-config.js	 #当前配置文件
 				|-lib  		 #
 					|-class  #类文件
 					|-css  	 #样式文件
 				|-common  #公共文件
 					|-config  #配置文件存放位置
-						|-config.js  #项目配置文件
+						|-config.js  #主配置文件
 						|-init.js  #每个页面公用的.js文件
 				|-lamborghiniJS  #lamborghiniJS 核心类库文件
 				|-project  	 #项目demo文件
@@ -631,9 +634,30 @@
 			Array.in_array();
 
 	八、框架里的方法
-			LAMJS.run(function(){});//
+			
+			LAMJS.run([],function(){});//此方法提供俩个参数，
+				 名称：System.run()
+                 功能：程序主方法
+                 说明：
+				 @param   (Array)args 			       NULL :传入的参数,里面的的元素和回调函数的参数试一一对应的。（可选）
+				 @param   (Function)callback 		NO NULL :在运行此方法要立马执行的操作,这里的this指的是LAMJS 对象（必选）
+				 @return  (Object) 返回callback 里的返回值
 			LAMJS.then(function(){});// 
-			LAMJS.wait(function(){});//在延时的时间后在执行，默认时间是3秒
+				 名称：System.then()
+				 功能：一直是链式调用，总是返回当前命名空间对象，
+				 说明：跟run方法类似，不同的是run 返回的是callback里的返回值。
+				 注意：
+				 @param   (Array)args 			       NULL :传入的参数,里面的的元素和回调函数的参数试一一对应的。（可选）
+                 @param   (Function)callback 		NO NULL :在运行此方法要立马执行的操作,这里的this指的是LAMJS 对象（必选）
+			LAMJS.wait([],function(){});//在延时的时间后在执行，默认时间是3秒
+				 名称：System.wait
+				 功能：一直是链式调用，总是返回当前命名空间对象，
+				 说明：与main方法功类似,不同的是每隔规定的时间数再去调用传进来的函数
+				 注意：
+				 @param   (Array)args 			   NULL :传入的参数,里面的的元素和回调函数的参数试一一对应的。（可选）
+				 @param   (Function)callback 		NO NULL :在运行此方法要等待多长时间才执行的操作,这里的this指的是LAMJS 对象（必选）
+				 @param   (Number)time 			   NULL :等待执行的时间
+				 @return  (System)
 			LAMJS.use();   用document.createElement() 引入js,css 
             LAMJS.unuse(); 用document.write() 引入js,css
 			LAMJS.import();//导入js 文件
@@ -855,8 +879,8 @@
 					    LAMJS.replaceTpl('link','href');
 					    
 					 3.模板标签: {{LAMJS.Config.Public.ROOT}}
-                        这里的 LAMJS.Config.Public.ROOT 是变量(模板标签就是js 变量名称)，LAMJS会解析换成变量的值。{{LAMJS.Config.Public.ROOT}} 跟{{_ROOT_}}意思相同，都是项目根目录位置
-                         这里推荐使用LAMJS.Config.Public.ROOT 以为 _ROOT_ 是全局变量容易被外部人为修改。（_ROOT_ 的值修改 不会影响到 LAMJS.Config.Public.ROOT 的值）。
+                        这里的 LAMJS.Config.Public.ROOT 是变量(模板标签里内容就是js 变量)，LAMJS会解析换成变量的值。{{LAMJS.Config.Public.ROOT}} 跟{{_ROOT_}}意思相同，都是项目根目录位置
+                         这里推荐使用LAMJS.Config.Public.ROOT 因为 _ROOT_ 是全局变量容易被外部人为修改。（_ROOT_ 的值修改 不会影响到 LAMJS.Config.Public.ROOT 的值）。
                          note:模板标签里一定要放已定义过的变量才能被解析正常工作，否则将会报错，不能正常工作！
                         模板标签分隔符设置与修改   （参考 二十、配置参数 一、模板标签分隔符设置与修改）
                          
