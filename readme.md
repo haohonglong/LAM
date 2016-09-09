@@ -880,8 +880,6 @@
 					    1.在需要解析的标签上放指定的自定义属性 LAM-VAR="template"
 					    2.在window.onload 函数里 调用 LAMJS.Html.analysisTpl(); 静态方法
 					    note:一定要在页面元素加载完毕才能调用LAMJS.Html.analysisTpl()
-					     
-
 					    
 					 2.解析指定HTML元素的模板标签 (不需要放指定的自定义属性 LAM-VAR="template")
 					    LAMJS.replaceTpl(selector,attr_name);
