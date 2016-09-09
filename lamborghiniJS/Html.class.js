@@ -144,6 +144,47 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 *
 	 * @author: lhh
 	 * 产品介绍：
+	 * 创建日期：2016-9-9
+	 * 修改日期：2016-9-9
+	 * 名称： Html.analysisTpl
+	 * 功能：查找并解析自定义属性'LAM-VAR=TPL=template'元素的标签
+	 * 说明：
+	 * 注意：
+	 * @return {void}
+	 * Example：
+	 *
+	 */
+	Html.analysisTpl=function(){
+		var value ='[LAM-VAR=template]';
+		var $value = $(value);
+		if($value){
+			$value.each(function(){
+				var $this=$(this);
+				var attr=null;
+				var tag = this.nodeName;
+				switch(tag){
+					case "LINK":
+					case "A":
+						attr = attr || 'href';
+					case "IMG":
+						attr = attr || 'src';
+
+						value=System.template($this.attr(attr));
+						$this.attr(attr,value);
+
+
+
+				}
+
+			});
+		}
+
+		
+	};
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
 	 * 创建日期：2016-1-15
 	 * 修改日期：2016-4-7
 	 * 名称： Html.include
