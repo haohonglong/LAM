@@ -878,7 +878,8 @@
 					    <img LAM-VAR="template" src="{{LAMJS.Config.Public.ROOT}}/"/>
 					    怎么工作的？
 					    1.在需要解析的标签上放指定的自定义属性 LAM-VAR="template"
-					    2.在页面加载完成后 调用 LAMJS.Html.analysisTpl(); 静态方法
+					    2.在window.onload 函数里 调用 LAMJS.Html.analysisTpl(); 静态方法
+					    note:一定要在页面元素加载完毕才能调用LAMJS.Html.analysisTpl()
 					     
 
 					    
