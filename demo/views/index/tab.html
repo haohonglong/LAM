@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>选项卡实例</title>
+
 	<script type="text/javascript" src="config.js"></script>
 	<script type="text/javascript">
 		LAMJS.wait([
@@ -24,8 +25,8 @@
 
 
 			System.import([
-				'/lamborghiniJS/Tab.class'
-			],ROOT);
+				'/Tab.class'
+			],System.classPath);
 		},2000);
 
 
@@ -33,13 +34,40 @@
 
 </script>
 
-<!--<script type="text/javascript" js="../js/system/Drag.class.js"></script>-->
+
+
+
+
+<style type="text/css">
+	.list li{color:#333;width:100px;}
+	.list .cur{color:red;}
+	.hide{display:none;}
+</style>
+</head>
+
+<body>
+<div data-controller="body" class="hide">
+	<ul class="list sectionFloat clearfix">
+		<li class="cur">111</li>
+		<li>222</li>
+		<li>333</li>
+	</ul>
+	<div class="block"><a LAM-VAR="template" href="{{LAMJS.Config.Public.ROOT}}/hhh">1111</a> </div>
+	<img LAM-VAR="template" src="{{LAMJS.Config.Public.ROOT}}/333"/>
+	<div class="block hide">22222</div>
+	<div class="block hide">33333</div>
+
+</div>
+
+</body>
 <script type="text/javascript">
 
 	LAMJS.wait(function(){
 		'use strict';
 		var System=this;
+
 		$(function(){
+			System.Html.analysisTpl();
 			$('[data-controller=body]').show();
 			new System.Tab({
 				'list':$('.list li'),
@@ -66,28 +94,5 @@
 	});
 
 </script>
-
-
-
-<style type="text/css">
-	.list li{color:#333;width:100px;}
-	.list .cur{color:red;}
-	.hide{display:none;}
-</style>
-</head>
-
-<body>
-<div data-controller="body" class="hide">
-	<ul class="list sectionFloat clearfix">
-		<li class="cur">111</li>
-		<li>222</li>
-		<li>333</li>
-	</ul>
-	<div class="block">11111</div>
-	<div class="block hide">22222</div>
-	<div class="block hide">33333</div>
-
-</div>
-
-</body>
 </html>
+

@@ -872,11 +872,26 @@
 				 
 	十八、模版标签
 				 查找解析指定元素属性里的模板标签
-					 1.定义元素属性值里的模板标签 
-					    <link rel="stylesheet" type="text/css" href="{{LAMJS.Config.Public.ROOT}}/project/common/css/bootstrap.css"/>
+					 1. 系统规定只能解析 link,a,img 这种标签
+					    <link LAM-VAR="template" rel="stylesheet" type="text/xxx" href="{{LAMJS.Config.Public.ROOT}}/"/>
+					    <a LAM-VAR="template" rel="stylesheet" href="{{LAMJS.Config.Public.ROOT}}/"/>跳转</a>
+					    <img LAM-VAR="template" src="{{LAMJS.Config.Public.ROOT}}/"/>
+					    怎么工作的？
+					    1.在需要解析的标签上放指定的自定义属性 LAM-VAR="template"
+					    2.在页面加载完成后 调用 LAMJS.Html.analysisTpl(); 静态方法
+					     
+
 					    
-					 2.解析模板标签 
-					    LAMJS.replaceTpl('link','href');
+					 2.自定义解析任何HTML元素的模板标签 (不需要放指定的自定义属性 LAM-VAR="template")
+					    LAMJS.replaceTpl(selector,attr_name);
+                             功能：替换模版标签
+                             说明：
+                             注意：
+                             @param (String)selector 		NO NULL:选择器标示符
+                             @param (String)attr_name 	NO NULL:标签属性
+                        example:解析所有link 标签 href 的模板标签
+						    <link rel="stylesheet" type="text/css" href="{{LAMJS.Config.Public.ROOT}}/project/common/css/bootstrap.css"/>
+						    LAMJS.replaceTpl('link','href');     
 					    
 					 3.模板标签: {{LAMJS.Config.Public.ROOT}}
                         这里的 LAMJS.Config.Public.ROOT 是变量(模板标签里内容就是js 变量)，LAMJS会解析换成变量的值。{{LAMJS.Config.Public.ROOT}} 跟{{_ROOT_}}意思相同，都是项目根目录位置

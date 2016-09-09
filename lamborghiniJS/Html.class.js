@@ -124,7 +124,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @param 	(String|{}) D.data             	  NULL :请求地址的参数
 	 * @param 	(Boolean) 	D.async               NULL :是否异步加载
 	 * @param 	(Boolean) 	D.cache           	  NULL :是否缓存默认true
-	 * @return (void | Number)
+	 * @return {*}
 	 * Example：
 	 *
 	 */
