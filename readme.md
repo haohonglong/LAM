@@ -2,7 +2,7 @@
 	version ：1.1.2
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-9-9
+	修改日期 ：2016-9-10
 
 
 产品介绍：
@@ -872,7 +872,7 @@
 				 
 	十八、模版标签
 				 查找解析指定元素属性里的模板标签
-					 1. 系统规定只能解析 link,a,img 这种标签
+					 1. 系统规定只能解析 link,a,img 这几种标签模板标签
 					    <link LAM-VAR="template" rel="stylesheet" type="text/xxx" href="{{LAMJS.Config.Public.ROOT}}/"/>
 					    <a LAM-VAR="template" rel="stylesheet" href="{{LAMJS.Config.Public.ROOT}}/"/>跳转</a>
 					    <img LAM-VAR="template" src="{{LAMJS.Config.Public.ROOT}}/"/>
@@ -882,7 +882,7 @@
 					     
 
 					    
-					 2.自定义解析任何HTML元素的模板标签 (不需要放指定的自定义属性 LAM-VAR="template")
+					 2.解析指定HTML元素的模板标签 (不需要放指定的自定义属性 LAM-VAR="template")
 					    LAMJS.replaceTpl(selector,attr_name);
                              功能：替换模版标签
                              说明：
