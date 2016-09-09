@@ -30,12 +30,15 @@
 	文件夹结构：
 			|-LAM      		 #项目根目录
 				|-demo 		 #
+					|-views	 #html文件
+						|-index	 #html文件
+							|-config.js	 #当前配置文件
 				|-lib  		 #
 					|-class  #类文件
 					|-css  	 #样式文件
 				|-common  #公共文件
 					|-config  #配置文件存放位置
-						|-config.js  #项目配置文件
+						|-config.js  #主配置文件
 						|-init.js  #每个页面公用的.js文件
 				|-lamborghiniJS  #lamborghiniJS 核心类库文件
 				|-project  	 #项目demo文件
