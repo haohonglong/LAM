@@ -311,7 +311,7 @@ if(!GRN_LHH){
 		 * 说明：
 		 * 注意：
 		 * @param   (Array)args 			   NULL :传入的参数
-		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
+		 * @param   (Function)callback 		NO NULL :
 		 * @return  (Object) 返回callback 里的返回值
 		 * Example：
 		 */
@@ -328,8 +328,8 @@ if(!GRN_LHH){
 		 * 说明：
 		 * 注意：
 		 * @param   (Array)args 			   NULL :传入的参数
-		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
-		 * @return  (Object) 返回callback 里的返回值
+		 * @param   (Function)callback 		NO NULL :在运行此方法要立马执行的操作（必选）
+		 * @return  {*} 返回callback 里的返回值
 		 * Example：
 		 */
 		'run':function(args,callback){
@@ -348,8 +348,8 @@ if(!GRN_LHH){
 		 * 功能：一直是链式调用，总是返回当前命名空间对象，
 		 * 说明：与main方法功类似,不同的是每隔规定的时间数再去调用传进来的函数
 		 * 注意：
-		 * @param   (Array)args 			   NULL :传入的参数
-		 * @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
+		 * @param   (Array)args 			   NULL :传入的参数,里面的的元素和回调函数的参数试一一对应的。（可选）
+		 * @param   (Function)callback 		NO NULL :在运行此方法要等待多长时间才执行的操作（必选）
 		 * @param   (Number)time 			   NULL :等待执行的时间
 		 * @return  (System)
 		 * Example：
@@ -382,7 +382,7 @@ if(!GRN_LHH){
 		 * 说明：跟run方法类似，不同的是run 返回的是callback里的返回值。
 		 * 注意：
 		 * @param   (Array)args 			   NULL :传入的参数
-		 * @param   (Function)callback 		NO NULL :要执行的操作
+		 * @param   (Function)callback 		NO NULL :在运行此方法要立马执行的操作（必选）
 		 * @return  (System)
 		 * Example：
 		 */

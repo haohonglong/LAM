@@ -638,8 +638,9 @@
 			LAMJS.run([],function(){});//此方法提供俩个参数，
 				 名称：System.run()
                  功能：程序主方法
+                 说明：
 				 @param   (Array)args 			       NULL :传入的参数,里面的的元素和回调函数的参数试一一对应的。（可选）
-				 @param   (Function)callback 		NO NULL :调用main 方法要执行的操作（必选）
+				 @param   (Function)callback 		NO NULL :在运行此方法要立马执行的操作（必选）
 				 @return  (Object) 返回callback 里的返回值
 			LAMJS.then(function(){});// 
 				 名称：System.then()
@@ -647,11 +648,16 @@
 				 说明：跟run方法类似，不同的是run 返回的是callback里的返回值。
 				 注意：
 				 @param   (Array)args 			       NULL :传入的参数,里面的的元素和回调函数的参数试一一对应的。（可选）
-                 @param   (Function)callback 		NO NULL :调用main 方法要执行的操作（必选）
+                 @param   (Function)callback 		NO NULL :在运行此方法要立马执行的操作（必选）
 			LAMJS.wait([],function(){});//在延时的时间后在执行，默认时间是3秒
-				 @param   (Array)args 			   NULL :传入的参数
-				 @param   (Function)callback 		NO NULL :调用main 方法要执行的操作
+				 名称：System.wait
+				 功能：一直是链式调用，总是返回当前命名空间对象，
+				 说明：与main方法功类似,不同的是每隔规定的时间数再去调用传进来的函数
+				 注意：
+				 @param   (Array)args 			   NULL :传入的参数,里面的的元素和回调函数的参数试一一对应的。（可选）
+				 @param   (Function)callback 		NO NULL :在运行此方法要等待多长时间才执行的操作（必选）
 				 @param   (Number)time 			   NULL :等待执行的时间
+				 @return  (System)
 			LAMJS.use();   用document.createElement() 引入js,css 
             LAMJS.unuse(); 用document.write() 引入js,css
 			LAMJS.import();//导入js 文件
