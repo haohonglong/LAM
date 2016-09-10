@@ -279,14 +279,14 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2015-8-25
-	 * 修改日期：2016-9-4
+	 * 修改日期：2016-9-11
 	 * 名称： tag
 	 * 功能：动态返回指定的标签
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
 	 * @param 	(String)name            NO NULL : 标签名称
 	 * @param 	(Boolean)single            NULL : 成对标签还是单一标签，false 是成对标签
-	 * @param 	(Object)Attr             	NO NULL : 标签的属性
+	 * @param 	(Object)Attr               NULL : 标签的属性
 	 * @param 	(String|Array)content      NULL : 内容
 	 * @return (String) 返回标签字符串
 	 * Example：
@@ -404,13 +404,13 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-4
+	 * 修改日期：2016-9-11
 	 * 名称： scriptFile
 	 * 功能：
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(Object)Attr        NO NULL : 标签的属性
 	 * @param 	(String)src      NO NULL : 路径
+	 * @param 	(Object)Attr        NULL : 标签的属性
 	 * @return (String)
 	 * Example：
 	 *
@@ -436,13 +436,13 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-4
+	 * 修改日期：2016-9-11
 	 * 名称： a
 	 * 功能：
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(String)href   			NO  NULL : 连接地址
-	 * @param 	(Object)Attr             	NO NULL : 标签的属性
+	 * @param 	(String)href   		NO  NULL : 连接地址
+	 * @param 	(Object)Attr            NULL : 标签的属性
 	 * @return (String)
 	 * Example：
 	 *
@@ -466,13 +466,13 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-4
+	 * 修改日期：2016-9-11
 	 * 名称： script
 	 * 功能：
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(String|Array)content      NULL : 内容
-	 * @param 	(Object)Attr             	NO NULL : 标签的属性
+	 * @param 	(String)content      NO NULL : 内容
+	 * @param 	(Object)Attr            NULL : 标签的属性
 	 * @return (String)
 	 * Example：
 	 *
@@ -496,13 +496,13 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-4
+	 * 修改日期：2016-9-11
 	 * 名称： style
 	 * 功能：
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(Object)Attr             	NO NULL : 标签的属性
-	 * @param 	(String|Array)content      NULL : 内容
+	 * @param 	(String|Array)content     NO NULL : 内容
+	 * @param 	(Object)Attr             	 NULL : 标签的属性
 	 * @return (String)
 	 * Example：
 	 *
@@ -526,14 +526,14 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-4
+	 * 修改日期：2016-9-11
 	 * 名称： a
 	 * 功能：
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
 	 * @param 	(String)href   			NO  NULL : 连接地址
-	 * @param 	(Object)Attr             	NO NULL : 标签的属性
 	 * @param 	(String|Array)content      NULL : 内容
+	 * @param 	(Object)Attr               NULL : 标签的属性
 	 * @return (String)
 	 * Example：
 	 *
@@ -595,13 +595,13 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-4
+	 * 修改日期：2016-9-11
 	 * 名称： img
 	 * 功能：
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
 	 * @param 	(String)src      NO NULL : 图片 路径
-	 * @param 	(Object)Attr        NO NULL : 标签的属性
+	 * @param 	(Object)Attr        NULL : 标签的属性
 	 * @return (String)
 	 * Example：
 	 *

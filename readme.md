@@ -2,7 +2,7 @@
 	version ：1.1.2
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-9-10
+	修改日期 ：2016-9-11
 
 
 产品介绍：
@@ -681,21 +681,21 @@
                  @param 	(Boolean) 	D.cache           	  NULL :是否缓存默认true
                  @return {*}
 			
-			LAMJS.Html.tag(name,single,D,content); 
+			LAMJS.Html.tag(name,single,Attr,content); 
 				 名称： tag
 	             功能：动态返回指定的标签
 	             说明：
 	             注意：length 是关键字 属性里禁止使用
-	             @param 	(String)name            NO NULL : 标签名称
-	             @param 	(Boolean)single            NULL : 成对标签还是单一标签，false 是成对标签
-	             @param 	(Object)D             	NO NULL : 标签的属性
-	             @param 	(String|Array)content      NULL : 内容
+	             @param 	(String)name          NO NULL : 标签名称
+	             @param 	(Boolean)single          NULL : 成对标签还是单一标签，false 是成对标签,true 是单标签
+	             @param 	(Object)Attr             NULL : 标签的属性
+	             @param 	(String|Array)content    NULL : 内容
 	             @return (String) 返回标签字符串
 				
 				第一参数是标签名称。
 				第二参数，是否是单标签 true | false (默认可不填)。
-				第三参数是标签里的所有属性，（没有的话就传个{}）.
-				第四个参数是标签里的内容（没有内容可以省略这个参数）。
+				第三参数是标签里的所有属性，（可选）.
+				第四个参数是标签里的内容（可选）。
 				example:
 					LAMJS.Html.tag('p', {},'这是一个p标签');
 					上面的代码生成下面的字符串
@@ -704,12 +704,12 @@
 					    LAMJS.run(function () {
 	                        'use strict';
 	                        var System = this;
-	                        System.Html.tag('nav',{},
+	                        System.Html.tag('nav',
 									System.Html.tag('ul', {'class': 'pagination'},
 											(function(){
 												var arr=[];
 												var li;
-												li =System.Html.tag('li', {},
+												li =System.Html.tag('li',
 														System.Html.tag('a',{'href':'#','aria-label':'Previous'},
 																System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
 														)
@@ -718,12 +718,12 @@
 												arr.push(li);
 												
 												for(var i=1;i<=5;i++){
-													arr.push(System.Html.tag('li', {},
+													arr.push(System.Html.tag('li',
 															System.Html.tag('a', {'href':'#'},i)
 													));
 				
 												}
-												li = System.Html.tag('li', {},
+												li = System.Html.tag('li',
 														System.Html.tag('a', {'href':'#','aria-label':'Next'},
 																System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
 														)
@@ -760,61 +760,61 @@
 	                  </ul>
 	                </nav>
                 
-            LAMJS.Html.renderTagAttributes(D);
+            LAMJS.Html.renderTagAttributes(Attr);
                  名称： Html.renderTagAttributes
                  功能：
                  说明：
                  注意：length 是关键字 属性里禁止使用
-                 @param 	(Object)D             	NO NULL : 标签的属性
+                 @param 	(Object)Attr             	NO NULL : 标签的属性
                  @return (String) 返回属性符串
-            LAMJS.Html.scriptFile(D,src);
+            LAMJS.Html.scriptFile(Attr,src);
                  名称： scriptFile
                  功能：
                  说明：
                  注意：length 是关键字 属性里禁止使用
-                 @param 	(Object)D        NO NULL : 标签的属性
                  @param 	(String)src      NO NULL : 路径
+                 @param 	(Object)Attr        NULL : 标签的属性
                  @return (String)
-            LAMJS.Html.linkFile(D,href);
+            LAMJS.Html.linkFile(Attr,href);
                  名称： a
                  功能：
                  说明：
                  注意：length 是关键字 属性里禁止使用
-                 @param 	(Object)D             	NO NULL : 标签的属性
                  @param 	(String)href   			NO  NULL : 连接地址
+                 @param 	(Object)Attr                NULL : 标签的属性
                  @return (String)
-            LAMJS.Html.script(D,content);
+            LAMJS.Html.script(Attr,content);
                  名称： script
                  功能：
                  说明：
                  注意：length 是关键字 属性里禁止使用
-                 @param 	(Object)D             	NO NULL : 标签的属性
-                 @param 	(String|Array)content      NULL : 内容
+                 @param 	(String|Array)content   NO NULL : 内容
+                 @param 	(Object)Attr               NULL : 标签的属性
                  @return (String)
-            LAMJS.Html.style(D,content);
+            LAMJS.Html.style(Attr,content);
                  名称： style
                  功能：
                  说明：
                  注意：length 是关键字 属性里禁止使用
-                 @param 	(Object)D             	NO NULL : 标签的属性
                  @param 	(String|Array)content      NULL : 内容
+                 @param 	(Object)Attr               NULL : 标签的属性
                  @return (String)
-            LAMJS.Html.a(href,D,content);
+            LAMJS.Html.a(href,Attr,content);
                  名称： a
                  功能：
                  说明：
                  注意：length 是关键字 属性里禁止使用
                  @param 	(String)href   			NO  NULL : 连接地址
-                 @param 	(Object)D             	NO NULL : 标签的属性
-                 @param 	(String|Array)content      NULL : 内容
+                 @param 	(String|Array)content       NULL : 内容
+                 @param 	(Object)Attr                NULL : 标签的属性
                  @return (String)
-            LAMJS.Html.img(src,D);
+            LAMJS.Html.img(src,Attr);
                  名称： img
                  功能：
                  说明：
                  注意：length 是关键字 属性里禁止使用
                  @param 	(String)src      NO NULL : 图片 路径
-                 @param 	(Object)D        NO NULL : 标签的属性
+                 @param 	(Object)Attr        NULL : 标签的属性
                  @return (String)
             LAMJS.Html.analysisTpl();
                  名称： analysisTpl
