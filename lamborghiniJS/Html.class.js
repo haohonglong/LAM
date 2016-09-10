@@ -16,7 +16,6 @@ window[GRN_LHH].run([window],function(window,undefined){
 	}
 
 
-
 	/**
 	 *
 	 * @author: lhh

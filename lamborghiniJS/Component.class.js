@@ -17,6 +17,103 @@ window[GRN_LHH].run([window],function(window,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'BiObject','Component');
+	System.merge(null,[{
+						/**
+						 * @author: lhh
+						 * 产品介绍：
+						 * 创建日期：2015-8-27
+						 * 修改日期：2016-8-19
+						 * 名称：import
+						 * 功能：导入指定的js文件
+						 * 说明：System 参数不用传
+						 * 注意：
+						 * @param   (Array)url 			    NO NULL :要加载js文件
+						 * @param   (String)baseUrl 		   NULL :文件路径
+						 * @param   (String)suffix 		       NULL :文件后缀名
+						 * @return  {System} 返回当前对象可以链式调用import方法
+						 * Example：
+						 */
+						'import':function(url,baseUrl,suffix){
+							suffix = suffix || '.js';
+							try {
+								if(System.isset(importScripts) && System.isFunction(importScripts)){
+									url.each(function(){
+										var e=this;
+										e+=suffix;
+										baseUrl ? importScripts(baseUrl+e) : importScripts(e);
+									});
+								}
+
+
+							} catch (e) {
+								//throw new Error(e.message);
+								System.Loadcommon.load({
+									'baseUrl':baseUrl || null,
+									'js':url,
+									'suffix':suffix
+								}).print();
+							}
+							return this;
+						},
+						/**
+						 * @author lhh
+						 * 产品介绍：
+						 * 创建日期：2015-6-25
+						 * 修改日期：2015-6-25
+						 * 名称：get_url_param
+						 * 功能：根据指定的url参数获取相对应的参数值
+						 * 说明：
+						 * 注意：
+						 * @param   (String)name            NO NULL :参数名称
+						 * @return  {String}
+						 *
+						 */
+						'get_url_param':function(name){
+							var search = document.location.search;
+							var pattern = new RegExp("[?&]"+name+"\=([^&]+)", "g");
+							var matcher = pattern.exec(search);
+							var items = null;
+							if(null != matcher){
+								try{
+									items = decodeURIComponent(decodeURIComponent(matcher[1]));
+								}catch(e){
+									try{
+										items = decodeURIComponent(matcher[1]);
+									}catch(e){
+										items = matcher[1];
+									}
+								}
+							}
+							console.log(items);
+							return items;
+
+						},
+						/**
+						 *
+						 * @author: lhh
+						 * 产品介绍：
+						 * 创建日期：2016-04-18
+						 * 修改日期：2016-04-18
+						 * 名称：getRootPath
+						 * 功能：获取项目根路径，如： http://localhost:8083/uimcardprj
+						 * 说明：
+						 * 注意：
+						 * @param (void)
+						 * @returns {string}
+						 */
+						'getRootPath':function(){
+							//获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+							var curWwwPath=window.document.location.href;
+							//获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+							var pathName=window.document.location.pathname;
+							var pos=curWwwPath.indexOf(pathName);
+							//获取主机地址，如： http://localhost:8083
+							var localhostPaht=curWwwPath.substring(0,pos);
+							//获取带"/"的项目名，如：/uimcardprj
+							var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+							return(localhostPaht+projectName);
+						}
+	}]);
 
 	var __this__=null;
 

@@ -19,39 +19,6 @@ window[GRN_LHH].run([window,window.document,jQuery],function(window,document,$,u
     System.is(System,'Component','Controller');
 
     var __this__=null;
-    /**
-     * @author lhh
-     * 产品介绍：
-     * 创建日期：2015-6-25
-     * 修改日期：2016-7-14
-     * 名称：get_url_Param
-     * 功能：根据指定的url参数获取相对应的参数值
-     * 说明：
-     * 注意：
-     * @param   (String)name            NO NULL :参数名称
-     * @return  String
-     *
-     */
-    var get_url_Param=function(name){
-        var search = document.location.search;
-        var pattern = new RegExp("[?&]"+name+"\=([^&]+)", "g");
-        var matcher = pattern.exec(search);
-        var items = null;
-        if(null != matcher){
-            try{
-                items = decodeURIComponent(decodeURIComponent(matcher[1]));
-            }catch(e){
-                try{
-                    items = decodeURIComponent(matcher[1]);
-                }catch(e){
-                    items = matcher[1];
-                }
-            }
-        }
-        console.log(items);
-        return items;
-
-    };
     function Controller(init){
         System.Basis.extends.call(this,System.Component);
         __this__=this;
@@ -81,9 +48,7 @@ window[GRN_LHH].run([window,window.document,jQuery],function(window,document,$,u
      * @returns {String}渲染对应视图文件的方法名
      * Example: eval(Controller.get_url_name('file'))()
      */
-    Controller.get_url_name =function(name){
-        return get_url_Param(name);
-    };
+    Controller.get_url_name = System.get_url_param;
 
     Controller.prototype = {
         'constructor':Controller,
