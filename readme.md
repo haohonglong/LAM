@@ -499,7 +499,8 @@
 		命名空间接口定义: var GRN_LHH='interfaceName';
         命名空间接口调用: window[GRN_LHH]  或者 window['interfaceName'] 或者 LamborghiniJS_20150910123700_ 或者 LAMJS
 		命名空间接口的设计是灵活的，修改接口名不影响库文件里的内核代码及类接口。
-        与第三方插件发生冲突时解决方法:  修改变量 'GRN_LHH' 里的值 即可。'GRN_LHH' 是命名空间接口的密钥 作用是定义命名空间。
+        与第三方插件发生冲突时解决方法:  修改主配置文件config.js 里的变量 'GRN_LHH' 里的值 即可。'GRN_LHH' 是命名空间接口的密钥 作用是定义命名空间。
+        note:不能在框架加载完成后修改 'GRN_LHH' 里的值，必须在没加载前修改！！！ 
 
 
 	五、文件加载器
