@@ -147,7 +147,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 node = CMyDom().create('script',attr);
                                 node.script=true;
                             }else{
-                                node = System.Html.scriptFile(attr,src);
+                                node = System.Html.scriptFile(src,attr);
                             }
 
                             files.push(node);
@@ -171,7 +171,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 node = CMyDom().create('script',js);
                                 node.script=true;
                             }else{
-                                node = System.Html.scriptFile(js);
+                                node = System.Html.scriptFile(js.src,js);
                             }
                             files.push(node);
                             if(System.isClassFile(js.src)){
@@ -205,7 +205,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 node = CMyDom().create('link',attr);
                                 node.style=true;
                             }else{
-                                node = System.Html.linkFile(attr,href);
+                                node = System.Html.linkFile(href,attr);
                             }
 
                             files.push(node);
@@ -226,7 +226,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 node = CMyDom().create('link',css);
                                 node.style=true;
                             }else{
-                                node = System.Html.linkFile(css);
+                                node = System.Html.linkFile(css.href,css);
                             }
 
                             files.push(node);

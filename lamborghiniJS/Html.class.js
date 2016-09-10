@@ -3,6 +3,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Dom','Html');
+	var sAttribute   = System.Config.render.default.script.Attribute;
+	var cAttribute   = System.Config.render.default.css.Attribute;
 
 	var __this__=null;
 	function Html(){
@@ -253,18 +255,21 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 功能：
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(Object)D             	NO NULL : 标签的属性
+	 * @param 	(Object)Attr             	NO NULL : 标签的属性
 	 * @return (String) 返回属性符串
 	 * Example：
 	 *
 	 */
-	Html.renderTagAttributes = function(D){
+	Html.renderTagAttributes = function(Attr){
+		if(!Attr || !System.isPlainObject(Attr)) {
+			return '';
+		}
 		var attrs=[];
-		for(var key in D){
+		for(var key in Attr){
 			if(System.arr_Object_key_has(key)){
 				continue;
 			}
-			attrs.push(' ',key,'="',D[key],'"');
+			attrs.push(' ',key,'="',Attr[key],'"');
 		}
 		return attrs.join('');
 	};
@@ -281,32 +286,102 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 注意：length 是关键字 属性里禁止使用
 	 * @param 	(String)name            NO NULL : 标签名称
 	 * @param 	(Boolean)single            NULL : 成对标签还是单一标签，false 是成对标签
-	 * @param 	(Object)D             	NO NULL : 标签的属性
+	 * @param 	(Object)Attr             	NO NULL : 标签的属性
 	 * @param 	(String|Array)content      NULL : 内容
 	 * @return (String) 返回标签字符串
 	 * Example：
 	 *
 	 */
-	Html.tag = function(name,single,D,content){
-
-		if(!System.isString(arguments[0])){
-			throw new Error('Warning 缺少标签名称');
-			return false;
+	Html.tag = function(name,single,Attr,content){
+		var args = arguments;
+		var len = args.length;
+		if(0 == len || !System.isString(args[0])){
+			throw new Error('Warning :缺少标签名称');
+			return '';
 		}
 
-		if(System.isObject(arguments[1])){
-			content = arguments[2];
-			D = arguments[1];
-			single = false;
+		switch (len){
+			case 4:
+				name	 = args[0];
+				single 	 = args[1];
+				Attr 		 = args[2];
+				content  = args[3];
+				break;
+			case 3:
+				if(System.isPlainObject(args[1])){//tag('div',{},'')
+					name	 = args[0];
+					single 	 = false;
+					Attr 		 = args[1];
+					content  = args[2];
+				}else if(System.isBoolean(args[1])){//tag('img',true,{})
+					name	 = args[0];
+					single 	 = args[1];
+					Attr 		 = args[2];
+					content  = null;
+				}else{
+					throw new Error('Warning :第二参数类型非法！');
+					return '';
+				}
+
+				break;
+			case 2:
+				if(System.isString(args[1]) || System.isArray(args[1])){//tag('div',String|Array)
+					name	 = args[0];
+					single 	 = false;
+					Attr 	 = null;
+					content  = args[1];
+				}else if(System.isPlainObject(args[1])){//tag('div',{})
+					name	 = args[0];
+					single 	 = false;
+					Attr 	 = args[1];
+					content  = null;
+				}else if(System.isBoolean(args[1])){//tag('img',true)
+					name	 = args[0];
+					single 	 = args[1];
+					Attr 	 = null;
+					content  = null;
+				}else{
+					throw new Error('Warning :第二参数类型非法！');
+					return '';
+				}
+
+				break;
+			case 1:
+				name	 = args[0];
+				single 	 = false;
+				Attr     = null;
+				content  = null;
+				break;
+			default:
+				throw new Error('Warning :第二参数类型不合法！');
+				return '';
+
 		}
 
-		single = single || false;
-		D = D || {};
+		if(name && !System.isString(name)){
+			throw new Error('Warning :name数类型不合法！');
+			return '';
+		}
+		if(single && !System.isBoolean(single)){
+			throw new Error('Warning :single数类型不合法！');
+			return '';
+		}
+		if(Attr && !System.isPlainObject(Attr)){
+			throw new Error('Warning :Attr数类型不合法！');
+			return '';
+		}
+		if(content && !System.isString(content) && !System.isArray(content)){
+			throw new Error('Warning :content数类型不合法！');
+			return '';
+		}
 
 		var tag=[];
 		tag.push('<',name);
 		//拼接属性
-		tag.push(Html.renderTagAttributes(D));
+		if(Attr && System.isObject(Attr)){
+			tag.push(Html.renderTagAttributes(Attr));
+		}
+
 
 		if(single){
 			tag.push(' />');
@@ -334,21 +409,26 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 功能：
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(Object)D        NO NULL : 标签的属性
+	 * @param 	(Object)Attr        NO NULL : 标签的属性
 	 * @param 	(String)src      NO NULL : 路径
 	 * @return (String)
 	 * Example：
 	 *
 	 */
-	Html.scriptFile=function(D,src){
-		if(!D){
-			D = {};
+	Html.scriptFile=function(src,Attr){
+		if(!System.isString(src)){
+			throw new Error('Warning: src数类型不合法！');
+			return '';
 		}
-		if(src){
-			D.src = src;
+
+		if(Attr && !System.isPlainObject(Attr)){
+			throw new Error('Warning: Attr数类型不合法！');
+			return '';
 		}
-		D.type = D.type || 'text/javascript';
-		return Html.tag('script',D);
+		Attr = Attr || System.clone(sAttribute);
+		Attr.src = src;
+		Attr.type = Attr.type || 'text/javascript';
+		return Html.tag('script',Attr);
 	};
 
 	/**
@@ -361,20 +441,25 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 功能：
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(Object)D             	NO NULL : 标签的属性
 	 * @param 	(String)href   			NO  NULL : 连接地址
+	 * @param 	(Object)Attr             	NO NULL : 标签的属性
 	 * @return (String)
 	 * Example：
 	 *
 	 */
-	Html.linkFile=function(D,href){
-		if(!D){
-			D = {};
+	Html.linkFile=function(href,Attr){
+		if(!System.isString(href)){
+			throw new Error('Warning: href数类型不合法！');
+			return '';
 		}
-		if(href){
-			D.href = href;
+
+		if(Attr && !System.isPlainObject(Attr)){
+			throw new Error('Warning: Attr数类型不合法！');
+			return '';
 		}
-		return Html.tag('link',true,D);
+		Attr = Attr || System.clone(cAttribute);
+		Attr.href = href;
+		return Html.tag('link',true,Attr);
 	};
 	/**
 	 *
@@ -386,15 +471,25 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 功能：
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(Object)D             	NO NULL : 标签的属性
 	 * @param 	(String|Array)content      NULL : 内容
+	 * @param 	(Object)Attr             	NO NULL : 标签的属性
 	 * @return (String)
 	 * Example：
 	 *
 	 */
-	Html.script=function(D,content){
-		D.type = D.type || 'text/javascript';
-		return Html.tag('script',D,content);
+	Html.script=function(content,Attr){
+		if(!System.isString(content)){
+			throw new Error('Warning: content数类型不合法！');
+			return '';
+		}
+
+		if(Attr && !System.isPlainObject(Attr)){
+			throw new Error('Warning: src数类型不合法！');
+			return '';
+		}
+		Attr = Attr || {};
+		Attr.type = Attr.type || 'text/javascript';
+		return Html.tag('script',Attr,content);
 	};
 	/**
 	 *
@@ -406,15 +501,25 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 功能：
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(Object)D             	NO NULL : 标签的属性
+	 * @param 	(Object)Attr             	NO NULL : 标签的属性
 	 * @param 	(String|Array)content      NULL : 内容
 	 * @return (String)
 	 * Example：
 	 *
 	 */
-	Html.style=function(D,content){
-		D.type = D.type || 'text/css';
-		return Html.tag('style',D,content);
+	Html.style=function(content,Attr){
+		if(!System.isString(content)){
+			throw new Error('Warning: content数类型不合法！');
+			return '';
+		}
+
+		if(Attr && !System.isPlainObject(Attr)){
+			throw new Error('Warning: src数类型不合法！');
+			return '';
+		}
+		Attr = Attr || {};
+		Attr.type = Attr.type || 'text/css';
+		return Html.tag('style',Attr,content);
 	};
 	/**
 	 *
@@ -427,15 +532,62 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
 	 * @param 	(String)href   			NO  NULL : 连接地址
-	 * @param 	(Object)D             	NO NULL : 标签的属性
+	 * @param 	(Object)Attr             	NO NULL : 标签的属性
 	 * @param 	(String|Array)content      NULL : 内容
 	 * @return (String)
 	 * Example：
 	 *
 	 */
-	Html.a=function(href,D,content){
-		D.href = href;
-		return Html.tag('a',D,content);
+	Html.a=function(href,content,Attr){
+		var args = arguments;
+		var len = args.length;
+		if(0 == len || !System.isString(args[0])){
+			throw new Error('Warning :路径参数必写');
+			return '';
+		}
+
+		switch (len){
+			case 3:
+				href	 = args[0];
+				content	 = args[1];
+				Attr 	 = args[2];
+				break;
+			case 2:
+				if(System.isString(args[1])){
+					href	 = args[0];
+					content	 = args[1];
+					Attr 	 = {};
+				}else if(System.isPlainObject(args[1])){
+					href	 = args[0];
+					content	 = '';
+					Attr 	 = args[1];
+				}else{
+					throw new Error('Warning: 第二参数类型不合法！');
+					return '';
+				}
+
+				break;
+
+			default:
+
+		}
+		if(!System.isString(href)){
+			throw new Error('Warning: href数类型不合法！');
+			return '';
+		}
+		if(content && !System.isString(content) && !System.isArray(content)){
+			throw new Error('Warning: content数类型不合法！');
+			return '';
+		}
+
+		if(Attr && !System.isPlainObject(Attr)){
+			throw new Error('Warning: src数类型不合法！');
+			return '';
+		}
+		Attr = Attr || {};
+		content = content || '';
+		Attr.href = href;
+		return Html.tag('a',Attr,content);
 	};
 
 	/**
@@ -449,14 +601,23 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
 	 * @param 	(String)src      NO NULL : 图片 路径
-	 * @param 	(Object)D        NO NULL : 标签的属性
+	 * @param 	(Object)Attr        NO NULL : 标签的属性
 	 * @return (String)
 	 * Example：
 	 *
 	 */
-	Html.img=function(src,D){
-		D.src = src;
-		return Html.tag('img',true,D);
+	Html.img=function(src,Attr){
+		if(!System.isString(src)){
+			throw new Error('Warning: src数类型不合法！');
+			return '';
+		}
+		if(Attr && !System.isPlainObject(Attr)){
+			throw new Error('Warning: src数类型不合法！');
+			return '';
+		}
+		Attr = Attr || {};
+		Attr.src = src;
+		return Html.tag('img',true,Attr);
 	};
 
 

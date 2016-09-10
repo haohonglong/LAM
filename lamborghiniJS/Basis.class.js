@@ -1079,7 +1079,7 @@ if(!GRN_LHH){
 		isPlainObject: function( obj ) {
 			var key;
 
-			if ( !obj || !System.isObject(obj) || obj.nodeType) {
+			if ( !obj || !System.isObject(obj) || System.isArray(obj) || obj.nodeType) {
 				return false;
 			}
 
