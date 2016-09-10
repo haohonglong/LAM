@@ -53,7 +53,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 									'suffix':suffix
 								}).print();
 							}
-							return this;
+							return System;
 						},
 						/**
 						 * @author lhh
