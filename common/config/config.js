@@ -114,7 +114,7 @@ if(!GRN_LHH){
                 };
             },
             'bulid':function(tag,D){
-                tag = tag || "div";
+                tag = tag || "script";
                 var node;
                 var k;
                 var fragment;
