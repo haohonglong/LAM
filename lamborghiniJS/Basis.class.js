@@ -194,6 +194,7 @@ if(!GRN_LHH){
 	Interface= {
 		'Basis': {},
 		'BiObject': {},
+		'Loader': {},
 		'Component': {},
 		'Helper': {},
 		'Controller': {},

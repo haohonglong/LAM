@@ -381,6 +381,7 @@
         all classes：
         	{
         		'Basis'      		:function(){},
+        		'Loader'   		    :{},
         		'BiObject'   		:function(){},
         		'Component'      	:function(){},
         		'Helper'     		:function(){},
