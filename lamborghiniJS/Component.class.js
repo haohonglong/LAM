@@ -38,9 +38,16 @@ window[GRN_LHH].run([window],function(window,undefined){
 							try {
 								if(System.isset(importScripts) && System.isFunction(importScripts)){
 									url.each(function(){
-										var e=this;
-										e+=suffix;
-										baseUrl ? importScripts(baseUrl+e) : importScripts(e);
+										var src=this;
+										src+=suffix;
+										src = baseUrl ? baseUrl+src : src;
+										if(!System.fileExisted(src)){
+											importScripts(src);
+											if(System.isClassFile(src)){
+												System.classes.push(src);
+											}
+											System.files.push(src);
+										}
 									});
 								}
 
