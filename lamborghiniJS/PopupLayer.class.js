@@ -126,7 +126,7 @@
 		  * @author: lhh
 		  * 产品介绍：
 		  * 创建日期：2014-12-1
-		  * 修改日期：2015-8-19
+		  * 修改日期：2016-9-11
 		  * 名称：create
 		  * 功能：动态创建html
 		  * 说明：
@@ -151,10 +151,33 @@
 			 };
 
 			 var D = System.isObject(init) ? System.merge({},[init,defaults]) : defaults;
+			 var tag = System.Html.tag;
 
 			 var container='';
 			 switch(D['select']){
 				 case 0:
+					 container = tag('div',{'class':D["div_class_PopupLayer_wrap_name"]},
+									 [
+										  tag('div',{'class':D["div_class_colose_name"]})
+										 ,tag('div',{'class':'p10'},
+												 tag('div',{'class':'content'},
+													 [
+														 tag('div',{'class':D["div_title_name"]},
+															 [
+																 tag('h2',{},D["title"])
+																 ,D["more"] ? tag('div',{'class':'more'},D["more"]) : ''
+															 ]
+														 )
+														 ,tag('div',{'class':D["div_content_name"]},
+															 tag('div',{'class':'P20'},D["content"])
+														 )
+													 ]
+												 )
+										 )
+
+									 ]
+								 );
+					 /*
 					 container ='<div class="'+D["div_class_PopupLayer_wrap_name"]+'"> \
 									<div class="'+D["div_class_colose_name"]+'"></div> \
 									<div class="p10"> \
@@ -169,6 +192,7 @@
 										</div> \
 									</div> \
 								</div>' ;
+					*/
 					 break;
 
 
