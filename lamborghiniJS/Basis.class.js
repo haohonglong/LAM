@@ -493,15 +493,14 @@ if(!GRN_LHH){
 		'define':function(args,callback){
 			if(System.isObject(System.Alias) && System.isPlainObject(System.Alias)) {
 				var paths = System.Alias.paths;
+				var urls=[];
 				System.each(args, function (i,item) {
-					System.each(paths, function (k,v) {
-						if (item === k) {
-
-						}
-
-
-					});
+					if(paths[item] && System.isString(paths[item])){
+						urls.push(paths[item]);
+					}
 				});
+
+				System.import(urls,paths.baseUrl);
 			}
 
 		},
