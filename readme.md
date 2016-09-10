@@ -482,9 +482,9 @@
 
 	三、功能模块扩充
 		功能独立 易于扩充 不影响原有功能
-		1.接口里的merge方法LAMJS.merge();(参考 八、框架里的属性和方法)
+		1.LAMJS.merge();(参考 八、框架里的属性和方法)
 			
-		2.克隆对象(clone)LAMJS.clone();(参考 八、框架里的属性和方法)
+		2.克隆对象LAMJS.clone();(参考 八、框架里的属性和方法)
 		
 		3.实例化后，晚期扩充成员的方法
 			var obj=new window['interfaceName'].classNme();
