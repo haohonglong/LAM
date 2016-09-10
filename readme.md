@@ -786,6 +786,7 @@
                  @param   (Function)fn 		NO NULL :返回滚动方向和滚轮滚动的值
 			
 			
+			LAMJS.Browser.innerSize();///获取浏览器窗口视口宽度和高度
 			LAMJS.Browser.getViewWH();//获取可视区域宽高,返回对象
 			LAMJS.Browser.getBodyWH();
 				 名称： getBodyWH
@@ -805,9 +806,47 @@
                  功能：获取滚动条距离顶端的距离
                  说明：支持IE6
                  @return {Number}
+			LAMJS.Browser.getExplorer();
+				 名称：getExplorer
+                 功能：判断浏览器种类
+                 注意：
+                 说明：返回值对照：
+                                     1:chrome;
+                     				 2:Firefox;
+                  					 3:ie;
+                 					 4:Safari;
+                 					 5:Opera
+                 					 0:Other
+                 @return  {Number}
 			LAMJS.Browser.setFixed();
-			LAMJS.Browser.resize();
-			LAMJS.Browser.setIEfixed();
+			LAMJS.Browser.isIE();
+			LAMJS.Browser.isIE6();
+			LAMJS.Browser.isIE7();
+			LAMJS.Browser.isIE8();
+			LAMJS.Browser.isFirefox();
+			LAMJS.Browser.isChrome();
+			LAMJS.Browser.isSafari();
+			LAMJS.Browser.isOpera();
+			LAMJS.Browser.resize($div,fn);
+					 功能：窗口重新调整大小
+                	 名称：resize
+                	 @param	        $div(jQuery obj) NO NULL : //被居中的容器
+                	 @param(Object) 	fn(Function)     NO NULL : callBack
+                	 @return  (Function) 时时计算垂直水平居中的函数原型
+                	 调用方式：
+                		 LAMJS.Browser.resize($('div'),function(){
+                							 var size=window.System.autoCenter($(window).width(),this.width(),
+                															   $(window).height(),this.height(),100);
+                								this.css({'top':size.y+'px',
+                										 'left':size.x+'px'
+                										});
+                						});
+                	 
+			LAMJS.Browser.setIEfixed($elem);
+				 名称：(vido) setIEfixed
+                 功能：IE 6,7固定位置
+                 参数： $elem (jQuery obj)
+                 @return  (Function)
 			LAMJS.Browser.getDPI();
 			LAMJS.Browser.addFavorite();
 			LAMJS.Browser.setElemAutoCenter();//

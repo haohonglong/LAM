@@ -36,6 +36,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	 * 					 0:Other
 	 * 注意：
 	 * @param   (void)
+	 * @return  {Number}
 	 * Example：
 	 */
 	var getExplorer=function() {
