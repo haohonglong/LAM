@@ -22,7 +22,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 						 * @author: lhh
 						 * 产品介绍：
 						 * 创建日期：2015-8-27
-						 * 修改日期：2016-8-19
+						 * 修改日期：2016-9-10
 						 * 名称：import
 						 * 功能：导入指定的js文件
 						 * 说明：System 参数不用传
