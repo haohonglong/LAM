@@ -458,30 +458,53 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-9-15
-		 * 修改日期：2015-9-15
+		 * 修改日期：2016-9-10
 		 * 名称：System.config
 		 * 功能：配置类加载文件
 		 * 说明：
 		 * 注意：
-		 * @param   (Object)D 			NO NULL :传入的参数
+		 * @param   (Object)D 			        NO NULL :传入的参数
+		 * @param   (String)D.baseUrl 			NO NULL :相对于哪个路径
+		 * @param   (Object)D.paths 			NO NULL :
 		 * @return  (voide)						:
 		 * Example：
 		 */
-		'config':function(D){},
+		'config':function(D){
+			var option ={
+				baseUrl: D.baseUrl || System.Config.Public.ROOT,
+				paths: D.paths
+			};
+			System.Alias = option;
+		},
 		/**
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-9-21
-		 * 修改日期：2015-9-21
+		 * 修改日期：2016-9-10
 		 * 名称：System.define
 		 * 功能：
 		 * 说明：
 		 * 注意：
-		 * @param   (Object)D 			NO NULL :传入的参数
+		 * @param   (Array)args 			   NULL :传入的参数
+		 * @param   (Function)callback 		NO NULL :在运行此方法要立马执行的操作,这里的this指的是LAMJS 对象（必选）
 		 * @return  (voide)						:
 		 * Example：
 		 */
-		'define':function(D){},
+		'define':function(args,callback){
+			if(System.isObject(System.Alias) && System.isPlainObject(System.Alias)) {
+				var paths = System.Alias.paths;
+				System.each(args, function (i,item) {
+					System.each(paths, function (k,v) {
+						if (item === k) {
+
+						}
+
+
+					});
+				});
+			}
+
+		},
 		/**
 		 * @author: lhh
 		 * 产品介绍：
@@ -718,14 +741,14 @@ if(!GRN_LHH){
 				return obj;
 			}
 
-			var i;
+			var key;
 
 			if ( this.isArray( obj ) ) {
 				return obj.each(callback);
 			} else {
 				if(!System.isPlainObject(obj)) return obj;
-				for ( i in obj ) {
-					if (false === callback.call( obj[ i ], i, obj[ i ])) {
+				for (key in obj ) {
+					if (false === callback.call( obj[ key ], key, obj[ key ])) {
 						break;
 					}
 				}
