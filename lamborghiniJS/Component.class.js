@@ -35,6 +35,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 						 */
 						'import':function(url,baseUrl,suffix){
 							suffix = suffix || '.js';
+							baseUrl = baseUrl || System.Config.Public.ROOT;
 							try {
 								if(System.isset(importScripts) && System.isFunction(importScripts)){
 									url.each(function(){
@@ -55,7 +56,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 							} catch (e) {
 								//throw new Error(e.message);
 								System.Loader.load({
-									'baseUrl':baseUrl || null,
+									'baseUrl':baseUrl,
 									'js':url,
 									'suffix':suffix
 								}).print();
