@@ -334,7 +334,7 @@
 		
         根据下面三条修改上面对应的参数
 			1.修改 GRN_LHH 的值
-			2.修改 System.Configuration.vendorPath 的值
+			2.修改 System.Config.vendorPath 的值
 
 
 		'config.js'文件里做的事情是：
@@ -357,6 +357,7 @@
 		成员都是受保护的，不对外共享，如要在外面修改或者复写，都要通过接口。
 		调用基类的静态成员方法:(调用接口.类名称.静态成员)。
         基类不允许被直接实例化，要实例化它的派生类。
+        
         
         1.全局常量:字符大写，俩边各一个下横线
         	expmple:
@@ -507,13 +508,11 @@
         与第三方插件发生冲突时解决方法:  修改变量 'GRN_LHH' 里的值 即可。'GRN_LHH' 是命名空间接口的密钥 作用是定义命名空间。
 
 
-	五、应用
-		window['interfaceName'].app :这个对象代表当前实例化后的对象 (window['interfaceName'] 参考 四、里的 命名空间接口调用)
+	五、文件加载器
+		
 		文件加载器方式引入:有两种方式
-		
-		
 			1.下面这种不仅适合脚本文件和样式文件的引入还适合less文件的引入。load方法是加载指定的文件到加载器中，load方法可以链式调用多个不同类型文件，当调用到print方法的时候才会一次性从加载器里输出到页面中
-				LAMJS['Loadcommon']
+				LAMJS.Loadcommon
 					.load({
 						'baseUrl':jsPath,//baseUrl 默认是 项目的根目录（_ROOT_）
 						'suffix':'.js',//
@@ -551,23 +550,12 @@
 				上面依次输出的是js、css、less文件
 				用对象的方式可以传自定义参数
 				
-				
-
-
-
-
-
-
 			2.下面这种仅适合脚本文件的引入（只引入脚本时推荐使用这种方式）
 				System.import(['http://apps.bdimg.com/libs/jquery/1.6.4/jquery.js'],' ',' ');
 
 				System
 					.import([
-						'/Browser.class',
-						'/Drag.class',
-						'/Dom.class',
-						'/Tools.class',
-						'/PaintBase.class'
+						'/Browser.class'
 					],classPath);
 					
 					classPath 不填的话 默认是 项目的根目录（_ROOT_）
@@ -578,13 +566,12 @@
 						{'src':'/Browser.class','data-main':'scripts/main.js',' ',' '},
 						{'src':'/Drag.class','attr':2},
 						{'src':'/Drag_xy.class','attr':3},
-						{'src':'/Dom.class','attr':4},
-						{'src':'/PaintBase.class','attr':5}
+						{'src':'/Dom.class','attr':4}
 					],classPath);
 				
 				也可以链式调用
 				System
-					.import(['http://apps.bdimg.com/libs/jquery/1.6.4/jquery.js'])
+					.import(['http://apps.bdimg.com/libs/jquery/1.6.4/jquery.js'],' ')
 					.import([
 	                    '/Browser.class',
 	                    '/Drag.class',
@@ -633,8 +620,11 @@
 			Array.filter();
 			Array.in_array();
 
-	八、框架里的方法
+	八、框架里的属性和方法
+		属性：	
 			
+			LAMJS.app//这个属性代表当前实例化后的对象  
+		方法：	
 			LAMJS.run([],function(){});//此方法提供俩个参数，
 				 名称：System.run()
                  功能：程序主方法
@@ -660,8 +650,9 @@
 				 @return  (System)
 			LAMJS.use();   用document.createElement() 引入js,css 
             LAMJS.unuse(); 用document.write() 引入js,css
-			LAMJS.import();//导入js 文件
-			LAMJS.print('s'[,1,'a',...]);
+			LAMJS.print('s'[,1,'a',...]);//打印
+			LAMJS.import();//导入js 文件（参考 五、文件加载器）
+			LAMJS.Loadcommon.load();导入js,css.less 文件（参考 五、文件加载器）
 			
 			LAMJS.arr_isEmpty();
 			LAMJS.queues();//队列

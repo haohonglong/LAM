@@ -519,46 +519,6 @@ if(!GRN_LHH){
 			document.write(arr.join(' '));
 		},
 
-
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-8-27
-		 * 修改日期：2016-8-19
-		 * 名称：import
-		 * 功能：导入指定的js文件
-		 * 说明：System 参数不用传
-		 * 注意：
-		 * @param   (Array)url 			    NO NULL :要加载js文件
-		 * @param   (String)baseUrl 		   NULL :文件路径
-		 * @param   (String)suffix 		       NULL :文件后缀名
-		 * @return  {System} 返回当前对象可以链式调用import方法
-		 * Example：
-		 */
-		'import':function(url,baseUrl,suffix){
-			suffix = suffix || '.js';
-			try {
-				if(System.isset(importScripts) && System.isFunction(importScripts)){
-					url.each(function(){
-						var e=this;
-						e+=suffix;
-						baseUrl ? importScripts(baseUrl+e) : importScripts(e);
-					});
-				}
-
-
-			} catch (e) {
-				//throw new Error(e.message);
-				System.Loadcommon.load({
-					'baseUrl':baseUrl || null,
-					'js':url,
-					'suffix':suffix
-				}).print();
-			}
-			return this;
-		},
-
 		/**
 		 *
 		 * @author: lhh
