@@ -112,6 +112,35 @@ window[GRN_LHH].run([window],function(window,undefined){
 							//获取带"/"的项目名，如：/uimcardprj
 							var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 							return(localhostPaht+projectName);
+						},
+						/**
+						 *
+						 * @author: lhh
+						 * 产品介绍：
+						 * 创建日期：2014-11-27
+						 * 修改日期：2014-11-27
+						 * 名称：System.autoCenter
+						 * 功能：元素自定垂直居中容器中间
+						 * 说明：
+						 * 注意：
+						 * @param(Number) 		NO NULL : W  容器宽
+						 * @param(Number) 		NO NULL : w  元素宽
+						 * @param(Number) 		NO NULL : H  容器高
+						 * @param(Number) 		NO NULL : h  元素高
+						 * @param(Number) 		NULL 	: p  有padding值时
+						 * @return (Object) 返回居中位置的xy 坐标
+						 * Example：
+						 *		System.autoCenter(500,10,500,10,0);
+						 */
+						'autoCenter':function(W,w,H,h,p){
+							p=p || 0;
+							W=parseInt(W);
+							w=parseInt(w);
+							H=parseInt(H);
+							h=parseInt(h);
+							p=parseInt(p);
+							if(!W || !w || !H || !h) return 0;
+							return {'x':parseInt((W-w-p)/2),'y':parseInt((H-h-p)/2)};
 						}
 	}]);
 

@@ -126,12 +126,12 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	 * 修改日期：2014/8/29
 	 * 名称： getBodySize
 	 * 功能：获取网页的宽度和高度
-	 * @param 	String get   	需要的宽（w）或高（h）
+	 * @param 	String size   	需要的宽（w）或高（h）
 	 * @param 	Numver n   		获取哪种方式 默认不用输入
 	 * @param 	Boolean show   	是否在console.log()中打印出数据值调试 默认不打印，如要打印设为true
-	 * @return  (Number | Array) 如果参数get存在，则返回相应宽或高，如果get没有写则返回数组
+	 * @return  (Number | Array) 如果参数size存在，则返回相应宽或高，如果size没有写则返回数组
 	 */
-	Browser.getBodySize=function(get,n,show) {
+	Browser.getBodySize=function(size,n,show) {
 		var bodySize = [];
 		switch(n){
 			case 1:
@@ -162,7 +162,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 		if(show){
 			console.log('window:'+$(window).height() +'|document.body:'+$(document.body).height() +'|document:'+$(document).height()+'|bodySize[h]:'+bodySize['h']+'|bodySize:'+bodySize)
 		}
-		return get?bodySize[get]:bodySize;
+		return size?bodySize[size]:bodySize;
 	};
 
 
@@ -290,10 +290,11 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 	 * 产品介绍：
 	 * 创建日期：2014-12-25
 	 * 修改日期：2014-12-25
-	 * 名称：(Number) getScrollTop
+	 * 名称：getScrollTop
 	 * 功能：获取滚动条距离顶端的距离
 	 * 说明：支持IE6
 	 * 注意：
+	 * @return {Number}
 	 * Example：
 	 */
 	Browser.getScrollTop=function(){

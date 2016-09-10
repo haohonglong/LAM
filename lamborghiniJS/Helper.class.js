@@ -129,14 +129,14 @@ window[GRN_LHH].run([window,window.document],function(window,document,undefined)
 	 * 说明：
 	 * 注意：
 	 * @param(String)src 			NO NULL : 要加载jQuery文件的路径
-	 * @param(jQuery)jQuery 		   NULL : jQuery
+	 * @param(jQuery)$	        	   NULL : jQuery
 	 * @return (String | Boolean)
 	 * Example：
 	 *
 	 */
-	Helper.isjQuery=function(src,jQuery){
-		jQuery = jQuery || window.jQuery;
-		return (!jQuery ? System.import([src]) : 0);
+	Helper.isjQuery=function(src,$){
+		$ = $ || window.jQuery;
+		return (!$ ? System.import([src]) : 0);
 	};
 
 

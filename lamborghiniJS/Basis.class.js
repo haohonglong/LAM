@@ -400,7 +400,7 @@ if(!GRN_LHH){
 		 * 创建日期：2016-1-18
 		 * 修改日期：2016-3-22
 		 * 名称：System.use
-		 * 功能：用createElement 创建标签并且设为异步
+		 * 功能：用createElement 方式创建标签并且设为异步
 		 * 说明：
 		 * 注意：
 		 * @return  (System)
@@ -416,7 +416,7 @@ if(!GRN_LHH){
 		 * 创建日期：2016-1-18
 		 * 修改日期：2016-3-22
 		 * 名称：System.unuse
-		 * 功能：用document.write() 创建标签并且设为非异步
+		 * 功能：用document.write() 方式创建标签并且设为非异步
 		 * 说明：
 		 * 注意：
 		 * @return  (System)
@@ -891,7 +891,7 @@ if(!GRN_LHH){
 		 * 修改日期：2016-8-23
 		 * 名称：clone
 		 * 功能：对象克隆
-		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
+		 * 说明：_hashCode里的'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
 		 * 注意：
 		 * @param   (Boolean)deep  		   	   NULL :是否要深度拷贝对象
 		 * @param   (Object)className 		NO NULL : 要克隆的类
@@ -1051,7 +1051,7 @@ if(!GRN_LHH){
 		 * 功能：是否是纯对象
 		 * 说明：摘抄jQuery isPlainObject()
 		 * 注意：
-		 * @param obj
+		 * @param ({})obj
 		 * @returns {boolean}
 		 */
 		isPlainObject: function( obj ) {
@@ -1149,38 +1149,10 @@ if(!GRN_LHH){
 			};
 			M = isObject(M) ? this.merge({},[M,defaults]) : defaults;
 			throw new Error(["Warning: at ","'",M.line,"'"," line tip: -> ",M.message].join(''));
-		},
-
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2014-11-27
-		 * 修改日期：2014-11-27
-		 * 名称：System.autoCenter
-		 * 功能：元素自定垂直居中容器中间
-		 * 说明：
-		 * 注意：
-		 * @param(Number) 		NO NULL : W  容器宽
-		 * @param(Number) 		NO NULL : w  元素宽
-		 * @param(Number) 		NO NULL : H  容器高
-		 * @param(Number) 		NO NULL : h  元素高
-		 * @param(Number) 		NULL 	: p  有padding值时
-		 * @return (Object) 返回居中位置的xy 坐标
-		 * Example：
-		 *		System.autoCenter(500,10,500,10,0);
-		 */
-		'autoCenter':function(W,w,H,h,p){
-			p=p || 0;
-			W=parseInt(W);
-			w=parseInt(w);
-			H=parseInt(H);
-			h=parseInt(h);
-			p=parseInt(p);
-			if(!W || !w || !H || !h) return 0;
-			return {'x':parseInt((W-w-p)/2),'y':parseInt((H-h-p)/2)};
 		}
+
+
+
 	};
 
 

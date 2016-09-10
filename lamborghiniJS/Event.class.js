@@ -81,6 +81,7 @@ window[GRN_LHH].run([window,window['document']],function(window,document,undefin
      * 说明：
      * 注意：
      * @param   (event)event 			NO NULL :
+     * @return  {window.even}
      * Example：
      */
     Event.fixEvt=function(event){//解决事件兼容问题
@@ -124,7 +125,7 @@ window[GRN_LHH].run([window,window['document']],function(window,document,undefin
      * 产品介绍：
      * 创建日期：2014-12-22
      * 修改日期：2014-12-23
-     * 名称：Event.mousewheel
+     * 名称：Event.addEvent
      * 功能：给dom节点绑定指定事件
      * 说明：
      * 注意：
@@ -170,8 +171,8 @@ window[GRN_LHH].run([window,window['document']],function(window,document,undefin
     };
 
 
-    Event.bind=function(obj,evt,fn){//给某个对象添加多个事件监听函数
-        return Event.addEvent(obj,evt,fn);
+    Event.bind=function(dom,evt,fn){//给某个对象添加多个事件监听函数
+        return Event.addEvent(dom,evt,fn);
     };
     Event.unbind =function(obj,evt,fn){//删除事件监听
         if(obj.functions){

@@ -146,7 +146,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 创建日期：2016-9-9
 	 * 修改日期：2016-9-9
 	 * 名称： Html.analysisTpl
-	 * 功能：查找并解析自定义属性'LAM-VAR=TPL=template'元素的标签
+	 * 功能：只能在 link,a,img 这几种标签范围内查找，并解析带自定义属性'LAM-VAR=TPL=template'元素的标签
 	 * 说明：
 	 * 注意：
 	 * @return {void}
@@ -193,7 +193,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @param 	(jQuery)$dom             NO NULL :
 	 * @param 	(Object)D                NO NULL :json 数据
 	 * @param 	(Function)D.callBack       	NULL :返回到会调函数里的内容:this: 当前include 节点;content:include 的文件
-	 * @return ()
+	 * @return {void}
 	 * Example：
 	 *
 	 */
@@ -227,7 +227,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * 修改日期：2016-4-7
 	 * 名称： Html.load
 	 * 功能：html文件里包含另一个文件,扩充jQuery load方法
-	 * 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象,跟Html.include方法不一样的地方是 Html.include 调用的是jQuery Ajax方法
+	 * 说明：跟Html.include方法不一样的地方是 这里调用的是jQuery load方法
 	 * 注意：
 	 * @param 	(jQuery)$dom             NO NULL :
 	 * @return ()

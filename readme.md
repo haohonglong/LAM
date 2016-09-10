@@ -483,16 +483,9 @@
 	三、功能模块扩充
 		功能独立 易于扩充 不影响原有功能
 		1.接口里的merge方法
-			window['interfaceName'].merge([true,]target,args[,override]);
-			上面这个方法作用是：一个或多个对象合并成一个指定的对象,默认同名的键值前面的不会被覆盖。
-			参数说明：
-				@param : (Boolean)deep  		   NULL :是否要深度拷贝对象(可填)
-				@param :(Object)target   合并后的对象。null 代表给命名空间本身进行扩展，(必填)
-				@param :(Array)args   	 要合并对象的集合(必填)
-				@param :(Boolean)override 是否覆盖同名键名值,默认 false 是不覆盖(可填)
-			返回合并后的类
+			
 		2.克隆对象(clone)
-			window['interfaceName'].clone([true,]target);
+		
 		3.实例化后，晚期扩充成员的方法
 			var obj=new window['interfaceName'].classNme();
 			obj.merge(args,override);
@@ -626,22 +619,22 @@
 			
 			LAMJS.app//这个属性代表当前实例化后的对象  
 		方法：	
-			LAMJS.run([],function(){});//此方法提供俩个参数，
-				 名称：System.run()
+			LAMJS.run(args,callback);//此方法提供俩个参数，
+				 名称：run
                  功能：程序主方法
                  说明：
 				 @param   (Array)args 			       NULL :传入的参数,里面的的元素和回调函数的参数试一一对应的。（可选）
 				 @param   (Function)callback 		NO NULL :在运行此方法要立马执行的操作,这里的this指的是LAMJS 对象（必选）
 				 @return  (Object) 返回callback 里的返回值
-			LAMJS.then(function(){});// 
-				 名称：System.then()
+			LAMJS.then(args,callback);
+				 名称：then
 				 功能：一直是链式调用，总是返回当前命名空间对象，
 				 说明：跟run方法类似，不同的是run 返回的是callback里的返回值。
 				 注意：
 				 @param   (Array)args 			       NULL :传入的参数,里面的的元素和回调函数的参数试一一对应的。（可选）
                  @param   (Function)callback 		NO NULL :在运行此方法要立马执行的操作,这里的this指的是LAMJS 对象（必选）
-			LAMJS.wait([],function(){});//在延时的时间后在执行，默认时间是3秒
-				 名称：System.wait
+			LAMJS.wait(args,callback,time);//在延时的时间后在执行，默认时间是3秒
+				 名称：wait
 				 功能：一直是链式调用，总是返回当前命名空间对象，
 				 说明：与main方法功类似,不同的是每隔规定的时间数再去调用传进来的函数
 				 注意：
@@ -652,35 +645,166 @@
 			LAMJS.use();   用document.createElement() 引入js,css 
             LAMJS.unuse(); 用document.write() 引入js,css
 			LAMJS.print('s'[,1,'a',...]);//打印
-			LAMJS.import();//导入js 文件（参考 五、文件加载器）
-			LAMJS.Loader.load();导入js,css.less 文件（参考 五、文件加载器）
+			LAMJS.get_url_param(name);
+				 名称：get_url_param
+		         功能：根据指定的url参数获取相对应的参数值
+		         说明：
+		         注意：
+		         @param   (String)name            NO NULL :参数名称
+		         @return  {String}
+				
+			LAMJS.import(url,baseUrl,suffix);（参考 五、文件加载器）
+				 名称：import
+	             功能：导入指定的js文件
+	             注意：
+	             @param   (Array)url 			    NO NULL :要加载js文件
+	             @param   (String)baseUrl 		   NULL :文件路径
+	             @param   (String)suffix 		       NULL :文件后缀名
+			LAMJS.Loader.replace_tpl();//替换模板标签
+			LAMJS.Loader.load(D);//导入js,css.less 文件（参考 五、文件加载器）
+				  名称： load
+                  功能：动态创建js,css 标签引入公共文件
+                  说明：js 和 css 任选其一
+                  @params   (Object)D 			NO NULL :初始化参数
+                  @param(Array)D.js		  	     NO NULL:js文件集合
+                  @param(Array)D.css		  	     NO NULL:css文件集合
+                  @param(String)D.baseUrl		  	    NULL:文件路径
+                  @param(String)D.suffix		  	    NULL:文件后缀名
+                  注意：
+                  @return  (Object) 返回当前对象
 			
 			LAMJS.arr_isEmpty();
 			LAMJS.queues();//队列
 			LAMJS.length();//获取对象成员的长度
-			LAMJS.eval();//对表达式字符串，或 json 进行eval 再处理
+			LAMJS.eval();
+				 名称：eval
+                 功能：对表达式字符串，或 json 进行eval 再处理
+                 说明：
+                 注意：
+                 @param   {*}expression 			NO NULL :表达式字符串
+                 @return  {*}	
 			LAMJS.proxy();
 			LAMJS.putIndexGetObjectTheValue();
-			LAMJS.list();//递归对象 如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象为止
-			LAMJS.extends();
+			LAMJS.list();
+				 名称： list
+	             功能：递归对象
+	             说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象为止
+	             注意：
+	             @param 	(Object)D             			NO NULL : 对象
+	             @param 	(Funtion)callback             	NO NULL : 回调方法
+	             @returns {Object}
+			LAMJS.extends(subClass,superClass,type,args);
+				 名称：System.extends
+                 功能：子类继承父类对象
+                 说明：System类范围内
+                 注意：这里的this指向的不是 System 对象
+                 @param   (Object)this 			NO NULL :子类对象
+                 @param   (Function)subClass 		   NULL :子类名称
+                 @param   (Function)superClass   	NO NULL :父类名称
+                 @param   (String)type 			NO NULL :1:原型链反射继承;2(默认):对象冒充方式继承
+                 @param   ([])args 			   	   NULL :继承父类时传的构造参数
+                 @return  (void)
+                 Example：
+                 		对象冒充方式继承:System.extends.call(this,subClass,superClass,type,[,extraParameters]);
+                 		原型链继承:System.extends(subClass,superClass,type);
 			LAMJS.extend();
-			LAMJS.merge();// 一个或多个对象合并成一个指定的对象,默认同名的键值前面的不会被覆盖
-			LAMJS.clone();//克隆对象
-			LAMJS.is();//类检测方法 检测父类是否已注册过。检测子类名称是否与已注册的类名重名了
+			LAMJS.merge([true,]target,args[,override]);
+					名称：merge
+					功能：一个或多个对象合并成一个指定的对象,默认同名的键值前面的不会被覆盖
+					说明：
+					注意：
+                    @param : (Boolean)deep  		   NULL :是否要深度拷贝对象(可填)
+                    @param :(Object)target   合并后的对象。null 代表给命名空间本身进行扩展，(必填)
+                    @param :(Array)args   	 要合并对象的集合(必填)
+                    @param :(Boolean)override 是否覆盖同名键名值,默认 false 是不覆盖(可填)
+                    @return  (target)返回合并后的类
+			LAMJS.clone([true],className);//克隆对象
+				 名称：clone
+                 功能：对象克隆
+                 说明：_hashCode里的'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
+                 注意：
+                 @param   (Boolean)deep  		   	   NULL :是否要深度拷贝对象
+                 @param   (Object)className 		NO NULL : 要克隆的类
+                 @return  (Object)				:返回克隆后的新对象
+			LAMJS.is();
+				 名称： is
+	             功能：检测System是否合法，检测要使用的类是否已加载过；检测要定义的类名称之前是否已注册过。
+	             说明：子类继承父类之前调用此方法检测父类之前是否有加载过，如果填写第三参数可检测当前的类是否跟之前的类重名了
+	             注意：
+	             @param  (Object)System 	       		NO NULL : 命名空间
+	             @param 	(String)useClassName     	NO NULL : 要使用的类名称
+	             @param 	(String)className         	　　NULL : 当前类的名称
+	             @return (Boolean)
+			LAMJS.isclone(className);
+				 名称：isclone
+		         功能：检查对象是否是克隆对象
+		         说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
+		         注意：
+		         @param   (Object)className 		NO NULL : 检查的对象
+		         @returns {boolean}
 			LAMJS.isPlainObject();//是否是纯对象
 			LAMJS.log();
-			LAMJS.autoCenter();
-			LAMJS.template();
-			LAMJS.replaceTpl();
+			LAMJS.autoCenter(W,w,H,h,p);
+				 名称：autoCenter
+	             功能：元素自定垂直居中容器中间
+	             说明：
+	             注意：
+	             @param(Number) 		NO NULL : W  容器宽
+	             @param(Number) 		NO NULL : w  元素宽
+	             @param(Number) 		NO NULL : H  容器高
+	             @param(Number) 		NO NULL : h  元素高
+	             @param(Number) 		NULL 	: p  有padding值时
+	             @return (Object) 返回居中位置的xy 坐标
+	             Example：
+	             		System.autoCenter(500,10,500,10,0);
 			LAMJS.fileExisted();
-			
 			LAMJS.Basis.extends();
 		
-			LAMJS.Browser.bind();
-			LAMJS.Browser.fixEvt();
+			
+			LAMJS.Event.bind(dom,evt,fn);
+				 名称：bind
+                 功能：给dom节点绑定指定事件
+                 说明：
+                 注意：
+                 @param   (Dom)dom 			NO NULL :dom节点对象
+                 @param   (String)evt 		NO NULL :事件类型
+                 @param   (Function)fn 		NO NULL :绑定事件对象的函数
+			LAMJS.Event.unbind(dom,evt,fn);	 
+			LAMJS.Event.fixEvt(event);
+				 名称：Event.fixEvt
+                 功能：解决事件兼容问题
+                 说明：
+                 注意：
+                 @param   (event)event 			NO NULL :
+                 @return  {window.even}
+			LAMJS.Event.mousewheel(dom,fn);
+				 名称：mousewheel
+                 功能：鼠标滚轮事件注册
+                 说明：dom 是滚动的范围区域
+                 注意：这个功能只能在鼠标滚动时返回滚动的方向,和滚轮滚动判断方向的值
+                 @param   (Dom)dom 			NO NULL :dom节点对象
+                 @param   (Function)fn 		NO NULL :返回滚动方向和滚轮滚动的值
+			
+			
+			LAMJS.Browser.getViewWH();//获取可视区域宽高,返回对象
 			LAMJS.Browser.getBodyWH();
+				 名称： getBodyWH
+                 功能： 这个为获取页面的高度，用于iframe的自适应时候获取。
+                 @param   (voide)
+                 @return  (Object)
+			LAMJS.Browser.fixed_element($elem,$context,animate);
+				 名称： fixed_element
+                 功能： 固定元素 （模拟css fixed 功能）
+                 @param (jQuery)$elem 被fixed 的元素
+                 @param (jQuery)$context 出现滚动条的容器，默认是窗口
+                 @param (Boolean)animate 是否有缓冲效果 默认没有
+			LAMJS.Browser.addFavorite();//加入到收藏夹
+			LAMJS.Browser.getDPI();//
 			LAMJS.Browser.getScrollTop();
-			LAMJS.Browser.mousewheel();
+				 名称：getScrollTop
+                 功能：获取滚动条距离顶端的距离
+                 说明：支持IE6
+                 @return {Number}
 			LAMJS.Browser.setFixed();
 			LAMJS.Browser.resize();
 			LAMJS.Browser.setIEfixed();
@@ -688,80 +812,195 @@
 			LAMJS.Browser.addFavorite();
 			LAMJS.Browser.setElemAutoCenter();//
 			
-			返回创建指定标签的字符串 
-			LAMJS.Html.tag(); 
-				
-				第一参数是标签名称。第二参数，是否是单标签 true | false (默认可不填)。第三参数是标签里的所有属性，（没有的话就传个{}）.第四个参数是标签里的内容（没有内容可以省略这个参数）。
-				LAMJS.Html.tag('p', {},'这是一个p标签');
-				上面的代码生成下面的字符串
-					<p>这是一个p标签</p>
-				可以嵌套n个标签，方式如下：
-				    LAMJS.run(function () {
-                        'use strict';
-                        var System = this;
-                        System.Html.tag('nav',{},
-								System.Html.tag('ul', {'class': 'pagination'},
-										(function(){
-											var arr=[];
-											var li;
-											li =System.Html.tag('li', {},
-													System.Html.tag('a',{'href':'#','aria-label':'Previous'},
-															System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
-													)
-											);
-											
-											arr.push(li);
-											
-											for(var i=1;i<=5;i++){
-												arr.push(System.Html.tag('li', {},
-														System.Html.tag('a', {'href':'#'},i)
-												));
+			LAMJS.Template.template(S);
+                 名称：templat
+                 功能：替换模版中的变量
+                 说明：
+                 注意：
+                 @param (String)S NO NULL:要匹配的变量
+                 @returns {String}
+            LAMJS.Template.replaceTpl(selector,attr_name,callback);
+                 名称：replaceTpl
+                 功能：替换模版标签
+                 说明：
+                 注意：
+                 @param (String)selector 		NO NULL:选择器
+                 @param (String)attr_name 	NO NULL:标签属性
+                 @param (Function)callback 	   NULL:回调函数
+                 @returns {String}
 			
-											}
-											li = System.Html.tag('li', {},
-													System.Html.tag('a', {'href':'#','aria-label':'Next'},
-															System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
-													)
-											);
-											arr.push(li);
-											return arr;
-										})()
+			LAMJS.Html.load($dom); 
+				 名称： load
+                 功能：html文件里包含另一个文件,扩充jQuery load方法
+                 说明：跟Html.include方法不一样的地方是 这里调用的是jQuery load方法
+                 注意：
+                 @param 	(jQuery)$dom             NO NULL :
+                 @return ()
+			LAMJS.Html.include($dom,D); 
+					 名称： Html.include
+                	 功能：html文件里包含另一个文件
+                	 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象
+                	 注意：
+                	 @param 	(jQuery)$dom             NO NULL :
+                	 @param 	(Object)D                NO NULL :json 数据
+                	 @param 	(Function)D.callBack       	NULL :返回到会调函数里的内容:this: 当前include 节点;content:include 的文件
+                	 @return {void}
+			LAMJS.Html.getFile(url,callBack,D); 
+				 名称： getFile
+                 功能：返回指定的文件
+                 说明：
+                 注意：
+                 @param 	(String)  	D.url         	      NULL :请求地址
+                 @param 	(Function)	D.callBack       	  NULL :参数：文件里的内容
+                 @param 	(Object)D                	   NO NULL :json 数据
+                 @param 	(String)  	D.type             NO NULL :获取方式
+                 @param 	(String)  	D.dataType         NO NULL :获取文件类型
+                 @param 	(String|{}) D.data             	  NULL :请求地址的参数
+                 @param 	(Boolean) 	D.async               NULL :是否异步加载
+                 @param 	(Boolean) 	D.cache           	  NULL :是否缓存默认true
+                 @return {*}
+			
+			LAMJS.Html.tag(name,single,D,content); 
+				 名称： tag
+	             功能：动态返回指定的标签
+	             说明：
+	             注意：length 是关键字 属性里禁止使用
+	             @param 	(String)name            NO NULL : 标签名称
+	             @param 	(Boolean)single            NULL : 成对标签还是单一标签，false 是成对标签
+	             @param 	(Object)D             	NO NULL : 标签的属性
+	             @param 	(String|Array)content      NULL : 内容
+	             @return (String) 返回标签字符串
 				
-								)
-							);
-                        
-                    });
+				第一参数是标签名称。
+				第二参数，是否是单标签 true | false (默认可不填)。
+				第三参数是标签里的所有属性，（没有的话就传个{}）.
+				第四个参数是标签里的内容（没有内容可以省略这个参数）。
+				example:
+					LAMJS.Html.tag('p', {},'这是一个p标签');
+					上面的代码生成下面的字符串
+						<p>这是一个p标签</p>
+					可以嵌套n个标签，方式如下：
+					    LAMJS.run(function () {
+	                        'use strict';
+	                        var System = this;
+	                        System.Html.tag('nav',{},
+									System.Html.tag('ul', {'class': 'pagination'},
+											(function(){
+												var arr=[];
+												var li;
+												li =System.Html.tag('li', {},
+														System.Html.tag('a',{'href':'#','aria-label':'Previous'},
+																System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
+														)
+												);
+												
+												arr.push(li);
+												
+												for(var i=1;i<=5;i++){
+													arr.push(System.Html.tag('li', {},
+															System.Html.tag('a', {'href':'#'},i)
+													));
+				
+												}
+												li = System.Html.tag('li', {},
+														System.Html.tag('a', {'href':'#','aria-label':'Next'},
+																System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
+														)
+												);
+												arr.push(li);
+												return arr;
+											})()
 					
-				
-				上面的代码生成下面的字符串
-				
-				<nav>
-                  <ul class="pagination">
-                    <li>
-                      <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                      <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+									)
+								);
+	                        
+	                    });
+						
+					
+					上面的代码生成下面的字符串
+					
+					<nav>
+	                  <ul class="pagination">
+	                    <li>
+	                      <a href="#" aria-label="Previous">
+	                        <span aria-hidden="true">&laquo;</span>
+	                      </a>
+	                    </li>
+	                    <li><a href="#">1</a></li>
+	                    <li><a href="#">2</a></li>
+	                    <li><a href="#">3</a></li>
+	                    <li><a href="#">4</a></li>
+	                    <li><a href="#">5</a></li>
+	                    <li>
+	                      <a href="#" aria-label="Next">
+	                        <span aria-hidden="true">&raquo;</span>
+	                      </a>
+	                    </li>
+	                  </ul>
+	                </nav>
                 
-            LAMJS.Html.renderTagAttributes();
-            LAMJS.Html.scriptFile();
-            LAMJS.Html.linkFile();
-            LAMJS.Html.script();
-            LAMJS.Html.style();
-            LAMJS.Html.a();
-            LAMJS.Html.img();
+            LAMJS.Html.renderTagAttributes(D);
+                 名称： Html.renderTagAttributes
+                 功能：
+                 说明：
+                 注意：length 是关键字 属性里禁止使用
+                 @param 	(Object)D             	NO NULL : 标签的属性
+                 @return (String) 返回属性符串
+            LAMJS.Html.scriptFile(D,src);
+                 名称： scriptFile
+                 功能：
+                 说明：
+                 注意：length 是关键字 属性里禁止使用
+                 @param 	(Object)D        NO NULL : 标签的属性
+                 @param 	(String)src      NO NULL : 路径
+                 @return (String)
+            LAMJS.Html.linkFile(D,href);
+                 名称： a
+                 功能：
+                 说明：
+                 注意：length 是关键字 属性里禁止使用
+                 @param 	(Object)D             	NO NULL : 标签的属性
+                 @param 	(String)href   			NO  NULL : 连接地址
+                 @return (String)
+            LAMJS.Html.script(D,content);
+                 名称： script
+                 功能：
+                 说明：
+                 注意：length 是关键字 属性里禁止使用
+                 @param 	(Object)D             	NO NULL : 标签的属性
+                 @param 	(String|Array)content      NULL : 内容
+                 @return (String)
+            LAMJS.Html.style(D,content);
+                 名称： style
+                 功能：
+                 说明：
+                 注意：length 是关键字 属性里禁止使用
+                 @param 	(Object)D             	NO NULL : 标签的属性
+                 @param 	(String|Array)content      NULL : 内容
+                 @return (String)
+            LAMJS.Html.a(href,D,content);
+                 名称： a
+                 功能：
+                 说明：
+                 注意：length 是关键字 属性里禁止使用
+                 @param 	(String)href   			NO  NULL : 连接地址
+                 @param 	(Object)D             	NO NULL : 标签的属性
+                 @param 	(String|Array)content      NULL : 内容
+                 @return (String)
+            LAMJS.Html.img(src,D);
+                 名称： img
+                 功能：
+                 说明：
+                 注意：length 是关键字 属性里禁止使用
+                 @param 	(String)src      NO NULL : 图片 路径
+                 @param 	(Object)D        NO NULL : 标签的属性
+                 @return (String)
+            LAMJS.Html.analysisTpl();
+                 名称： analysisTpl
+                 功能：只能在 link,a,img 这几种标签范围内查找并解析带自定义属性'LAM-VAR=TPL=template'元素的标签
+                 说明：
+                 注意：
+                 @return {void}
 				
 		
 	九、错误机制
