@@ -36,7 +36,7 @@ if(!GRN_LHH){
 }
 (function(global,namespace,factory,undefined){
 	'use strict';
-	if('version' in global[namespace]){
+	if('LAMJS' in global){
 		return;
 	}
 	global['LAMJS'] = global['LamborghiniJS_20150910123700_'] = global[namespace] = factory(global,namespace);
