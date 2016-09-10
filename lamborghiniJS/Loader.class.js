@@ -4,7 +4,7 @@
  * 产品介绍： 文件加载器
  * 创建日期：2014.9.9     
  * 修改日期：2016.9.4
- * 名称：Loadcommon
+ * 名称：Loader
  * 功能：动态引入js;css;less 文件
  * 说明 :
  * 注意：
@@ -27,7 +27,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
 
 
-    System.is(System,'Basis','Loadcommon');
+    System.is(System,'Basis','Loader');
 
     /**
      *
@@ -70,14 +70,14 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
     var __this__=null;
     var files = [];
 
-    function Loadcommon(){
+    function Loader(){
         System.Basis.extends.call(this);
         __this__=this;
         this.D = null;
     }
 
-    Loadcommon.prototype={
-        'constructor':Loadcommon,
+    Loader.prototype={
+        'constructor':Loader,
         '__constructor':function(){},
         'js'     :[],
         'css'    :[],
@@ -366,7 +366,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         }
 
     };
-    System['Loadcommon'] = System['Loader'] =new Loadcommon();
+    System['Loadcommon'] = System['Loader'] =new Loader();
 
 
 });

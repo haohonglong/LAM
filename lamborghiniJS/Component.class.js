@@ -47,7 +47,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 							} catch (e) {
 								//throw new Error(e.message);
-								System.Loadcommon.load({
+								System.Loader.load({
 									'baseUrl':baseUrl || null,
 									'js':url,
 									'suffix':suffix

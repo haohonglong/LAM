@@ -66,7 +66,7 @@ if(!GRN_LHH){
                 classPath+'/Basis.class.js',
                 //classPath+'/Base.class.js',
                 classPath+'/BiObject.class.js',
-                classPath+'/loadcommon.class.js',
+                classPath+'/Loader.class.js',
                 classPath+'/Component.class.js',
                 classPath+'/Helper.class.js',
                 classPath+'/Event.class.js',

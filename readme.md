@@ -512,7 +512,7 @@
 		
 		文件加载器方式引入:有两种方式
 			1.下面这种不仅适合脚本文件和样式文件的引入还适合less文件的引入。load方法是加载指定的文件到加载器中，load方法可以链式调用多个不同类型文件，当调用到print方法的时候才会一次性从加载器里输出到页面中
-				LAMJS.Loadcommon
+				LAMJS.Loader
 					.load({
 						'baseUrl':jsPath,//baseUrl 默认是 项目的根目录（_ROOT_）
 						'suffix':'.js',//
@@ -652,7 +652,7 @@
             LAMJS.unuse(); 用document.write() 引入js,css
 			LAMJS.print('s'[,1,'a',...]);//打印
 			LAMJS.import();//导入js 文件（参考 五、文件加载器）
-			LAMJS.Loadcommon.load();导入js,css.less 文件（参考 五、文件加载器）
+			LAMJS.Loader.load();导入js,css.less 文件（参考 五、文件加载器）
 			
 			LAMJS.arr_isEmpty();
 			LAMJS.queues();//队列
