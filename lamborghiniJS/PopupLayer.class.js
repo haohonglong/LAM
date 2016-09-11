@@ -50,7 +50,8 @@
 		 System.Basis.extends.call(this,System.Browser);
 		 __this__=this;
 
-		 if(!System.isObject(D)) return this;
+		 if(!D) return this;
+		 if(!System.isPlainObject(D)) return this;
 
 		 this.popLayout  = D.popLayout;
 		 this.padding	=  D.padding || 0;
