@@ -1063,6 +1063,32 @@ if(!GRN_LHH){
 
 
 		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍： 函数检验器
+		 * 创建日期：2016-9-18
+		 * 修改日期：2016-9-18
+		 * 名称： System.function_exists
+		 * 功能：检验全局函数是否已定义过了
+		 * 说明：
+		 * 注意：
+		 * @param 	(String)fun_name         	　　NULL : 全局函数名称
+		 * @return (Boolean)
+		 * Example：
+		 *
+		 */
+		'function_exists':function(fun_name){
+			if(W[fun_name] && System.isFunction(W[fun_name])){
+				return true;
+			}
+			return false;
+
+
+		},
+
+
 		/**
 		 *
 		 * @author: lhh
