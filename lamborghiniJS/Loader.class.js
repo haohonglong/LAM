@@ -150,10 +150,10 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 node = System.Html.scriptFile(src,attr);
                             }
 
-                            files.push(node);
                             if(System.isClassFile(src)){
                                 System.classes.push(src);
                             }
+                            files.push(node);
                             System.files.push(src);
                         }
 
@@ -173,10 +173,10 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                             }else{
                                 node = System.Html.scriptFile(js.src,js);
                             }
-                            files.push(node);
                             if(System.isClassFile(js.src)){
                                 System.classes.push(js.src);
                             }
+                            files.push(node);
                             System.files.push(js.src);
                         }
 
