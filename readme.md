@@ -395,6 +395,27 @@
 			Array.each();
 			Array.filter();
 			Array.in_array();
+			Array.clone();
+				 名称：clone
+                 功能：克隆数组
+                 说明：跟copy 是等效的 推荐用clone
+                 注意：
+                 @param   (void)
+                 调用方式：
+                 @return  (Array)返回克隆后的数组
+                 Example：[2,3].clone();
+			Array.merge(arr,override);
+				 名称：merge
+                 功能：合并数组
+                 说明：
+                 注意：
+                 @param   (Array)arr				NO NULL : //要被合并的数组
+                 @param   (Boolean)override 		   NULL : //是否覆盖相同的值,true : 覆盖；false : 不覆盖；默认不覆盖
+                 调用方式：
+                 @return  (Array)返回复制后的数组
+                 Example：下面俩种方式任选其一
+                 		a.merge(b).merge(c).merge(e).merge(f);
+                  		a.merge(b.merge(c.merge(d.merge(e.merge(f)))));
 
 	八、框架里的属性和方法
 		属性：	

@@ -8,7 +8,7 @@
  * LamborghiniJS 0.3 pre
  * @author：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-9-10
+ * 修改日期:2016-9-19
  * 名称：基类
  * 功能：服务于派生类
  * 命名空间接口定义: var GRN_LHH='interfaceName';
@@ -2164,6 +2164,7 @@ window[GRN_LHH].run([window],function(W,Config){
 		'random':10000,
 		//定义模版标签
 		'templat':{
+			'custom_attr':'LAM-VAR=template',
 			'leftLimit':'{{',
 			'rightLimit':'}}'
 		},

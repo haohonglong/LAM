@@ -146,7 +146,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-9
-	 * 修改日期：2016-9-9
+	 * 修改日期：2016-9-19
 	 * 名称： Html.analysisTpl
 	 * 功能：只能在 link,a,img 这几种标签范围内查找，并解析带自定义属性'LAM-VAR=TPL=template'元素的标签
 	 * 说明：
@@ -156,7 +156,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 *
 	 */
 	Html.analysisTpl=function(){
-		var value ='[LAM-VAR=template]';
+		var custom_attr=System.Config.templat.custom_attr || 'LAM-VAR=template';
+		var value ='['+custom_attr+']';
 		var $value = $(value);
 		if($value){
 			$value.each(function(){

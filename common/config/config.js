@@ -1,9 +1,9 @@
 /**
  * 创建人：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-9-10
+ * 修改日期:2016-9-19
  * 功能：配置文件
- * 说明 : 这个文件要copy到项目里面可以修改 System.Configuration里的属性 和 GRN_LHH; 的值；
+ * 说明 : 这个文件要copy到项目里面可以修改 System.Config里的属性 和 GRN_LHH; 的值；
  *
  * note :
  *
@@ -53,6 +53,7 @@ if(!GRN_LHH){
         'random':10000,
         //定义模版标签
         'templat':{
+            'custom_attr':'LAM-VAR=template',
             'leftLimit':'{{',
             'rightLimit':'}}'
         },
