@@ -2263,6 +2263,7 @@ window[GRN_LHH].run([window],function(W,Config){
 			}
 		},
 		'init':{},
+		'params':{},
 		'getClassPath':function(){
 			return this.vendorPath;
 		}

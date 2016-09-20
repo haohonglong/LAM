@@ -152,6 +152,7 @@ if(!GRN_LHH){
             }
         },
         'init':{},
+        'params':{},
         'getClassPath':function(){
             return this.vendorPath;
         }

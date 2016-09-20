@@ -2,7 +2,7 @@
 	version ：1.1.2
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-9-11
+	修改日期 ：2016-9-20
 
 
 产品介绍：
@@ -951,7 +951,7 @@
 					    <a LAM-VAR="template" rel="stylesheet" href="{{LAMJS.Config.Public.ROOT}}/"/>跳转</a>
 					    <img LAM-VAR="template" src="{{LAMJS.Config.Public.ROOT}}/"/>
 					    怎么工作的？
-					    1.在需要解析的标签上放指定的自定义属性 LAM-VAR="template"
+					    1.在需要解析的标签上放指定的自定义属性 LAM-VAR="template"(也可以通过 common/config/config.js 文件的 'Config.templat.custom_attr' 属性 修改自定义属性)
 					    2.在window.onload 函数里 调用 LAMJS.Html.analysisTpl(); 静态方法
 					    note:
 					        1.自定义属性LAM-VAR="template"一定要有。否则不会解析模板标签。
