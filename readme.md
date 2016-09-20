@@ -1,5 +1,5 @@
 	name    ：LamborghiniJS(OO JS)
-	version ：1.1.2
+	version ：1.1.2.1
 	author  ：lhh
 	创建日期 ：2015-8-19
 	修改日期 ：2016-9-20
