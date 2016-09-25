@@ -2,7 +2,7 @@
 	version ：1.1.2.1
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-9-20
+	修改日期 ：2016-9-25
 
 
 产品介绍：
@@ -946,7 +946,7 @@
 				 
 	十八、模版标签
 				 查找解析指定元素属性里的模板标签
-					 1. 只能在 link,a,img 这几种标签范围内解析模板标签
+					 1. 只能在 link,a,img,iframe 这几种标签范围内解析模板标签
 					    <link LAM-VAR="template" rel="stylesheet" type="text/xxx" href="{{LAMJS.Config.Public.ROOT}}/"/>
 					    <a LAM-VAR="template" rel="stylesheet" href="{{LAMJS.Config.Public.ROOT}}/"/>跳转</a>
 					    <img LAM-VAR="template" src="{{LAMJS.Config.Public.ROOT}}/"/>
