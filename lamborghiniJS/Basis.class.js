@@ -8,7 +8,7 @@
  * LamborghiniJS 0.3 pre
  * @author：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-9-19
+ * 修改日期:2016-9-25
  * 名称：基类
  * 功能：服务于派生类
  * 命名空间接口定义: var GRN_LHH='interfaceName';
@@ -2271,6 +2271,7 @@ window[GRN_LHH].run([window],function(W,Config){
 
 	System.merge(System.Config,[Config]);
 	System.classPath = System.Config.getClassPath();
+	System.ROOT = System.Config.Public.ROOT;
 	//hashcode 随机种子
 	System.random 	 = System.Config.random || 10000;
 

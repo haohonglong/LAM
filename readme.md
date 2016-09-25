@@ -78,7 +78,7 @@
 				LAMJS.run(function() {
 					'use strict';
 					var System=this;
-					var ROOT = System.Config.Public.ROOT;//这里的ROOT代表上名配置的项目根目录
+					var ROOT = System.Config.Public.ROOT;//这里的ROOT代表上名配置的项目根目录 或用 System.ROOT
 					// doing here coded ....
 				});
 			</script>
@@ -918,7 +918,7 @@
 			2.根据占位符里file参数请求另一个页面，然后替换掉当前占位符
 		警告:有些浏览器要支持跨域才可以!!!，解决方法：在服务器环境里运行
 		步骤：
-			1.自定义标签:<include file="{{LAMJS.Config.Public.ROOT}}/views/include/header.html" 
+			1.自定义标签:<include file="{{LAMJS.ROOT}}/views/include/header.html" 
 								  beforeSend="function(a,b){
 		                              this.dataType='html';
                                       this.async=true;
@@ -927,7 +927,7 @@
                                      这里就可以设置一个beforeSend回调函数，其余的参数都可以在这个函数里设置,
                                      在beforeSend回调函数里设置file 参数 要换成 url 参数。
                                      函数里的两个参数请参考jQuery Ajax API。
-                 {{LAMJS.Config.Public.ROOT}}（ 参考 十八、模版标签 3）
+                 {{LAMJS.ROOT}}（ 参考 十八、模版标签 3）
                   
                 
 			2.先要加载Html.class 类文件
@@ -947,9 +947,9 @@
 	十八、模版标签
 				 查找解析指定元素属性里的模板标签
 					 1. 只能在 link,a,img,iframe 这几种标签范围内解析模板标签
-					    <link LAM-VAR="template" rel="stylesheet" type="text/xxx" href="{{LAMJS.Config.Public.ROOT}}/"/>
-					    <a LAM-VAR="template" rel="stylesheet" href="{{LAMJS.Config.Public.ROOT}}/"/>跳转</a>
-					    <img LAM-VAR="template" src="{{LAMJS.Config.Public.ROOT}}/"/>
+					    <link LAM-VAR="template" rel="stylesheet" type="text/xxx" href="{{LAMJS.ROOT}}/"/>
+					    <a LAM-VAR="template" rel="stylesheet" href="{{LAMJS.ROOT}}/"/>跳转</a>
+					    <img LAM-VAR="template" src="{{LAMJS.ROOT}}/"/>
 					    怎么工作的？
 					    1.在需要解析的标签上放指定的自定义属性 LAM-VAR="template"(也可以通过 common/config/config.js 文件的 'Config.templat.custom_attr' 属性 修改自定义属性)
 					    2.在window.onload 函数里 调用 LAMJS.Html.analysisTpl(); 静态方法
@@ -965,12 +965,12 @@
                              @param (String)selector 		NO NULL:选择器标示符
                              @param (String)attr_name 	NO NULL:标签属性
                         example:解析所有link 标签 href 的模板标签
-						    <link rel="stylesheet" type="text/css" href="{{LAMJS.Config.Public.ROOT}}/project/common/css/bootstrap.css"/>
+						    <link rel="stylesheet" type="text/css" href="{{LAMJS.ROOT}}/project/common/css/bootstrap.css"/>
 						    LAMJS.replaceTpl('link','href');     
 					    
-					 3.模板标签: {{LAMJS.Config.Public.ROOT}}
+					 3.模板标签: {{LAMJS.ROOT}} 等同于 {{LAMJS.Config.Public.ROOT}} 
                         这里的 LAMJS.Config.Public.ROOT 是变量(模板标签里内容就是js 变量)，LAMJS会解析换成变量的值。{{LAMJS.Config.Public.ROOT}} 跟{{_ROOT_}}意思相同，都是项目根目录位置
-                         这里推荐使用LAMJS.Config.Public.ROOT 因为 _ROOT_ 是全局变量容易被外部人为修改。（_ROOT_ 的值修改 不会影响到 LAMJS.Config.Public.ROOT 的值）。
+                         这里推荐使用LAMJS.Config.Public.ROOT 或 LAMJS.ROOT 因为 _ROOT_ 是全局变量容易被外部人为修改。（_ROOT_ 的值修改 不会影响到 LAMJS.Config.Public.ROOT 的值）。
                          note:模板标签里一定要放已定义过的变量才能被解析正常工作，否则将会报错，不能正常工作！
                         模板标签分隔符设置与修改   （参考 二十、配置参数 一、模板标签分隔符设置与修改）
                          
