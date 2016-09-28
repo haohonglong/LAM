@@ -2,8 +2,8 @@
 window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	'use strict';
 	var System=this;
-
 	System.is(System,'Browser','Layout');
+
 	var __this__=null;
 	/**
 	 * @author: lhh

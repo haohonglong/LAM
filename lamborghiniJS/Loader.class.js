@@ -17,6 +17,7 @@
 window[GRN_LHH].run([window,document],function(window,document,undefined){
     'use strict';
     var System=this;
+    System.is(System,'Basis','Loader');
 
     var html,head,body, m,meta, s,script, l,link;
     var create;
@@ -27,7 +28,6 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
 
 
-    System.is(System,'Basis','Loader');
 
     /**
      *
