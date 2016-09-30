@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="content-Type" content="text/html" charset="utf-8">
-<title>文档说明</title>
+    <meta http-equiv="content-Type" content="text/html" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>文档说明</title>
     <script type="text/javascript">var _ROOT_ ='../..';</script>
     <script type="text/javascript" src="../config.js"></script>
     <script type="text/javascript">
@@ -10,6 +11,8 @@
         LAMJS.run(function() {
             'use strict';
             var System = this;
+            var COMMON = System.Config.Public.COMMON;;
+            System.import(['/common'],COMMON);
 
         });
 
@@ -19,7 +22,16 @@
 
 </head>
 <body>
-<include file="{#_ROOT_#}/views/include/menu.html" dataType="html"></include>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"><include file="{#_ROOT_#}/views/include/menu.html" dataType="html"></include></div>
+        <div class="col-md-8">
+            内容
+        </div>
+    </div>
+
+</div>
+
 
 </body>
 

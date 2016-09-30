@@ -3,16 +3,17 @@
 LAMJS.run(function() {
     'use strict';
     var System=this;
-    System.load({
-        'baseUrl':System.Config.Public.Lib.css,
-        'suffix':'.css',
-        'rel':'stylesheet',
-        'css':[
-            '/bootstrap',
-            //'/global',
-            '/lib'
-        ]
-    }).print();
+    System.Loader
+        .load({
+            'baseUrl':System.Config.Public.Lib.css,
+            'suffix':'.css',
+            'rel':'stylesheet',
+            'css':[
+                '/bootstrap',
+                //'/global',
+                '/lib'
+            ]
+        }).print();
     System
         .import([
         ],System.classPath);
