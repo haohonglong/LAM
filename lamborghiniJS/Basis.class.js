@@ -8,7 +8,7 @@
  * LamborghiniJS 0.3 pre
  * @author：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-9-25
+ * 修改日期:2016-9-30
  * 名称：基类
  * 功能：服务于派生类
  * 命名空间接口定义: var GRN_LHH='interfaceName';
@@ -92,7 +92,7 @@ if(!GRN_LHH){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2014-12-23
-	 * 修改日期：2016-8-25
+	 * 修改日期：2016-9-30
 	 * 名称：runtime
 	 * 功能：run 时执行的方法
 	 * 说明：可传多个参数第一个必须是数组，在回调里接收的参数跟传来的参数一一对应
@@ -107,22 +107,23 @@ if(!GRN_LHH){
 			throw new Error('Warning 至少要有一个参数');
 			return this;
 		}
-		if(isFunction(args)) {
+		if(System.isFunction(args)) {
 			callback = args;
-			args = undefined;
+			args = null;
 		}
 
-		if(args && !isArray(args)){
-			throw new Error('Warning args 必须是数组类型');
-			return this;
-		}
-		if (!isFunction(callback) ) {
+
+		if (!System.isFunction(callback) ) {
 			throw new Error('Warning 参数必须要有一个 Function 类型');
 			return this;
 		}
 
-		if(args && System.isArray(args)){
-			return callback.apply(this,args);
+		if(args){
+			if(System.isArray(args)){
+				return callback.apply(this,args);
+			}else{
+				return callback.call(this,args);
+			}
 		}else{
 			return callback.call(this);
 		}
