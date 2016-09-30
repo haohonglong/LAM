@@ -43,19 +43,22 @@ if(!GRN_LHH){
 
 
     Config = System.Config = {
-        'vendorPath':_ROOT_+'/lamborghiniJS',
+        'vendorPath':_ROOT_+'/../lamborghiniJS',
         'Public':{
              'ROOT':_ROOT_
             ,'COMMON':_ROOT_+'/common'
             ,'PLUGINS':_ROOT_+'/plugins'
+            ,'Lib':{
+                'css':_ROOT_+'/../lib/css'
+            }
         },
         //hashcode 随机种子
         'random':10000,
         //定义模版标签
         'templat':{
             'custom_attr':'LAM-VAR=template',
-            'leftLimit':'{{',
-            'rightLimit':'}}'
+            'leftLimit':'{#',
+            'rightLimit':'#}'
         },
         'files':[],
         //配置基础文件
@@ -74,8 +77,8 @@ if(!GRN_LHH){
                 classPath+'/Browser.class.js',
                 classPath+'/Dom.class.js',
                 classPath+'/Html.class.js',
-                classPath+'/Template.class.js',
-                classPath+'/Controller.class.js'
+                classPath+'/Template.class.js'
+                //classPath+'/Controller.class.js'
             ];
         },
 

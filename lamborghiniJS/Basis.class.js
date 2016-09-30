@@ -472,7 +472,7 @@ if(!GRN_LHH){
 		 */
 		'config':function(D){
 			var option ={
-				baseUrl: D.baseUrl || System.Config.Public.ROOT,
+				baseUrl: D.baseUrl || System.ROOT,
 				paths: D.paths
 			};
 			System.Alias = option;
@@ -521,13 +521,28 @@ if(!GRN_LHH){
 		'eval':function(expression){
 			return eval('('+expression+')');
 		},
-
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-9-30
+		 * 修改日期：2016-9-30
+		 * 名称：System.open
+		 * 功能：打开一个新文档，并擦除当前文档的内容
+		 * 说明：
+		 * 注意：
+		 * @return  {Document}
+		 */
+		'open':function(mimetype,replace){
+			mimetype = mimetype || "text/html";
+			replace = replace 	|| "replace";
+			return document.open(mimetype,replace)
+		},
 
 		/**
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-9-16
-		 * 修改日期：2016-2-23
+		 * 修改日期：2016-9-30
 		 * 名称：System.print
 		 * 功能：输出
 		 * 说明：
@@ -538,10 +553,29 @@ if(!GRN_LHH){
 		 * 		System.print('s'[,1,'a',...])
 		 */
 		'print':function(){
+			var document=System.open();
 			var arr=prints.apply(Array,arguments);
-
 			document.write(arr.join(' '));
+			System.close(document);
 		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-9-30
+		 * 修改日期：2016-9-30
+		 * 名称：System.close
+		 * 功能：关闭输出文档流
+		 * 说明：
+		 * 注意：
+		 * @return  (voide)
+		 */
+		'close':function(document){
+			document = document || W.document;
+			document.close();
+		},
+
+
+
 
 		/**
 		 *
