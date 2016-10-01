@@ -72,7 +72,7 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-03-8
-	 * 修改日期：2016-03-9
+	 * 修改日期：2016-10-1
 	 * 名称：Template.templat
 	 * 功能：替换模版中的变量
 	 * 说明：变量式：__root__ ; 对象式：System.__root__
@@ -81,6 +81,7 @@ window[GRN_LHH].run(function(undefined){
 	 * @returns {String}
 	 */
 	Template.template=function(S){
+		if(!S) return null;
 		//没找到模版分隔符就返回传入的字符串
 		if(-1 === S.indexOf(System.Config.templat.leftLimit)){
 			return S ||'';
@@ -119,6 +120,7 @@ window[GRN_LHH].run(function(undefined){
 	 * @returns {Array}
 	 */
 	Template.findTpl=function(S){
+		if(!S) return null;
 		var ss=[],arr=[],v=[],$1,$2,
 			L=System.Config.templat.leftLimit,
 			R=System.Config.templat.rightLimit;
@@ -149,7 +151,7 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-03-9
-	 * 修改日期：2016-03-9
+	 * 修改日期：2016-10-1
 	 * 名称：Template.replaceTpl
 	 * 功能：替换模版标签
 	 * 说明：
@@ -166,8 +168,11 @@ window[GRN_LHH].run(function(undefined){
 				callback.call(this);
 			}else{
 				value=Template.template($(this).attr(attr_name));
-				$(this).attr(attr_name,value);
-				console.log(value);
+				if(value && System.isString(value)){
+					$(this).attr(attr_name,value);
+					console.log(value);
+				}
+
 			}
 
 		});

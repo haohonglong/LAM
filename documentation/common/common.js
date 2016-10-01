@@ -13,7 +13,8 @@ LAMJS.run(function() {
                 //'/global',
                 '/lib'
             ]
-        }).print();
+        })
+        .print();
     System
         .import([
         ],System.classPath);

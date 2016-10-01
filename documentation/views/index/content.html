@@ -1,0 +1,198 @@
+<h1>Installing Yii <span id="installing-yii"></span><a href="#installing-yii" class="hashlink">¶</a></h1>
+<div class="toc"><ol><li><a href="#installing-via-composer">Installing via Composer</a></li>
+    <li><a href="#installing-from-archive-file">Installing from an Archive File</a></li>
+    <li><a href="#other-installation-options">Other Installation Options</a></li>
+    <li><a href="#verifying-installation">Verifying the Installation</a></li>
+    <li><a href="#configuring-web-servers">Configuring Web Servers</a></li></ol></div>
+<p>You can install Yii in two ways, using the <a href="https://getcomposer.org/">Composer</a> package manager or by downloading an archive file.
+    The former is the preferred way, as it allows you to install new <a href="guide-structure-extensions.html">extensions</a> or update Yii by simply running a single command.</p>
+<p>Standard installations of Yii result in both the framework and a project template being downloaded and installed.
+    A project template is a working Yii project implementing some basic features, such as login, contact form, etc.
+    Its code is organized in a recommended way. Therefore, it can serve as a good starting point for your projects.</p>
+<p>In this and the next few sections, we will describe how to install Yii with the so-called <em>Basic Project Template</em> and
+    how to implement new features on top of this template. Yii also provides another template called
+    the <a href="https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/README.md">Advanced Project Template</a> which is better used in a team development environment
+    to develop applications with multiple tiers.</p>
+<blockquote class="info"><p><strong>Info: </strong>The Basic Project Template is suitable for developing 90 percent of Web applications. It differs
+    from the Advanced Project Template mainly in how their code is organized. If you are new to Yii, we strongly
+    recommend you stick to the Basic Project Template for its simplicity yet sufficient functionalities.</p>
+</blockquote>
+<h2>Installing via Composer  <span id="installing-via-composer"></span><a href="#installing-via-composer" class="hashlink">¶</a></h2><h3>Installing Composer <span id="installing-composer"></span><a href="#installing-composer" class="hashlink">¶</a></h3><p>If you do not already have Composer installed, you may do so by following the instructions at
+    <a href="https://getcomposer.org/download/">getcomposer.org</a>. On Linux and Mac OS X, you'll run the following commands:</p>
+<pre><code class="hljs bash language-bash">curl <span class="hljs-operator">-s</span>S https://getcomposer.org/installer | php
+    mv composer.phar /usr/<span class="hljs-built_in">local</span>/bin/composer
+</code></pre>
+<p>On Windows, you'll download and run <a href="https://getcomposer.org/Composer-Setup.exe">Composer-Setup.exe</a>.</p>
+<p>Please refer to the <a href="https://getcomposer.org/doc/articles/troubleshooting.md">Troubleshooting section of the Composer Documentation</a>
+    if you encounter any problems.
+    If you are new to Composer, we also recommend to read at least the <a href="https://getcomposer.org/doc/01-basic-usage.md">Basic usage section</a>
+    of the Composer documentation.</p>
+<p>In this guide all composer commands assume you have installed composer <a href="https://getcomposer.org/doc/00-intro.md#globally">globally</a>
+    so that it is available as the <code>composer</code> command. If you are using the <code>composer.phar</code> in the local directory instead,
+    you have to adjust the example commands accordingly.</p>
+<p>If you had Composer already installed before, make sure you use an up to date version. You can update Composer
+    by running <code>composer self-update</code>.</p>
+<blockquote class="note"><p><strong>Note: </strong>During the installation of Yii, Composer will need to request a lot of information from the Github API.
+    The number of requests depends on the number of dependencies your application has and may be bigger than the
+    <strong>Github API rate limit</strong>. If you hit this limit, Composer may ask for your Github login credentials to obtain
+    a Github API access token. On fast connections you may hit this limit earlier than Composer can handle so we
+    recommend to configure the access token before installing Yii.
+    Please refer to the <a href="https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens">Composer documentation about Github API tokens</a>
+    for instructions on how to do this.</p>
+</blockquote>
+<h3>Installing Yii <span id="installing-yii"></span><a href="#installing-yii" class="hashlink">¶</a></h3><p>With Composer installed, you can install Yii by running the following commands under a Web-accessible folder:</p>
+<pre><code class="hljs bash language-bash">composer global require <span class="hljs-string">"fxp/composer-asset-plugin:^1.2.0"</span>
+    composer create-project --prefer-dist yiisoft/yii2-app-basic basic
+</code></pre>
+<p>The first command installs the <a href="https://github.com/francoispluchino/composer-asset-plugin/">composer asset plugin</a>
+    which allows managing bower and npm package dependencies through Composer. You only need to run this command
+    once for all. The second command installs the latest stable version of Yii in a directory named <code>basic</code>.
+    You can choose a different directory name if you want.</p>
+<blockquote class="info"><p><strong>Info: </strong>If the <code>composer create-project</code> command fails make sure you have the composer asset plugin installed correctly.
+    You can do that by running <code>composer global show</code>, which should contain an entry <code>fxp/composer-asset-plugin</code>.
+    You may also refer to the <a href="https://getcomposer.org/doc/articles/troubleshooting.md">Troubleshooting section of the Composer Documentation</a>
+    for common errors. When you have fixed the error, you can resume the aborted installation
+    by running <code>composer update</code> inside of the <code>basic</code> directory.</p>
+</blockquote>
+<blockquote class="tip"><p><strong>Tip: </strong>If you want to install the latest development version of Yii, you may use the following command instead,
+    which adds a <a href="https://getcomposer.org/doc/04-schema.md#minimum-stability">stability option</a>:</p>
+<pre><code class="hljs bash language-bash">composer create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
+</code></pre>
+    <p>Note that the development version of Yii should not be used for production as it may break your running code.</p>
+</blockquote>
+<h2>Installing from an Archive File  <span id="installing-from-archive-file"></span><a href="#installing-from-archive-file" class="hashlink">¶</a></h2><p>Installing Yii from an archive file involves three steps:</p>
+<ol>
+    <li>Download the archive file from <a href="http://www.yiiframework.com/download/">yiiframework.com</a>.</li>
+    <li>Unpack the downloaded file to a Web-accessible folder.</li>
+    <li><p>Modify the <code>config/web.php</code> file by entering a secret key for the <code>cookieValidationKey</code> configuration item
+        (this is done automatically if you are installing Yii using Composer):</p>
+<pre><code class="hljs php language-php"><span class="hljs-comment">// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation</span>
+    <span class="hljs-string">'cookieValidationKey'</span> =&gt; <span class="hljs-string">'enter your secret key here'</span>,
+</code></pre>
+    </li>
+</ol>
+<h2>Other Installation Options  <span id="other-installation-options"></span><a href="#other-installation-options" class="hashlink">¶</a></h2><p>The above installation instructions show how to install Yii, which also creates a basic Web application that works out of the box.
+    This approach is a good starting point for most projects, either small or big. It is especially suitable if you just
+    start learning Yii.</p>
+<p>But there are other installation options available:</p>
+<ul>
+    <li>If you only want to install the core framework and would like to build an entire  application from scratch,
+        you may follow the instructions as explained in <a href="guide-tutorial-start-from-scratch.html">Building Application from Scratch</a>.</li>
+    <li>If you want to start with a more sophisticated application, better suited to team development environments,
+        you may consider installing the <a href="https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/README.md">Advanced Project Template</a>.</li>
+</ul>
+<h2>Verifying the Installation  <span id="verifying-installation"></span><a href="#verifying-installation" class="hashlink">¶</a></h2><p>After installation is done, either configure your web server (see next section) or use the
+    <a href="https://secure.php.net/manual/en/features.commandline.webserver.php">built-in PHP web server</a> by running the following
+    console command while in the project <code>web</code> directory:</p>
+<pre><code class="hljs bash language-bash">php yii serve
+</code></pre>
+<blockquote class="note"><p><strong>Note: </strong>By default the HTTP-server will listen to port 8080. However if that port is already in use or you wish to
+    serve multiple applications this way, you might want to specify what port to use. Just add the --port argument:</p>
+</blockquote>
+<pre><code class="hljs bash language-bash">php yii serve --port=<span class="hljs-number">8888</span>
+</code></pre>
+<p>You can use your browser to access the installed Yii application with the following URL:</p>
+<pre><code class="hljs less"><span class="hljs-attribute">http</span>:<span class="hljs-comment">//localhost:8080/</span>
+</code></pre>
+<p><img src="images/start-app-installed.png" alt="Successful Installation of Yii"></p>
+<p>You should see the above "Congratulations!" page in your browser. If not, please check if your PHP installation satisfies
+    Yii's requirements. You can check if the minimum requirements are met using one of the following approaches:</p>
+<ul>
+    <li>Copy <code>/requirements.php</code> to <code>/web/requirements.php</code> and then use a browser to access it via <code>http://localhost/requirements.php</code></li>
+    <li><p>Run the following commands:</p>
+<pre><code class="hljs bash language-bash"><span class="hljs-built_in">cd</span> basic
+    php requirements.php
+</code></pre>
+    </li>
+</ul>
+<p>You should configure your PHP installation so that it meets the minimum requirements of Yii. Most importantly, you
+    should have PHP 5.4 or above. You should also install the <a href="http://www.php.net/manual/en/pdo.installation.php">PDO PHP Extension</a>
+    and a corresponding database driver (such as <code>pdo_mysql</code> for MySQL databases), if your application needs a database.</p>
+<h2>Configuring Web Servers  <span id="configuring-web-servers"></span><a href="#configuring-web-servers" class="hashlink">¶</a></h2><blockquote class="info"><p><strong>Info: </strong>You may skip this subsection for now if you are just test driving Yii with no intention
+    of deploying it to a production server.</p>
+</blockquote>
+<p>The application installed according to the above instructions should work out of box with either
+    an <a href="http://httpd.apache.org/">Apache HTTP server</a> or an <a href="http://nginx.org/">Nginx HTTP server</a>, on
+    Windows, Mac OS X, or Linux running PHP 5.4 or higher. Yii 2.0 is also compatible with facebook's
+    <a href="http://hhvm.com/">HHVM</a>. However, there are some edge cases where HHVM behaves different than native
+    PHP, so you have to take some extra care when using HHVM.</p>
+<p>On a production server, you may want to configure your Web server so that the application can be accessed
+    via the URL <code>http://www.example.com/index.php</code> instead of <code>http://www.example.com/basic/web/index.php</code>. Such configuration
+    requires pointing the document root of your Web server to the <code>basic/web</code> folder. You may also
+    want to hide <code>index.php</code> from the URL, as described in the <a href="guide-runtime-routing.html">Routing and URL Creation</a> section.
+    In this subsection, you'll learn how to configure your Apache or Nginx server to achieve these goals.</p>
+<blockquote class="info"><p><strong>Info: </strong>By setting <code>basic/web</code> as the document root, you also prevent end users from accessing
+    your private application code and sensitive data files that are stored in the sibling directories
+    of <code>basic/web</code>. Denying access to those other folders is a security improvement.</p>
+</blockquote>
+<blockquote class="info"><p><strong>Info: </strong>If your application will run in a shared hosting environment where you do not have permission
+    to modify its Web server configuration, you may still adjust the structure of your application for better security. Please refer to
+    the <a href="guide-tutorial-shared-hosting.html">Shared Hosting Environment</a> section for more details.</p>
+</blockquote>
+<h3>Recommended Apache Configuration  <span id="recommended-apache-configuration"></span><a href="#recommended-apache-configuration" class="hashlink">¶</a></h3><p>Use the following configuration in Apache's <code>httpd.conf</code> file or within a virtual host configuration. Note that you
+    should replace <code>path/to/basic/web</code> with the actual path for <code>basic/web</code>.</p>
+<pre><code class="hljs apache language-apache"><span class="hljs-comment"># Set document root to be "basic/web"</span>
+    <span class="hljs-keyword"><span class="hljs-common">DocumentRoot</span></span> <span class="hljs-string">"path/to/basic/web"</span>
+
+    <span class="hljs-tag">&lt;Directory "path/to/basic/web"&gt;</span>
+    <span class="hljs-comment"># use mod_rewrite for pretty URL support</span>
+    <span class="hljs-keyword"><span class="hljs-common">RewriteEngine</span></span> <span class="hljs-literal">on</span>
+    <span class="hljs-comment"># If a directory or a file exists, use the request directly</span>
+    <span class="hljs-keyword"><span class="hljs-common">RewriteCond</span></span> <span class="hljs-cbracket">%{REQUEST_FILENAME}</span> !-f
+    <span class="hljs-keyword"><span class="hljs-common">RewriteCond</span></span> <span class="hljs-cbracket">%{REQUEST_FILENAME}</span> !-d
+    <span class="hljs-comment"># Otherwise forward the request to index.php</span>
+    <span class="hljs-keyword"><span class="hljs-common">RewriteRule</span></span> . index.php
+
+    <span class="hljs-comment"># ...other settings...</span>
+    <span class="hljs-tag">&lt;/Directory&gt;</span>
+</code></pre>
+<h3>Recommended Nginx Configuration  <span id="recommended-nginx-configuration"></span><a href="#recommended-nginx-configuration" class="hashlink">¶</a></h3><p>To use <a href="http://wiki.nginx.org/">Nginx</a>, you should install PHP as an <a href="http://php.net/install.fpm">FPM SAPI</a>.
+    You may use the following Nginx configuration, replacing <code>path/to/basic/web</code> with the actual path for
+    <code>basic/web</code> and <code>mysite.local</code> with the actual hostname to serve.</p>
+<pre><code class="hljs nginx language-nginx"><span class="hljs-title">server</span> {
+    <span class="hljs-title">charset</span> utf-<span class="hljs-number">8</span>;
+    <span class="hljs-title">client_max_body_size</span> <span class="hljs-number">128M</span>;
+
+    <span class="hljs-title">listen</span> <span class="hljs-number">80</span>; <span class="hljs-comment">## listen for ipv4</span>
+    <span class="hljs-comment">#listen [::]:80 default_server ipv6only=on; ## listen for ipv6</span>
+
+    <span class="hljs-title">server_name</span> mysite.local;
+    <span class="hljs-title">root</span>        /path/to/basic/web;
+    <span class="hljs-title">index</span>       index.php;
+
+    <span class="hljs-title">access_log</span>  /path/to/basic/log/access.log;
+    <span class="hljs-title">error_log</span>   /path/to/basic/log/error.log;
+
+    <span class="hljs-title">location</span> / {
+    <span class="hljs-comment"># Redirect everything that isn't a real file to index.php</span>
+    <span class="hljs-title">try_files</span> <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span>/ /index.php<span class="hljs-variable">$is_args</span><span class="hljs-variable">$args</span>;
+    }
+
+    <span class="hljs-comment"># uncomment to avoid processing of calls to non-existing static files by Yii</span>
+    <span class="hljs-comment">#location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ {</span>
+    <span class="hljs-comment">#    try_files $uri =404;</span>
+    <span class="hljs-comment">#}</span>
+    <span class="hljs-comment">#error_page 404 /404.html;</span>
+
+    <span class="hljs-comment"># deny accessing php files for the /assets directory</span>
+    <span class="hljs-title">location</span> <span class="hljs-regexp">~ ^/assets/.*\.php$</span> {
+    <span class="hljs-title">deny</span> all;
+    }
+
+    <span class="hljs-title">location</span> <span class="hljs-regexp">~ \.php$</span> {
+    <span class="hljs-title">include</span> fastcgi_params;
+    <span class="hljs-title">fastcgi_param</span> SCRIPT_FILENAME <span class="hljs-variable">$document_root</span><span class="hljs-variable">$fastcgi_script_name</span>;
+    <span class="hljs-title">fastcgi_pass</span> <span class="hljs-number">127.0.0.1:9000</span>;
+    <span class="hljs-comment">#fastcgi_pass unix:/var/run/php5-fpm.sock;</span>
+    <span class="hljs-title">try_files</span> <span class="hljs-variable">$uri</span> =<span class="hljs-number">404</span>;
+    }
+
+    <span class="hljs-title">location</span> <span class="hljs-regexp">~* /\.</span> {
+    <span class="hljs-title">deny</span> all;
+    }
+    }
+</code></pre>
+<p>When using this configuration, you should also set <code>cgi.fix_pathinfo=0</code> in the <code>php.ini</code> file
+    in order to avoid many unnecessary system <code>stat()</code> calls.</p>
+<p>Also note that when running an HTTPS server, you need to add <code>fastcgi_param HTTPS on;</code> so that Yii
+    can properly detect if a connection is secure.</p>

@@ -23,7 +23,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-1-15
-	 * 修改日期：2016-8-26
+	 * 修改日期：2016-10-1
 	 * 名称： getFile
 	 * 功能：返回指定的文件
 	 * 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象
@@ -56,9 +56,9 @@ window[GRN_LHH].run([window],function(window,undefined){
 						 capture,
 						 callBack){
 		//如果第一个是对象且不是jQuery对象
-		if ($dom && System.isObject($dom) && !$dom.each) {
+		if ($dom && System.isObject($dom) && System.isPlainObject($dom) && !$dom.each) {
 			D = $dom;
-			$dom = undefined;
+			$dom = null;
 		}
 
 		data  		= $dom && System.eval($dom.attr('data'))			|| D&&D.data  	 	||	{};
@@ -204,6 +204,14 @@ window[GRN_LHH].run([window],function(window,undefined){
 	Html.include=function($dom,D,
 						  callBack){
 		callBack = D && D.callBack || 0;
+		//如果第一个是对象且不是jQuery对象
+		if ($dom && System.isObject($dom) && System.isPlainObject($dom) && !$dom.each) {
+			D = $dom;
+			$dom = null;
+			getFile(D);
+			return;
+		}
+
 		$dom.each(function(){
 			var dom =this;
 			var file = $(this).attr('file');

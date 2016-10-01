@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
 <head>
-    <meta http-equiv="content-Type" content="text/html" charset="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>文档说明</title>
     <script type="text/javascript">var _ROOT_ ='../..';</script>
     <script type="text/javascript" src="../config.js"></script>
     <script type="text/javascript">
-
         LAMJS.run(function() {
             'use strict';
             var System = this;
-            var COMMON = System.Config.Public.COMMON;;
+            var COMMON = System.Config.Public.COMMON;
             System.import(['/common'],COMMON);
 
         });
-
     </script>
 
 
@@ -24,8 +23,22 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-4"><include file="{#_ROOT_#}/views/include/menu.html" dataType="html"></include></div>
-        <div class="col-md-8">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="#">首页</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a LAM-VAR="template" href="{#_ROOT_#}/views/index/index.html">介绍</a>
+                </li>
+                <li class="list-group-item" href="{# _ROOT_ #}/views/index/content.html">入门</li>
+            </ul>
+        </div>
+        <div id="content" class="col-md-9">
             内容
         </div>
     </div>
@@ -37,12 +50,28 @@
 
 
 <script type="text/javascript">
-
-
-    LAMJS.run(function(){
+   LAMJS.run(function(){
         'use strict';
         var System=this;
-        this.Html.include($('include'));
+       System.Html.analysisTpl();
+       System.replaceTpl('.list-group li','href');
+
+       function goToUrl(url){
+           System.Html.include({
+               'url':url
+               ,'callBack':function(content){
+                   console.log(content)
+                   $('#content').html(content);
+               }
+           });
+       }
+
+       $(function(){
+           $('.list-group li').on('click',function(){
+               goToUrl($(this).attr('href'));
+           });
+       })
+
 
     });
 </script>
