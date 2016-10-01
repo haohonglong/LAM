@@ -35,7 +35,7 @@
                 <li class="list-group-item">
                     <a LAM-VAR="template" href="{#_ROOT_#}/views/index/index.html">介绍</a>
                 </li>
-                <li class="list-group-item" href="{# _ROOT_ #}/views/index/content.html">入门</li>
+                <li class="list-group-item" data-url="{'url':'{# _ROOT_ #}/views/index/content.html','title':'入门'}">入门</li>
             </ul>
         </div>
         <div id="content" class="col-md-9">
@@ -54,15 +54,19 @@
         'use strict';
         var System=this;
        System.Html.analysisTpl();
-       System.replaceTpl('.list-group li','href');
+       var url='data-url';
+       System.replaceTpl('.list-group li',url);
 
        function putContent(url){
            $('#content').load(url);
        }
 
        $(function(){
+           var $title=$('title');
            $('.list-group li').on('click',function(){
-               putContent($(this).attr('href'));
+               var data=System.eval($(this).attr(url));
+               $title.text(data.title);
+               putContent(data.url);
            });
        })
 
