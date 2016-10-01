@@ -189,7 +189,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-1-15
-	 * 修改日期：2016-4-7
+	 * 修改日期：2016-10-1
 	 * 名称： Html.include
 	 * 功能：html文件里包含另一个文件
 	 * 说明：只有两个参数可选,第一个参数是jQuery 对象,第二个是json 对象
