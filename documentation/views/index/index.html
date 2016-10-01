@@ -22,7 +22,13 @@
 </head>
 <body>
 <div class="container">
-    <include file="{#_ROOT_#}/views/include/nav.html"></include>
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="#">首页</a></li>
+            </ol>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-2">
             <ul class="list-group">
@@ -47,7 +53,6 @@
    LAMJS.run(function(){
         'use strict';
         var System=this;
-       System.Html.include($('include'));
        System.Html.analysisTpl();
        System.replaceTpl('.list-group li','href');
 
