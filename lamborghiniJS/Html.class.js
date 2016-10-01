@@ -212,6 +212,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 			return;
 		}
 
+		if(!$dom) return;
+
 		$dom.each(function(){
 			var dom =this;
 			var file = $(this).attr('file');

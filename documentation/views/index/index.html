@@ -22,13 +22,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <ol class="breadcrumb">
-                <li><a href="#">首页</a></li>
-            </ol>
-        </div>
-    </div>
+    <include file="{#_ROOT_#}/views/include/nav.html"></include>
     <div class="row">
         <div class="col-md-2">
             <ul class="list-group">
@@ -53,22 +47,17 @@
    LAMJS.run(function(){
         'use strict';
         var System=this;
+       System.Html.include($('include'));
        System.Html.analysisTpl();
        System.replaceTpl('.list-group li','href');
 
-       function goToUrl(url){
-           System.Html.include({
-               'url':url
-               ,'callBack':function(content){
-                   console.log(content)
-                   $('#content').html(content);
-               }
-           });
+       function putContent(url){
+           $('#content').load(url);
        }
 
        $(function(){
            $('.list-group li').on('click',function(){
-               goToUrl($(this).attr('href'));
+               putContent($(this).attr('href'));
            });
        })
 
