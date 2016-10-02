@@ -186,6 +186,11 @@ if(!GRN_LHH){
         window.setTimeout(function(){
             var H=Config.render.H();
             for(i=0,len = srcs.length;i < len; i++){
+                //确保每个文件只加载一次
+                if(Config.files.indexOf(srcs[i] != -1)){
+                    continue;
+                }
+                Config.files.push(srcs[i]);
                 data.src = srcs[i];
                 Config.render.bulid(tag,data);
             }
@@ -200,7 +205,7 @@ if(!GRN_LHH){
         }
         for(i=0,len = srcs.length;i < len; i++){
             //确保每个文件只加载一次
-            if(!(-1 === Config.files.indexOf(srcs[i]))){
+            if(Config.files.indexOf(srcs[i] != -1)){
                 continue;
             }
             files.push('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
