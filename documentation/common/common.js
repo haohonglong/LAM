@@ -14,8 +14,17 @@ LAMJS.run(function() {
                 '/lib'
             ]
         })
+        .load({
+            'baseUrl':System.ROOT,
+            'suffix':'.css',
+            'rel':'stylesheet',
+            'css':[
+                '/css/lib'
+            ]
+        })
         .print();
-    System
-        .import([
-        ],System.classPath);
+
+    //System
+    //    .import([
+    //    ],System.classPath);
 });
