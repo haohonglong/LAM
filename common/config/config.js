@@ -183,6 +183,11 @@ if(!GRN_LHH){
         window.setTimeout(function(){
             var H=Config.render.H();
             for(i=0,len = srcs.length;i < len; i++){
+                //确保每个文件只加载一次
+                if(!(-1 === Config.files.indexOf(srcs[i]))){
+                    continue;
+                }
+                Config.files.push(srcs[i]);
                 data.src = srcs[i];
                 Config.render.bulid(tag,data);
             }
