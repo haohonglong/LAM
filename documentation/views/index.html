@@ -34,12 +34,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2">
-            <ul class="list-group">
-                <li class="list-group-item active" data-url="{'url':'{#VIEWS#}/content/content.html','title':'入门'}">入门</li>
-                <li class="list-group-item" data-url="{'url':'{#VIEWS#}/content/content2.html','title':'content2'}">content2</li>
-            </ul>
-        </div>
+        <include file="{#VIEWS#}/include/menu.html"></include>
         <div id="content" class="col-md-9">
             <include file="{#VIEWS#}/content/content.html"></include>
         </div>
@@ -58,12 +53,12 @@
        System.Html.include($('include'));
        System.Html.analysisTpl();
        var url='data-url';
-       System.replaceTpl('.list-group li',url);
+       System.replaceTpl('[LAM-VAR=template]',url);
 
        $(function(){
            var $title=$('title');
            new System.Tab({
-               'list':$('.list-group li'),
+               'list':$('.list-group [LAM-VAR=template]'),
                'event':'click',
                'class':'active',
                'fn':function(obj){

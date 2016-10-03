@@ -159,28 +159,28 @@ window[GRN_LHH].run([window],function(window,undefined){
 		var custom_attr=System.Config.templat.custom_attr || 'LAM-VAR=template';
 		var value ='['+custom_attr+']';
 		var $value = $(value);
-		if($value){
-			$value.each(function(){
-				var $this=$(this);
-				var attr=null;
-				var tag = this.nodeName;
-				switch(tag){
-					case "LINK":
-					case "A":
-						attr = attr || 'href';
-					case "IMG":
-					case "IFRAME":
-						attr = attr || 'src';
+		if(!$value){return;}
+		$value.each(function(){
+			var $this=$(this);
+			var attr=null;
+			var tag = this.nodeName;
+			switch(tag){
+				case "LINK":
+				case "A":
+					attr = attr || 'href';
+				case "IMG":
+				case "IFRAME":
+					attr = attr || 'src';
 
-						value=System.template($this.attr(attr));
-						$this.attr(attr,value);
+					value=System.template($this.attr(attr));
+					$this.attr(attr,value);
 
 
 
-				}
+			}
 
-			});
-		}
+		});
+
 
 		
 	};
