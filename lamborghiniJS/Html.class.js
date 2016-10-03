@@ -171,7 +171,6 @@ window[GRN_LHH].run([window],function(window,undefined){
 				case "IMG":
 				case "IFRAME":
 					attr = attr || 'src';
-
 					value=System.template($this.attr(attr));
 					$this.attr(attr,value);
 
