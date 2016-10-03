@@ -238,6 +238,7 @@ window[GRN_LHH].run([window,window['document']],function(window,document,undefin
         NUMPAD_ADD: 107,
         NUMPAD_DECIMAL: 110,
         NUMPAD_DIVIDE: 111,
+        F2: 113,
         NUMPAD_ENTER: 108,
         NUMPAD_MULTIPLY: 106,
         NUMPAD_SUBTRACT: 109,

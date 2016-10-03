@@ -58,15 +58,23 @@
        $(function(){
            var $title=$('title');
            new System.Tab({
-               'list':$('.list-group [LAM-VAR=template]'),
+               'list':'.list-group [LAM-VAR=template]',
                'event':'click',
+               'or':true,
+               'on':'on',
                'class':'active',
                'fn':function(obj){
-                   var data=System.eval($(this).attr(url));
-                   if(System.isObject(data)){
-                       $title.text(data.title);
-                       $('#content').load(data.url);
+                   var $submenu=$(this).next().is('.submenu');
+                   if($submenu){
+                       $(this).next().toggle();
+                   }else{
+                       var data=System.eval($(this).attr(url));
+                       if(System.isObject(data)){
+                           $title.text(data.title);
+                           $('#content').load(data.url);
+                       }
                    }
+
 
 
                }

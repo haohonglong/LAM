@@ -8,12 +8,13 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 	var fixEvt = System.Browser.fixEvt;
 	var $=jQuery;
 	var unbind =function(D,eve){
-		if('live' === D['on'] && D['list']['die']){
-			D['list']['die'](eve);
-		}else if('live' === D['on'] && D['list']['off']){
-			D['list']['off'](eve);
+		var $list=$(D.list);
+		if('live' === D.on && $list.die){
+			$list.die(eve);
+		}else if('on' === D.on && $list.off){
+			$list.off(eve);
 		}else{
-			D['list']['unbind'](eve);
+			$list.unbind(eve);
 		}
 	};
 
@@ -21,8 +22,32 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 	 *
 	 * @author lhh
 	 * 产品介绍：
+	 * 创建日期：2016-10-3
+	 * 修改日期：2016-10-4
+	 * 名称：bind_eve_doit
+	 * 功能：执触发事件的对象
+	 * 说明：
+	 * 注意：
+	 * @params  (Object)D 		NO NULL
+	 * @params  (String)eve 	NO NULL 	要绑定的事件
+	 * @params  (String)css 	NO NULL 	事件绑定时要添加的样式
+	 * @params  (Event)event 	NO NULL 	事件对象
+	 * Example：
+	 */
+	function bind_eve_doit(D,eve,css,event){
+		//D.or 为 true 时当前选中的按钮点击后仍触发事件。默认是如果在当前选中的按钮上再次单击不触发任何事件
+		var doif=D.or ? (D.temp || $(this)[0]!=D.temp[0]) : (D.temp && $(this)[0]!=D.temp[0]);
+		D.cur_even_this=this;//this 代表的是被点击的 dom 对象
+		if(doif) __this__.doit(D,css,event);
+		event.stopPropagation();
+	}
+
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：
 	 * 创建日期：2014-11-10
-	 * 修改日期：2014-11-10
+	 * 修改日期：2016-10-4
 	 * 名称：bind_eve
 	 * 功能：执行异步时绑定的事件
 	 * 说明：
@@ -32,29 +57,28 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 	 * @params  (String)css 	NO NULL 	事件绑定时要添加的样式
 	 * Example：
 	 */
-	var bind_eve=function(D,eve,css){
+	function bind_eve(D,eve,css){
+			var $list= $(D.list);
+			var $parent=$(D.parent);
+			//当鼠标事件为hover 同时 hover 没有设定 ture 时 鼠标离开时除去移入添加的样式
+			var hover = 'hover' === eve && !D.hover ? function(){D.temp.removeClass(css)} : null;
 			unbind(D,eve);
-			if(D['on']){
-				D['list'][D['on']](eve,function(event){
-					//D['or'] 为 true 时当前选中的按钮点击后仍触发事件。默认是如果在当前选中的按钮上再次单击不触发任何事件
-					var doif=D['or'] ? (D['temp'] || $(this)[0]!=D['temp'][0]) : (D['temp'] && $(this)[0]!=D['temp'][0]);
-					D.cur_even_this=this;
-					if(doif) __this__.doit(D,css,event);
-					event.stopPropagation();
-				},eve=='hover' && !D['hover']?function(){D['temp'].removeClass(css)}:null);//当鼠标事件为hover 同时 hover 没有设定 ture 时 鼠标离开时除去移入添加的样式
+			if('on' === D.on){
+				$parent.on(eve,D.list,function(event){
+					bind_eve_doit.call(this,D,eve,css,event);
+				},hover);
+			}else if('live' === D.on){
+				$list.live(eve,function(event){
+					bind_eve_doit.call(this,D,eve,css,event);
+				},hover);
 			}else{
-
-				D['list'][eve](function(event){
-					//D['or'] 为 true 时当前选中的按钮点击后仍触发事件。默认是如果在当前选中的按钮上再次单击不触发任何事件
-					var doif=D['or'] ? (D['temp'] || $(this)[0]!=D['temp'][0]) : (D['temp'] && $(this)[0]!=D['temp'][0]);
-					D.cur_even_this=this;
-					if(doif) __this__.doit(D,css,event);
-					event.stopPropagation();
-				},eve=='hover' && !D['hover']?function(){D['temp'].removeClass(css)}:null);//当鼠标事件为hover 同时 hover 没有设定 ture 时 鼠标离开时除去移入添加的样式
+				$list[eve](function(event){
+					bind_eve_doit.call(this,D,eve,css,event);
+				},hover);
 			}
 
 
-		},
+		}
 		/**
 		 *
 		 * @author lhh
@@ -70,23 +94,24 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 		 * (String no null) 	'css' //事件绑定时要添加的样式
 		 * Example：
 		 */
-		select_event=function(D,eve,css){
+		function select_event(D,eve,css){
+			var $list=$(D.list);
 			switch(eve){
 				case 'keydown'://判断键盘按下去的按键值
-					D['list'][eve](function(event){
+					$list[eve](function(event){
 						var e = fixEvt(event);
 						switch(e && e.keyCode){
-							case 27:// 按 Esc
+							case System.Event.keyCode.ESCAPE:// 按 Esc
 
 								break;
-							case 113:// 按 F2
+							case System.Event.keyCode.F2:// 按 F2
 
 								break;
-							case 13:// enter 键
-								e.keyCode=9;
+							case System.Event.keyCode.ENTER:// enter 键
+								e.keyCode=System.Event.keyCode.TAB;
 								return false;
 								break;
-							case 9:// Tab 键
+							case System.Event.keyCode.TAB:// Tab 键
 
 								break;
 
@@ -100,11 +125,12 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 
 					break;
 				case 'hover':
-					$('list').unbind('mouseenter').unbind('mouseleave');
-					D['list'][eve](function(){
+					var $list=$(D.list);
+					$list.unbind('mouseenter').unbind('mouseleave');
+					$list[eve](function(){
 						$(this).addClass(css);
 					},function(){
-						//if(D['temp'] && $(this)[0]!=D['temp'][0]){//只有不是当前选中的才能做下面的事情
+						//if(D.temp && $(this)[0]!=D.temp[0]){//只有不是当前选中的才能做下面的事情
 						$(this).removeClass(css);
 						//}
 					});
@@ -119,17 +145,19 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 			}
 
 
-		},multi_css=function(D,arr_eve,arr_css,css){
-			/**
-			 *	创建日期：2014-11-10
-			 * 修改日期：2014-11-10
-			 *	名称：private (void) isArray_css
-			 * 功能：对个事件匹配多个样式
-			 * 参数： (Object no null) 	 D,
-			 *		   (Array no null) 	'arr_eve',//要绑定的事件集合
-			 *		   (Array no null) 	'arr_eve' //事件绑定时要添加的样式的集合
-			 *
-			 */
+		}
+		/**
+		 *	创建日期：2014-11-10
+		 * 修改日期：2016-10-4
+		 *	名称：private (void) isArray_css
+		 * 功能：对个事件匹配多个样式
+		 * 参数： (Object no null) 	 D,
+		 *		   (Array no null) 	'arr_eve',//要绑定的事件集合
+		 *		   (Array no null) 	'arr_eve' //事件绑定时要添加的样式的集合
+		 *
+		 */
+		function multi_css(D,arr_eve,arr_css,css){
+
 			var flag=false;
 			if(arr_css.length > 1) flag=true;
 			for(var i=0;i<arr_eve.length;i++){
@@ -141,52 +169,54 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 				}
 			}
 
-		},execu_event=function(D,css){
-			/**
-			 *	创建日期：
-			 * 修改日期：2014-11-10
-			 *	名称：private (void) execu_event
-			 * 功能：执行传入的事件行为
-			 * 参数：(Object no null) D
-			 *
-			 */
-			if(System.isObject(D['event'])){//传入的是对象目的多个事件执行不同的选中状态样式
+		}
+		/**
+		 *	创建日期：
+		 * 修改日期：2016-10-4
+		 *	名称：private (void) execu_event
+		 * 功能：执行传入的事件行为
+		 * 参数：(Object no null) D
+		 *
+		 */
+		function execu_event(D,css){
+			if(System.isObject(D.event)){//传入的是对象目的多个事件执行不同的选中状态样式
 				//{'k':v}
-				var E=D['event'];
+				var E=D.event;
 				for(var k in E){
 					select_event(D,k,E[k]);
 				}
 
-			}else if(System.isArray(D['event'])){//传入的数组
-				if(0 === D['event'].length) {
-					alert('数组必须要有值');
+			}else if(System.isArray(D.event)){//传入的数组
+				if(0 === D.event.length) {
+					throw new Error('Warning: 数组必须要有值');
 					return 0;
 				}
-				var arr_eve=D['event'],arr_css=css;
+				var arr_eve=D.event,arr_css=css;
 				multi_css(D,arr_eve,arr_css);
 			}else{//传入的是字符串用,号分割
-				var arr_eve=D['event'].split(","),arr_css=css.split(",");
+				var arr_eve=D.event.split(","),arr_css=css.split(",");
 				if(arr_eve.length > 1){
 					multi_css(D,arr_eve,arr_css,css);
 				}else{
-					bind_eve(D,D['event'],css);
+					bind_eve(D,D.event,css);
 
 				}
 			}
-		};
+		}
 
 	/**
 	 * @author lhh
 	 * 产品介绍：tabs 功能可添加多个事件和对应事件添加不同的样式
 	 * 创建日期：2014-10-28
-	 * 修改日期：2014-11-10
+	 * 修改日期：2016-10-4
 	 * 		   	 2015-05-13
 	 * 名称：Tab
 	 * 功能：表格每行鼠标移上去变色，移出恢复
 	 * 说明：
 	 * 注意：
 	 * @params  (Object)D 			NO NULL :初始化参数
-	 * 			(jQuery)list    	   						:NO ULL
+	 * 			(String)parent    	   						:   ULL on 时间的父级dom对象 默认body
+	 * 			(String)list    	   						:NO ULL
 	 * 			(String)class    	   						:NO	ULL | 'h_cur,c_cur' | ['h_cur','c_cur']  //对应事件加不同样式
 	 * 			(String)event    	   						:NO ULL 'hover'  | 'hover,click' | ['hover','click'] | {'hover':'h_cur','click':'c_cur'}
 	 * 			(String)hover    	   						:NO ULL 当鼠标事件为hover 同时 hover 没有设定 ture 时 鼠标离开时除去移入添加的样式
@@ -195,12 +225,15 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 	 * 			(String)on	    	   						:	ULL 'live | on' 如果是异步就选择
 	 * 			(jquery)block    	   						:	ULL 对应选项卡的内容区域
 	 * 			(function)fn    	   						:	ULL 回调
+	 * 			(function)befor    	   						:	ULL 回调
+	 * 			(function)after    	   						:	ULL 回调
 	 *  Example：
 	 */
 	function Tab(D){
 		System.Basis.extends.call(this,System.Browser);
 		var defaults ={
-			'list':$('.list li'),
+			'parent':'body',
+			'list':'.list li',
 			'event':'hover',
 			'hover':false,
 			'on':null,
@@ -226,20 +259,20 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 		'doClass':function(D,css){
 			D = D || this.D;
 			if(System.isString(css)){
-				D['temp'].removeClass(css);
+				D.temp.removeClass(css);
 				$(D.cur_even_this).addClass(css);
 			}
 		},
 		'doit':function(D,css,event){
 			var __this__=this;
 			D = D || this.D;
-			var temp=D['temp'];
+			var temp=D.temp;
 			if(css){
 				this.doClass(D,css);
 			}
-			D['temp']=$(D.cur_even_this);
-			if(System.isFunction(D['fn'])){
-				D['fn'].call(D.cur_even_this,{
+			D.temp=$(D.cur_even_this);
+			if(System.isFunction(D.fn)){
+				D.fn.call(D.cur_even_this,{
 					'temp':temp,
 					'temp_index':temp.index(),
 					'current':D,
@@ -252,16 +285,17 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 		'run':function(){
 			var __this__=this;
 			var D = this.D;
-			D['temp'] = D['temp'] ? D['temp'] : $(D['list'][0]);
-			if(D['list']){
-				if(D['event']){//有事件时
+			var $list=$(D.list);
+			D.temp = D.temp ? D.temp : $list.eq(0);
+			if($list){
+				if(D.event){//有事件时
 
-					execu_event(D,D['class']);
+					execu_event(D,D.class);
 				}else{//没事件时
 
-					D['list']['each'](function(){
+					$list.each(function(){
 						D.cur_even_this = this;
-						__this__.doit(D,D['class']);
+						__this__.doit(D,D.class);
 
 					});
 				}
@@ -301,6 +335,6 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 		}
 	};
 	System.extends(Tab,System.Browser,1);
-	System['Tab'] = Tab;
+	System.Tab = Tab;
 
 });
