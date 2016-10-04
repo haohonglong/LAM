@@ -57,18 +57,37 @@
 
        $(function(){
            var $title=$('title');
+
+           $('.list-group [LAM-VAR=template]').hover(function(){
+               if($(this).is('[data-parent=parent]')){return;}
+               $(this).addClass('hover');
+           },function(){
+               $(this).removeClass('hover');
+           });
            new System.Tab({
                'list':'.list-group [LAM-VAR=template]',
-               'event':'click',
+               'event':{'click':'active'},
                'or':true,
                'on':'on',
-               'class':'active',
                'fn':function(obj){
-                   var $submenu=$(this).next().is('.submenu');
-                   if($submenu){
-                       $(this).next().toggle();
+                   var $this=$(this);
+                   if($this.is('[data-parent=parent]')){
+                       $this.removeClass('active');
+                       $this.next().toggle();
+                       if(!obj.temp.is('[data-parent=parent]')){
+                           obj.temp.addClass('active');
+                       }
                    }else{
-                       var data=System.eval($(this).attr(url));
+                       $(obj.current.list).removeClass('active');
+                       $('[data-parent=parent]').removeClass('p-active');
+                       $this.addClass('active');
+                       if($this.parent().prev().is('[data-parent=parent]')){
+                           $this.parent().prev().addClass('p-active');
+                       }
+                   }
+
+                   if($this.attr(url)){
+                       var data=System.eval($this.attr(url));
                        if(System.isObject(data)){
                            $title.text(data.title);
                            $('#content').load(data.url);
