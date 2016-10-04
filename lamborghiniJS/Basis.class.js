@@ -8,7 +8,7 @@
  * LamborghiniJS 0.3 pre
  * @author：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-9-30
+ * 修改日期:2016-10-4
  * 名称：基类
  * 功能：服务于派生类
  * 命名空间接口定义: var GRN_LHH='interfaceName';
@@ -43,7 +43,7 @@ if(!GRN_LHH){
 
 })(typeof window !== "undefined" ? window : this,GRN_LHH,function(W,namespace,undefined){
 	'use strict';
-	var version="1.1.2.1";
+	var version="1.1.3";
 	var Interface,System;
 	/**
 	 *
@@ -1304,11 +1304,8 @@ if(!GRN_LHH){
 	System.isNumber = System.isNumeric 	= isNumeric;
 	System.isFloat 	= isFloat;
 
-	System.Config=null;
-	System.random=10000;
 	System.guid=0;
 	System.classPath='./';
-	System.files=[];
 	System.classes=[];
 	System.Super={};
 	System.app=null;
@@ -2149,7 +2146,7 @@ if(!GRN_LHH){
 
 
 
-	return System.merge(null,[Interface,W[namespace]],true);
+	return System.merge(null,[Interface,W[namespace]]);
 });
 
 /*
@@ -2172,7 +2169,6 @@ if(!GRN_LHH){
 window[GRN_LHH].run([window],function(W,Config){
 	'use strict';
 	var System=this;
-
 
 	//js获取项目根路径，如： http://localhost:8083/uimcardprj
 	function getRootPath(){
@@ -2304,7 +2300,7 @@ window[GRN_LHH].run([window],function(W,Config){
 		}
 	};
 
-	System.merge(System.Config,[Config]);
+	System.merge(System.Config || {},[Config]);
 	System.classPath = System.Config.getClassPath();
 	System.ROOT = System.Config.Public.ROOT;
 	//hashcode 随机种子
