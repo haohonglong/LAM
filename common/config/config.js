@@ -1,7 +1,7 @@
 /**
  * 创建人：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-9-19
+ * 修改日期:2016-10-4
  * 功能：配置文件
  * 说明 : 这个文件要copy到项目里面可以修改 System.Config里的属性 和 GRN_LHH; 的值；
  *
@@ -157,6 +157,63 @@ if(!GRN_LHH){
             return this.vendorPath;
         }
     };
+    System.wait=function(callback,time){
+        time = time || 15000;
+        global.setTimeout(function(){
+            callback.call(System);
+        }, time);
+    };
+
+    /**
+     * @author: lhh
+     * 产品介绍：
+     * 创建日期：2016-9-30
+     * 修改日期：2016-9-30
+     * 名称：System.open
+     * 功能：打开一个新文档，并擦除当前文档的内容
+     * 说明：
+     * 注意：
+     * @return  {Document}
+     */
+    System.open=function(mimetype,replace){
+        mimetype = mimetype || "text/html";
+        replace = replace 	|| "replace";
+        return document.open(mimetype,replace)
+    };
+
+    /**
+     * @author: lhh
+     * 产品介绍：
+     * 创建日期：2015-9-16
+     * 修改日期：2016-9-30
+     * 名称：System.print
+     * 功能：输出
+     * 说明：
+     * 注意：
+     * @param   (String)S 			NO NULL :
+     * @return  (voide)						:
+     * Example：
+     */
+    System.print=function(S){
+        var document=System.open();
+        document.write(S);
+        System.close(document);
+    };
+    /**
+     * @author: lhh
+     * 产品介绍：
+     * 创建日期：2016-9-30
+     * 修改日期：2016-9-30
+     * 名称：System.close
+     * 功能：关闭输出文档流
+     * 说明：
+     * 注意：
+     * @return  (voide)
+     */
+    System.close=function(document){
+        document = document || global.document;
+        document.close();
+    };
 
     global[namespace] = System;
 
@@ -180,7 +237,7 @@ if(!GRN_LHH){
     var srcs =Config.autoLoadFile();
     //=================================================================================================================================
     if(Config.render.create){
-        window.setTimeout(function(){
+        System.wait(function(){
             var H=Config.render.H();
             for(i=0,len = srcs.length;i < len; i++){
                 //确保每个文件只加载一次
@@ -209,8 +266,7 @@ if(!GRN_LHH){
             Config.files.push(srcs[i]);
 
         }
-        document.write(files.join(''));
-        document.close();
+        System.print(files.join(''));
     }
 
     //=================================================================================================================================
@@ -219,7 +275,7 @@ if(!GRN_LHH){
     //=================================================================================================================================
     //5秒之后检测lamborghiniJS基础类文件是否加载成功
     //=================================================================================================================================
-    window.setTimeout(function(){
+    System.wait(function(){
         if(!LAMJS){
             alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
         }else{
