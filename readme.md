@@ -947,17 +947,17 @@
 	十八、模版标签
 				 查找解析指定元素属性里的模板标签
 					 1. 只能在 link,a,img,iframe 这几种标签范围内解析模板标签
-					    <link LAM-VAR="template" rel="stylesheet" type="text/xxx" href="{{LAMJS.ROOT}}/"/>
-					    <a LAM-VAR="template" rel="stylesheet" href="{{LAMJS.ROOT}}/"/>跳转</a>
-					    <img LAM-VAR="template" src="{{LAMJS.ROOT}}/"/>
+					    <link data-var="tpl" rel="stylesheet" type="text/xxx" href="{{LAMJS.ROOT}}/"/>
+					    <a data-var="tpl" rel="stylesheet" href="{{LAMJS.ROOT}}/"/>跳转</a>
+					    <img data-var="tpl" src="{{LAMJS.ROOT}}/"/>
 					    怎么工作的？
-					    1.在需要解析的标签上放指定的自定义属性 LAM-VAR="template"(也可以通过 common/config/config.js 文件的 'Config.templat.custom_attr' 属性 修改自定义属性)
+					    1.在需要解析的标签上放指定的自定义属性 data-var="tpl"(也可以通过 common/config/config.js 文件的 'Config.templat.custom_attr' 属性 修改自定义属性)
 					    2.在window.onload 函数里 调用 LAMJS.Html.analysisTpl(); 静态方法
 					    note:
-					        1.自定义属性LAM-VAR="template"一定要有。否则不会解析模板标签。
+					        1.自定义属性data-var="tpl"一定要有。否则不会解析模板标签。
 					        2一定要在页面元素加载完毕才能调用LAMJS.Html.analysisTpl()
 					    
-					 2.解析指定HTML元素的模板标签 (不需要放指定的自定义属性 LAM-VAR="template")
+					 2.解析指定HTML元素的模板标签 (不需要放指定的自定义属性 data-var="tpl")
 					    LAMJS.replaceTpl(selector,attr_name);
                              功能：替换模版标签
                              说明：
