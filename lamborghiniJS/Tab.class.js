@@ -7,16 +7,7 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 	var __this__=null;
 	var fixEvt = System.Browser.fixEvt;
 	var $=jQuery;
-	var unbind =function(D,eve){
-		var $list=$(D.list);
-		if('live' === D.on && $list.die){
-			$list.die(eve);
-		}else if('on' === D.on && $list.off){
-			$list.off(eve);
-		}else{
-			$list.unbind(eve);
-		}
-	};
+
 
 	/**
 	 *
@@ -42,6 +33,17 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 			__this__.doit(D,css,event);
 		}
 		event.stopPropagation();
+	}
+
+	function unbind(D,eve){
+		var $list=$(D.list);
+		if('live' === D.on && $list.die){
+			$list.die(eve);
+		}else if('on' === D.on && $list.off){
+			$list.off(eve);
+		}else{
+			$list.unbind(eve);
+		}
 	}
 
 	/**
@@ -74,7 +76,7 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 					bind_eve_doit.call(this,D,eve,css,event);
 				},hover);
 			}else{
-				$list[eve](function(event){
+				$list.bind(eve,function(event){
 					bind_eve_doit.call(this,D,eve,css,event);
 				},hover);
 			}
@@ -217,7 +219,7 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 	 * 说明：
 	 * 注意：
 	 * @params  (Object)D 			NO NULL :初始化参数
-	 * 			(String)parent    	   						:   ULL on 时间的父级dom对象 默认body
+	 * 			(String)parent    	   						:   ULL on 事件的父级dom对象 默认body
 	 * 			(String)list    	   						:NO ULL
 	 * 			(String)class    	   						:NO	ULL | 'h_cur,c_cur' | ['h_cur','c_cur']  //对应事件加不同样式
 	 * 			(String)event    	   						:NO ULL 'hover'  | 'hover,click' | ['hover','click'] | {'hover':'h_cur','click':'c_cur'}
