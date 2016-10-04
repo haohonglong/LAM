@@ -30,12 +30,14 @@
     <div class="row">
         <div class="col-md-12">
             <ol class="breadcrumb">
-                <li><a LAM-VAR="template" href="{#VIEWS#}/index.html">首页</a></li>
+                <li><a data-var="tpl" href="{#VIEWS#}/index.html">首页</a></li>
             </ol>
         </div>
     </div>
     <div class="row">
-        <include file="{#VIEWS#}/include/menu.html"></include>
+        <div class="col-md-2">
+            <include file="{#VIEWS#}/include/menu.html"></include>
+        </div>
         <div id="content" class="col-md-9">
             <include file="{#VIEWS#}/content/content.html"></include>
         </div>
