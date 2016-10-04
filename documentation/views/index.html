@@ -54,35 +54,35 @@
        System.Html.include($('include'));
        System.Html.analysisTpl();
        var url='data-url';
-       System.replaceTpl('[LAM-VAR=template]',url);
+       System.replaceTpl('[data-url]',url);
 
        $(function(){
            var $title=$('title');
 
-           $('.list-group [LAM-VAR=template]').hover(function(){
-               if($(this).is('[data-parent=parent]')){return;}
+           $('.list-group [data-url]').hover(function(){
                $(this).addClass('hover');
            },function(){
                $(this).removeClass('hover');
            });
            new System.Tab({
-               'list':'.list-group [LAM-VAR=template]',
+               'list':'.list-group .list-group-item',
                'event':{'click':'active'},
                'or':true,
                'on':'on',
                'fn':function(obj){
                    var $this=$(this);
-                   if($this.is('[data-parent=parent]')){
+                   if(!$this.is('[data-url]')){
                        $this.removeClass('active');
                        $this.next().toggle();
-                       if(!obj.temp.is('[data-parent=parent]')){
+                       if(obj.temp.is('[data-url]')){
                            obj.temp.addClass('active');
                        }
                    }else{
                        $(obj.current.list).removeClass('active');
-                       $('[data-parent=parent]').removeClass('p-active');
+
+                       $('.list-group .list-group-item').not('[data-url]').removeClass('p-active');
                        $this.addClass('active');
-                       if($this.parent().prev().is('[data-parent=parent]')){
+                       if(!$this.parent().prev().is('[data-url]')){
                            $this.parent().prev().addClass('p-active');
                        }
                    }

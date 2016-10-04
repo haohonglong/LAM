@@ -2195,7 +2195,7 @@ window[GRN_LHH].run([window],function(W,Config){
 		'random':10000,
 		//定义模版标签
 		'templat':{
-			'custom_attr':'LAM-VAR=template',
+			'custom_attr':'[data-var=tpl]',
 			'leftLimit':'{{',
 			'rightLimit':'}}'
 		},
