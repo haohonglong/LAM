@@ -1,5 +1,5 @@
 
-window[GRN_LHH].run([window],function(window,undefined){
+window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Dom','Html');
