@@ -3,7 +3,7 @@
 window[GRN_LHH].run([window],function(window,undefined){
 	'use strict';
 	var System=this;
-	System.is(System,'Browser','Canvas');
+	System.is('System.Browser','System.Html5.Canvas');
 
 	var __this__=null;
 
@@ -718,6 +718,6 @@ window[GRN_LHH].run([window],function(window,undefined){
 	};
 
 	System.extends(Canvas,System.Browser,1);
-	System['Html5']['Canvas']=Canvas;
+	System.Html5.Canvas=Canvas;
 
 });
