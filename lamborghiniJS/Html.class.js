@@ -8,7 +8,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 
 	var __this__=null;
 	function Html(){
-		System.Basis.extends.call(this.System.Dom);
+		System.Basis.extends.call(this,System.Dom);
 		__this__=this;
 		/*--------------------------------------------------------------------------------------------------*/
 
