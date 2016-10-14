@@ -171,6 +171,9 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 		}
 		System.each(urls,function(){
 			if(!System.fileExisted(this)){
+				if(System.isClassFile(this)){
+					System.classes.push(this);
+				}
 				System.files.push(this);
 				Html.getFile(this,callBack,D);
 			}
