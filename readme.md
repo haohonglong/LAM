@@ -2,7 +2,7 @@
 	version ：1.1.3
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-10-9
+	修改日期 ：2016-10-14
 
 
 产品介绍：
@@ -700,7 +700,7 @@
 			LAMJS.Html.getFile(url,callBack,D); 
 				 名称： getFile
                  功能：返回指定的文件
-                 说明：
+                 说明：支持链式调用
                  注意：
                  @param 	(String)  	D.url         	      NULL :请求地址
                  @param 	(Function)	D.callBack       	  NULL :参数：文件里的内容
@@ -710,7 +710,21 @@
                  @param 	(String|{}) D.data             	  NULL :请求地址的参数
                  @param 	(Boolean) 	D.async               NULL :是否异步加载
                  @param 	(Boolean) 	D.cache           	  NULL :是否缓存默认true
-                 @return {*}
+                 @returns {Html|*}
+			LAMJS.Html.getFiles(url,callBack,D); 
+				 名称： Html.getFiles
+                 功能：返回指定的多个文件
+                 说明：支持链式调用
+                 注意：
+                 @param 	(Array)  	D.urls         	      NULL :请求地址
+                 @param 	(Function)	D.callBack       	  NULL :参数：文件里的内容
+                 @param 	(Object)D                	   NO NULL :json 数据
+                 @param 	(String)  	D.type             NO NULL :获取方式
+                 @param 	(String)  	D.dataType         NO NULL :获取文件类型
+                 @param 	(String|{}) D.data             	  NULL :请求地址的参数
+                 @param 	(Boolean) 	D.async               NULL :是否异步加载
+                 @param 	(Boolean) 	D.cache           	  NULL :是否缓存默认true
+                 @returns {Html|*}
 			
 			LAMJS.Html.tag(name,single,Attr,content); 
 				 名称： tag
