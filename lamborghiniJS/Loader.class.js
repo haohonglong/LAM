@@ -247,12 +247,12 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 名称：print
          * 功能：显示load() 里的文件
          * 创建日期：2015-9-2
-         * 修改日期：2016-9-4
+         * 修改日期：2016-10-14
          * 说明：
          * 调用方式：
          */
         'print':function(){
-
+            if(files.length < 1){return;}
             if(!System.Config.render.create){//document.write() 方式引入外部文件(.js|.css)
                 System.print(files.join(''));
             }else{

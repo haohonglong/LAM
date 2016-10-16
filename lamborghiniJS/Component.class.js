@@ -6,11 +6,11 @@
  * 名称：组件类
  * 功能：服务于应用层类
  * 说明 : 这个基类不允许被直接实例化，要实例化它的派生类。
- *        
- * note : 
- * 		  
- *		
- * 
+ *
+ * note :
+ *
+ *
+ *
  */
 
 window[GRN_LHH].run([window],function(window,undefined){
@@ -18,138 +18,153 @@ window[GRN_LHH].run([window],function(window,undefined){
 	var System=this;
 	System.is(System,'BiObject','Component');
 	System.merge(null,[{
-						/**
-						 * @author: lhh
-						 * 产品介绍：
-						 * 创建日期：2015-8-27
-						 * 修改日期：2016-9-10
-						 * 名称：import
-						 * 功能：导入指定的js文件
-						 * 说明：System 参数不用传
-						 * 注意：
-						 * @param   (Array)url 			    NO NULL :要加载js文件
-						 * @param   (String)baseUrl 		   NULL :文件路径
-						 * @param   (String)suffix 		       NULL :文件后缀名
-						 * @return  {System} 返回当前对象可以链式调用import方法
-						 * Example：
-						 */
-						'import':function(url,baseUrl,suffix){
-							suffix = suffix || '.js';
-							baseUrl = baseUrl || System.Config.Public.ROOT;
-							try {
-								if(System.isset(importScripts) && System.isFunction(importScripts)){
-									url.each(function(){
-										var src=this;
-										src+=suffix;
-										src = baseUrl ? baseUrl+src : src;
-										if(!System.fileExisted(src)){
-											importScripts(src);
-											if(System.isClassFile(src)){
-												System.classes.push(src);
-											}
-											System.files.push(src);
-										}
-									});
-								}
-
-
-							} catch (e) {
-								//throw new Error(e.message);
-								System.Loader.load({
-									'baseUrl':baseUrl,
-									'js':url,
-									'suffix':suffix
-								}).print();
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-8-27
+		 * 修改日期：2016-10-14
+		 * 名称：import
+		 * 功能：导入指定的js文件
+		 * 说明：System 参数不用传
+		 * 注意：
+		 * @param   (Array)url 			    NO NULL :要加载js文件
+		 * @param   (String)baseUrl 		   NULL :文件路径
+		 * @param   (String)suffix 		       NULL :文件后缀名
+		 * @return  {System} 返回当前对象可以链式调用import方法
+		 * Example：
+		 */
+		'import':function(url,baseUrl,suffix){
+			suffix = suffix || '.js';
+			baseUrl = baseUrl || System.Config.Public.ROOT;
+			try {
+				if(System.isset(importScripts) && System.isFunction(importScripts)){
+					url.each(function(){
+						var src=this;
+						src+=suffix;
+						src = baseUrl ? baseUrl+src : src;
+						if(!System.fileExisted(src)){
+							importScripts(src);
+							if(System.isClassFile(src)){
+								System.classes.push(src);
 							}
-							return System;
-						},
-						/**
-						 * @author lhh
-						 * 产品介绍：
-						 * 创建日期：2015-6-25
-						 * 修改日期：2015-6-25
-						 * 名称：get_url_param
-						 * 功能：根据指定的url参数获取相对应的参数值
-						 * 说明：
-						 * 注意：
-						 * @param   (String)name            NO NULL :参数名称
-						 * @return  {String}
-						 *
-						 */
-						'get_url_param':function(name){
-							var search = document.location.search;
-							var pattern = new RegExp("[?&]"+name+"\=([^&]+)", "g");
-							var matcher = pattern.exec(search);
-							var items = null;
-							if(null != matcher){
-								try{
-									items = decodeURIComponent(decodeURIComponent(matcher[1]));
-								}catch(e){
-									try{
-										items = decodeURIComponent(matcher[1]);
-									}catch(e){
-										items = matcher[1];
-									}
-								}
-							}
-							console.log(items);
-							return items;
-
-						},
-						/**
-						 *
-						 * @author: lhh
-						 * 产品介绍：
-						 * 创建日期：2016-04-18
-						 * 修改日期：2016-04-18
-						 * 名称：getRootPath
-						 * 功能：获取项目根路径，如： http://localhost:8083/uimcardprj
-						 * 说明：
-						 * 注意：
-						 * @param (void)
-						 * @returns {string}
-						 */
-						'getRootPath':function(){
-							//获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
-							var curWwwPath=window.document.location.href;
-							//获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
-							var pathName=window.document.location.pathname;
-							var pos=curWwwPath.indexOf(pathName);
-							//获取主机地址，如： http://localhost:8083
-							var localhostPaht=curWwwPath.substring(0,pos);
-							//获取带"/"的项目名，如：/uimcardprj
-							var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
-							return(localhostPaht+projectName);
-						},
-						/**
-						 *
-						 * @author: lhh
-						 * 产品介绍：
-						 * 创建日期：2014-11-27
-						 * 修改日期：2014-11-27
-						 * 名称：System.autoCenter
-						 * 功能：元素自定垂直居中容器中间
-						 * 说明：
-						 * 注意：
-						 * @param(Number) 		NO NULL : W  容器宽
-						 * @param(Number) 		NO NULL : w  元素宽
-						 * @param(Number) 		NO NULL : H  容器高
-						 * @param(Number) 		NO NULL : h  元素高
-						 * @param(Number) 		NULL 	: p  有padding值时
-						 * @return (Object) 返回居中位置的xy 坐标
-						 * Example：
-						 *		System.autoCenter(500,10,500,10,0);
-						 */
-						'autoCenter':function(W,w,H,h,p){
-							p=p || 0;
-							W=parseInt(W);
-							w=parseInt(w);
-							H=parseInt(H);
-							h=parseInt(h);
-							p=parseInt(p);
-							if(!W || !w || !H || !h) return 0;
-							return {'x':parseInt((W-w-p)/2),'y':parseInt((H-h-p)/2)};
+							System.files.push(src);
 						}
+					});
+				}
+
+
+			} catch (e) {
+				if(System.Html.getFiles && System.isFunction(System.Html.getFiles)){//异步方式加载 script 脚本文件
+					var arr=[];
+					url.each(function(){
+						var src=this;
+						src+=suffix;
+						src = baseUrl ? baseUrl+src : src;
+						arr.push(src);
+
+					});
+					System.Html.getFiles(arr,null,{
+						'type':'GET'
+						,'dataType':'script'
+					});
+				}else{
+					System.Loader.load({
+						'baseUrl':baseUrl,
+						'js':url,
+						'suffix':suffix
+					}).print();
+				}
+
+			}
+			return System;
+		},
+		/**
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2015-6-25
+		 * 修改日期：2015-6-25
+		 * 名称：get_url_param
+		 * 功能：根据指定的url参数获取相对应的参数值
+		 * 说明：
+		 * 注意：
+		 * @param   (String)name            NO NULL :参数名称
+		 * @return  {String}
+		 *
+		 */
+		'get_url_param':function(name){
+			var search = document.location.search;
+			var pattern = new RegExp("[?&]"+name+"\=([^&]+)", "g");
+			var matcher = pattern.exec(search);
+			var items = null;
+			if(null != matcher){
+				try{
+					items = decodeURIComponent(decodeURIComponent(matcher[1]));
+				}catch(e){
+					try{
+						items = decodeURIComponent(matcher[1]);
+					}catch(e){
+						items = matcher[1];
+					}
+				}
+			}
+			console.log(items);
+			return items;
+
+		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-04-18
+		 * 修改日期：2016-04-18
+		 * 名称：getRootPath
+		 * 功能：获取项目根路径，如： http://localhost:8083/uimcardprj
+		 * 说明：
+		 * 注意：
+		 * @param (void)
+		 * @returns {string}
+		 */
+		'getRootPath':function(){
+			//获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+			var curWwwPath=window.document.location.href;
+			//获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+			var pathName=window.document.location.pathname;
+			var pos=curWwwPath.indexOf(pathName);
+			//获取主机地址，如： http://localhost:8083
+			var localhostPaht=curWwwPath.substring(0,pos);
+			//获取带"/"的项目名，如：/uimcardprj
+			var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+			return(localhostPaht+projectName);
+		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-11-27
+		 * 修改日期：2014-11-27
+		 * 名称：System.autoCenter
+		 * 功能：元素自定垂直居中容器中间
+		 * 说明：
+		 * 注意：
+		 * @param(Number) 		NO NULL : W  容器宽
+		 * @param(Number) 		NO NULL : w  元素宽
+		 * @param(Number) 		NO NULL : H  容器高
+		 * @param(Number) 		NO NULL : h  元素高
+		 * @param(Number) 		NULL 	: p  有padding值时
+		 * @return (Object) 返回居中位置的xy 坐标
+		 * Example：
+		 *		System.autoCenter(500,10,500,10,0);
+		 */
+		'autoCenter':function(W,w,H,h,p){
+			p=p || 0;
+			W=parseInt(W);
+			w=parseInt(w);
+			H=parseInt(H);
+			h=parseInt(h);
+			p=parseInt(p);
+			if(!W || !w || !H || !h) return 0;
+			return {'x':parseInt((W-w-p)/2),'y':parseInt((H-h-p)/2)};
+		}
 	}]);
 
 	var __this__=null;

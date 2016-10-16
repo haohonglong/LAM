@@ -1066,33 +1066,63 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍： class文件检验器
 		 * 创建日期：2015-8-18
-		 * 修改日期：2015-8-21
+		 * 修改日期：2016-10-9
 		 * 名称： System.is
 		 * 功能：检测System是否合法，检测要使用的类是否已加载过；检测要定义的类名称之前是否已注册过。
 		 * 说明：子类继承父类之前调用此方法检测父类之前是否有加载过，如果填写第三参数可检测当前的类是否跟之前的类重名了
-		 * 注意：
-		 * @param  (Object)System 	       		NO NULL : 命名空间
-		 * @param 	(String)useClassName     	NO NULL : 要使用的类名称
-		 * @param 	(String)className         	　　NULL : 当前类的名称
+		 * 注意：当Obj 类型是对象时 useClassName 参数必须要传！ 没传命名空间时 useClassName 参数可以省略不传
+		 * @param  (Object)Obj 	       				 NULL : 命名空间
+		 * @param 	(String)useClassName     	  	 NULL : 要使用的类名称
+		 * @param 	(String)className         	　　 NULL : 当前类的名称
 		 * @return (Boolean)
 		 * Example：
 		 *
 		 */
-		'is':function(System,useClassName,className){
-			if(!(useClassName in System)){
+		'is':function(Obj,useClassName,className){
+			var arg_len=arguments.length;
+			if(System.isString(Obj)){
+				//两个参数时 参数类型全部是字符串
+				if(2 === arg_len){
+					className 	 = useClassName;
+					useClassName = Obj;
+					Obj = null;
+					if(!System.isFunction (System.eval(useClassName))){
+						throw new Error(["Warning cannot find the class file ","'/",useClassName,".class'"].join(''));
+						return false;
+					}
+					if(!System.empty(System.eval(className)) && System.isFunction (System.eval(className))) {
+						throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
+						return false;
+					}
 
-				throw new Error(["Warning ",System," is not a legitimate object or ","'",useClassName,"'"," is not a legitimate"].join(''));
-				return false;
+				}else if(1 === arg_len){//只有一个参数时 功能：检测函数或方法是否之前已定义过了
+					className 	 = Obj;
+					useClassName = null;
+					Obj = null;
+					if(!System.empty(System.eval(className)) && System.isFunction (System.eval(className))) {
+						throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
+						return false;
+					}
+
+				}
+
+			}else if(System.isPlainObject(Obj)){
+				if(!(useClassName in Obj)){
+
+					throw new Error(["Warning ",Obj," is not a legitimate object or ","'",useClassName,"'"," is not a legitimate"].join(''));
+					return false;
+				}
+				className = className || null;
+				if(!System.isFunction (Obj[useClassName])){
+					throw new Error(["Warning cannot find the class file ","'/",useClassName,".class'"].join(''));
+					return false;
+				}
+				if(!System.empty(className) && System.isFunction (Obj[className])) {
+					throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
+					return false;
+				}
 			}
-			className = className || null;
-			if(!isFunction (System[useClassName])){
-				throw new Error(["Warning cannot find the class file ","'/",useClassName,".class'"].join(''));
-				return false;
-			}
-			if(!empty(className) && isFunction (System[className])) {
-				throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
-				return false;
-			}
+
 
 			return true;
 
@@ -1130,7 +1160,7 @@ if(!GRN_LHH){
 		 * 产品介绍：
 		 * 创建日期：2016-8-23
 		 * 修改日期：2016-8-23
-		 * 名称： System.defined
+		 * 名称： System.isPlainObject
 		 * 功能：是否是纯对象
 		 * 说明：摘抄jQuery isPlainObject()
 		 * 注意：

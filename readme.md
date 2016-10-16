@@ -1,8 +1,8 @@
 	name    ：LamborghiniJS(OO JS)
-	version ：1.1.2.1
+	version ：1.1.3
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-9-25
+	修改日期 ：2016-10-14
 
 
 产品介绍：
@@ -422,6 +422,16 @@
 			
 			LAMJS.app//这个属性代表当前实例化后的对象  
 		方法：	
+			LAMJS.is(Obj,useClassName,className);
+				 产品介绍： class文件检验器
+				 名称： System.is
+				 功能：检测System是否合法，检测要使用的类是否已加载过；检测要定义的类名称之前是否已注册过。
+				 说明：子类继承父类之前调用此方法检测父类之前是否有加载过，如果填写第三参数可检测当前的类是否跟之前的类重名了
+				 注意：当Obj 类型是对象时 useClassName 参数必须要传！ 没传命名空间时 useClassName 参数可以省略不传
+				 @param  (Object)Obj 	       				 NULL : 命名空间
+				 @param 	(String)useClassName     	     NULL : 要使用的类名称
+				 @param 	(String)className         	　　 NULL : 当前类的名称
+				 @return (Boolean)
 			LAMJS.run(args,callback);//此方法提供俩个参数，
 				 名称：run
                  功能：程序主方法
@@ -690,7 +700,7 @@
 			LAMJS.Html.getFile(url,callBack,D); 
 				 名称： getFile
                  功能：返回指定的文件
-                 说明：
+                 说明：支持链式调用
                  注意：
                  @param 	(String)  	D.url         	      NULL :请求地址
                  @param 	(Function)	D.callBack       	  NULL :参数：文件里的内容
@@ -700,7 +710,21 @@
                  @param 	(String|{}) D.data             	  NULL :请求地址的参数
                  @param 	(Boolean) 	D.async               NULL :是否异步加载
                  @param 	(Boolean) 	D.cache           	  NULL :是否缓存默认true
-                 @return {*}
+                 @returns {Html|*}
+			LAMJS.Html.getFiles(url,callBack,D); 
+				 名称： Html.getFiles
+                 功能：返回指定的多个文件
+                 说明：支持链式调用
+                 注意：
+                 @param 	(Array)  	D.urls         	      NULL :请求地址
+                 @param 	(Function)	D.callBack       	  NULL :参数：文件里的内容
+                 @param 	(Object)D                	   NO NULL :json 数据
+                 @param 	(String)  	D.type             NO NULL :获取方式
+                 @param 	(String)  	D.dataType         NO NULL :获取文件类型
+                 @param 	(String|{}) D.data             	  NULL :请求地址的参数
+                 @param 	(Boolean) 	D.async               NULL :是否异步加载
+                 @param 	(Boolean) 	D.cache           	  NULL :是否缓存默认true
+                 @returns {Html|*}
 			
 			LAMJS.Html.tag(name,single,Attr,content); 
 				 名称： tag
