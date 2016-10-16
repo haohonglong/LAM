@@ -22,7 +22,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-27
-		 * 修改日期：2016-10-14
+		 * 修改日期：2016-10-16
 		 * 名称：import
 		 * 功能：导入指定的js文件
 		 * 说明：System 参数不用传
@@ -30,12 +30,14 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @param   (Array)url 			    NO NULL :要加载js文件
 		 * @param   (String)baseUrl 		   NULL :文件路径
 		 * @param   (String)suffix 		       NULL :文件后缀名
+		 * @param   (Boolean)xhr 		       NULL :是否异步加载，默认异步
 		 * @return  {System} 返回当前对象可以链式调用import方法
 		 * Example：
 		 */
-		'import':function(url,baseUrl,suffix){
+		'import':function(url,baseUrl,suffix,xhr){
 			suffix = suffix || '.js';
-			baseUrl = baseUrl || System.Config.Public.ROOT;
+			baseUrl = baseUrl || System.ROOT;
+			xhr = System.isBoolean(xhr) ? xhr : true;
 			try {
 				if(System.isset(importScripts) && System.isFunction(importScripts)){
 					url.each(function(){
@@ -52,9 +54,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 					});
 				}
 
-
 			} catch (e) {
-				if(System.Html.getFiles && System.isFunction(System.Html.getFiles)){//异步方式加载 script 脚本文件
+				if(System.Html.getFiles && System.isFunction(System.Html.getFiles) && xhr){//异步方式加载 script 脚本文件
 					var arr=[];
 					url.each(function(){
 						var src=this;
@@ -74,6 +75,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 						'suffix':suffix
 					}).print();
 				}
+
 
 			}
 			return System;
