@@ -30,14 +30,16 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @param   (Array)url 			    NO NULL :要加载js文件
 		 * @param   (String)baseUrl 		   NULL :文件路径
 		 * @param   (String)suffix 		       NULL :文件后缀名
-		 * @param   (Boolean)xhr 		       NULL :是否异步加载，默认异步
+		 * @param   (Object)X 		       NULL :是否异步加载配置参数
+		 * @param   (Boolean)X.xhr 		       NULL :是否异步加载，默认异步
+		 * @param   (String)X.type 		       NULL :异步加载请求地址的方式
 		 * @return  {System} 返回当前对象可以链式调用import方法
 		 * Example：
 		 */
-		'import':function(url,baseUrl,suffix,xhr){
+		'import':function(url,baseUrl,suffix,X){
 			suffix = suffix || '.js';
 			baseUrl = baseUrl || System.ROOT;
-			xhr = System.isBoolean(xhr) ? xhr : true;
+			var xhr =X && System.isPlainObject(X) && System.isBoolean(X.xhr) ? X.xhr : true;
 			try {
 				if(System.isset(importScripts) && System.isFunction(importScripts)){
 					url.each(function(){
@@ -65,7 +67,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 					});
 					System.Html.getFiles(arr,null,{
-						'type':'GET'
+						'type':X && X.type || 'GET'
 						,'dataType':'script'
 					});
 				}else{
