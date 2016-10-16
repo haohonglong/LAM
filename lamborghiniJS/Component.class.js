@@ -32,7 +32,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @param   (String)suffix 		       NULL :文件后缀名
 		 * @param   (Object)X 		       NULL :是否异步加载配置参数
 		 * @param   (Boolean)X.xhr 		       NULL :是否异步加载，默认异步
-		 * @param   (String)X.type 		       NULL :异步加载请求地址的方式
+		 * @param   (Object)X.params 		       NULL :异步加载参数
 		 * @return  {System} 返回当前对象可以链式调用import方法
 		 * Example：
 		 */
@@ -66,10 +66,10 @@ window[GRN_LHH].run([window],function(window,undefined){
 						arr.push(src);
 
 					});
-					System.Html.getFiles(arr,null,{
-						'type':X && X.type || 'GET'
+					System.Html.getFiles(arr,null,System.merge(X && System.isPlainObject(X.params) ? X.params : {},[{
+						 'type': 'GET'
 						,'dataType':'script'
-					});
+					}]));
 				}else{
 					System.Loader.load({
 						'baseUrl':baseUrl,
