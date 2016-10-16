@@ -2,7 +2,7 @@
 	version ：1.1.3
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-10-14
+	修改日期 ：2016-10-16
 
 
 产品介绍：
@@ -466,13 +466,14 @@
 		         @param   (String)name            NO NULL :参数名称
 		         @return  {String}
 				
-			LAMJS.import(url,baseUrl,suffix);（参考 五、文件加载器）
+			LAMJS.import(url,baseUrl,suffix,X);（参考 五、文件加载器）
 				 名称：import
 	             功能：导入指定的js文件
 	             注意：
 	             @param   (Array)url 			    NO NULL :要加载js文件
 	             @param   (String)baseUrl 		   NULL :文件路径
 	             @param   (String)suffix 		       NULL :文件后缀名
+	             @param   (Object)X 		       NULL :是否异步加载配置参数
 			LAMJS.Loader.replace_tpl();//替换模板标签
 			LAMJS.Loader.load(D);//导入js,css.less 文件（参考 五、文件加载器）
 				  名称： load

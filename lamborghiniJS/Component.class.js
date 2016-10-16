@@ -30,7 +30,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @param   (Array)url 			    NO NULL :要加载js文件
 		 * @param   (String)baseUrl 		   NULL :文件路径
 		 * @param   (String)suffix 		       NULL :文件后缀名
-		 * @param   (Object)X 		       NULL :是否异步加载配置参数
+		 * @param   (Object)X 		       		   NULL :是否异步加载配置参数
 		 * @param   (Boolean)X.xhr 		       NULL :是否异步加载，默认异步
 		 * @param   (Object)X.params 		       NULL :异步加载参数
 		 * @return  {System} 返回当前对象可以链式调用import方法
