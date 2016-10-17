@@ -2,80 +2,30 @@
 window[GRN_LHH].run([window],function(window,undefined){
 	'use strict';
 	var System=this;
-	System.is(System,'Browser','Fsc');
+	System.is(System,'Xhr','Fsc');
 
 
 	var __this__=null;
 
-	// Functions to create xhrs
-	function createStandardXHR() {
-		try {
-			return new window.XMLHttpRequest();
-		} catch( e ) {}
-	}
+	function Fsc(D){
 
-	function createActiveXHR() {
-		try {
-			return new window.ActiveXObject( "Microsoft.XMLHTTP" );
-		} catch( e ) {}
-	}
-
-	var myAjax = {
-		// XMLHttpRequest IE7+, Firefox, Chrome, Opera, Safari ；  ActiveXObject IE6, IE5
-		xhr: window.XMLHttpRequest ? createStandardXHR() : createActiveXHR(),
-		get: function (url, callback) {
-			this.xhr.open('get', url);
-			this.onreadystatechange(callback, this.xhr);
-			this.xhr.send(null);
-		},
-		post: function (url, data, callback) {
-			this.xhr.open('post', url);
-			this.xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			this.onreadystatechange(callback, this.xhr);
-			this.xhr.send(data);
-		},
-		onreadystatechange: function (func, _xhr) {
-			_xhr.onreadystatechange = function () {
-				if (_xhr.readyState == 4) {
-					if (_xhr.status == 200) {
-						func(_xhr.responseText);
-					}
-				}
-			}
-		}
-	};
-
-
-	function Fsc(){
-
-		System.Basis.extends.call(this,System.Browser);
+		System.Basis.extends.call(this,System.Xhr);
 		__this__=this;
 		/*--------------------------------------------------------------------------------------------------*/
 
 		this.fso =null;
 		this.file=null;
-		this.xhr =null;
+		this.xhr = D.xhr || new System.Xhr().getXHR();
 	}
-	Fsc.getXMLHttpRequest=function() {
-		if (window.XMLHttpRequest && !("file:" === window.location.protocol && "ActiveXObject" in window)){
-			return createStandardXHR();
-		}
-		try {
-			return createActiveXHR();
-		} catch (e) {
-			throw new Error("browser doesn't support AJAX."+e.name);
-		}
-	};
-
-	Fsc.Ajax = myAjax;
-
-
 
 	Fsc.prototype = {
 		'constructor':Fsc,
 		'__constructor':function(){},
 		'cFsc':function(){
 			var __this__=this;
+			if(this.fso){
+				return this.fso;
+			}
 			if(ActiveXObject){//IE
 				this.fso = new ActiveXObject("Scripting.FileSystemObject");
 			}else{
@@ -83,12 +33,9 @@ window[GRN_LHH].run([window],function(window,undefined){
 			}
 			return this.fso;
 		},
-		'getXHR':function(){
-			this.xhr = Fsc.getXMLHttpRequest();
-		},
 
 		'createTextFile':function(fso,file){
-			fso = fso || this.fclose;
+			fso = fso || this.cFsc();
 			this.file=fso.CreateTextFile(file, true);
 			return this.file;
 		},
@@ -116,12 +63,10 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @return  ()						:
 		 * Example：
 		 */
-		'destructor':function(){
-
-		}
+		'destructor':function(){}
 
 	};
-	System.extends(Fsc,System.Browser,1);
+	System.extends(Fsc,System.Xhr,1);
 	System['Fsc']=Fsc;
 
 });

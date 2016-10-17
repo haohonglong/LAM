@@ -68,7 +68,10 @@ window[GRN_LHH].run([window],function(window,undefined){
 					});
 					System.Html.getFiles(arr,null,System.merge(X && System.isPlainObject(X.params) ? X.params : {},[{
 						 'type': 'GET'
+						,'async':false
+						,'cache':true
 						,'dataType':'script'
+						,'beforeSend':function(){}
 					}]));
 				}else{
 					System.Loader.load({

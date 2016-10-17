@@ -185,7 +185,7 @@ if(!GRN_LHH){
 	 * @author: lhh
 	 * 产品介绍：所有类的接口
 	 * 创建日期：2015-9-6
-	 * 修改日期：2015-9-6
+	 * 修改日期：2016-10-17
 	 * 名称：Interface
 	 * 功能：
 
@@ -212,6 +212,7 @@ if(!GRN_LHH){
 		'Error': {},
 		'FakeSelect': {},
 		'AutoLayout': {},
+		'Xhr': {},
 		'Fsc': {},
 		'Linklist': {},
 		'PopupLayer': {},
