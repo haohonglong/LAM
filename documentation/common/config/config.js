@@ -62,11 +62,10 @@ if(!GRN_LHH){
         },
         'files':[],
         'XHR':{//配置加载xhr 的公共参数
-
-             'beforeSend':function(){
-                this.type='GET';
-                this.cache=false;
-            }
+            'type': 'GET'
+            ,'async':false
+            ,'cache':true
+            ,'beforeSend':function(){}
         },
         //配置基础文件
         'autoLoadFile':function(){
