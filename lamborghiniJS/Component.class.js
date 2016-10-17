@@ -22,7 +22,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-27
-		 * 修改日期：2016-10-16
+		 * 修改日期：2016-10-17
 		 * 名称：import
 		 * 功能：导入指定的js文件
 		 * 说明：System 参数不用传
@@ -39,6 +39,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		'import':function(url,baseUrl,suffix,X){
 			suffix = suffix || '.js';
 			baseUrl = baseUrl || System.ROOT;
+			var xhr_params = System.Config.XHR;
 			var xhr =X && System.isPlainObject(X) && System.isBoolean(X.xhr) ? X.xhr : true;
 			try {
 				if(System.isset(importScripts) && System.isFunction(importScripts)){
@@ -66,13 +67,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 						arr.push(src);
 
 					});
-					System.Html.getFiles(arr,null,System.merge(X && System.isPlainObject(X.params) ? X.params : {},[{
-						 'type': 'GET'
-						,'async':false
-						,'cache':true
-						,'dataType':'script'
-						,'beforeSend':function(){}
-					}]));
+					xhr_params.dataType='script';
+					System.Html.getFiles(arr,null,System.merge(X && System.isPlainObject(X.params) ? X.params : {},[xhr_params]));
 				}else{
 					System.Loader.load({
 						'baseUrl':baseUrl,

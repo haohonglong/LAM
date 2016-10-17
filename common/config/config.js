@@ -1,7 +1,7 @@
 /**
  * 创建人：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-10-4
+ * 修改日期:2016-10-17
  * 功能：配置文件
  * 说明 : 这个文件要copy到项目里面可以修改 System.Config里的属性 和 GRN_LHH; 的值；
  *
@@ -58,6 +58,12 @@ if(!GRN_LHH){
             'rightLimit':'}}'
         },
         'files':[],
+        'XHR':{//配置加载xhr 的公共参数
+             'type': 'GET'
+            ,'async':false
+            ,'cache':true
+            ,'beforeSend':function(){}
+        },
         //配置基础文件
         'autoLoadFile':function(){
             var ROOT = this.Public.ROOT;

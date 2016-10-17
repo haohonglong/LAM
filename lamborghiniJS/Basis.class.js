@@ -8,7 +8,7 @@
  * LamborghiniJS 0.3 pre
  * @author：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-10-4
+ * 修改日期:2016-10-17
  * 名称：基类
  * 功能：服务于派生类
  * 命名空间接口定义: var GRN_LHH='interfaceName';
@@ -2231,6 +2231,12 @@ window[GRN_LHH].run([window],function(W,Config){
 			'rightLimit':'}}'
 		},
 		'files':[],
+		'XHR':{//配置加载xhr 的公共参数
+			 'type': 'GET'
+			,'async':false
+			,'cache':true
+			,'beforeSend':function(){}
+		},
 		//配置基础文件
 		'autoLoadFile':function(){
 			var ROOT = this.Public.ROOT;
@@ -2331,6 +2337,7 @@ window[GRN_LHH].run([window],function(W,Config){
 		}
 	};
 
+	System.merge(System.Config.XHR || {},[Config.XHR]);
 	System.merge(System.Config || {},[Config]);
 	System.classPath = System.Config.getClassPath();
 	System.ROOT = System.Config.Public.ROOT;
