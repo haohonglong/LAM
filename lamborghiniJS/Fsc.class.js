@@ -1,4 +1,16 @@
-
+/**
+ *
+ * @author lhh
+ * 产品介绍：创建文件流对象
+ * 创建日期：2016-10-17
+ * 修改日期：2016-10-17
+ * 名称：LAMJS.Fsc
+ * 功能：
+ * 说明：
+ * 注意：
+ * @return  ()						:
+ * Example：
+ */
 window[GRN_LHH].run([window],function(window,undefined){
 	'use strict';
 	var System=this;

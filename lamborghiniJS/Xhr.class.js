@@ -1,4 +1,16 @@
-
+/**
+ *
+ * @author lhh
+ * 产品介绍：创建一个XMLHTTP 对象
+ * 创建日期：2016-10-17
+ * 修改日期：2016-10-17
+ * 名称：LAMJS.Xhr
+ * 功能：
+ * 说明：
+ * 注意：
+ * @return  ()						:
+ * Example：
+ */
 window[GRN_LHH].run([window],function(window,undefined){
 	'use strict';
 	var System=this;
@@ -76,8 +88,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 *
 		 * @author lhh
 		 * 产品介绍：析构方法
-		 * 创建日期：2015-4-2
-		 * 修改日期：2015-4-2
+		 * 创建日期：2016-10-7
+		 * 修改日期：2016-10-7
 		 * 名称：destructor
 		 * 功能：在注销Xhr对象时调用此方法
 		 * 说明：
@@ -85,9 +97,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @return  ()						:
 		 * Example：
 		 */
-		'destructor':function(){
-
-		}
+		'destructor':function(){}
 
 	};
 	System.extends(Xhr,System.Browser,1);
