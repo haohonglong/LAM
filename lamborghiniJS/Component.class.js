@@ -18,69 +18,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	var System=this;
 	System.is(System,'BiObject','Component');
 	System.merge(null,[{
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-8-27
-		 * 修改日期：2016-10-17
-		 * 名称：import
-		 * 功能：导入指定的js文件
-		 * 说明：System 参数不用传
-		 * 注意：
-		 * @param   (Array)url 			    NO NULL :要加载js文件
-		 * @param   (String)baseUrl 		   NULL :文件路径
-		 * @param   (String)suffix 		       NULL :文件后缀名
-		 * @param   (Object)X 		       		   NULL :是否异步加载配置参数
-		 * @param   (Boolean)X.xhr 		       NULL :是否异步加载，默认异步
-		 * @param   (Object)X.params 		       NULL :异步加载参数
-		 * @return  {System} 返回当前对象可以链式调用import方法
-		 * Example：
-		 */
-		'import':function(url,baseUrl,suffix,X){
-			suffix = suffix || '.js';
-			baseUrl = baseUrl || System.ROOT;
-			var xhr_params = System.Config.XHR;
-			var xhr =X && System.isPlainObject(X) && System.isBoolean(X.xhr) ? X.xhr : true;
-			try {
-				if(System.isset(importScripts) && System.isFunction(importScripts)){
-					url.each(function(){
-						var src=this;
-						src+=suffix;
-						src = baseUrl ? baseUrl+src : src;
-						if(!System.fileExisted(src)){
-							importScripts(src);
-							if(System.isClassFile(src)){
-								System.classes.push(src);
-							}
-							System.files.push(src);
-						}
-					});
-				}
-
-			} catch (e) {
-				if(System.Html.getFiles && System.isFunction(System.Html.getFiles) && xhr){//异步方式加载 script 脚本文件
-					var arr=[];
-					url.each(function(){
-						var src=this;
-						src+=suffix;
-						src = baseUrl ? baseUrl+src : src;
-						arr.push(src);
-
-					});
-					xhr_params.dataType='script';
-					System.Html.getFiles(arr,null,System.merge(X && System.isPlainObject(X.params) ? X.params : {},[xhr_params]));
-				}else{
-					System.Loader.load({
-						'baseUrl':baseUrl,
-						'js':url,
-						'suffix':suffix
-					}).print();
-				}
-
-
-			}
-			return System;
-		},
+		'import':System.Loader.import,
 		/**
 		 * @author lhh
 		 * 产品介绍：
