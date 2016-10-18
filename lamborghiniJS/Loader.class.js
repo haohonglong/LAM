@@ -24,7 +24,6 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
     var append;
     var sAttribute   = System.Config.render.default.script.Attribute;
     var cAttribute   = System.Config.render.default.css.Attribute;
-    var ROOT         = System.Config.Public.ROOT;
 
 
 
@@ -124,7 +123,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
             }
             var suffix;
             var rel;
-            var baseUrl=D.baseUrl || ROOT;
+            var baseUrl=D.baseUrl || System.ROOT;
             var len;
             var src="";
             var href="";
