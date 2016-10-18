@@ -313,6 +313,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 修改日期：2016-10-14
          * 说明：
          * 调用方式：
+         * @returns {Loader}返回当前对象可以链式调用
          */
         'print':function(){
             if(files.length < 1){return;}
@@ -355,6 +356,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
             }
 
             this.remove();
+            return this;
 
         },
         /**
