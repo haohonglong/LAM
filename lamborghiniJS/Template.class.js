@@ -151,13 +151,13 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-03-9
-	 * 修改日期：2016-10-1
+	 * 修改日期：2016-10-18
 	 * 名称：Template.replaceTpl
 	 * 功能：替换模版标签
-	 * 说明：
+	 * 说明：替换多个属性的模版标签，标签属性，用数组方式传递
 	 * 注意：
 	 * @param (String)selector 		NO NULL:选择器
-	 * @param (String)attr_name 	NO NULL:标签属性
+	 * @param (String|Array)attr_name 	NO NULL:标签属性
 	 * @param (Function)callback 	   NULL:回调函数
 	 * @returns {String}
 	 */
@@ -167,11 +167,23 @@ window[GRN_LHH].run(function(undefined){
 			if(callback && System.isFunction(callback)){
 				callback.call(this);
 			}else{
-				value=Template.template($(this).attr(attr_name));
-				if(value && System.isString(value)){
-					$(this).attr(attr_name,value);
-					console.log(value);
+				var $this=$(this);
+				if(System.isArray(attr_name)){
+					System.each(attr_name,function(){
+						value=Template.template($this.attr(this));
+						if(value && System.isString(value)){
+							$this.attr(this,value);
+
+						}
+					});
+				}else{
+					value=Template.template($this.attr(attr_name));
+					if(value && System.isString(value)){
+						$this.attr(attr_name,value);
+
+					}
 				}
+
 
 			}
 
