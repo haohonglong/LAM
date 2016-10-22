@@ -19,6 +19,197 @@ window[GRN_LHH].run([window],function(window,undefined){
 	System.is(System,'BiObject','Component');
 	System.merge(null,[{
 		'import':System.Loader.import,
+		'require':function(name){
+			if(System.modules.exports[name]){
+				return System.modules.exports[name];
+			}else{
+				return null;
+			}
+		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-9-15
+		 * 修改日期：2016-9-10
+		 * 名称：System.config
+		 * 功能：配置类加载文件
+		 * 说明：
+		 * 注意：
+		 * @param   (Object)D 			        NO NULL :传入的参数
+		 * @param   (String)D.baseUrl 			NO NULL :相对于哪个路径
+		 * @param   (Object)D.paths 			NO NULL :
+		 * @return  (voide)						:
+		 * Example：
+		 */
+		'config':function(D){
+			var option ={
+				baseUrl: D.baseUrl || System.ROOT,
+				paths: D.paths
+			};
+			System.Alias = option;
+		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-9-21
+		 * 修改日期：2016-9-10
+		 * 名称：System.define
+		 * 功能：
+		 * 说明：
+		 * 注意：
+		 * @param   (Array)args 			   NULL :传入的参数
+		 * @param   (Function)callback 		NO NULL :在运行此方法要立马执行的操作,这里的this指的是LAMJS 对象（必选）
+		 * @return  (voide)						:
+		 * Example：
+		 */
+		'define':function(args,callback){
+			if(System.isObject(System.Alias) && System.isPlainObject(System.Alias)) {
+				var paths = System.Alias.paths;
+				var urls=[];
+				System.each(args, function (i,item) {
+					if(paths[item] && System.isString(paths[item])){
+						urls.push(paths[item]);
+					}
+				});
+
+				System.import(urls,paths.baseUrl);
+			}
+
+		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-11-22
+		 * 修改日期：2015-11-24
+		 * 名称：System.modules
+		 * 功能：模块
+		 * 说明：
+		 * 注意：
+		 * Example：
+		 */
+		'modules':{
+			/**
+			 * @author: lhh
+			 * 产品介绍：
+			 * 创建日期：2015-11-22
+			 * 修改日期：2015-11-24
+			 * 名称：System.modules.exports
+			 * 功能：
+			 * 说明：
+			 * 注意：
+			 * Example：
+			 */
+			'exports':{}
+		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-8-26
+		 * 修改日期：2016-8-25
+		 * 名称： list
+		 * 功能：递归对象
+		 * 说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象为止
+		 * 注意：
+		 * @param 	(Object)D             			NO NULL : 对象
+		 * @param 	(Funtion)callback             	NO NULL : 回调方法
+		 * @returns {Object}
+		 * Example：
+		 *
+		 */
+		'list':function(D,callback){
+			var loop,totalLoop;
+			totalLoop=loop=0;
+			var list=function(D,callback){
+
+				if(!System.isArray(D) && !System.isObject(D)){
+					return D;
+				}
+				if(!System.isFunction(callback)){
+					throw new Error('Warning 第二参数 必须是个callback');
+				}
+				//算出找到指定内容，所需要遍历的次数
+				loop++;
+				return System.each(D,function(k,v){
+					totalLoop++;
+					if (false === callback.apply(D,[k,v,loop,totalLoop])) {
+						console.log('共遍历----->'+loop+'<------次找到了')
+						return false;
+					}
+					//如果没找到，就继续递归搜索
+					if(v){
+						return list(v,callback);
+					}
+				});
+			};
+			return {'data':list(D,callback),'totalLoop':totalLoop,'loop':loop};
+
+		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-10-13
+		 * 修改日期：2016-8-23
+		 * 名称：clone
+		 * 功能：对象克隆
+		 * 说明：_hashCode里的'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
+		 * 注意：
+		 * @param   (Boolean)deep  		   	   NULL :是否要深度拷贝对象
+		 * @param   (Object)className 		NO NULL : 要克隆的类
+		 * @return  (Object)				:返回克隆后的新对象
+		 * Example：
+		 */
+		'clone': function(className) {
+			var deep;
+			if(System.isBoolean(className)) {
+				deep = className;
+				className = arguments[1];
+			}else{
+				deep = false;
+			}
+			var obj;
+			obj = System.merge(deep,{},[className]);
+			if(obj['_hashCode']){
+				obj['_hashCode'] += '_'+System.BiObject.generate();
+			}
+			return obj;
+
+		},
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-15
+		 * 修改日期：2016-8-23
+		 * 名称：isclone
+		 * 功能：检查对象是否是克隆对象
+		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
+		 * 注意：
+		 * @param   (Object)className 		NO NULL : 检查的对象
+		 * @returns {boolean}
+		 */
+		'isclone': function(obj) {
+			if(-1 === obj._hashCode.indexOf('_')){
+				return false;
+			}else{
+				return true;
+			}
+
+		},
+
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-02-17
+		 * 修改日期：2016-02-17
+		 * 名称：checkout
+		 * 功能：
+		 * 说明：
+		 * 注意：
+		 * Example：
+		 */
+		'checkout': function() {},
 		/**
 		 * @author lhh
 		 * 产品介绍：
