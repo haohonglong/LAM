@@ -191,9 +191,83 @@ window[GRN_LHH].run(function(undefined){
 		return System;
 	};
 
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：获取容器里带模板标签的html 字符串 ，然后迭代解析后输出到指定标签里
+	 * 创建日期：2016-10-22
+	 * 修改日期：2016-10-22
+	 * 名称：Template.foreach
+	 * @param {String}template NO NULL:容器里带模板标签的html 字符串
+	 * @param {Array}data		NO NUll:解析模板标签的数据
+	 * @returns {string} 返回解析后的字符串
+	 * Example：
+	 * 			html:
+	 * 				<div class="result"></div>
+
+	 			template:
+					 <script type="text/template-foreach:.result">
+						 <li sort:id="{{id}}">
+							 <div><a href="{{href}}">{{title}}</a></div>
+							 <img src="{{imgSrc}}" alt="{{title}}">
+						 </li>
+
+					 </script>
+
+	 			data:
+						 [
+						 {
+							id : '1',
+							title : 'php web appliaction',
+							href : 'http://www.baidu.com',
+							imgSrc : 'http://www.baidu.com'
+						},
+						 {
+							id : '2',
+							title : 'java web appliaction',
+							href : 'http://www.baidu.com',
+							imgSrc : 'http://www.baidu.com'
+						},
+						 {
+							id : '3',
+							title : 'python web appliaction',
+							href : 'http://www.baidu.com',
+							imgSrc : 'http://www.baidu.com'
+						},
+						 {
+							id : '4',
+							title : 'js 权威指南',
+							href : 'http://www.qq.com',
+							imgSrc : 'http://www.qq.com'
+						}]
+
+	 			js:
+	 				document.querySelector('.result').innerHTML=(System.Template.foreach($('[type="text/template-foreach:.result"]').html(), data));
+	 */
+	Template.foreach=function(template, data){
+		var leftLimit  = System.Config.templat.leftLimit,
+			rightLimit  = System.Config.templat.rightLimit;
+		var i = 0,
+			len = data.length,
+			fragment = '';
+		function replace(obj){
+			var t, key, reg;
+			for(key in obj){
+				reg = new RegExp(leftLimit + key + rightLimit, 'ig');
+				t = (t || template).replace(reg, obj[key]);
+			}
+			return t;
+		}
+		for(; i < len; i++){
+			fragment += replace(data[i]);
+		}
+		return fragment;
+	};
+
 	Template.getGuid=function(){
 		return guid;
 	};
+
 
 	System.merge(null,[{
 						'analysisVar':Template.analysisVar,
