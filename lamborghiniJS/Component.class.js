@@ -46,7 +46,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 				baseUrl: D.baseUrl || System.ROOT,
 				paths: D.paths
 			};
-			System.Alias = option;
+			System.alias = option;
 		},
 		/**
 		 * @author: lhh
@@ -63,8 +63,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * Example：
 		 */
 		'define':function(args,callback){
-			if(System.isObject(System.Alias) && System.isPlainObject(System.Alias)) {
-				var paths = System.Alias.paths;
+			if(System.alias && System.isObject(System.alias) && System.isPlainObject(System.alias)) {
+				var paths = System.alias.paths;
 				var urls=[];
 				System.each(args, function (i,item) {
 					if(paths[item] && System.isString(paths[item])){
@@ -73,7 +73,12 @@ window[GRN_LHH].run([window],function(window,undefined){
 				});
 
 				System.import(urls,paths.baseUrl);
+			}else{
+				System.import(args,System.ROOT);
 			}
+			System.wait(function(){
+					callback.apply(System,[]);
+				});
 
 		},
 		/**
