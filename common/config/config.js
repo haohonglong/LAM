@@ -44,6 +44,7 @@ if(!GRN_LHH){
 
     Config = System.Config = {
         'vendorPath':_ROOT_+'/lamborghiniJS',
+        'requirejs':false,
         'Public':{
              'ROOT':_ROOT_
             ,'COMMON':_ROOT_+'/common'
@@ -238,63 +239,65 @@ if(!GRN_LHH){
     var classPath=Config.getClassPath();
     var ROOT=Config.Public.ROOT;
     var files=[];
-
     //加载基础类
     var srcs =Config.autoLoadFile();
-    //=================================================================================================================================
-    if(Config.render.create){
-        System.wait(function(){
-            var H=Config.render.H();
+    if(Config.requirejs && requirejs){
+        requirejs.config({
+            baseUrl: ''
+        });
+        requirejs(srcs,function(){});
+
+    }else{
+        //=================================================================================================================================
+        if(Config.render.create){
+            System.wait(function(){
+                var H=Config.render.H();
+                for(i=0,len = srcs.length;i < len; i++){
+                    //确保每个文件只加载一次
+                    if(Config.files.indexOf(srcs[i]) != -1){
+                        continue;
+                    }
+                    Config.files.push(srcs[i]);
+                    data.src = srcs[i];
+                    Config.render.bulid(tag,data);
+                }
+                console.log(H.body);
+                console.log(Config.render.fragment);
+                H.body.appendChild(Config.render.fragment);
+            },3000);
+        }else{
+            var attrs=[];
+            for(var k in scriptAttribute){
+                attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
+            }
             for(i=0,len = srcs.length;i < len; i++){
                 //确保每个文件只加载一次
                 if(Config.files.indexOf(srcs[i]) != -1){
                     continue;
                 }
+                files.push('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
                 Config.files.push(srcs[i]);
-                data.src = srcs[i];
-                Config.render.bulid(tag,data);
-            }
-            console.log(H.body);
-            console.log(Config.render.fragment);
-            H.body.appendChild(Config.render.fragment);
-        },3000);
-    }else{
-        var attrs=[];
-        for(var k in scriptAttribute){
-            attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
-        }
-        for(i=0,len = srcs.length;i < len; i++){
-            //确保每个文件只加载一次
-            if(Config.files.indexOf(srcs[i]) != -1){
-                continue;
-            }
-            files.push('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
-            Config.files.push(srcs[i]);
 
+            }
+            System.print(files.join(''));
         }
-        System.print(files.join(''));
+
+        //=================================================================================================================================
+        //3分钟之后检测lamborghiniJS基础类文件是否加载成功
+        //=================================================================================================================================
+        System.wait(function(){
+            if(!LAMJS){
+                alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
+            }else{
+                LAMJS.run(function() {
+                    'use strict';
+                    var System=this;
+                    var ROOT = System.Config.Public.ROOT;
+                });
+            }
+        },30000);
+        //=================================================================================================================================
     }
-
-    //=================================================================================================================================
-
-
-    //=================================================================================================================================
-    //3分钟之后检测lamborghiniJS基础类文件是否加载成功
-    //=================================================================================================================================
-    System.wait(function(){
-        if(!LAMJS){
-            alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
-        }else{
-            LAMJS.run(function() {
-                'use strict';
-                var System=this;
-                var ROOT = System.Config.Public.ROOT;
-            });
-        }
-    },30000);
-    //=================================================================================================================================
-
-
 })(window[GRN_LHH]);
 
 
