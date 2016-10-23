@@ -1,7 +1,7 @@
 /**
  * 创建人：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-10-17
+ * 修改日期:2016-10-23
  * 功能：配置文件
  * 说明 : 这个文件要copy到项目里面可以修改 System.Config里的属性 和 GRN_LHH; 的值；
  *
@@ -39,12 +39,8 @@ if(!GRN_LHH){
 
     }
 
-
-
-
     Config = System.Config = {
         'vendorPath':_ROOT_+'/lamborghiniJS',
-        'requirejs':false,
         'Public':{
              'ROOT':_ROOT_
             ,'COMMON':_ROOT_+'/common'
@@ -85,7 +81,6 @@ if(!GRN_LHH){
                 classPath+'/Controller.class.js'
             ];
         },
-
         //标签的渲染方式
         'render':{
             //输出标签的方式 ()
@@ -241,9 +236,10 @@ if(!GRN_LHH){
     var files=[];
     //加载基础类
     var srcs =Config.autoLoadFile();
-    if(Config.requirejs && requirejs){
+    if(typeof requirejs != 'undefined'){
         requirejs.config({
-            baseUrl: ''
+             baseUrl: ''
+            ,waitSeconds:0
         });
         requirejs(srcs,function(){});
 
