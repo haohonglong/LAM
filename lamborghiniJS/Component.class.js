@@ -19,6 +19,19 @@ window[GRN_LHH].run([window],function(window,undefined){
 	System.is(System,'BiObject','Component');
 	System.merge(null,[{
 		'import':System.Loader.import,
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-10-23
+		 * 修改日期：2016-10-23
+		 * 名称：System.require
+		 * 功能：调用export的接口
+		 * 说明：
+		 * 注意：
+		 * @param {String} name
+		 * @returns {*}					:
+		 * Example：
+		 */
 		'require':function(name){
 			if(System.modules.exports[name]){
 				return System.modules.exports[name];
@@ -26,6 +39,28 @@ window[GRN_LHH].run([window],function(window,undefined){
 				return null;
 			}
 		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-10-23
+		 * 修改日期：2016-10-23
+		 * 名称：System.export
+		 * 功能：设置对外提供接口
+		 * 说明：
+		 * 注意：
+		 * @param {String} name
+		 * @param {*} value
+		 * @return  (voide)						:
+		 * Example：
+		 */
+		'export':function(name,value){
+			if(System.modules.exports[name]){
+				throw new Error(['Warning: \'',name,'\' 名称已经存在,请换个名字'].join(''));
+			}else{
+				System.modules.exports[name] = value;
+			}
+		},
+
 		/**
 		 * @author: lhh
 		 * 产品介绍：
