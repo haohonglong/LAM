@@ -1145,6 +1145,8 @@ if(!GRN_LHH){
 	Function.prototype.method=function(name,fn){
 		if(!this.prototype[name]){
 			this.prototype[name] = fn;
+		}else{
+			throw new Error(['Warning: \'',name,'\' 名称已经存在,请换个名字'].join(''));
 		}
 		return this;
 	};
