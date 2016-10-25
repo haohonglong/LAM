@@ -343,96 +343,53 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * 功能：动态返回指定的标签
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(String)name            NO NULL : 标签名称
 	 * @param 	(Boolean)single            NULL : 成对标签还是单一标签，false 是成对标签
+	 * @param 	(String)name            NO NULL : 标签名称
 	 * @param 	(Object)Attr               NULL : 标签的属性
 	 * @param 	(String|Array)content      NULL : 内容
 	 * @return (String) 返回标签字符串
 	 * Example：
 	 *
 	 */
-	Html.tag = function(name,single,Attr,content){
+	Html.tag = function(single,name,Attr,content){
 		var args = arguments;
 		var len = args.length;
-		if(0 == len || !System.isString(args[0])){
-			throw new Error('Warning :缺少标签名称');
-			return '';
+		if(0 === len || len > 4){
+			throw new Error('Warning :参数不合法');
 		}
+		if(!System.isBoolean(single)){
+			name	 = args[0];
+			Attr	 = args[1] || {};
+			content	 = args[2] || null;
+			single	 = false;
+		}else{
+			if(!System.isString(args[1])){
+				throw new Error('Warning :缺少标签名称');
+			}else{
+				single	 = args[0];
+				name	 = args[1] || null;
+				Attr	 = args[2] || {};
+				content	 = args[3] || null;
+			}
+
+		}
+
+		if(single && content){throw new Error('Warning :单标签下没有 content 参数:'+content);}
 
 		switch (len){
 			case 4:
-				name	 = args[0];
-				single 	 = args[1];
-				Attr 		 = args[2];
-				content  = args[3];
-				break;
-			case 3:
-				if(System.isPlainObject(args[1])){//tag('div',{},'')
-					name	 = args[0];
-					single 	 = false;
-					Attr 		 = args[1];
-					content  = args[2];
-				}else if(System.isBoolean(args[1])){//tag('img',true,{})
-					name	 = args[0];
-					single 	 = args[1];
-					Attr 		 = args[2];
-					content  = null;
-				}else{
-					throw new Error('Warning :第二参数类型非法！');
-					return '';
+				if(!System.isBoolean(single)
+				|| !System.isString(name)
+				|| !System.isPlainObject(Attr)
+				|| !System.isString(content) && !System.isArray(content)){
+					throw new Error('Warning :参数不合法');
 				}
 
-				break;
-			case 2:
-				if(System.isString(args[1]) || System.isArray(args[1])){//tag('div',String|Array)
-					name	 = args[0];
-					single 	 = false;
-					Attr 	 = null;
-					content  = args[1];
-				}else if(System.isPlainObject(args[1])){//tag('div',{})
-					name	 = args[0];
-					single 	 = false;
-					Attr 	 = args[1];
-					content  = null;
-				}else if(System.isBoolean(args[1])){//tag('img',true)
-					name	 = args[0];
-					single 	 = args[1];
-					Attr 	 = null;
-					content  = null;
-				}else{
-					throw new Error('Warning :第二参数类型非法！');
-					return '';
-				}
-
-				break;
-			case 1:
-				name	 = args[0];
-				single 	 = false;
-				Attr     = null;
-				content  = null;
 				break;
 			default:
-				throw new Error('Warning :第二参数类型不合法！');
-				return '';
 
 		}
 
-		if(name && !System.isString(name)){
-			throw new Error('Warning :name数类型不合法！');
-			return '';
-		}
-		if(single && !System.isBoolean(single)){
-			throw new Error('Warning :single数类型不合法！');
-			return '';
-		}
-		if(Attr && !System.isPlainObject(Attr)){
-			throw new Error('Warning :Attr数类型不合法！');
-			return '';
-		}
-		if(content && !System.isString(content) && !System.isArray(content)){
-			throw new Error('Warning :content数类型不合法！');
-			return '';
-		}
 
 		var tag=[];
 		tag.push('<',name);
@@ -539,12 +496,10 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	Html.script=function(content,Attr){
 		if(!System.isString(content)){
 			throw new Error('Warning: content数类型不合法！');
-			return '';
 		}
 
 		if(Attr && !System.isPlainObject(Attr)){
 			throw new Error('Warning: src数类型不合法！');
-			return '';
 		}
 		Attr = Attr || {};
 		Attr.type = Attr.type || 'text/javascript';
@@ -569,12 +524,10 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	Html.style=function(content,Attr){
 		if(!System.isString(content)){
 			throw new Error('Warning: content数类型不合法！');
-			return '';
 		}
 
 		if(Attr && !System.isPlainObject(Attr)){
 			throw new Error('Warning: src数类型不合法！');
-			return '';
 		}
 		Attr = Attr || {};
 		Attr.type = Attr.type || 'text/css';
@@ -602,7 +555,6 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 		var len = args.length;
 		if(0 == len || !System.isString(args[0])){
 			throw new Error('Warning :路径参数必写');
-			return '';
 		}
 
 		switch (len){
@@ -622,7 +574,6 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 					Attr 	 = args[1];
 				}else{
 					throw new Error('Warning: 第二参数类型不合法！');
-					return '';
 				}
 
 				break;
@@ -632,16 +583,13 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 		}
 		if(!System.isString(href)){
 			throw new Error('Warning: href数类型不合法！');
-			return '';
 		}
 		if(content && !System.isString(content) && !System.isArray(content)){
 			throw new Error('Warning: content数类型不合法！');
-			return '';
 		}
 
 		if(Attr && !System.isPlainObject(Attr)){
 			throw new Error('Warning: src数类型不合法！');
-			return '';
 		}
 		Attr = Attr || {};
 		content = content || '';
@@ -668,15 +616,13 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	Html.img=function(src,Attr){
 		if(!System.isString(src)){
 			throw new Error('Warning: src数类型不合法！');
-			return '';
 		}
 		if(Attr && !System.isPlainObject(Attr)){
 			throw new Error('Warning: src数类型不合法！');
-			return '';
 		}
 		Attr = Attr || {};
 		Attr.src = src;
-		return Html.tag('img',true,Attr);
+		return Html.tag(true,'img',Attr);
 	};
 
 
