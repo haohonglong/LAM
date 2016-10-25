@@ -750,12 +750,12 @@
 					    LAMJS.run(function () {
 	                        'use strict';
 	                        var System = this;
-	                        System.Html.tag('nav',
+	                        System.Html.tag('nav',{},
 									System.Html.tag('ul', {'class': 'pagination'},
 											(function(){
 												var arr=[];
 												var li;
-												li =System.Html.tag('li',
+												li =System.Html.tag('li',{},
 														System.Html.tag('a',{'href':'#','aria-label':'Previous'},
 																System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
 														)
@@ -764,12 +764,12 @@
 												arr.push(li);
 												
 												for(var i=1;i<=5;i++){
-													arr.push(System.Html.tag('li',
+													arr.push(System.Html.tag('li',{},
 															System.Html.tag('a', {'href':'#'},i)
 													));
 				
 												}
-												li = System.Html.tag('li',
+												li = System.Html.tag('li',{},
 														System.Html.tag('a', {'href':'#','aria-label':'Next'},
 																System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
 														)

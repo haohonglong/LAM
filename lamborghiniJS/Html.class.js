@@ -375,6 +375,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 		}
 
 		if(single && content){throw new Error('Warning :单标签下没有 content 参数:'+content);}
+		content = System.isNumeric(content) ? String(content) : content;
 
 		switch (len){
 			case 4:
