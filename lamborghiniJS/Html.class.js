@@ -309,7 +309,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-4
+	 * 修改日期：2016-10-26
 	 * 名称： Html.renderTagAttributes
 	 * 功能：
 	 * 说明：
@@ -320,9 +320,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.renderTagAttributes = function(Attr){
-		if(!Attr || !System.isPlainObject(Attr)) {
-			return '';
-		}
+		Attr = !Attr || !System.isPlainObject(Attr) ? {} : Attr;
 		var attrs=[];
 		for(var key in Attr){
 			if(System.arr_Object_key_has(key)){
@@ -338,7 +336,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2015-8-25
-	 * 修改日期：2016-10-25
+	 * 修改日期：2016-10-26
 	 * 名称： tag
 	 * 功能：动态返回指定的标签
 	 * 说明：
@@ -355,12 +353,12 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 		var args = arguments;
 		var len = args.length;
 		if(0 === len || len > 4){
-			throw new Error('Warning :参数不合法');
+			throw new Error('Warning :参数至少有一个，且参数个数不能超过4个');
 		}
 		if(!System.isBoolean(single)){
 			name	 = args[0];
 			Attr	 = args[1] || {};
-			content	 = args[2] || null;
+			content	 = args[2] || '';
 			single	 = false;
 		}else{
 			if(!System.isString(args[1])){
@@ -369,36 +367,24 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 				single	 = args[0];
 				name	 = args[1] || null;
 				Attr	 = args[2] || {};
-				content	 = args[3] || null;
+				content	 = args[3] || '';
 			}
 
 		}
 
-		if(single && content){throw new Error('Warning :单标签下没有 content 参数:'+content);}
+		if(single && content){throw new Error('Warning :单标签下没有参数:{content} 值是:\''+content+'\'');}
 		content = System.isNumeric(content) ? String(content) : content;
 
-		switch (len){
-			case 4:
-				if(!System.isBoolean(single)
-				|| !System.isString(name)
-				|| !System.isPlainObject(Attr)
-				|| !System.isString(content) && !System.isArray(content)){
-					throw new Error('Warning :参数不合法');
-				}
-			case 3:
-			case 2:
-				if(!System.isBoolean(single)
-				|| !System.isString(name)
-				|| Attr && !System.isPlainObject(Attr)
-				|| content && !System.isString(content) && !System.isArray(content)){
-					throw new Error('Warning :参数不合法');
-				}
-
-				break;
-			default:
-
+		//check
+		if(System.empty(name) || !System.isString(name)){
+			throw new Error('Warning :标签名称不能为空，只能是字符串！');
 		}
-
+		if(Attr && !System.isPlainObject(Attr)){
+			throw new Error('Warning :<'+name+'>标签的属性必须是一个对象！');
+		}
+		if(content && !System.isString(content) && !System.isArray(content)){
+			throw new Error('Warning :<'+name+'>标签内容必须是字符串或者是数组');
+		}
 
 		var tag=[];
 		tag.push('<',name);
@@ -412,7 +398,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 			tag.push(' />');
 		}else{
 			tag.push('>');
-			if(content){
+			if(!System.empty(content)){
 				if(System.isArray(content)){
 					tag.push(content.join(''));
 				}else{
@@ -429,7 +415,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-10-25
+	 * 修改日期：2016-10-26
 	 * 名称： scriptFile
 	 * 功能：
 	 * 说明：
@@ -441,10 +427,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.scriptFile=function(src,Attr){
-		if(!System.isString(src)){
-			throw new Error('Warning: src数类型不合法！');
-		}
-
+		if(!System.isString(src)){throw new Error('Warning: script 标签src参数必须是字符串！');}
 		Attr = Attr || System.clone(sAttribute);
 		Attr.src = src;
 		Attr.type = Attr.type || 'text/javascript';
@@ -456,7 +439,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-10-25
+	 * 修改日期：2016-10-26
 	 * 名称： a
 	 * 功能：
 	 * 说明：
@@ -468,9 +451,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.linkFile=function(href,Attr){
-		if(!System.isString(href)){
-			throw new Error('Warning: href数类型不合法！');
-		}
+		if(!System.isString(href)){throw new Error('Warning: link 标签href参数必须是字符串！');}
 		Attr = Attr || System.clone(cAttribute);
 		Attr.href = href;
 		return Html.tag(true,'link',Attr);
@@ -522,7 +503,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-10-25
+	 * 修改日期：2016-10-26
 	 * 名称： a
 	 * 功能：
 	 * 说明：
@@ -535,9 +516,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.a=function(href,content,Attr){
-		if(!System.isString(href)){
-			throw new Error('Warning: href数类型不合法！');
-		}
+		if(!System.isString(href)){throw new Error('Warning: a标签href参数必须是字符串！');}
 		Attr = Attr || {};
 		content = content || '';
 		Attr.href = href;
@@ -549,7 +528,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-10-25
+	 * 修改日期：2016-10-26
 	 * 名称： img
 	 * 功能：
 	 * 说明：
@@ -561,15 +540,11 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.img=function(src,Attr){
-		if(!System.isString(src)){
-			throw new Error('Warning: src数类型不合法！');
-		}
+		if(!System.isString(src)){throw new Error('Warning: img标签src参数必须是字符串！');}
 		Attr = Attr || {};
 		Attr.src = src;
 		return Html.tag(true,'img',Attr);
 	};
-
-
 
 
 	Html.prototype = {
