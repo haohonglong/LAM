@@ -1,3 +1,15 @@
+/**
+ * @author: lhh
+ * 产品介绍：
+ * 创建日期：2015-8-26
+ * 修改日期：2016-10-26
+ * 名称：
+ * 功能：操作dom
+ * 说明：
+ * 注意：
+ * Example：
+ *
+ */
 window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefined){
 	'use strict';
 	var System=this;
@@ -7,15 +19,26 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 	function Dom(tag,D){
 		System.Basis.extends.call(this,System.Browser);
 		__this__=this;
+		this.root=document;
 		this.node=null;
 		this.attributes=[];
 		//构造有参数时
-		if(arguments.length){
-			this.create(tag,D);
-		}
+		if(arguments.length){this.create(tag,D);}
 		this.fragment = document.createDocumentFragment();
 	}
-
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-7-13
+	 * 修改日期：2016-10-26
+	 * 名称：Dom.getStyle
+	 * 功能：
+	 * 说明：
+	 * 注意：
+	 *
+	 * @param $string
+	 * @returns {*}
+	 */
 	Dom.getStyle=function(obj,attr){
 		if(obj.currentStyle){
 			return obj.currentStyle[attr];
@@ -23,6 +46,106 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			return getComputedStyle(obj,false)[attr];
 		}
 	};
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：
+	 * 创建日期：2014-11-28
+	 * 修改日期：2014-12-22
+	 * 名称：Dom.setStyle
+	 * 功能：对多个节点元素批量设置同一个样式
+	 * 说明：
+	 * 注意：
+	 * @param   (Array)nodes 			NO NULL :dom节点集合
+	 * @param   (String)attr 			NO NULL :要设置样式属性
+	 * @param   (String)value 			NO NULL :要设置样式属性的值
+	 * @return  {*}
+	 * Example：
+	 */
+	Dom.setStyle=function(nodes,attr,value){
+		if(System.empty(nodes) || System.isString(nodes)) return 0;
+		for(var i=0,len=nodes.length;i<len;i++){
+			nodes[i].style[attr]=value;
+		}
+	};
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：
+	 * 创建日期：2014-11-28
+	 * 修改日期：2014-12-22
+	 * 名称：Dom.css
+	 * 功能：设置
+	 * 说明：
+	 * 注意：
+	 * @param   (Array)nodes 			NO NULL :dom节点集合
+	 * @param   ({})D 			        NO NULL :多个样式数据 {k:v[,k:v[,...]]}
+	 * @return  (void)
+	 * Example：
+	 */
+	Dom.css=function(nodes,D){
+		for(var prop in D){
+			if(!D.hasOwnProperty(prop)) continue;
+			Dom.setStyle(nodes,prop,D[prop]);
+		}
+	};
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：
+	 * 创建日期：2014-11-28
+	 * 修改日期：2014-12-22
+	 * 名称：Dom.getByClass
+	 * 功能：获取类名集合
+	 * 说明：
+	 * 注意：
+	 * @param   (String)s			NO NULL :class 名称
+	 * @param   (String)p 			NO NULL :
+	 * @param   (String)t 			NO NULL :
+	 * @return  (Array)				返回匹配的节点集合
+	 * Example：
+	 */
+	Dom.getByClass=function(s,p,t){//使用class获取元素
+		var reg=new RegExp('\\b'+s+'\\b');
+		var aResult=[];
+		var aElement=(p||document).getElementsByTagName(t || '*');
+
+		for(var i=0;i<aElement.length;i++)
+		{
+			if(reg.test(aElement[i].className))
+			{
+				aResult.push(aElement[i])
+			}
+		}
+		return aResult;
+	};
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-7-13
+	 * 修改日期：2016-10-26
+	 * 名称：Dom.shtmlspecialchars
+	 * 功能：取消HTML代码
+	 * 说明：
+	 * 注意：
+	 *
+	 * @param $string
+	 * @returns {*}
+	 */
+	Dom.shtmlspecialchars=function($string) {
+		var $p;
+		var $unallowed = {
+			'&': '&',
+			'"': '"',
+			'<': '<',
+			'>': '>'
+		};
+		for($p in $unallowed){
+			$string = $string.replace(eval('/'+$p+'/g'), $unallowed[$p]);
+		}
+		return $string;
+	};
+
 
 	Dom.prototype = {
 		'constructor':Dom,
@@ -31,7 +154,7 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-26
-		 * 修改日期：2016-7-15
+		 * 修改日期：2016-10-26
 		 * 名称： create
 		 * 功能：创建节点元素
 		 * 说明：
@@ -44,17 +167,11 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 */
 		'create':function(tag,D){
 			tag = tag || "div";
-			if(!System.isString(tag)){
-				throw new Error('Warning 缺少标签名称');
-				return false;
-			}
+			if(System.empty(tag)){throw new Error('Warning 缺少标签名称');}
 			this.node=document.createElement(tag);
 			this.attributes = this.node.attributes;
 			var k;
-			for(k in D){
-				this.attr(k,D[k]);
-			}
-
+			for(k in D){this.attr(k,D[k]);}
 			return this;
 		},
 
@@ -98,10 +215,9 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * 创建日期：2015-12-08
 		 * 修改日期：2015-12-08
 		 * 名称： createFragment
-		 * 功能：documentFragment 节点
+		 * 功能：创建文档碎片节点
 		 * 说明：
 		 * 注意：
-		 * @param 	(String)tag             NULL : 标签名称
 		 * @return (Dom)
 		 * Example：
 		 *
@@ -145,24 +261,27 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-12-08
-		 * 修改日期：2015-12-08
+		 * 修改日期：2016-10-26
 		 * 名称： innerHTML
 		 * 功能：
 		 * 说明：
 		 * 注意：
 		 * @param 	(String)html             NO NULL : html 内容
-		 * @param 	(String)tag              	NULL : html 标签名
-		 * @return (DocumentFragment)
+		 * @returns {string}
 		 * Example：
-		 *
 		 */
-		'innerHTML':function(html,tag) {
-			tag = tag || "div";
-			this.create(tag).node.innerHTML = html;
-			for (this.createFragment(); this.node.firstChild; ) {
-				this.fragment.appendChild(this.node.firstChild);
+		'html':function(html) {
+			if(html){
+				this.node.innerHTML = html;
+
+			}else{
+				return this.node.innerHTML;
 			}
-			return this.fragment.childNodes.length > 1 ? this.fragment : this.fragment.removeChild(this.fragment.firstChild);
+			//勿删
+			//for (this.createFragment(); this.node.firstChild;) {
+			//	this.fragment.appendChild(this.node.firstChild);
+			//}
+			//return this.fragment.childNodes.length > 1 ? this.fragment : this.fragment.removeChild(this.fragment.firstChild);
 		},
 		/**
 		 * @author: lhh
@@ -231,39 +350,69 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 
 		},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称： append
+		 * 功能：指定的节点插入到当前节点里
+		 * 说明：
+		 * 注意：
 		 * @param newNode
 		 * @param oldNode
 		 * @returns {Dom}
 		 */
 		'append':function(newNode,oldNode){
+			if(!newNode){throw new Error('Warning :必须指定要插入的节点');}
 			oldNode = oldNode || this.node;
 			oldNode.appendChild(newNode);
 			return this;
 
 		},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称： appendTo
+		 * 功能：当前节点里插入到指定的节点里
+		 * 说明：
+		 * 注意：
 		 * @param oldNode
 		 * @param newNode
 		 * @returns {Dom}
 		 */
 		'appendTo':function(oldNode,newNode){
+			if(!oldNode){throw new Error('Warning :必须指定当前节点要被插入到哪个节点里');}
 			newNode = newNode || this.node;
 			oldNode.appendChild(newNode);
 			return this;
 		},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：getTagName
+		 * 功能：获取节点的标签名称
+		 * 说明：
+		 * 注意：
 		 * @param node
 		 * @returns {string}
 		 */
-		'getNodeName':function(node){
+		'getTagName':function(node){
 			node = node || this.node;
 			return node.nodeName;
 		},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：delNode
+		 * 功能：删除指定的节点，参数不填默认删除当前的节点
+		 * 说明：
+		 * 注意：
 		 * @param node
 		 * @returns {Dom}
 		 */
@@ -273,7 +422,14 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			return this;
 		},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：getParent
+		 * 功能：获取指定节点的父节点
+		 * 说明：
+		 * 注意：
 		 * @param node
 		 * @returns {Node}
 		 */
@@ -282,30 +438,52 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			return node.parentNode;
 		},
 		/**
-		 *
-		 * @param newNode
-		 * @param current
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：replaceNode
+		 * 功能：替换节点
+		 * 说明：
+		 * 注意：
+		 * @param newChild
+		 * @param oldChild 希望删除的节点对象
 		 * @returns {Dom}
 		 */
-		'replaceNode':function(newNode,current){//替换节点
-			newNode = newNode || this.node;
-			this.getParent(current).replaceChild(newNode , current);
+		'replaceNode':function(newChild, oldChild){//替换节点
+			if(!oldChild){throw new Error('Warning :必须填写您希望删除的节点对象 oldChild');}
+			newChild = newChild || this.node;
+			this.getParent(oldChild).replaceChild(newChild , oldChild);
 			return this;
 		},
 		/**
-		 *
-		 * @param newNode
-		 * @param current
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：insertBefore
+		 * 功能：在您指定的已有子节点之前插入新的子节点
+		 * 说明：
+		 * 注意：
+		 * @param newNode 		需要插入的节点对象
+		 * @param referenceNode	可选。在其之前插入新节点的子节点。如果未规定，则 insertBefore 方法会在结尾插入 newNode。
 		 * @returns {Dom}
 		 */
-		'insertBefore':function(newNode , current){//在oldNode的父节点上调用insertBefore燃后把新节点插入它自身前面
+		'insertBefore':function(newNode , referenceNode){
 			newNode = newNode || this.node;
-			this.getParent(current).insertBefore(newNode , current);
+			this.getParent(referenceNode).insertBefore(newNode , referenceNode);
 			return this;
 
 		},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：insertAfter
+		 * 功能：
+		 * 说明：
+		 * 注意：
 		 * @param node
 		 * @param newNode
 		 * @returns {*}
@@ -320,10 +498,17 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			return node;
 		},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：delNodeMore
+		 * 功能：删除多个节点
+		 * 说明：
+		 * 注意：
 		 * @returns {Dom}
 		 */
-		'delNodeMore':function(){//删除多个节点
+		'delNodeMore':function(){//
 			var __this___ = this;
 			System.each(arguments,function(k,v){
 				__this___.delNode(this);
@@ -408,19 +593,31 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 
 		},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：find
+		 * 功能：
+		 * 说明：
+		 * 注意：
 		 * @param (String)s		NO NUll:
 		 * @returns {*}
 		 */
-		'find':function(s){
-
-		},
+		'find':function(s){},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：firstChild
+		 * 功能：查找下面的元素是不是节点元素
+		 * 说明：
+		 * 注意：
 		 * @param node
 		 * @returns {*}
 		 */
-		'firstChild':function(node){//查找下面的元素是不是节点元素
+		'firstChild':function(node){//
 			node = node || this.node;
 			if(node.firstChild){//有子节点的话
 				var n=node.firstChild;
@@ -432,11 +629,18 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 
 
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：lastChild
+		 * 功能：查找元素最后节点是不是节点元素
+		 * 说明：
+		 * 注意：
 		 * @param node
 		 * @returns {*}
 		 */
-		'lastChild':function(node){//查找元素最后节点是不是节点元素
+		'lastChild':function(node){//
 			node = node || this.node;
 			if(node.lastChild){//有子节点的话
 				var n=node.lastChild;
@@ -446,11 +650,18 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			return null;
 		},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：previousSibling
+		 * 功能：查找前一个节点是否是元素节点排除所有非元素节点
+		 * 说明：
+		 * 注意：
 		 * @param node
 		 * @returns {*}
 		 */
-		'previousSibling':function(node){//查找前一个节点是否是元素节点排除所有非元素节点
+		'previousSibling':function(node){//
 			node = node || this.node;
 			if(node.previousSibling){
 				var n=node.previousSibling;
@@ -462,7 +673,14 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			return null;
 		},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：nextSibling
+		 * 功能：
+		 * 说明：
+		 * 注意：
 		 * @param node
 		 * @returns {*}
 		 */
@@ -477,12 +695,20 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			}
 			return null;
 		},
+		'empty':function(){},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：filterSpaceNode
+		 * 功能：过滤元素中包含的所有空白节点
+		 * 说明：
+		 * 注意：
 		 * @param nodes
 		 * @returns {Array}
 		 */
-		'filterSpaceNode':function(nodes){//过滤元素中包含的所有空白节点
+		'filterSpaceNode':function(nodes){//
 			var ret=[];
 			for(var i=0;i<nodes.length;i++){
 				if(nodes[i].nodeType===3 && /^\s+$/.test(nodes[i].nodeValue)) continue;//查找是否是文本节点且有空格
@@ -490,9 +716,15 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			}
 			return ret;
 		},
-		'empty':function(){},
 		/**
-		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：$
+		 * 功能：选择器功能
+		 * 说明：
+		 * 注意：
 		 * @param str
 		 * @returns {*}
 		 */
@@ -507,34 +739,21 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 
 		},
 
-
 		/**
-		 * 取消HTML代码
-		 * @param $string
-		 * @returns {*}
-		 */
-		'shtmlspecialchars':function($string) {
-			var $p;
-			var $unallowed = {
-				'&': '&',
-				'"': '"',
-				'<': '<',
-				'>': '>'
-			};
-			for($p in $unallowed){
-				$string = $string.replace(eval('/'+$p+'/g'), $unallowed[$p]);
-			}
-			return $string;
-		},
-
-
-		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：addClass
+		 * 功能：给指定元素添加类名
+		 * 说明：
+		 * 注意：
 		 *
 		 * @param node
 		 * @param className
 		 * @returns {*}
 		 */
-		'addClass':function(node,className){//给指定元素添加类名
+		'addClass':function(node,className){//
 			var names = node.className || this.attr(node,'class');
 			names = names.split(/\s+/);
 			names.push(className);
@@ -542,6 +761,14 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			return node;
 		},
 		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016-7-13
+		 * 修改日期：2016-10-26
+		 * 名称：delClass
+		 * 功能：删除指定元素类名
+		 * 说明：
+		 * 注意：
 		 *
 		 * @param node
 		 * @param className
@@ -555,7 +782,6 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 					delete names[i];
 				}
 			}
-
 
 			if(node.className){
 				node.className=names.join(" ");
@@ -628,81 +854,8 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 
 			return ret;
 		},
-		/**
-		 *
-		 * @author lhh
-		 * 产品介绍：
-		 * 创建日期：2014-11-28
-		 * 修改日期：2014-12-22
-		 * 名称：getByClass
-		 * 功能：获取类名集合
-		 * 说明：
-		 * 注意：
-		 * @param   (String)s			NO NULL :class 名称
-		 * @param   (String)p 			NO NULL :
-		 * @param   (String)t 			NO NULL :
-		 * @return  (Array)				返回匹配的节点集合
-		 * Example：
-		 */
-		'getByClass':function(s,p,t){//使用class获取元素
-			var reg=new RegExp('\\b'+s+'\\b');
-			var aResult=[];
-			var aElement=(p||document).getElementsByTagName(t || '*');
 
-			for(var i=0;i<aElement.length;i++)
-			{
-				if(reg.test(aElement[i].className))
-				{
-					aResult.push(aElement[i])
-				}
-			}
-			return aResult;
-		},
 
-		/**
-		 *
-		 * @author lhh
-		 * 产品介绍：
-		 * 创建日期：2014-11-28
-		 * 修改日期：2014-12-22
-		 * 名称：setStyle
-		 * 功能：对多个节点元素批量设置同一个样式
-		 * 说明：
-		 * 注意：
-		 * @param   (Array)nodes 			NO NULL :dom节点集合
-		 * @param   (String)attr 			NO NULL :要设置样式属性
-		 * @param   (String)value 			NO NULL :要设置样式属性的值
-		 * @return  (*)
-		 * Example：
-		 */
-		'setStyle':function(nodes,attr,value){
-			if(System.empty(nodes) || System.isString(nodes)) return 0;
-			for(var i=0,len=nodes.length;i<len;i++){
-				nodes[i].style[attr]=value;
-			}
-			return this;
-		},
-		/**
-		 *
-		 * @author lhh
-		 * 产品介绍：
-		 * 创建日期：2014-11-28
-		 * 修改日期：2014-12-22
-		 * 名称：css
-		 * 功能：设置
-		 * 说明：
-		 * 注意：
-		 * @param   (Array)nodes 			NO NULL :dom节点集合
-		 * @param   ({})D 			        NO NULL :多个样式数据 {k:v[,k:v[,...]]}
-		 * @return  (void)
-		 * Example：
-		 */
-		'css':function(nodes,D){
-			for(var prop in D){
-				if(!D.hasOwnProperty(prop)) continue;
-				this.setStyle(nodes,prop,D[prop]);
-			}
-		},
 		/**
 		 *
 		 * @author lhh
