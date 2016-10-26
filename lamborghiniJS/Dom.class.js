@@ -874,17 +874,17 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		zIndex: function( $node,zIndex ) {
 			$node = $node || $(this.node);
 			if ( zIndex !== undefined ) {
-				return this.css( "zIndex", zIndex );
+				return $node.css( "zIndex", zIndex );
 			}
 
-			if ( $node.length ) {
-				var elem = $( $node[ 0 ] ), position, value;
-				while ( elem.length && elem[ 0 ] !== document ) {
+			if ($node.length) {
+				var elem = $($node[0]), position, value;
+				while ( elem.length && elem[0] !== document ) {
 					// Ignore z-index if position is set to a value where z-index is ignored by the browser
 					// This makes behavior of this function consistent across browsers
 					// WebKit always returns auto if the element is positioned
 					position = elem.css( "position" );
-					if ( position === "absolute" || position === "relative" || position === "fixed" ) {
+					if (position === "absolute" || position === "relative" || position === "fixed"){
 						// IE returns 0 when zIndex is not specified
 						// other browsers return a string
 						// we ignore the case of nested elements with an explicit value of 0
