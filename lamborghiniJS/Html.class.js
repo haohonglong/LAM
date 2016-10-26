@@ -352,39 +352,27 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	Html.tag = function(single,name,Attr,content){
 		var args = arguments;
 		var len = args.length;
-		if(0 === len || len > 4){
-			throw new Error('Warning :参数至少有一个，且参数个数不能超过4个');
-		}
+		if(0 === len || len > 4){throw new Error('Warning :参数至少有一个，且参数个数不能超过4个');}
 		if(!System.isBoolean(single)){
 			name	 = args[0];
 			Attr	 = args[1] || {};
 			content	 = args[2] || '';
 			single	 = false;
 		}else{
-			if(!System.isString(args[1])){
-				throw new Error('Warning :缺少标签名称');
-			}else{
-				single	 = args[0];
-				name	 = args[1] || null;
-				Attr	 = args[2] || {};
-				content	 = args[3] || '';
-			}
-
+			if(!System.isString(args[1])){throw new Error('Warning :缺少标签名称');}
+			single	 = args[0];
+			name	 = args[1] || null;
+			Attr	 = args[2] || {};
+			content	 = args[3] || '';
 		}
 
 		if(single && content){throw new Error('Warning :单标签下没有参数:{content} 值是:\''+content+'\'');}
 		content = System.isNumeric(content) ? String(content) : content;
 
 		//check
-		if(System.empty(name) || !System.isString(name)){
-			throw new Error('Warning :标签名称不能为空，只能是字符串！');
-		}
-		if(Attr && !System.isPlainObject(Attr)){
-			throw new Error('Warning :<'+name+'>标签的属性必须是一个对象！');
-		}
-		if(content && !System.isString(content) && !System.isArray(content)){
-			throw new Error('Warning :<'+name+'>标签内容必须是字符串或者是数组');
-		}
+		if(System.empty(name) || !System.isString(name)){throw new Error('Warning :标签名称不能为空，只能是字符串！');}
+		if(Attr && !System.isPlainObject(Attr)){throw new Error('Warning :<'+name+'>标签的属性,{Attr}参数必须是一个对象！');}
+		if(content && !System.isString(content) && !System.isArray(content)){throw new Error('Warning :<'+name+'>标签内容必须是字符串或者是数组');}
 
 		var tag=[];
 		tag.push('<',name);
