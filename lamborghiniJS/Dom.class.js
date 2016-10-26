@@ -145,6 +145,71 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		}
 		return $string;
 	};
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-7-13
+	 * 修改日期：2016-10-26
+	 * 名称：Dom.filterSpaceNode
+	 * 功能：过滤元素中包含的所有空白节点
+	 * 说明：
+	 * 注意：
+	 * @param nodes
+	 * @returns {Array}
+	 */
+	Dom.filterSpaceNode=function(nodes){//
+		var ret=[];
+		for(var i=0;i<nodes.length;i++){
+			if(nodes[i].nodeType===3 && /^\s+$/.test(nodes[i].nodeValue)) continue;//查找是否是文本节点且有空格
+			ret.push(nodes[i]);
+		}
+		return ret;
+	};
+
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：
+	 * 创建日期：2016-6-16
+	 * 修改日期：2016-6-16
+	 * 名称：Dom.zIndex
+	 * 功能：设置或获取 z-index
+	 * 说明：
+	 * 注意：
+	 * @param   (jQuery Object)$node 	NULL :jQuery object
+	 * @param   (Number)zIndex 			NULL :设置z-index
+	 * @return  (Number)
+	 * Example：
+	 */
+	Dom.zIndex=function( $node,zIndex ) {
+		$node = $node;
+		if ( zIndex !== undefined ) {
+			return $node.css( "zIndex", zIndex );
+		}
+
+		if ($node.length) {
+			var elem = $($node[0]), position, value;
+			while ( elem.length && elem[0] !== document ) {
+				// Ignore z-index if position is set to a value where z-index is ignored by the browser
+				// This makes behavior of this function consistent across browsers
+				// WebKit always returns auto if the element is positioned
+				position = elem.css( "position" );
+				if (position === "absolute" || position === "relative" || position === "fixed"){
+					// IE returns 0 when zIndex is not specified
+					// other browsers return a string
+					// we ignore the case of nested elements with an explicit value of 0
+					// <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
+					value = parseInt( elem.css( "zIndex" ), 10 );
+					if ( !isNaN( value ) && value !== 0 ) {
+						return value;
+					}
+				}
+				elem = elem.parent();
+			}
+		}
+
+		return 0;
+	};
 
 
 	Dom.prototype = {
@@ -696,26 +761,7 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			return null;
 		},
 		'empty':function(){},
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-7-13
-		 * 修改日期：2016-10-26
-		 * 名称：filterSpaceNode
-		 * 功能：过滤元素中包含的所有空白节点
-		 * 说明：
-		 * 注意：
-		 * @param nodes
-		 * @returns {Array}
-		 */
-		'filterSpaceNode':function(nodes){//
-			var ret=[];
-			for(var i=0;i<nodes.length;i++){
-				if(nodes[i].nodeType===3 && /^\s+$/.test(nodes[i].nodeValue)) continue;//查找是否是文本节点且有空格
-				ret.push(nodes[i]);
-			}
-			return ret;
-		},
+
 		/**
 		 * @author: lhh
 		 * 产品介绍：
@@ -853,52 +899,6 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			// }
 
 			return ret;
-		},
-
-
-		/**
-		 *
-		 * @author lhh
-		 * 产品介绍：
-		 * 创建日期：2016-6-16
-		 * 修改日期：2016-6-16
-		 * 名称：css
-		 * 功能：设置或获取 z-index
-		 * 说明：
-		 * 注意：
-		 * @param   (jQuery Object)$node 	NULL :jQuery object
-		 * @param   (Number)zIndex 			NULL :设置z-index
-		 * @return  (Number)
-		 * Example：
-		 */
-		zIndex: function( $node,zIndex ) {
-			$node = $node || $(this.node);
-			if ( zIndex !== undefined ) {
-				return $node.css( "zIndex", zIndex );
-			}
-
-			if ($node.length) {
-				var elem = $($node[0]), position, value;
-				while ( elem.length && elem[0] !== document ) {
-					// Ignore z-index if position is set to a value where z-index is ignored by the browser
-					// This makes behavior of this function consistent across browsers
-					// WebKit always returns auto if the element is positioned
-					position = elem.css( "position" );
-					if (position === "absolute" || position === "relative" || position === "fixed"){
-						// IE returns 0 when zIndex is not specified
-						// other browsers return a string
-						// we ignore the case of nested elements with an explicit value of 0
-						// <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
-						value = parseInt( elem.css( "zIndex" ), 10 );
-						if ( !isNaN( value ) && value !== 0 ) {
-							return value;
-						}
-					}
-					elem = elem.parent();
-				}
-			}
-
-			return 0;
 		},
 
 		/**
