@@ -310,7 +310,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 名称：print
          * 功能：显示load() 里的文件
          * 创建日期：2015-9-2
-         * 修改日期：2016-10-14
+         * 修改日期：2016-10-26
          * 说明：
          * 调用方式：
          * @returns {Loader}返回当前对象可以链式调用
@@ -340,14 +340,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                     node.delNode();
                                 },this.timer);
                             }
-
-
                         }else if(this.style){
-                            if(0 === i){
-                                this.insertAfter(s[s.length-1]);
-                            }else{
-                                this.insertAfter(l[i-1]);
-                            }
+                            this.appendTo(head);
                         }
 
                     }
