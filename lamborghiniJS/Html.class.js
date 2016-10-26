@@ -130,10 +130,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.getFile=function(url,callBack,D){
-		if(!System.isString(url)){
-			throw new Error("Warning :url 必须是请求文件的路径");
-			return 0;
-		}
+		if(!System.isString(url)){throw new Error("Warning :url 必须是请求文件的路径");}
 
 		getFile(System.merge({
 			'url':url,
@@ -149,7 +146,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-10-14
-	 * 修改日期：2016-10-14
+	 * 修改日期：2016-10-26
 	 * 名称： Html.getFiles
 	 * 功能：返回指定的多个文件
 	 * 说明：支持链式调用
@@ -165,10 +162,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @returns {Html|*}
 	 */
 	Html.getFiles=function(urls,callBack,D){
-		if(!System.isArray(urls)){
-			throw new Error("Warning :url 必须是请求文件的路径(数组格式)");
-			return;
-		}
+		if(!System.isArray(urls)){throw new Error("Warning :url 必须是请求文件的路径(数组格式)");}
 		System.each(urls,function(){
 			if(!System.fileExisted(this)){
 				if(System.isClassFile(this)){
@@ -228,8 +222,6 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 
 		});
 
-
-		
 	};
 	/**
 	 *
@@ -321,11 +313,10 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 */
 	Html.renderTagAttributes = function(Attr){
 		Attr = !Attr || !System.isPlainObject(Attr) ? {} : Attr;
+		if(System.isEmptyObject(Attr)){return '';}
 		var attrs=[];
 		for(var key in Attr){
-			if(System.arr_Object_key_has(key)){
-				continue;
-			}
+			if(System.arr_Object_key_has(key)){continue;}
 			attrs.push(' ',key,'="',Attr[key],'"');
 		}
 		return attrs.join('');
@@ -377,10 +368,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 		var tag=[];
 		tag.push('<',name);
 		//拼接属性
-		if(Attr && System.isObject(Attr)){
-			tag.push(Html.renderTagAttributes(Attr));
-		}
-
+		if(Attr && System.isObject(Attr)){tag.push(Html.renderTagAttributes(Attr));}
 
 		if(single){
 			tag.push(' />');
