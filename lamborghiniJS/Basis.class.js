@@ -1958,6 +1958,7 @@ window[GRN_LHH].run([window],function(W,Config){
 			'fragment':null,
 			//true : document.createElement(); false :document.write();
 			'create':false,
+			'create_callback':null,
 			//加载后是否要移除添加过的script 节点
 			'remove':true,
 			'append':'befor',

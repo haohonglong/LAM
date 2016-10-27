@@ -17,9 +17,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
     var System=this;
     System.is(System,'Basis','Loader');
 
-    var html,head,body, m,meta, s,script, l,link;
+    var html,head,body,meta,script,link;
     var create;
-    var append;
     var sAttribute   = System.Config.render.default.script.Attribute;
     var cAttribute   = System.Config.render.default.css.Attribute;
     /**
@@ -31,7 +30,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         System.is(System,'Dom');
         return new System.Dom();
     }
-    var initDom=function(){
+    function initDom(){
         //var load = window.onload;
         //window.onload=function(){
         //    if(System.isFunction(load)){
@@ -40,13 +39,13 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         //
         //};
         var H=System.Config.render.H();
-        html        = H.html;
-        head        = H.head;
-        body        = H.body;
-        m = meta    = H.meta;
-        s = script  = H.script;
-        l = link    = H.link;
-    };
+        html    = H.html;
+        head    = H.head;
+        body    = H.body;
+        meta    = H.meta;
+        script  = H.script;
+        link    = H.link;
+    }
     var __this__=null;
     var files = [];
     function Loader(){
@@ -91,18 +90,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          */
         'load':function(D){
             create = System.Config.render.create;
-            append = System.Config.render.append;
-            if(create){
-                initDom();
-            }
-            var suffix;
-            var rel;
+            var suffix,rel,len,src="",href="",i= 0,node = null;
             var baseUrl=D.baseUrl || System.ROOT;
-            var len;
-            var src="";
-            var href="";
-            var i=0;
-            var node = null;
             if(D.js){
                 suffix = D.suffix || '.js';
                 for (i=0,len=D.js.length;i<len;i++){
@@ -283,39 +272,46 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * @returns {Loader}返回当前对象可以链式调用
          */
         'print':function(){
-            if(files.length < 1){return;}
+            if(files.length < 1){return this;}
             if(!System.Config.render.create){//document.write() 方式引入外部文件(.js|.css)
                 System.print(files.join(''));
             }else{
-                System.each(files,function(i){
-                    if(System.isObject(this)){
-                        this.timer = i*1000;
-                        if(this.script){
-                            if('befor' === append){
-                                this.appendTo(head);
-                            }else if('after' === append){
-                                this.appendTo(body);
-                            }else{
-                                if(0 === i){
-                                    this.insertBefore(null,head.firstChild);
+                if(System.isFunction(System.Config.render.create_callback)){
+                    System.Config.render.create_callback(files);
+                }else{
+                    var append = System.Config.render.append;
+                    initDom();
+                    System.each(files,function(i){
+                        if(System.isObject(this)){
+                            this.timer = i*1000;
+                            if(this.script){
+                                if('befor' === append){
+                                    this.appendTo(head);
+                                }else if('after' === append){
+                                    this.appendTo(body);
                                 }else{
-                                    this.insertAfter(script[i-1]);
+                                    if(0 === i){
+                                        this.insertBefore(null,head.firstChild);
+                                    }else{
+                                        this.insertAfter(script[i-1]);
+                                    }
                                 }
+                                //加载后要依次移除添加的script 节点
+                                if(System.Config.render.remove){
+                                    //3秒后依次移除添加的script 节点
+                                    System.wait([this],function(node){
+                                        node.delNode();
+                                    },this.timer);
+                                }
+                            }else if(this.style){
+                                this.appendTo(head);
                             }
-                            //加载后要依次移除添加的script 节点
-                            if(System.Config.render.remove){
-                                //3秒后依次移除添加的script 节点
-                                System.wait([this],function(node){
-                                    node.delNode();
-                                },this.timer);
-                            }
-                        }else if(this.style){
-                            this.appendTo(head);
+
                         }
 
-                    }
+                    });
+                }
 
-                });
             }
 
             this.remove();

@@ -111,9 +111,9 @@ if(!GRN_LHH){
                     'html'    : document.getElementsByTagName('html')[0],
                     'head'    : document.getElementsByTagName('head')[0],
                     'body'    : document.getElementsByTagName('body')[0],
-                    'meta'    : document.getElementsByTagName('meta'),
-                    'script'  : document.getElementsByTagName('script'),
-                    'link'    : document.getElementsByTagName('link')
+                    'meta'    : document.getElementsByTagName('meta')[0],
+                    'script'  : document.getElementsByTagName('script')[0],
+                    'link'    : document.getElementsByTagName('link')[0]
                 };
             },
             'bulid':function(tag,D){
