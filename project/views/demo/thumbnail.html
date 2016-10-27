@@ -8,6 +8,7 @@
             'use strict';
             var System=this;
             var ROOT = System.Config.Public.ROOT;
+            System.use();
             System.Loader
                     .load({
                         'css':[
@@ -90,21 +91,12 @@
         var ul1;
         function layout(){
             ul1=new System.Thumbnail({'$view':$('#ul1'),'baseWidth':200,'baseHeight':150,'$li':$('#ul1 > li')}).run();
-
-
-
-
-
         }
         $(function(){
 
             layout();
 
         });
-
-
-
-
 
         $(window).resize(function(){
             ul1.resize();

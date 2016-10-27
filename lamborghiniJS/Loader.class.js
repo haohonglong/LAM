@@ -3,17 +3,15 @@
  * @author: lhh
  * 产品介绍： 文件加载器
  * 创建日期：2014.9.9
- * 修改日期：2016.10.18
+ * 修改日期：2016.10.27
  * 名称：Loader
- * 功能：动态引入js;css;less 文件
+ * 功能：导入js;css;less 文件
  * 说明 :
  * 注意：
  *
  * Example：
  *
  */
-
-
 window[GRN_LHH].run([window,document],function(window,document,undefined){
     'use strict';
     var System=this;
@@ -24,10 +22,6 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
     var append;
     var sAttribute   = System.Config.render.default.script.Attribute;
     var cAttribute   = System.Config.render.default.css.Attribute;
-
-
-
-
     /**
      *
      * @returns {*|Dom}
@@ -37,12 +31,6 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         System.is(System,'Dom');
         return new System.Dom();
     }
-
-
-
-
-
-
     var initDom=function(){
         //var load = window.onload;
         //window.onload=function(){
@@ -51,24 +39,16 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         //    }
         //
         //};
-
         var H=System.Config.render.H();
-
-
         html        = H.html;
         head        = H.head;
         body        = H.body;
         m = meta    = H.meta;
         s = script  = H.script;
         l = link    = H.link;
-
-
-
     };
-
     var __this__=null;
     var files = [];
-
     function Loader(){
         System.Basis.extends.call(this);
         __this__=this;
@@ -92,13 +72,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          *          <img LAM-VAR="template" src="{{_ROOT_}}/images/a.jpg"  />
          *          <a LAM-VAR="template" href="{{_ROOT_}}/xxx.html" ></a>
          */
-        'replace_tpl':function(){
-            $(function(){
-                System.Html.analysisTpl();
-            });
-
-        },
-
+        'replace_tpl':function(){$(function(){System.Html.analysisTpl();});},
         /**
          *
          * @author: lhh
@@ -160,7 +134,6 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
                     }else if(System.isObject(js)){
                         js.src = baseUrl ? baseUrl+js.src+suffix : js.src+suffix;
-
                         //是否已加载过了
                         if(System.fileExisted(js.src)){
                             continue;
@@ -178,11 +151,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                             files.push(node);
                             System.files.push(js.src);
                         }
-
-
-
                     }
-
                 }
             }
 
@@ -299,8 +268,6 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                         'suffix':suffix
                     }).print();
                 }
-
-
             }
             return this;
         },
@@ -365,9 +332,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 说明：
          * 调用方式：
          */
-        'remove':function(){
-            files = [];
-        },
+        'remove':function(){files = [];},
         /**
          *
          * @author: lhh
@@ -378,10 +343,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 说明：
          * 调用方式：
          */
-        'get_files':function(){
-            return files;
-        },
-
+        'get_files':function(){return files;},
         /**
          *
          * @author: lhh
@@ -395,9 +357,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * @return  ()                      :
          * Example：
          */
-        'destructor':function(){
-
-        }
+        'destructor':function(){}
 
     };
     System['Loadcommon'] = System['Loader'] =new Loader();
