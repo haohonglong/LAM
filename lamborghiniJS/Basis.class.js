@@ -1960,7 +1960,7 @@ window[GRN_LHH].run([window],function(W,Config){
 			'create':false,
 			//加载后是否要移除添加过的script 节点
 			'remove':true,
-			'append':'after',
+			'append':'befor',
 			'default':{
 				'script':{
 					'Attribute':{

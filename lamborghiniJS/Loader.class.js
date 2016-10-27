@@ -310,7 +310,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 名称：print
          * 功能：显示load() 里的文件
          * 创建日期：2015-9-2
-         * 修改日期：2016-10-26
+         * 修改日期：2016-10-27
          * 说明：
          * 调用方式：
          * @returns {Loader}返回当前对象可以链式调用
@@ -324,13 +324,15 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                     if(System.isObject(this)){
                         this.timer = i*1000;
                         if(this.script){
-                            if('after' === append){
+                            if('befor' === append){
+                                this.appendTo(head);
+                            }else if('after' === append){
                                 this.appendTo(body);
                             }else{
                                 if(0 === i){
                                     this.insertBefore(null,head.firstChild);
                                 }else{
-                                    this.insertAfter(s[i-1]);
+                                    this.insertAfter(script[i-1]);
                                 }
                             }
                             //加载后要依次移除添加的script 节点

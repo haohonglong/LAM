@@ -544,7 +544,7 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-7-13
-		 * 修改日期：2016-10-26
+		 * 修改日期：2016-10-27
 		 * 名称：insertAfter
 		 * 功能：
 		 * 说明：
@@ -556,7 +556,7 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		'insertAfter':function(node,newNode){
 			newNode = newNode || this.node;
 			if(node.nextSibling){//如果node有下一个节点的话
-				this.insertBefore(newNode,node.nextSibling);
+				this.insertBefore(newNode,this.nextSibling(node));
 			}else{
 				this.append(this.getParent(node),newNode);
 			}
@@ -753,12 +753,12 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			node = node || this.node;
 			if(node.nextSibling){
 				var n=node.nextSibling;
-				if(n.nodeType==1) return n;
-				while(n=n.nextSibling){//查找下一个节点----->下一个节点------->下一个节点.........直到没有节点为止
-					if(n.nodeType==1) return n;
+				if(1 === n.nodeType) return n;
+				while(n = n.nextSibling){//查找下一个节点----->下一个节点------->下一个节点.........直到没有节点为止
+					if(1 === n.nodeType) return n;
 				}
 			}
-			return null;
+			return node;
 		},
 		'empty':function(){},
 

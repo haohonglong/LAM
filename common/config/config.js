@@ -1,7 +1,7 @@
 /**
  * 创建人：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-10-23
+ * 修改日期:2016-10-27
  * 功能：配置文件
  * 说明 : 这个文件要copy到项目里面可以修改 System.Config里的属性 和 GRN_LHH; 的值；
  *
@@ -89,7 +89,7 @@ if(!GRN_LHH){
             'create':false,
             //加载后是否要移除添加过的script 节点
             'remove':true,
-            'append':'after',
+            'append':'befor',
             'default':{
                 'script':{
                     'Attribute':{
