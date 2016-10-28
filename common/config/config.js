@@ -257,10 +257,9 @@ if(!GRN_LHH){
                     data.src = srcs[i];
                     Config.render.bulid(tag,data);
                 }
-                console.log(H.body);
                 console.log(Config.render.fragment);
-                H.body.appendChild(Config.render.fragment);
-            },3000);
+                H.head.appendChild(Config.render.fragment);
+            },1);
         }else{
             var attrs=[];
             for(var k in scriptAttribute){
