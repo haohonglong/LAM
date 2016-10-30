@@ -1921,8 +1921,7 @@ window[GRN_LHH].run([window],function(W,Config){
 		//定义模版标签
 		'templat':{
 			'custom_attr':'[data-var=tpl]',
-			'leftLimit':'{{',
-			'rightLimit':'}}'
+			'delimiters':['{{','}}']
 		},
 		'files':[],
 		'XHR':{//配置加载xhr 的公共参数
