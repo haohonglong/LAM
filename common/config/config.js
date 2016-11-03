@@ -82,6 +82,8 @@ if(!GRN_LHH){
         },
         //标签的渲染方式
         'render':{
+            //加载文件的后缀名称
+            'suffixs':['.js','.css'],
             //输出标签的方式 ()
             'fragment':null,
             //true : document.createElement(); false :document.write();

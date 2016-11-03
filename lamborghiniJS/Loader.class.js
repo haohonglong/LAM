@@ -54,6 +54,34 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         this.D = null;
     }
 
+    /**
+     *
+     * @author: lhh
+     * 名称： load
+     * 功能：检查加载的文件路径是否已经包含后缀名
+     * 创建日期：2016-11-3
+     * 修改日期：2016-11-3
+     * 说明：
+     *
+     * @param str
+     * @param suffix
+     * @returns {boolean}
+     */
+    function hassuffix(str,suffix){
+        if(suffix){
+            return (str.indexOf(suffix) !== -1);
+        }
+        for(var i= 0,
+                suffixs=System.Config.render.suffixs,
+                len=suffixs.length;
+            i<len;i++){
+            if(str.indexOf(suffixs[i]) !== -1){
+                return true;
+            }
+        }
+        return false;
+    }
+
     Loader.prototype={
         'constructor':Loader,
         '__constructor':function(){},
@@ -78,7 +106,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 名称： load
          * 功能：动态创建js,css 标签引入公共文件
          * 创建日期：2014-9-9
-         * 修改日期：2016-9-11
+         * 修改日期：2016-11-3
          * 说明：js 和 css 任选其一
          * @params   (Object)D 			NO NULL :初始化参数
          * @param(Array)D.js		  	     NO NULL:js文件集合
@@ -97,7 +125,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                 for (i=0,len=D.js.length;i<len;i++){
                     var js=D.js[i];
                     if(System.isString(js)){
-                        src = baseUrl ? baseUrl+js+suffix : js+suffix;
+                        js = hassuffix(js,suffix) ? js : js+suffix;
+                        src = baseUrl ? baseUrl+js : js;
                         //是否已加载过了
                         if(System.fileExisted(src)){
                             continue;
@@ -122,7 +151,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
 
                     }else if(System.isObject(js)){
-                        js.src = baseUrl ? baseUrl+js.src+suffix : js.src+suffix;
+                        js.src = hassuffix(js.src,suffix) ? js.src : js.src+suffix;
+                        js.src = baseUrl ? baseUrl+js.src : js.src;
                         //是否已加载过了
                         if(System.fileExisted(js.src)){
                             continue;
@@ -151,7 +181,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                     var css=D.css[i];
 
                     if(System.isString(css)){
-                        href = baseUrl ? baseUrl+css+suffix : css+suffix;
+                        css = hassuffix(css,suffix) ? css : css+suffix;
+                        href = baseUrl ? baseUrl+css : css;
                         //是否已加载过了
                         if(System.fileExisted(href)){
                             continue;
@@ -171,8 +202,9 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
 
                     }else if(System.isObject(css)){
+                        css.href = hassuffix(css.href,suffix) ? css.href : css.href+suffix;
                         css.rel = css.rel || rel;
-                        css.href = baseUrl ? baseUrl+css.href+suffix : css.href+suffix;
+                        css.href = baseUrl ? baseUrl+css.href : css.href;
                         //是否已加载过了
                         if(System.fileExisted(css.href)){
                             continue;
@@ -202,7 +234,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * @author: lhh
          * 产品介绍：
          * 创建日期：2015-8-27
-         * 修改日期：2016-10-17
+         * 修改日期：2016-11-3
          * 名称：import
          * 功能：导入指定的js文件
          * 说明：System 参数不用传
@@ -225,7 +257,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                 if(System.isset(importScripts) && System.isFunction(importScripts)){
                     url.each(function(){
                         var src=this;
-                        src+=suffix;
+                        src = hassuffix(src,suffix) ? src : src+suffix;
                         src = baseUrl ? baseUrl+src : src;
                         if(!System.fileExisted(src)){
                             importScripts(src);
@@ -243,7 +275,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                     var arr=[];
                     url.each(function(){
                         var src=this;
-                        src+=suffix;
+                        src = hassuffix(src,suffix) ? src : src+suffix;
                         src = baseUrl ? baseUrl+src : src;
                         arr.push(src);
 
