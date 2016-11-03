@@ -65,8 +65,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
      * 修改日期：2016-11-3
      * 说明：
      *
-     * @param str
-     * @param suffix
+     * @param {String}str    文件路径
+     * @param {String}suffix 对应文件的后缀名
      * @returns {*}
      */
     function suffix_checkor(str,suffix){
