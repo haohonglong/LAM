@@ -59,7 +59,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
     /**
      *
      * @author: lhh
-     * 名称： load
+     * 名称： suffix_checkor
      * 功能：检查加载的文件路径是否已经包含后缀名,如果没有就添加返回，有就返回原路径
      * 创建日期：2016-11-3
      * 修改日期：2016-11-3
@@ -69,7 +69,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
      * @param suffix
      * @returns {*}
      */
-    function hassuffix(str,suffix){
+    function suffix_checkor(str,suffix){
         if(suffix){
             if(-1 === str.indexOf(suffix)){
                 return str+suffix;
@@ -131,7 +131,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                 for (i=0,len=D.js.length;i<len;i++){
                     var js=D.js[i];
                     if(System.isString(js)){
-                        js = hassuffix(js,suffix);
+                        js = suffix_checkor(js,suffix);
                         src = baseUrl ? baseUrl+js : js;
                         //是否已加载过了
                         if(System.fileExisted(src)){
@@ -157,7 +157,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
 
                     }else if(System.isObject(js)){
-                        js.src = hassuffix(js.src,suffix);
+                        js.src = suffix_checkor(js.src,suffix);
                         js.src = baseUrl ? baseUrl+js.src : js.src;
                         //是否已加载过了
                         if(System.fileExisted(js.src)){
@@ -187,7 +187,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                     var css=D.css[i];
 
                     if(System.isString(css)){
-                        css = hassuffix(css,suffix);
+                        css = suffix_checkor(css,suffix);
                         href = baseUrl ? baseUrl+css : css;
                         //是否已加载过了
                         if(System.fileExisted(href)){
@@ -208,7 +208,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
 
                     }else if(System.isObject(css)){
-                        css.href = hassuffix(css.href,suffix);
+                        css.href = suffix_checkor(css.href,suffix);
                         css.rel = css.rel || rel;
                         css.href = baseUrl ? baseUrl+css.href : css.href;
                         //是否已加载过了
@@ -263,7 +263,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                 if(System.isset(importScripts) && System.isFunction(importScripts)){
                     url.each(function(){
                         var src=this;
-                        src = hassuffix(src,suffix);
+                        src = suffix_checkor(src,suffix);
                         src = baseUrl ? baseUrl+src : src;
                         if(!System.fileExisted(src)){
                             importScripts(src);
@@ -281,7 +281,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                     var arr=[];
                     url.each(function(){
                         var src=this;
-                        src = hassuffix(src,suffix);
+                        src = suffix_checkor(src,suffix);
                         src = baseUrl ? baseUrl+src : src;
                         arr.push(src);
 
