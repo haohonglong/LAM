@@ -52,6 +52,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         System.Basis.extends.call(this);
         __this__=this;
         this.D = null;
+        this.js  =[];
+        this.css =[];
     }
 
     /**
@@ -85,8 +87,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
     Loader.prototype={
         'constructor':Loader,
         '__constructor':function(){},
-        'js'     :[],
-        'css'    :[],
+
         /**
          *
          * @author: lhh
