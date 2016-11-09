@@ -57,8 +57,7 @@ if(!GRN_LHH){
         //定义模版标签
         'templat':{
             'custom_attr':'[data-var=tpl]',
-            'leftLimit':'{#',
-            'rightLimit':'#}'
+            'delimiters':['{#','#}']
         },
         'files':[],
         'XHR':{//配置加载xhr 的公共参数
@@ -90,13 +89,15 @@ if(!GRN_LHH){
 
         //标签的渲染方式
         'render':{
+            //加载文件的后缀名称
+            'suffixs':['.js','.css'],
             //输出标签的方式 ()
             'fragment':null,
             //true : document.createElement(); false :document.write();
             'create':false,
             //加载后是否要移除添加过的script 节点
             'remove':true,
-            'append':'after',
+            'append':'befor',
             'default':{
                 'script':{
                     'Attribute':{
@@ -118,9 +119,9 @@ if(!GRN_LHH){
                     'html'    : document.getElementsByTagName('html')[0],
                     'head'    : document.getElementsByTagName('head')[0],
                     'body'    : document.getElementsByTagName('body')[0],
-                    'meta'    : document.getElementsByTagName('meta'),
-                    'script'  : document.getElementsByTagName('script'),
-                    'link'    : document.getElementsByTagName('link')
+                    'meta'    : document.getElementsByTagName('meta')[0],
+                    'script'  : document.getElementsByTagName('script')[0],
+                    'link'    : document.getElementsByTagName('link')[0]
                 };
             },
             'bulid':function(tag,D){
@@ -241,63 +242,65 @@ if(!GRN_LHH){
     var classPath=Config.getClassPath();
     var ROOT=Config.Public.ROOT;
     var files=[];
-
     //加载基础类
     var srcs =Config.autoLoadFile();
-    //=================================================================================================================================
-    if(Config.render.create){
-        System.wait(function(){
-            var H=Config.render.H();
+    if(typeof requirejs != 'undefined'){
+        requirejs.config({
+            baseUrl: ''
+            ,waitSeconds:0
+        });
+        requirejs(srcs,function(){});
+
+    }else{
+        //=================================================================================================================================
+        if(Config.render.create){
+            System.wait(function(){
+                var H=Config.render.H();
+                for(i=0,len = srcs.length;i < len; i++){
+                    //确保每个文件只加载一次
+                    if(Config.files.indexOf(srcs[i]) != -1){
+                        continue;
+                    }
+                    Config.files.push(srcs[i]);
+                    data.src = srcs[i];
+                    Config.render.bulid(tag,data);
+                }
+                console.log(Config.render.fragment);
+                H.head.appendChild(Config.render.fragment);
+            },1);
+        }else{
+            var attrs=[];
+            for(var k in scriptAttribute){
+                attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
+            }
             for(i=0,len = srcs.length;i < len; i++){
                 //确保每个文件只加载一次
                 if(Config.files.indexOf(srcs[i]) != -1){
                     continue;
                 }
+                files.push('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
                 Config.files.push(srcs[i]);
-                data.src = srcs[i];
-                Config.render.bulid(tag,data);
-            }
-            console.log(H.body);
-            console.log(Config.render.fragment);
-            H.body.appendChild(Config.render.fragment);
-        },3000);
-    }else{
-        var attrs=[];
-        for(var k in scriptAttribute){
-            attrs.push(k,'=','"',scriptAttribute[k],'"',' ');
-        }
-        for(i=0,len = srcs.length;i < len; i++){
-            //确保每个文件只加载一次
-            if(Config.files.indexOf(srcs[i]) != -1){
-                continue;
-            }
-            files.push('<',tag,' ',attrs.join(''),'src=','"',srcs[i],'"','>','<','/',tag,'>');
-            Config.files.push(srcs[i]);
 
+            }
+            System.print(files.join(''));
         }
-        System.print(files.join(''));
+
+        //=================================================================================================================================
+        //3分钟之后检测lamborghiniJS基础类文件是否加载成功
+        //=================================================================================================================================
+        System.wait(function(){
+            if(!LAMJS){
+                alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
+            }else{
+                LAMJS.run(function() {
+                    'use strict';
+                    var System=this;
+                    var ROOT = System.Config.Public.ROOT;
+                });
+            }
+        },30000);
+        //=================================================================================================================================
     }
-
-    //=================================================================================================================================
-
-
-    //=================================================================================================================================
-    //5秒之后检测lamborghiniJS基础类文件是否加载成功
-    //=================================================================================================================================
-    System.wait(function(){
-        if(!LAMJS){
-            alert('cannot find Basis class! the lamborghiniJS\' path is :{'+classPath+'}');
-        }else{
-            LAMJS.run(function() {
-                'use strict';
-                var System=this;
-                var ROOT = System.Config.Public.ROOT;
-            });
-        }
-    },5000);
-    //=================================================================================================================================
-
-
 })(window[GRN_LHH]);
 
 
