@@ -23,7 +23,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-10-23
-		 * 修改日期：2016-10-23
+		 * 修改日期：2016-11-9
 		 * 名称：System.require
 		 * 功能：调用export的接口
 		 * 说明：
@@ -36,7 +36,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 			if(System.modules.exports[name]){
 				return System.modules.exports[name];
 			}else{
-				return null;
+				throw new Error(['Warning: \'',name,'\' 没有定义'].join(''));
 			}
 		},
 		/**
