@@ -87,6 +87,33 @@ if(!GRN_LHH){
 		trim = String.prototype.trim,
 		indexOf = Array.prototype.indexOf;
 
+	function Empty() {}
+
+	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2016-11-17
+	 * 修改日期：2016-11-17
+	 * 名称：createObject
+	 * 功能：用 Object.create() 实现 prototype 原型继承
+	 * 说明：
+	 * 注意：
+	 * @param proto
+	 * @param constructor
+	 * @returns {*}
+	 */
+	function createObject(proto, constructor) {
+		var newProto;
+		if (Object.create) {
+			newProto = Object.create(proto);
+		} else {
+			Empty.prototype = proto;
+			newProto = new Empty();
+		}
+		newProto.constructor = constructor;
+		return newProto;
+	}
+
 
 	/**
 	 * @author: lhh
@@ -1141,26 +1168,7 @@ if(!GRN_LHH){
 	System.printf=prints;
 
 //==================================================================================
-	function Empty() {
-	}
 
-	/**
-	 *
-	 * @param proto
-	 * @param constructor
-	 * @returns {*}
-	 */
-	function createObject(proto, constructor) {
-		var newProto;
-		if (Object.create) {
-			newProto = Object.create(proto);
-		} else {
-			Empty.prototype = proto;
-			newProto = new Empty();
-		}
-		newProto.constructor = constructor;
-		return newProto;
-	}
 	//函数在原型里定义一个方法
 	Function.prototype.method=function(name,fn){
 		if(!this.prototype[name]){
