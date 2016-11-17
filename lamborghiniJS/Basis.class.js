@@ -87,32 +87,6 @@ if(!GRN_LHH){
 		trim = String.prototype.trim,
 		indexOf = Array.prototype.indexOf;
 
-	function Empty() {}
-
-	/**
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2016-11-17
-	 * 修改日期：2016-11-17
-	 * 名称：createObject
-	 * 功能：用 Object.create() 实现 prototype 原型继承
-	 * 说明：
-	 * 注意：
-	 * @param proto
-	 * @param constructor
-	 * @returns {*}
-	 */
-	function createObject(proto, constructor) {
-		var newProto;
-		if (Object.create) {
-			newProto = Object.create(proto);
-		} else {
-			Empty.prototype = proto;
-			newProto = new Empty();
-		}
-		newProto.constructor = constructor;
-		return newProto;
-	}
 
 
 	/**
@@ -739,7 +713,7 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-7-23
-		 * 修改日期：2015-7-23
+		 * 修改日期：2016-11-17
 		 * 名称：System.extend
 		 * 功能：Extends a child object from a parent object using classical inheritance
 		 * pattern.
@@ -752,22 +726,29 @@ if(!GRN_LHH){
 
 		 *
 		 */
-		'extend': function() {
+		'extend': (function() {
 			// proxy used to establish prototype chain
 			var F = function() {};
 			// extend subClass from superClass
 			return function(subClass, superClass) {
-				F.prototype = superClass.prototype;
-				subClass.prototype = new F();
-				subClass.prototype.constructor = subClass;
+				if (Object.create) {//用 ecma5 Object.create() 实现 prototype 原型继承
+					// subclass extends superclass
+					subClass.prototype = Object.create(superClass.prototype);
+					subClass.prototype.constructor = subClass;
+				}else{
+					F.prototype = superClass.prototype;
+					subClass.prototype = new F();
+					subClass.prototype.constructor = subClass;
 
-				subClass.superClass = superClass.prototype;
-				if(superClass.prototype.constructor === Object.prototype.constructor){
-					superClass.prototype.constructor = superClass;
+					subClass.superClass = superClass.prototype;
+					if(superClass.prototype.constructor === Object.prototype.constructor){
+						superClass.prototype.constructor = superClass;
+					}
 				}
 
+
 			};
-		}(),
+		}()),
 		/**
 		 *
 		 * @author: lhh
