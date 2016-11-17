@@ -2,7 +2,7 @@
 /**
  * 创建人：lhh
  * 创建日期:2015-7-22
- * 修改日期:2016-9-10
+ * 修改日期:2016-10-30
  * 名称：模版类
  * 功能：用于对模版标签里内容操作，模版渲染
  * 说明 : 
@@ -28,8 +28,9 @@ window[GRN_LHH].run(function(undefined){
 		this.guid=0;
 		guid++;
 		this.html=[];
-		this.leftLimit =System.Config.templat.leftLimit;
-		this.rightLimit=System.Config.templat.rightLimit;
+		//模板分隔符
+		this.delimiterLeft  = System.Config.templat.delimiters[0];
+		this.delimiterRight = System.Config.templat.delimiters[1];
 
 
 
@@ -72,7 +73,7 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-03-8
-	 * 修改日期：2016-10-1
+	 * 修改日期：2016-10-30
 	 * 名称：Template.templat
 	 * 功能：替换模版中的变量
 	 * 说明：变量式：__root__ ; 对象式：System.__root__
@@ -82,21 +83,21 @@ window[GRN_LHH].run(function(undefined){
 	 */
 	Template.template=function(S){
 		if(!S) return null;
+		var delimiterLeft=System.Config.templat.delimiters[0];
+		var delimiterRight=System.Config.templat.delimiters[1];
 		//没找到模版分隔符就返回传入的字符串
-		if(-1 === S.indexOf(System.Config.templat.leftLimit)){
+		if(-1 === S.indexOf(delimiterLeft)){
 			return S ||'';
 		}
-		var ss=S.split('/'),arr=[],v=[],v2=[],$1,$2,$3,
-			L=System.Config.templat.leftLimit,
-			R=System.Config.templat.rightLimit;
+		var ss=S.split('/'),arr=[],v=[],v2=[],$1,$2,$3;
 
 		ss.each(function(){
-			if(-1 === this.indexOf(L)){
+			if(-1 === this.indexOf(delimiterLeft)){
 				arr.push(this);
 			}else{//如果每个里有模版标签
-				v=this.split(L);
+				v=this.split(delimiterLeft);
 				$1=v[0] ? v[0] : '';
-				v2=v[1].split(L)[0].trim().split(R);
+				v2=v[1].split(delimiterLeft)[0].trim().split(delimiterRight);
 				$2=v2[0];
 				$3=v2[1] ? v2[1] :'';
 				arr.push([$1,Template.analysisVar($2),$3].join('').trim());
@@ -111,7 +112,7 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-03-9
-	 * 修改日期：2016-03-9
+	 * 修改日期：2016-10-30
 	 * 名称：Template.findTpl
 	 * 功能：查找模版标签
 	 * 说明：
@@ -121,17 +122,17 @@ window[GRN_LHH].run(function(undefined){
 	 */
 	Template.findTpl=function(S){
 		if(!S) return null;
-		var ss=[],arr=[],v=[],$1,$2,
-			L=System.Config.templat.leftLimit,
-			R=System.Config.templat.rightLimit;
+		var ss=[],arr=[],v=[],$1,$2;
+		var delimiterLeft=System.Config.templat.delimiters[0];
+		var delimiterRight=System.Config.templat.delimiters[1];
 		//没找到模版分隔符就返回传入的字符串
-		if(S.indexOf(L) !== -1){
-			ss=S.split(L);
+		if(S.indexOf(delimiterLeft) !== -1){
+			ss=S.split(delimiterLeft);
 			ss.each(function(){
-				if(-1 === this.indexOf(R)){
+				if(-1 === this.indexOf(delimiterRight)){
 					arr.push(this);
 				}else{//如果每个里有模版标签
-					v=this.split(R);
+					v=this.split(delimiterRight);
 					$1=v[0];
 					$2=v[1].trim();
 					arr.push([System.analysisVar($1),System.findTpl($2)].join('').trim());
@@ -196,7 +197,7 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：获取容器里带模板标签的html 字符串 ，然后迭代解析后输出到指定标签里
 	 * 创建日期：2016-10-22
-	 * 修改日期：2016-10-22
+	 * 修改日期：2016-10-30
 	 * 名称：Template.foreach
 	 * @param {String}template NO NULL:容器里带模板标签的html 字符串
 	 * @param {Array}data		NO NUll:解析模板标签的数据
@@ -245,15 +246,15 @@ window[GRN_LHH].run(function(undefined){
 	 				document.querySelector('.result').innerHTML=(System.Template.foreach($('[type="text/template-foreach:.result"]').html(), data));
 	 */
 	Template.foreach=function(template, data){
-		var leftLimit  = System.Config.templat.leftLimit,
-			rightLimit  = System.Config.templat.rightLimit;
+		var delimiterLeft=System.Config.templat.delimiters[0];
+		var delimiterRight=System.Config.templat.delimiters[1];
 		var i = 0,
 			len = data.length,
 			fragment = '';
 		function replace(obj){
 			var t, key, reg;
 			for(key in obj){
-				reg = new RegExp(leftLimit + key + rightLimit, 'ig');
+				reg = new RegExp(delimiterLeft + key + delimiterRight, 'ig');
 				t = (t || template).replace(reg, obj[key]);
 			}
 			return t;
@@ -284,7 +285,7 @@ window[GRN_LHH].run(function(undefined){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-03-9
-		 * 修改日期：2016-03-9
+		 * 修改日期：2016-10-30
 		 * 名称：find
 		 * 功能：查找模版标签
 		 * 说明：
@@ -295,17 +296,17 @@ window[GRN_LHH].run(function(undefined){
 		 */
 		'find':function(S,D){
 			var self=this;
-			var ss=[],arr=[],v=[],$1,$2,
-				L=this.leftLimit,
-				R=this.rightLimit;
+			var ss=[],arr=[],v=[],$1,$2;
+			var delimiterLeft  = this.delimiterLeft;
+			var delimiterRight = this.delimiterRight;
 			//没找到模版分隔符就返回传入的字符串
-			if(S.indexOf(L) !== -1){
-				ss=S.split(L);
+			if(S.indexOf(delimiterLeft) !== -1){
+				ss=S.split(delimiterLeft);
 				ss.each(function(){
-					if(-1 === this.indexOf(R)){
+					if(-1 === this.indexOf(delimiterRight)){
 						arr.push(this);
 					}else{//如果每个里有模版标签
-						v=this.split(R);
+						v=this.split(delimiterRight);
 						$1=v[0];
 						$2=v[1].trim();
 

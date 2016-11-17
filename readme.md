@@ -732,8 +732,8 @@
 	             功能：动态返回指定的标签
 	             说明：
 	             注意：length 是关键字 属性里禁止使用
-	             @param 	(String)name          NO NULL : 标签名称
 	             @param 	(Boolean)single          NULL : 成对标签还是单一标签，false 是成对标签,true 是单标签
+	             @param 	(String)name          NO NULL : 标签名称
 	             @param 	(Object)Attr             NULL : 标签的属性
 	             @param 	(String|Array)content    NULL : 内容
 	             @return (String) 返回标签字符串
@@ -750,12 +750,12 @@
 					    LAMJS.run(function () {
 	                        'use strict';
 	                        var System = this;
-	                        System.Html.tag('nav',
+	                        System.Html.tag('nav',{},
 									System.Html.tag('ul', {'class': 'pagination'},
 											(function(){
 												var arr=[];
 												var li;
-												li =System.Html.tag('li',
+												li =System.Html.tag('li',{},
 														System.Html.tag('a',{'href':'#','aria-label':'Previous'},
 																System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
 														)
@@ -764,12 +764,12 @@
 												arr.push(li);
 												
 												for(var i=1;i<=5;i++){
-													arr.push(System.Html.tag('li',
+													arr.push(System.Html.tag('li',{},
 															System.Html.tag('a', {'href':'#'},i)
 													));
 				
 												}
-												li = System.Html.tag('li',
+												li = System.Html.tag('li',{},
 														System.Html.tag('a', {'href':'#','aria-label':'Next'},
 																System.Html.tag('span', {'aria-hidden':'true'},'&laquo;')
 														)

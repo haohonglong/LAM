@@ -130,10 +130,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.getFile=function(url,callBack,D){
-		if(!System.isString(url)){
-			throw new Error("Warning :url 必须是请求文件的路径");
-			return 0;
-		}
+		if(!System.isString(url)){throw new Error("Warning :url 必须是请求文件的路径");}
 
 		getFile(System.merge({
 			'url':url,
@@ -149,7 +146,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-10-14
-	 * 修改日期：2016-10-14
+	 * 修改日期：2016-10-26
 	 * 名称： Html.getFiles
 	 * 功能：返回指定的多个文件
 	 * 说明：支持链式调用
@@ -165,10 +162,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @returns {Html|*}
 	 */
 	Html.getFiles=function(urls,callBack,D){
-		if(!System.isArray(urls)){
-			throw new Error("Warning :url 必须是请求文件的路径(数组格式)");
-			return;
-		}
+		if(!System.isArray(urls)){throw new Error("Warning :url 必须是请求文件的路径(数组格式)");}
 		System.each(urls,function(){
 			if(!System.fileExisted(this)){
 				if(System.isClassFile(this)){
@@ -228,8 +222,6 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 
 		});
 
-
-		
 	};
 	/**
 	 *
@@ -309,7 +301,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-4
+	 * 修改日期：2016-10-26
 	 * 名称： Html.renderTagAttributes
 	 * 功能：
 	 * 说明：
@@ -320,14 +312,11 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.renderTagAttributes = function(Attr){
-		if(!Attr || !System.isPlainObject(Attr)) {
-			return '';
-		}
+		Attr = !Attr || !System.isPlainObject(Attr) ? {} : Attr;
+		if(System.isEmptyObject(Attr)){return '';}
 		var attrs=[];
 		for(var key in Attr){
-			if(System.arr_Object_key_has(key)){
-				continue;
-			}
+			if(System.arr_Object_key_has(key)){continue;}
 			attrs.push(' ',key,'="',Attr[key],'"');
 		}
 		return attrs.join('');
@@ -338,115 +327,54 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2015-8-25
-	 * 修改日期：2016-9-11
+	 * 修改日期：2016-10-26
 	 * 名称： tag
 	 * 功能：动态返回指定的标签
 	 * 说明：
 	 * 注意：length 是关键字 属性里禁止使用
-	 * @param 	(String)name            NO NULL : 标签名称
 	 * @param 	(Boolean)single            NULL : 成对标签还是单一标签，false 是成对标签
+	 * @param 	(String)name            NO NULL : 标签名称
 	 * @param 	(Object)Attr               NULL : 标签的属性
 	 * @param 	(String|Array)content      NULL : 内容
 	 * @return (String) 返回标签字符串
 	 * Example：
 	 *
 	 */
-	Html.tag = function(name,single,Attr,content){
+	Html.tag = function(single,name,Attr,content){
 		var args = arguments;
 		var len = args.length;
-		if(0 == len || !System.isString(args[0])){
-			throw new Error('Warning :缺少标签名称');
-			return '';
+		if(0 === len || len > 4){throw new Error('Warning :参数至少有一个，且参数个数不能超过4个');}
+		if(!System.isBoolean(single)){
+			name	 = args[0];
+			Attr	 = args[1] || {};
+			content	 = args[2] || '';
+			single	 = false;
+		}else{
+			if(!System.isString(args[1])){throw new Error('Warning :缺少标签名称');}
+			single	 = args[0];
+			name	 = args[1] || null;
+			Attr	 = args[2] || {};
+			content	 = args[3] || '';
 		}
 
-		switch (len){
-			case 4:
-				name	 = args[0];
-				single 	 = args[1];
-				Attr 		 = args[2];
-				content  = args[3];
-				break;
-			case 3:
-				if(System.isPlainObject(args[1])){//tag('div',{},'')
-					name	 = args[0];
-					single 	 = false;
-					Attr 		 = args[1];
-					content  = args[2];
-				}else if(System.isBoolean(args[1])){//tag('img',true,{})
-					name	 = args[0];
-					single 	 = args[1];
-					Attr 		 = args[2];
-					content  = null;
-				}else{
-					throw new Error('Warning :第二参数类型非法！');
-					return '';
-				}
+		if(single && content){throw new Error('Warning :单标签下没有参数:{content} 值是:\''+content+'\'');}
+		content = System.isNumeric(content) ? String(content) : content;
 
-				break;
-			case 2:
-				if(System.isString(args[1]) || System.isArray(args[1])){//tag('div',String|Array)
-					name	 = args[0];
-					single 	 = false;
-					Attr 	 = null;
-					content  = args[1];
-				}else if(System.isPlainObject(args[1])){//tag('div',{})
-					name	 = args[0];
-					single 	 = false;
-					Attr 	 = args[1];
-					content  = null;
-				}else if(System.isBoolean(args[1])){//tag('img',true)
-					name	 = args[0];
-					single 	 = args[1];
-					Attr 	 = null;
-					content  = null;
-				}else{
-					throw new Error('Warning :第二参数类型非法！');
-					return '';
-				}
-
-				break;
-			case 1:
-				name	 = args[0];
-				single 	 = false;
-				Attr     = null;
-				content  = null;
-				break;
-			default:
-				throw new Error('Warning :第二参数类型不合法！');
-				return '';
-
-		}
-
-		if(name && !System.isString(name)){
-			throw new Error('Warning :name数类型不合法！');
-			return '';
-		}
-		if(single && !System.isBoolean(single)){
-			throw new Error('Warning :single数类型不合法！');
-			return '';
-		}
-		if(Attr && !System.isPlainObject(Attr)){
-			throw new Error('Warning :Attr数类型不合法！');
-			return '';
-		}
-		if(content && !System.isString(content) && !System.isArray(content)){
-			throw new Error('Warning :content数类型不合法！');
-			return '';
-		}
+		//check
+		if(System.empty(name) || !System.isString(name)){throw new Error('Warning :标签名称不能为空，只能是字符串！');}
+		if(Attr && !System.isPlainObject(Attr)){throw new Error('Warning :<'+name+'>标签的属性,{Attr}参数必须是一个对象！');}
+		if(content && !System.isString(content) && !System.isArray(content)){throw new Error('Warning :<'+name+'>标签内容必须是字符串或者是数组');}
 
 		var tag=[];
 		tag.push('<',name);
 		//拼接属性
-		if(Attr && System.isObject(Attr)){
-			tag.push(Html.renderTagAttributes(Attr));
-		}
-
+		if(Attr && System.isObject(Attr)){tag.push(Html.renderTagAttributes(Attr));}
 
 		if(single){
 			tag.push(' />');
 		}else{
 			tag.push('>');
-			if(content){
+			if(!System.empty(content)){
 				if(System.isArray(content)){
 					tag.push(content.join(''));
 				}else{
@@ -463,7 +391,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-11
+	 * 修改日期：2016-10-26
 	 * 名称： scriptFile
 	 * 功能：
 	 * 说明：
@@ -475,15 +403,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.scriptFile=function(src,Attr){
-		if(!System.isString(src)){
-			throw new Error('Warning: src数类型不合法！');
-			return '';
-		}
-
-		if(Attr && !System.isPlainObject(Attr)){
-			throw new Error('Warning: Attr数类型不合法！');
-			return '';
-		}
+		if(!System.isString(src)){throw new Error('Warning: script 标签src参数必须是字符串！');}
 		Attr = Attr || System.clone(sAttribute);
 		Attr.src = src;
 		Attr.type = Attr.type || 'text/javascript';
@@ -495,7 +415,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-11
+	 * 修改日期：2016-10-26
 	 * 名称： a
 	 * 功能：
 	 * 说明：
@@ -507,25 +427,17 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.linkFile=function(href,Attr){
-		if(!System.isString(href)){
-			throw new Error('Warning: href数类型不合法！');
-			return '';
-		}
-
-		if(Attr && !System.isPlainObject(Attr)){
-			throw new Error('Warning: Attr数类型不合法！');
-			return '';
-		}
+		if(!System.isString(href)){throw new Error('Warning: link 标签href参数必须是字符串！');}
 		Attr = Attr || System.clone(cAttribute);
 		Attr.href = href;
-		return Html.tag('link',true,Attr);
+		return Html.tag(true,'link',Attr);
 	};
 	/**
 	 *
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-11
+	 * 修改日期：2016-10-25
 	 * 名称： script
 	 * 功能：
 	 * 说明：
@@ -537,15 +449,6 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.script=function(content,Attr){
-		if(!System.isString(content)){
-			throw new Error('Warning: content数类型不合法！');
-			return '';
-		}
-
-		if(Attr && !System.isPlainObject(Attr)){
-			throw new Error('Warning: src数类型不合法！');
-			return '';
-		}
 		Attr = Attr || {};
 		Attr.type = Attr.type || 'text/javascript';
 		return Html.tag('script',Attr,content);
@@ -555,7 +458,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-11
+	 * 修改日期：2016-10-25
 	 * 名称： style
 	 * 功能：
 	 * 说明：
@@ -567,15 +470,6 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.style=function(content,Attr){
-		if(!System.isString(content)){
-			throw new Error('Warning: content数类型不合法！');
-			return '';
-		}
-
-		if(Attr && !System.isPlainObject(Attr)){
-			throw new Error('Warning: src数类型不合法！');
-			return '';
-		}
 		Attr = Attr || {};
 		Attr.type = Attr.type || 'text/css';
 		return Html.tag('style',Attr,content);
@@ -585,7 +479,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-11
+	 * 修改日期：2016-10-26
 	 * 名称： a
 	 * 功能：
 	 * 说明：
@@ -598,51 +492,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.a=function(href,content,Attr){
-		var args = arguments;
-		var len = args.length;
-		if(0 == len || !System.isString(args[0])){
-			throw new Error('Warning :路径参数必写');
-			return '';
-		}
-
-		switch (len){
-			case 3:
-				href	 = args[0];
-				content	 = args[1];
-				Attr 	 = args[2];
-				break;
-			case 2:
-				if(System.isString(args[1])){
-					href	 = args[0];
-					content	 = args[1];
-					Attr 	 = {};
-				}else if(System.isPlainObject(args[1])){
-					href	 = args[0];
-					content	 = '';
-					Attr 	 = args[1];
-				}else{
-					throw new Error('Warning: 第二参数类型不合法！');
-					return '';
-				}
-
-				break;
-
-			default:
-
-		}
-		if(!System.isString(href)){
-			throw new Error('Warning: href数类型不合法！');
-			return '';
-		}
-		if(content && !System.isString(content) && !System.isArray(content)){
-			throw new Error('Warning: content数类型不合法！');
-			return '';
-		}
-
-		if(Attr && !System.isPlainObject(Attr)){
-			throw new Error('Warning: src数类型不合法！');
-			return '';
-		}
+		if(!System.isString(href)){throw new Error('Warning: a标签href参数必须是字符串！');}
 		Attr = Attr || {};
 		content = content || '';
 		Attr.href = href;
@@ -654,7 +504,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-9-4
-	 * 修改日期：2016-9-11
+	 * 修改日期：2016-10-26
 	 * 名称： img
 	 * 功能：
 	 * 说明：
@@ -666,20 +516,11 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	 *
 	 */
 	Html.img=function(src,Attr){
-		if(!System.isString(src)){
-			throw new Error('Warning: src数类型不合法！');
-			return '';
-		}
-		if(Attr && !System.isPlainObject(Attr)){
-			throw new Error('Warning: src数类型不合法！');
-			return '';
-		}
+		if(!System.isString(src)){throw new Error('Warning: img标签src参数必须是字符串！');}
 		Attr = Attr || {};
 		Attr.src = src;
-		return Html.tag('img',true,Attr);
+		return Html.tag(true,'img',Attr);
 	};
-
-
 
 
 	Html.prototype = {

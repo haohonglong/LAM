@@ -88,6 +88,7 @@ if(!GRN_LHH){
 		indexOf = Array.prototype.indexOf;
 
 
+
 	/**
 	 * @author: lhh
 	 * 产品介绍：
@@ -266,6 +267,7 @@ if(!GRN_LHH){
 	 *			then
 	 *			config
 	 *			define
+	 *			require
 	 *			eval
 	 *			print
 	 *			import
@@ -338,9 +340,6 @@ if(!GRN_LHH){
 		'run':function(args,callback){
 			return runtime.apply(this,[args,callback]);
 		},
-
-
-
 		/**
 		 *
 		 * @author: lhh
@@ -393,9 +392,6 @@ if(!GRN_LHH){
 			this.run(args,callback);
 			return this;
 		},
-
-
-
 		/**
 		 * @author: lhh
 		 * 产品介绍：
@@ -428,91 +424,13 @@ if(!GRN_LHH){
 			this.Config.render.unuse();
 			return this;
 		},
-
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-11-22
-		 * 修改日期：2015-11-24
-		 * 名称：System.modules
-		 * 功能：模块
-		 * 说明：
-		 * 注意：
-		 * Example：
-		 */
-		'modules':{
-			/**
-			 * @author: lhh
-			 * 产品介绍：
-			 * 创建日期：2015-11-22
-			 * 修改日期：2015-11-24
-			 * 名称：System.modules.exports
-			 * 功能：
-			 * 说明：
-			 * 注意：
-			 * Example：
-			 */
-			'exports':{}
-		},
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-9-15
-		 * 修改日期：2016-9-10
-		 * 名称：System.config
-		 * 功能：配置类加载文件
-		 * 说明：
-		 * 注意：
-		 * @param   (Object)D 			        NO NULL :传入的参数
-		 * @param   (String)D.baseUrl 			NO NULL :相对于哪个路径
-		 * @param   (Object)D.paths 			NO NULL :
-		 * @return  (voide)						:
-		 * Example：
-		 */
-		'config':function(D){
-			var option ={
-				baseUrl: D.baseUrl || System.ROOT,
-				paths: D.paths
-			};
-			System.Alias = option;
-		},
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-9-21
-		 * 修改日期：2016-9-10
-		 * 名称：System.define
-		 * 功能：
-		 * 说明：
-		 * 注意：
-		 * @param   (Array)args 			   NULL :传入的参数
-		 * @param   (Function)callback 		NO NULL :在运行此方法要立马执行的操作,这里的this指的是LAMJS 对象（必选）
-		 * @return  (voide)						:
-		 * Example：
-		 */
-		'define':function(args,callback){
-			if(System.isObject(System.Alias) && System.isPlainObject(System.Alias)) {
-				var paths = System.Alias.paths;
-				var urls=[];
-				System.each(args, function (i,item) {
-					if(paths[item] && System.isString(paths[item])){
-						urls.push(paths[item]);
-					}
-				});
-
-				System.import(urls,paths.baseUrl);
-			}
-
-		},
 		/**
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-8-26
 		 * 修改日期：2016-8-26
 		 * 名称：System.eval
-		 * 功能：对表达式字符串，或 json 进行eval 再处理
+		 * 功能：对json 或 function 的字符串 进行eval 处理
 		 * 说明：
 		 * 注意：
 		 * @param   {*}expression 			NO NULL :表达式字符串
@@ -574,10 +492,6 @@ if(!GRN_LHH){
 			document = document || W.document;
 			document.close();
 		},
-
-
-
-
 		/**
 		 *
 		 * @author: lhh
@@ -602,8 +516,6 @@ if(!GRN_LHH){
 
 			}
 		},
-
-
 		/**
 		 * @author: lhh
 		 * 产品介绍：
@@ -700,52 +612,6 @@ if(!GRN_LHH){
 			}
 			return false;
 		},
-
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-8-26
-		 * 修改日期：2016-8-25
-		 * 名称： list
-		 * 功能：递归对象
-		 * 说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象为止
-		 * 注意：
-		 * @param 	(Object)D             			NO NULL : 对象
-		 * @param 	(Funtion)callback             	NO NULL : 回调方法
-		 * @returns {Object}
-		 * Example：
-		 *
-		 */
-		'list':function(D,callback){
-			var loop,totalLoop;
-			totalLoop=loop=0;
-			var __this__ = this;
-			var list=function(D,callback){
-
-				if(!__this__.isArray(D) && !__this__.isObject(D)){
-					return D;
-				}
-				if(!__this__.isFunction(callback)){
-					throw new Error('Warning 第二参数 必须是个callback');
-				}
-				//算出找到指定内容，所需要遍历的次数
-				loop++;
-				return __this__.each(D,function(k,v){
-					totalLoop++;
-					if (false === callback.apply(D,[k,v,loop,totalLoop])) {
-						console.log('共遍历----->'+loop+'<------次找到了')
-						return false;
-					}
-					//如果没找到，就继续递归搜索
-					if(v){
-						return list(v,callback);
-					}
-				});
-			};
-			return {'data':list(D,callback),'totalLoop':totalLoop,'loop':loop};
-
-		},
-
 		/**
 		 * @author: lhh
 		 * 产品介绍：
@@ -766,19 +632,19 @@ if(!GRN_LHH){
 				throw new Error('Warning : 两个参数是必传的');
 
 			}
-			if(!this.isObject(obj) && !this.isArray(obj)){
+			if(!System.isObject(obj) && !System.isArray(obj)){
 				throw new Error('Warning '+obj+': 必须是个Object 或者 Array 类型！');
 				return obj;
 			}
 
-			if(!this.isFunction(callback)){
+			if(!System.isFunction(callback)){
 				throw new Error('Warning :第二参数 必须是个callback！');
 				return obj;
 			}
 
 			var key;
 
-			if ( this.isArray( obj ) ) {
+			if ( System.isArray( obj ) ) {
 				return obj.each(callback);
 			} else {
 				if(!System.isPlainObject(obj)) return obj;
@@ -847,7 +713,7 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-7-23
-		 * 修改日期：2015-7-23
+		 * 修改日期：2016-11-17
 		 * 名称：System.extend
 		 * 功能：Extends a child object from a parent object using classical inheritance
 		 * pattern.
@@ -860,22 +726,29 @@ if(!GRN_LHH){
 
 		 *
 		 */
-		'extend': function() {
+		'extend': (function() {
 			// proxy used to establish prototype chain
 			var F = function() {};
 			// extend subClass from superClass
 			return function(subClass, superClass) {
-				F.prototype = superClass.prototype;
-				subClass.prototype = new F();
-				subClass.prototype.constructor = subClass;
+				if (Object.create) {//用 ecma5 Object.create() 实现 prototype 原型继承
+					// subclass extends superclass
+					subClass.prototype = Object.create(superClass.prototype);
+					subClass.prototype.constructor = subClass;
+				}else{
+					F.prototype = superClass.prototype;
+					subClass.prototype = new F();
+					subClass.prototype.constructor = subClass;
 
-				subClass.superClass = superClass.prototype;
-				if(superClass.prototype.constructor === Object.prototype.constructor){
-					superClass.prototype.constructor = superClass;
+					subClass.superClass = superClass.prototype;
+					if(superClass.prototype.constructor === Object.prototype.constructor){
+						superClass.prototype.constructor = superClass;
+					}
 				}
 
+
 			};
-		}(),
+		}()),
 		/**
 		 *
 		 * @author: lhh
@@ -905,7 +778,7 @@ if(!GRN_LHH){
 			}else{
 				deep = false;
 			}
-			if(!isArray(args)){
+			if(!System.isArray(args)){
 				throw new Error('Warning args 不是一个数组');
 				return false;
 			}
@@ -940,75 +813,6 @@ if(!GRN_LHH){
 
 			return target;
 		},
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-10-13
-		 * 修改日期：2016-8-23
-		 * 名称：clone
-		 * 功能：对象克隆
-		 * 说明：_hashCode里的'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
-		 * 注意：
-		 * @param   (Boolean)deep  		   	   NULL :是否要深度拷贝对象
-		 * @param   (Object)className 		NO NULL : 要克隆的类
-		 * @return  (Object)				:返回克隆后的新对象
-		 * Example：
-		 */
-		'clone': function(className) {
-			var deep;
-			if (System.isBoolean(className)) {
-				deep = className;
-				className = arguments[1];
-			}else{
-				deep = false;
-			}
-			var obj;
-			obj = System.merge(deep,{},[className]);
-			if(obj['_hashCode']){
-				obj['_hashCode'] += '_'+System.BiObject.generate();
-			}
-			return obj;
-
-		},
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-7-15
-		 * 修改日期：2016-8-23
-		 * 名称：isclone
-		 * 功能：检查对象是否是克隆对象
-		 * 说明：'_'代表是从别的对象克隆来的，如果'_'前面的字符相同就说明俩对象是克隆关系
-		 * 注意：
-		 * @param   (Object)className 		NO NULL : 检查的对象
-		 * @returns {boolean}
-		 */
-		'isclone': function(obj) {
-			if(-1 === obj._hashCode.indexOf('_')){
-				return false;
-			}else{
-				return true;
-			}
-
-		},
-
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2016-02-17
-		 * 修改日期：2016-02-17
-		 * 名称：checkout
-		 * 功能：
-		 * 说明：
-		 * 注意：
-		 * Example：
-		 */
-		'checkout': function() {},
-
-
 		/**
 		 *
 		 * @author: lhh
@@ -1037,10 +841,6 @@ if(!GRN_LHH){
 			}
 			return this;
 		},
-
-
-
-
 
 		/**
 		 *
@@ -1348,22 +1148,17 @@ if(!GRN_LHH){
 
 	System.printf=prints;
 
-
-
-
-
 //==================================================================================
-
-
 
 	//函数在原型里定义一个方法
 	Function.prototype.method=function(name,fn){
 		if(!this.prototype[name]){
 			this.prototype[name] = fn;
+		}else{
+			throw new Error(['Warning: \'',name,'\' 名称已经存在,请换个名字'].join(''));
 		}
 		return this;
 	};
-
 
 	/**
 	 *
@@ -1396,8 +1191,6 @@ if(!GRN_LHH){
 			return fmt;
 		});
 	}
-
-
 
 	if(!String.prototype.trim){
 		String.method('trim',function(){
@@ -1782,12 +1575,6 @@ if(!GRN_LHH){
 		});
 	}
 
-
-
-
-
-
-
 	/**
 	 *
 	 * @author: lhh
@@ -1876,19 +1663,6 @@ if(!GRN_LHH){
 		});
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 	/**
 	 * @author: lhh
 	 * 产品介绍：
@@ -1914,7 +1688,6 @@ if(!GRN_LHH){
 		return n-1;
 	}
 
-
 	/**
 	 * @author: lhh
 	 * 产品介绍：
@@ -1939,67 +1712,6 @@ if(!GRN_LHH){
 		return false;
 	}
 
-
-
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2015.8.26
-	 * 修改日期：2015.8.26
-	 * 名称：length
-	 * 功能：Object 原型上添加 length 方法
-	 * 说明：
-	 * 注意：与jQuery 有冲突
-	 * 调用方式：
-	 * @return  (Number) 返回对象里的成员个数
-	 * Example：
-	 */
-	//if(!Object.prototype.length){
-	//	Object.method('length',function(){
-	//		return getObjectLength.call(this);
-	//	});
-	//}
-
-
-	/**
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2015-8-26
-	 * 修改日期：2015-8-26
-	 * 名称： list
-	 * 功能：递归对象
-	 * 说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象位置
-	 * 注意：与jQuery 有冲突
-	 * @param 	(Object)D             	NO NULL : 对象
-	 * @param 	(Funtion)fn             NO NULL : 回调方法
-	 * @return ()
-	 * Example：
-	 *
-	 */
-	//if(!Object.prototype.list){
-	//	Object.method('list',function(fn){
-	//		if(!isObject(this)){
-	//			return this;
-	//		}
-	//		for(var k in this){
-	//			if(this[k] && this[k].list){
-	//				this[k].list(fn);
-	//			}
-	//			if(isFunction(fn)){
-	//				if(arr_Object_key_has(k)){
-	//					continue;
-	//				}else{
-	//					fn.call(this,k,this[k]);
-	//				}
-    //
-    //
-	//			}
-	//		}
-	//	});
-	//}
-
-
 	(function(){
 		var READ=1;
 		var WRITE=2;
@@ -2014,12 +1726,6 @@ if(!GRN_LHH){
 				this.prototype["set"+capitalized]=new Function(sName,"this._"+sName+" = "+sName+";");
 		});
 	})();
-
-
-
-
-
-
 
 	/**
 	 *
@@ -2174,9 +1880,6 @@ if(!GRN_LHH){
 		return arr;
 	}
 
-
-
-
 	return System.merge(null,[Interface,W[namespace]]);
 });
 
@@ -2227,8 +1930,7 @@ window[GRN_LHH].run([window],function(W,Config){
 		//定义模版标签
 		'templat':{
 			'custom_attr':'[data-var=tpl]',
-			'leftLimit':'{{',
-			'rightLimit':'}}'
+			'delimiters':['{{','}}']
 		},
 		'files':[],
 		'XHR':{//配置加载xhr 的公共参数
@@ -2260,13 +1962,16 @@ window[GRN_LHH].run([window],function(W,Config){
 
 		//标签的渲染方式
 		'render':{
+			//加载文件的后缀名称
+			'suffixs':['.js','.css'],
 			//输出标签的方式 ()
 			'fragment':null,
 			//true : document.createElement(); false :document.write();
 			'create':false,
+			'create_callback':null,
 			//加载后是否要移除添加过的script 节点
 			'remove':true,
-			'append':'after',
+			'append':'befor',
 			'default':{
 				'script':{
 					'Attribute':{
@@ -2352,10 +2057,6 @@ window[GRN_LHH].run([window],function(W,Config){
 
 	System.arr_Object_key=null;
 	var __this__=null;
-
-
-
-
 	/**
 	 *
 	 * @author: lhh
@@ -2389,9 +2090,6 @@ window[GRN_LHH].run([window],function(W,Config){
 				//}
 			}
 		}
-
-
-
 		//这个类文件没有加载过
 		return false;
 	};
@@ -2421,9 +2119,6 @@ window[GRN_LHH].run([window],function(W,Config){
 			}
 		});
 	}
-
-
-
 	function Basis(D){
 		__this__=this;
 		System.app=this;
@@ -2433,12 +2128,7 @@ window[GRN_LHH].run([window],function(W,Config){
 				this.Browser=Browser;
 			}
 		};
-
-
 	}
-
-
-
 	/*---------------------------------
 	 static mothed
 	 -------*/
@@ -2527,8 +2217,6 @@ window[GRN_LHH].run([window],function(W,Config){
 			return this;
 		}
 		/*------------------------------*/
-
-
 
 	};
 
