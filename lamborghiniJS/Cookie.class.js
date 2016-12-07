@@ -30,6 +30,10 @@ window[GRN_LHH].run([window],function(window,undefined){
 				((secure) ? "; secure" : "");
 
 		},
+		'getCookie':function(name){//获取Cookie
+			var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+			if(arr != null) return unescape(arr[2]); return null;
+		},
 		'getCookie_2':function(name){//获取Cookie
 			var cookies=document.cookie.split("; ");
 			for(var i=0,c,len=cookies.length;i<len;i++){
@@ -39,7 +43,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 			}
 			return '';
 		},
-		'getCookie':function(name){
+		'getCookie_3':function(name){
 			var arg = name + "=";
 			var alen = arg.length;
 			var clen = document.cookie.length;
@@ -76,6 +80,12 @@ window[GRN_LHH].run([window],function(window,undefined){
 				expDate.setMinutes(expDate.getMinutes() + parseInt(minutes));
 				return expDate.toGMTString();
 			}
+		},
+		'delCookie':function(name){//
+			var exp = new Date();
+			exp.setTime(exp.getTime() - 1);
+			var cval=this.getCookie(name);
+			if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 		},
 		/**
 		 *
