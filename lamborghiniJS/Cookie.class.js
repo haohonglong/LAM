@@ -16,25 +16,40 @@ window[GRN_LHH].run([window],function(window,undefined){
 	Cookie.prototype = {
 		'constructor':Cookie,
 		'__constructor':function(){},
+
 		/**
-		 * 使用setCookie()函数来保存cookie项的值，
+		 * @author lhh
+		 * 产品介绍：
+		 * 创建日期：2016-12-8
+		 * 修改日期：2016-12-8
+		 * 名称：cookie
+		 * 功能：创建cookie
+		 * 说明：
 		 * 其中第一、二两个参数分别为cookie项的名称和值。
 		 * 如果想为其设置一个过期时间，那么就需要设置第三个参数，
 		 * 这里需要通过getExpDate()获得一个正确格式的参数。
+		 * 注意：
+		 *
+		 * @param name{String}
+		 * @param value
+		 * @param D{json}
+		 * @returns {*}
 		 */
-		'setCookie':function(name, value, expires, path, domain, secure){
-			document.cookie = name + "=" + escape(value) +
-				((expires) ? "; expires=" + expires : "") +
-				((path) ? "; path=" + path : "") +
-				((domain) ? "; domain=" + domain : "") +
-				((secure) ? "; secure" : "");
+		'cookie':function(name, value, D){
+			D = D || {};
+			if(1 === arguments.length){
+				var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+				if(arr != null) return unescape(arr[2]); return null;
+			}else{
+				document.cookie = name + "=" + escape(value) +
+					((D.expires) ? "; expires=" + D.expires : "") +
+					((D.path) ? "; path=" + D.path : "") +
+					((D.domain) ? "; domain=" + D.domain : "") +
+					((D.secure) ? "; secure" : "");
+			}
 
 		},
 		'getCookie':function(name){//获取Cookie
-			var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
-			if(arr != null) return unescape(arr[2]); return null;
-		},
-		'getCookie_2':function(name){//获取Cookie
 			var cookies=document.cookie.split("; ");
 			for(var i=0,c,len=cookies.length;i<len;i++){
 				c=cookies[i].split('=');
@@ -43,7 +58,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 			}
 			return '';
 		},
-		'getCookie_3':function(name){
+		'getCookie_2':function(name){
 			var arg = name + "=";
 			var alen = arg.length;
 			var clen = document.cookie.length;
@@ -81,10 +96,10 @@ window[GRN_LHH].run([window],function(window,undefined){
 				return expDate.toGMTString();
 			}
 		},
-		'delCookie':function(name){//
+		'removeCookie':function(name){//
 			var exp = new Date();
 			exp.setTime(exp.getTime() - 1);
-			var cval=this.getCookie(name);
+			var cval=this.cookie(name);
 			if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 		},
 		/**
@@ -105,7 +120,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		}
 	};
 	System.extends(Cookie,System.Browser,1);
-	System['Cookie']=Cookie;
+	System['Cookie']=new Cookie();
 
 });
 
