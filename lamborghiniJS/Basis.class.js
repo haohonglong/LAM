@@ -198,6 +198,7 @@ if(!GRN_LHH){
 		'BiObject': {},
 		'Loader': {},
 		'Component': {},
+		'Cache': {},
 		'Helper': {},
 		'Controller': {},
 		'Model': {},

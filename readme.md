@@ -165,6 +165,7 @@
         		'Loader'   		    :{},
         		'BiObject'   		:function(){},
         		'Component'      	:function(){},
+        		'Cache'				:function(){},
         		'Helper'     		:function(){},
         		'Controller'     	:function(){},
         		'Browser'    		:function(){},
