@@ -1159,11 +1159,11 @@
     二十、配置参数
             一、模板标签分隔符设置与修改
                 1.设置模板分隔符： 
-                     在配置文件 的templat里配置左右分隔符分别是：leftLimit , rightLimit
+                     在配置文件 的templat里配置左右分隔符是个数组：delimiters
                      也可在单独视图里定义，只匹配当前页面里的分隔符与别的页面没关系，不会改变全局配置
                  2.修改模板分隔符：(用MVC方式：设置在控制器方法里)
-                     LAMJS.Config.templat.leftLimit  = '${{';
-                     LAMJS.Config.templat.rightLimit = '}}$';
+                     LAMJS.Config.templat.delimiters[0]  = '${{';
+                     LAMJS.Config.templat.delimiters[1] = '}}$';
                      
                      
 
