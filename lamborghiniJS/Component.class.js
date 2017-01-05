@@ -33,8 +33,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * Example：
 		 */
 		'require':function(name){
-			if(System.modules.exports[name]){
-				return System.modules.exports[name];
+			if(System.module.exports[name]){
+				return System.module.exports[name];
 			}else{
 				throw new Error(['Warning: \'',name,'\' 没有定义'].join(''));
 			}
@@ -54,10 +54,10 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * Example：
 		 */
 		'export':function(name,value){
-			if(System.modules.exports[name]){
+			if(System.module.exports[name]){
 				throw new Error(['Warning: \'',name,'\' 名称已经存在,请换个名字'].join(''));
 			}else{
-				System.modules.exports[name] = value;
+				System.module.exports[name] = value;
 			}
 		},
 
@@ -121,19 +121,19 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * 产品介绍：
 		 * 创建日期：2015-11-22
 		 * 修改日期：2015-11-24
-		 * 名称：System.modules
+		 * 名称：System.module
 		 * 功能：模块
 		 * 说明：
 		 * 注意：
 		 * Example：
 		 */
-		'modules':{
+		'module':{
 			/**
 			 * @author: lhh
 			 * 产品介绍：
 			 * 创建日期：2015-11-22
 			 * 修改日期：2015-11-24
-			 * 名称：System.modules.exports
+			 * 名称：System.module.exports
 			 * 功能：
 			 * 说明：
 			 * 注意：
