@@ -91,7 +91,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 			set();
 		},
 		'get':function(index){
-			return cache[index];
+			return System.isset(index) ? cache[index] : cache;
 		},
 		'exist':function(key,value){
 			for(var i=0,len=cache.length;i<len;i++){
@@ -101,10 +101,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 			}
 			return -1;
 		},
-		'getAll':function(){//clone and return the array
-			cache = get();
-			return $.merge([],cache);
-		},
+
 		'clear':function(){
 			this.remove();
 			clear();
