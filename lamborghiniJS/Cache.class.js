@@ -18,7 +18,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	var System=this;
 	System.is(System,'Browser','Cache');
 	var __this__=null;
-	var cache = [],Cache,cache_name='cache',
+	var cache = [],Cache,cache_name='',
 		isStorage=function(){
 			if(typeof(Storage) !== "undefined") {
 				return true;
@@ -68,7 +68,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		System.Basis.extends.call(this,System.Browser);
 		__this__=this;
 		this.caches = [];
-		cache_name = name || cache_name;
+		cache_name = name || 'cache';
 		this.cache_name = cache_name;
 	}
 	Cache.prototype = {
