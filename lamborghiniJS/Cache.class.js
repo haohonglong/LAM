@@ -64,10 +64,12 @@ window[GRN_LHH].run([window],function(window,undefined){
 	}
 //========================================================
 
-	function Cache(){
+	function Cache(name){
 		System.Basis.extends.call(this,System.Browser);
 		__this__=this;
 		this.caches = [];
+		cache_name = name || cache_name;
+		this.cache_name = cache_name;
 	}
 	Cache.prototype = {
 		'constructor':Cache,
