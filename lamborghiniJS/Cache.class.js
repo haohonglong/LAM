@@ -18,6 +18,51 @@ window[GRN_LHH].run([window],function(window,undefined){
 	var System=this;
 	System.is(System,'Browser','Cache');
 	var __this__=null;
+	var cache = [],Cache,cache_name='cache',
+		isStorage=function(){
+			if(typeof(Storage) !== "undefined") {
+				return true;
+			} else {
+				return false;
+			}
+		};
+
+//========================================================
+
+	function set(value,name){
+		value = value || cache;
+		name = name || cache_name;
+		if(isStorage()){
+			clear();
+			sessionStorage.setItem(name,JSON.stringify(value));
+		}
+	}
+	function remove(name){
+		name = name || cache_name;
+		if(isStorage()){
+			sessionStorage.removeItem(name);
+		}
+	}
+
+	function clear() {
+		if(isStorage()){
+			sessionStorage.clear();
+		}else{
+			cache = [];
+		}
+
+	}
+
+	function get(name) {
+		name = name || cache_name;
+		if(isStorage()){
+			return (JSON.parse(sessionStorage.getItem(name))) || cache;
+		}else{
+			return cache;
+		}
+
+	}
+//========================================================
 
 	function Cache(){
 		System.Basis.extends.call(this,System.Browser);
@@ -27,6 +72,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	Cache.prototype = {
 		'constructor':Cache,
 		'cache':function(key,value,callback){
+			cache = get();
 			var index = this.exist(key,value);
 			if($.isFunction(callback)){
 				callback.call(this,index);
@@ -34,37 +80,45 @@ window[GRN_LHH].run([window],function(window,undefined){
 			return index;
 		},
 		'set':function(Obj,key,value){
+			// if(-1 == this.exist(key,value)){
 			Obj[key] = value;
-			this.caches.push(Obj);
-
+			cache.push(Obj);
+			set();
+			// }
 		},
 		'update':function(index,Obj){
-			this.caches[index] = Obj;
+			cache[index] = Obj;
+			set();
 		},
 		'get':function(index){
-			return this.caches[index];
+			return cache[index];
 		},
 		'exist':function(key,value){
-			var caches = this.caches;
-			for(var i=0,len=caches.length;i<len;i++){
-				if((key in caches[i]) && (value == caches[i][key])){
+			for(var i=0,len=cache.length;i<len;i++){
+				if((key in cache[i]) && (value == cache[i][key])){
 					return i;
 				}
 			}
 			return -1;
 		},
 		'getAll':function(){//clone and return the array
-			return $.merge([],this.caches);
+			cache = get();
+			return $.merge([],cache);
+		},
+		'clear':function(){
+			this.remove();
+			clear();
 		},
 		'remove':function(index){
 			if(index){
-				if (index > -1 && index < this.caches.length-1) {
-					this.caches.splice(index, 1);
-					// delete caches[index];
+				if (index > -1 && index < cache.length-1) {
+					cache.splice(index, 1);
+					// delete cache[index];
 				}
 			}else{
-				this.caches = [];
+				cache = [];
 			}
+			set();
 		},
 
 		/**
