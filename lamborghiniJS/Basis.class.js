@@ -198,6 +198,7 @@ if(!GRN_LHH){
 		'BiObject': {},
 		'Loader': {},
 		'Component': {},
+		'Cache': {},
 		'Helper': {},
 		'Controller': {},
 		'Model': {},
@@ -1781,7 +1782,7 @@ if(!GRN_LHH){
 		return !isNaN(n);
 	}
 	function isset_(s){
-		return (typeof s != "undefined" &&  s != null);
+		return (typeof s !== "undefined" &&  s !== null);
 	}
 
 	function empty_(s) {

@@ -292,7 +292,7 @@ window[GRN_LHH].run(function(undefined){
 		 * 注意：
 		 * @param (String)S NO NULL:要查找的字符串
 		 * @param (Object)D NO NULL:对象模板中的数据
-		 * @returns {Array}
+		 * @returns {String}
 		 */
 		'find':function(S,D){
 			var self=this;
@@ -319,7 +319,7 @@ window[GRN_LHH].run(function(undefined){
 				return S ||'';
 			}
 
-			return arr;
+			return arr.join('');
 		},
 		'replace':function(){},
 		'analysis':function(vars,D,
@@ -359,19 +359,17 @@ window[GRN_LHH].run(function(undefined){
 		 * 功能：
 		 * 说明：
 		 * 注意：
-		 * @param (String)view 			NO NULL:指定渲染的页面路径
-		 * @param (Object)D	    		NO NULL:渲染到模版中的数据
-		 * @param (Object)Cajax	    	NO NULL:设置Ajax参数
-		 * @param 	(Function)callBack NULL :参数：(解析后模板字符串)
+		 * @param {String}view 			NO NULL	:指定渲染的页面路径
+		 * @param {Object}D	    		NO NULL	:渲染到模版中的数据
+		 * @param {Function}callBack 	   NULL :参数：(解析后模板字符串)
+		 * @param {Object}Cajax	    	NO NULL	:设置Ajax参数
 		 * @returns {void}
 		 */
 		'render':function(view,D,callBack,Cajax){
 			var self=this,S;
 			System.Html.getFile(view,function(content){
 				S=self.find(content,D);
-				if(System.isArray(S)){
-					S=S.join('');
-				}
+
 				if(System.isFunction(callBack)){
 					callBack(S);
 				}else{

@@ -16,6 +16,7 @@
 	LamborghiniJS 里有hashcode概念（参考 十五、hashcode）
 	LamborghiniJS 里有模版标签概念（参考 十八、模版标签）
 	LamborghiniJS 里有MVC概念（参考 十九、MVC）
+	LamborghiniJS 里有缓存概念（参考 二十一、缓存机制）
 
 	现有的实例：
 		选项卡、拖拽、常用工具、弹出层、幻灯、棋盘、缩略图、自适应布局、html5绘图基础类
@@ -165,6 +166,7 @@
         		'Loader'   		    :{},
         		'BiObject'   		:function(){},
         		'Component'      	:function(){},
+        		'Cache'				:function(){},
         		'Helper'     		:function(){},
         		'Controller'     	:function(){},
         		'Browser'    		:function(){},
@@ -1158,15 +1160,17 @@
     二十、配置参数
             一、模板标签分隔符设置与修改
                 1.设置模板分隔符： 
-                     在配置文件 的templat里配置左右分隔符分别是：leftLimit , rightLimit
+                     在配置文件 的templat里配置左右分隔符是个数组：delimiters
                      也可在单独视图里定义，只匹配当前页面里的分隔符与别的页面没关系，不会改变全局配置
                  2.修改模板分隔符：(用MVC方式：设置在控制器方法里)
-                     LAMJS.Config.templat.leftLimit  = '${{';
-                     LAMJS.Config.templat.rightLimit = '}}$';
+                     LAMJS.Config.templat.delimiters[0]  = '${{';
+                     LAMJS.Config.templat.delimiters[1] = '}}$';
                      
                      
 
-    二十一、参考附录
+    二十一、缓存机制
+    
+    二十二、参考附录
             一、闭包：
                       AB俩函数，A包裹B并返回B的原型后被A外的变量c引用，此时B就是闭包。闭包在外面可以访问到A里面的变量。
                       闭包的作用就是在A执行完并返回后，闭包使得Javascript的垃圾回收机制GC不会收回A所占用的资源，因为A的内部函数B的执行需要依赖A中的变量。
