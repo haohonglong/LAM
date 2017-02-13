@@ -1155,8 +1155,6 @@ if(!GRN_LHH){
 	Function.prototype.method=function(name,fn){
 		if(!this.prototype[name]){
 			this.prototype[name] = fn;
-		}else{
-			throw new Error(['Warning: \'',name,'\' 名称已经存在,请换个名字'].join(''));
 		}
 		return this;
 	};
@@ -1173,32 +1171,27 @@ if(!GRN_LHH){
 	 *
 	 */
 
-	if(!Date.prototype.format){
-		Date.method('format',function(fmt){
-			var o = {
-				"M+" : this.getMonth()+1,                 //月份
-				"d+" : this.getDate(),                    //日
-				"h+" : this.getHours(),                   //小时
-				"m+" : this.getMinutes(),                 //分
-				"s+" : this.getSeconds(),                 //秒
-				"q+" : Math.floor((this.getMonth()+3)/3), //季度
-				"S"  : this.getMilliseconds()             //毫秒
-			};
-			if(/(y+)/.test(fmt))
-				fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-			for(var k in o)
-				if(new RegExp("("+ k +")").test(fmt))
-					fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-			return fmt;
-		});
-	}
+	Date.method('format',function(fmt){
+		var o = {
+			"M+" : this.getMonth()+1,                 //月份
+			"d+" : this.getDate(),                    //日
+			"h+" : this.getHours(),                   //小时
+			"m+" : this.getMinutes(),                 //分
+			"s+" : this.getSeconds(),                 //秒
+			"q+" : Math.floor((this.getMonth()+3)/3), //季度
+			"S"  : this.getMilliseconds()             //毫秒
+		};
+		if(/(y+)/.test(fmt))
+			fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+		for(var k in o)
+			if(new RegExp("("+ k +")").test(fmt))
+				fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+		return fmt;
+	});
 
-	if(!String.prototype.trim){
-		String.method('trim',function(){
-			return this.replace(/(^\s*)|(\s*$)/g, "");
-		});
-	}
-
+	String.method('trim',function(){
+		return this.replace(/(^\s*)|(\s*$)/g, "");
+	});
 
 	/**
 	 *
@@ -1213,11 +1206,9 @@ if(!GRN_LHH){
 	 * @return (Number)
 	 * Example：String.filterChar()
 	 */
-	if(!String.prototype.filterChar){
-		String.method('filterChar',function(){
-			return Number(this.replace(/[^\d]*/ig,""));
-		});
-	}
+	String.method('filterChar',function(){
+		return Number(this.replace(/[^\d]*/ig,""));
+	});
 
 	/**
 	 *
@@ -1231,14 +1222,12 @@ if(!GRN_LHH){
 	 * @return (String)
 	 * Example：String.findStr()
 	 */
-	if(!String.prototype.findStr){
-		String.method('findStr',function(){
-			if(System.empty(this)) {
-				return false;
-			}
-			return this.match(/[^\d]*/i);
-		});
-	}
+	String.method('findStr',function(){
+		if(System.empty(this)) {
+			return false;
+		}
+		return this.match(/[^\d]*/i);
+	});
 
 	/**
 	 *
@@ -1252,11 +1241,9 @@ if(!GRN_LHH){
 	 * @return (String)
 	 * Example：String.firstToUpperCase()
 	 */
-	if(!String.prototype.firstToUpperCase){
-		String.method('firstToUpperCase',function(){
-			return this.replace(/(\w)/,function(v){return v.toUpperCase()});
-		});
-	}
+	String.method('firstToUpperCase',function(){
+		return this.replace(/(\w)/,function(v){return v.toUpperCase()});
+	});
 
 
 
@@ -1274,21 +1261,19 @@ if(!GRN_LHH){
 	 * @param   (Boolean)
 	 * Example：String.compareTwoStr('aaa')
 	 */
-	if(!String.prototype.compareTwoStr){
-		String.method('compareTwoStr',function(s){
-			if(System.empty(this) || System.empty(s)) {
-				return false;
-			}
-			var s1,s2;
-			s1=this.match(/[^\d]*/i);
-			s2=s.match(/[^\d]*/i);
-			if(s1.length === s2.length && s1 === s2) {
-				return true;
-			}else {
-				return false;
-			}
-		});
-	}
+	String.method('compareTwoStr',function(s){
+		if(System.empty(this) || System.empty(s)) {
+			return false;
+		}
+		var s1,s2;
+		s1=this.match(/[^\d]*/i);
+		s2=s.match(/[^\d]*/i);
+		if(s1.length === s2.length && s1 === s2) {
+			return true;
+		}else {
+			return false;
+		}
+	});
 
 
 	/**
@@ -1305,15 +1290,13 @@ if(!GRN_LHH){
 	 * @returns   (Number)
 	 * Example：
 	 */
-	if(!Array.prototype.indexOf){
-		Array.method('indexOf',function(d){
-			for(var i=0,len=this.length;i < len;i++){
-				if(this[i] === d)
-					return i;
-			}
-			return -1;
-		});
-	}
+	Array.method('indexOf',function(d){
+		for(var i=0,len=this.length;i < len;i++){
+			if(this[i] === d)
+				return i;
+		}
+		return -1;
+	});
 
 	/**
 	 *
@@ -1329,27 +1312,23 @@ if(!GRN_LHH){
 	 * @returns   (Number)
 	 * Example：
 	 */
-	if(!Array.prototype.lastIndexOf){
-		Array.method('lastIndexOf',function(d){
-			for(var i=this.length-1;i>=0;i--){
-				if(this[i] === d)
-					return i;
-			}
-			return -1;
-		});
-	}
+	Array.method('lastIndexOf',function(d){
+		for(var i=this.length-1;i>=0;i--){
+			if(this[i] === d)
+				return i;
+		}
+		return -1;
+	});
 	/**
 	 * 根据内容删除一个元素，返回数组
 	 * @param val
 	 */
-	if(!Array.prototype.remove){
-		Array.method('remove',function(d){
-			var index = this.indexOf(d);
-			if (index > -1) {
-				this.splice(index, 1);
-			}
-		});
-	}
+	Array.method('remove',function(d){
+		var index = this.indexOf(d);
+		if (index > -1) {
+			this.splice(index, 1);
+		}
+	});
 
 
 	/**
@@ -1357,22 +1336,20 @@ if(!GRN_LHH){
 	 * @param n
 	 * @returns
 	 */
-	if(!Array.prototype.del){
-		Array.method('del',function(n){//n表示第几项，从0开始算起。
-			//prototype为对象原型，注意这里为对象增加自定义方法的方法。
-			if(n<0) {  //如果n<0，则不进行任何操作。
-				return this;
-			}else {
-				return this.slice(0, n).concat(this.slice(n + 1, this.length));
-			}
-			/*
-			 concat方法：返回一个新数组，这个新数组是由两个或更多数组组合而成的。
-			 　　　　　　这里就是返回this.slice(0,n)/this.slice(n+1,this.length)
-			 　　　　　　组成的新数组，这中间，刚好少了第n项。
-			 slice方法： 返回一个数组的一段，两个参数，分别指定开始和结束的位置。
-			 */
-		});
-	}
+	Array.method('del',function(n){//n表示第几项，从0开始算起。
+		//prototype为对象原型，注意这里为对象增加自定义方法的方法。
+		if(n<0) {  //如果n<0，则不进行任何操作。
+			return this;
+		}else {
+			return this.slice(0, n).concat(this.slice(n + 1, this.length));
+		}
+		/*
+		 concat方法：返回一个新数组，这个新数组是由两个或更多数组组合而成的。
+		 　　　　　　这里就是返回this.slice(0,n)/this.slice(n+1,this.length)
+		 　　　　　　组成的新数组，这中间，刚好少了第n项。
+		 slice方法： 返回一个数组的一段，两个参数，分别指定开始和结束的位置。
+		 */
+	});
 
 	/**
 	 *
@@ -1390,15 +1367,13 @@ if(!GRN_LHH){
 	 * @return  (Boolean)
 	 * Example：
 	 */
-	if(!Array.prototype.in_array){
-		Array.method('in_array',function(search,array){
-			array = array || this;
-			if(-1 === array.indexOf(search)){
-				return false;
-			}
-			return true;
-		});
-	}
+	Array.method('in_array',function(search,array){
+		array = array || this;
+		if(-1 === array.indexOf(search)){
+			return false;
+		}
+		return true;
+	});
 
 	/**
 	 *
@@ -1414,11 +1389,9 @@ if(!GRN_LHH){
 	 * @returns   (Boolean)
 	 * Example：
 	 */
-	if(!Array.prototype.contains){
-		Array.method('contains',function(d){
-			return this.indexOf(d) != -1;
-		});
-	}
+	Array.method('contains',function(d){
+		return this.indexOf(d) != -1;
+	});
 
 	/**
 	 *
@@ -1436,15 +1409,13 @@ if(!GRN_LHH){
 	 * Example：[].clone();
 	 */
 
-	if(!Array.prototype.clone){
-		Array.method('clone',function(){
-			if(this.concat){
-				return this.concat();
-			}
-			return this.copy();
+	Array.method('clone',function(){
+		if(this.concat){
+			return this.concat();
+		}
+		return this.copy();
 
-		});
-	}
+	});
 
 	/**
 	 *
@@ -1461,76 +1432,64 @@ if(!GRN_LHH){
 	 * @return  (Array)返回复制后的数组
 	 * Example：[].copy();
 	 */
-	if(!Array.prototype.copy){
-		Array.method('copy',function(){
-			var arr=[];
-			for(var i=0,l=this.length;i<l;i++){
-				arr.push(this[i]);
-			}
-			return arr;
-		});
-	}
+	Array.method('copy',function(){
+		var arr=[];
+		for(var i=0,l=this.length;i<l;i++){
+			arr.push(this[i]);
+		}
+		return arr;
+	});
 
-	if(!Array.prototype.insertAt){
-		Array.method('insertAt',function(d,i){
-			this.splice(i,0,d);
-		});
-	}
+	Array.method('insertAt',function(d,i){
+		this.splice(i,0,d);
+	});
 
 
 
-	if(!Array.prototype.insertBefore){
-		Array.method('insertBefore',function(d,d2){
-			var i=this.indexOf(d2);
-			if(i== -1) {
-				this.push(d);
-			}else {
-				this.splice(i, 0, d);
-			}
-		});
-	}
+	Array.method('insertBefore',function(d,d2){
+		var i=this.indexOf(d2);
+		if(i== -1) {
+			this.push(d);
+		}else {
+			this.splice(i, 0, d);
+		}
+	});
 
 
 
-	if(!Array.prototype.removeAt){
-		Array.method('removeAt',function(i){
+	Array.method('removeAt',function(i){
+		this.splice(i,1);
+	});
+
+
+	Array.method('remove',function(d){
+		var i=this.indexOf(d);
+		if(i!= -1)
 			this.splice(i,1);
-		});
-	}
+	});
 
+	Array.method('each',function(arr,fn){
+		if(1 === arguments.length){
+			arr = this;
+			fn = arguments[0]
+		}else{
+			arr = arr || this;
+		}
 
-	if(!Array.prototype.remove){
-		Array.method('remove',function(d){
-			var i=this.indexOf(d);
-			if(i!= -1)
-				this.splice(i,1);
-		});
-	}
-
-	if(!Array.prototype.each){
-		Array.method('each',function(arr,fn){
-			if(1 === arguments.length){
-				arr = this;
-				fn = arguments[0]
-			}else{
-				arr = arr || this;
-			}
-
-			if(!System.isFunction(fn)){
-				return arr;
-			}
-
-			var item;
-			for(var i=0,len=arr.length;i<len;++i) {
-				item=arr[i];
-				if(item && fn.call(item, i, item)){
-					break;
-				}
-			}
-
+		if(!System.isFunction(fn)){
 			return arr;
-		});
-	}
+		}
+
+		var item;
+		for(var i=0,len=arr.length;i<len;++i) {
+			item=arr[i];
+			if(item && fn.call(item, i, item)){
+				break;
+			}
+		}
+
+		return arr;
+	});
 
 	/**
 	 *
@@ -1550,31 +1509,29 @@ if(!GRN_LHH){
 	 * 		a.merge(b).merge(c).merge(e).merge(f);
 	 * 		a.merge(b.merge(c.merge(d.merge(e.merge(f)))));
 	 */
-	if(!Array.prototype.merge){
-		Array.method('merge',function(arr,override){
+	Array.method('merge',function(arr,override){
 
-			if(!isArray(arr)){
-				throw new Error(['Warning',arr,'不是数组'].join(' '));
-				return;
-			}
-			if(!override && this.concat){
-				return this.concat(arr);
-			}
-			var i=0;
-			var a   = this.clone();
-			var len = arr.length;
+		if(!isArray(arr)){
+			throw new Error(['Warning',arr,'不是数组'].join(' '));
+			return;
+		}
+		if(!override && this.concat){
+			return this.concat(arr);
+		}
+		var i=0;
+		var a   = this.clone();
+		var len = arr.length;
 
-			while ( i< len ) {
-				if(override && a.in_array(arr[i])){
-					i++;
-					continue;
-				}
-				a.push(arr[i]);
+		while ( i< len ) {
+			if(override && a.in_array(arr[i])){
 				i++;
+				continue;
 			}
-			return a;
-		});
-	}
+			a.push(arr[i]);
+			i++;
+		}
+		return a;
+	});
 
 	/**
 	 *
@@ -1592,22 +1549,20 @@ if(!GRN_LHH){
 	 * @return  (Array)返回过滤后符合条件的元素
 	 * Example：
 	 */
-	if(!Array.prototype.filter){
-		Array.method('filter',function(fn,D){
-			if(!isFunction(fn)){
-				return this;
+	Array.method('filter',function(fn,D){
+		if(!isFunction(fn)){
+			return this;
+		}
+		D = D || W;
+		var a=[];
+		for(var i=0,len=this.length;i<len;++i) {
+			if(!fn.call(D, this[i], i, this)){
+				continue;
 			}
-			D = D || W;
-			var a=[];
-			for(var i=0,len=this.length;i<len;++i) {
-				if(!fn.call(D, this[i], i, this)){
-					continue;
-				}
-				a.push(this[i]);
-			}
-			return a;
-		});
-	}
+			a.push(this[i]);
+		}
+		return a;
+	});
 	/**
 	 *
 	 * @author: lhh
@@ -1622,19 +1577,17 @@ if(!GRN_LHH){
 	 * @return  (Number)
 	 * Example：
 	 */
-	if(!Array.prototype.arrayMin){
-		Array.method('arrayMin',function(){
-			var i = this.length,
-				min = this[0];
+	Array.method('arrayMin',function(){
+		var i = this.length,
+			min = this[0];
 
-			while (i--) {
-				if (this[i] < min) {
-					min = this[i];
-				}
+		while (i--) {
+			if (this[i] < min) {
+				min = this[i];
 			}
-			return min;
-		});
-	}
+		}
+		return min;
+	});
 
 	/**
 	 *
@@ -1650,19 +1603,17 @@ if(!GRN_LHH){
 	 * @return  (Number)
 	 * Example：
 	 */
-	if(!Array.prototype.arrayMax){
-		Array.method('arrayMax',function(){
-			var i = this.length,
-				max = this[0];
+	Array.method('arrayMax',function(){
+		var i = this.length,
+			max = this[0];
 
-			while (i--) {
-				if (this[i] > max) {
-					max = this[i];
-				}
+		while (i--) {
+			if (this[i] > max) {
+				max = this[i];
 			}
-			return max;
-		});
-	}
+		}
+		return max;
+	});
 
 	/**
 	 * @author: lhh
