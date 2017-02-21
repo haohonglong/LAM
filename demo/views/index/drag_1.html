@@ -9,24 +9,58 @@
 	<script type="text/javascript" src="config.js"></script>
 
 
-<script type="text/javascript">
-	LAMJS.main(function(){
-		this.import([
-			'/Browser.class',
-			'/Drag.class',
-			'/Dom.class',
-			'/Tools.class',
-			'/Tab.class',
-			'/Canvas.class',
-			'/Shape.class'
-		],this.classPath);
-	});
-</script>
+	<script type="text/javascript">
+		LAMJS.run(function() {
+			'use strict';
+			var System=this;
+			System.use();
+
+			System.import([
+				'/Drag.class'
+				,'/Tools.class'
+				,'/Tab.class'
+				,'/Canvas.class'
+				,'/Shape.class'
+			],System.classPath);
+		});
+	</script>
 
 
+
+
+
+
+<style type="text/css">
+.abs{position:absolute;top:0;left:0;}
+.box{width:50px;height:50px;background:red;}
+#box3{background:#fff;}
+.top{top:300px;}
+.left{left:300px;}
+</style>
+</head>
+
+<body>
+<div id="box5" class="abs box">box</div>
+<div id="box1" class="abs box top">box1</div>
+<div id="box2" class="abs box left">box2</div>
+<canvas id="box3" class="abs left" width="300" height="200">box3</canvas>
+<canvas id="box4" class="abs left" width="300" height="300">box4</canvas>
+<canvas id="box6" class="abs left" width="400" height="200">box6</canvas>
+<canvas id="box7" class="abs left" width="150" height="150">box7</canvas>
+<div id="box" >
+	<svg class="abs" xmlns="http://www.w3.org/2000/svg" version="1.1" height="190" style="width: 195px;">
+		<polygon points="100,10 40,180 190,60 10,60 160,180"
+				 style="fill:red;stroke:blue;stroke-width:3;fill-rule:evenodd;" />
+	</svg>
+</div>
 <script type="text/javascript">
-	LAMJS.wait(function(){
+
+	LAMJS.run([
+		LAMJS.Config.Public.ROOT
+	],function(ROOT) {
+		'use strict';
 		var System=this;
+		var dbox1,dbox2,dbox;
 		$(function(){
 
 
@@ -44,7 +78,7 @@
 
 
 			var D={
-				'src':System.classPath+'/../case/images/bdlogo.png',
+				'src':ROOT+'/project/images/22.jpg',
 				'position':{'x':0,'y':0},
 //			'size':{'w':540,'h':258},
 //			'clip':{'sx':0,'sy':0,'sw':0,'sh':0},
@@ -86,7 +120,6 @@
 			sector_4.eAngle=240;
 
 			function triangle(){
-				console.log(p6.triangle)
 				p6.triangle().closePath().stroke().fill('red');
 
 			}
@@ -173,47 +206,19 @@
 				p1.beginPath().moveTo(150,0).bezierCurveTo(0,125,300,175,150,300).strokeStyle('#000').stroke();
 			}
 
-			var p=new System.Html5.Shape(document.getElementById("box3")).create();
-			var p1=new System.Html5.Shape(document.getElementById("box4")).create();
-			var p6=new System.Html5.Shape(document.getElementById("box6")).create();
-			var p7=new System.Html5.Shape(document.getElementById("box7")).create();
+			var p=new System.Html5.Shape(document.getElementById("box3"));
+			var p1=new System.Html5.Shape(document.getElementById("box4"));
+			var p6=new System.Html5.Shape(document.getElementById("box6"));
+			var p7=new System.Html5.Shape(document.getElementById("box7"));
 
 			triangle();
 			bezier();
 			case1();
 			polygon();
-			case2();
+//		case2();
 		});
 
-
-	},5000);
-
-
+	});
 </script>
-
-
-
-<style type="text/css">
-.abs{position:absolute;top:0;left:0;}
-.box{width:50px;height:50px;background:red;}
-#box3{background:#fff;}
-.top{top:300px;}
-.left{left:300px;}
-</style>
-</head>
-
-<body>
-<div id="box5" class="abs box">box</div>
-<div id="box1" class="abs box top">box1</div>
-<div id="box2" class="abs box left">box2</div>
-<canvas id="box3" class="abs left" width="300" height="200">box3</canvas>
-<canvas id="box4" class="abs left" width="300" height="300">box4</canvas>
-<canvas id="box6" class="abs left" width="400" height="200">box6</canvas>
-<canvas id="box7" class="abs left" width="150" height="150">box7</canvas>
-<svg class="abs" id="box" xmlns="http://www.w3.org/2000/svg" version="1.1" height="190" style="width: 195px;">
-	<polygon points="100,10 40,180 190,60 10,60 160,180"
-			 style="fill:red;stroke:blue;stroke-width:3;fill-rule:evenodd;" />
-</svg>
-
 </body>
 </html>

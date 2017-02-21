@@ -35,10 +35,12 @@
 <canvas id="box4" class="abs left" width="300" height="300">box4</canvas>
 <canvas id="box6" class="abs left" width="400" height="200">box6</canvas>
 <canvas id="box7" class="abs left" width="150" height="150">box7</canvas>
-<svg class="abs" id="box" xmlns="http://www.w3.org/2000/svg" version="1.1" height="190" style="width: 195px;">
-	<polygon points="100,10 40,180 190,60 10,60 160,180"
-			 style="fill:red;stroke:blue;stroke-width:3;fill-rule:evenodd;" />
-</svg>
+<div id="box" >
+	<svg class="abs" xmlns="http://www.w3.org/2000/svg" version="1.1" height="190" style="width: 195px;">
+		<polygon points="100,10 40,180 190,60 10,60 160,180"
+				 style="fill:red;stroke:blue;stroke-width:3;fill-rule:evenodd;" />
+	</svg>
+</div>
 
 </body>
 </html>
@@ -50,7 +52,9 @@
 	LAMJS.run([
 		LAMJS.Config.Public.ROOT
 	],function(ROOT) {
+		'use strict';
 		var System=this;
+		var dbox1,dbox2,dbox;
 		$(function(){
 
 
