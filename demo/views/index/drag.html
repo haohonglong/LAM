@@ -2,7 +2,13 @@
 <html lang="zh-cn">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>{{title}}</title>
+<title>拖拽实例</title>
+
+	<!--<script type="text/javascript" js="http://dms.website.eyouke.net/templates/768/js/jquery1.7.js"></script>-->
+	<!--<script type="text/javascript" js="../js/system/config.js"></script>-->
+	<script type="text/javascript" src="config.js"></script>
+
+
 	<script type="text/javascript">
 		LAMJS.run(function() {
 			'use strict';
@@ -10,7 +16,7 @@
 			System.use();
 
 			System.import([
-				 '/Drag.class'
+				'/Drag.class'
 				,'/Tools.class'
 				,'/Tab.class'
 				,'/Canvas.class'
@@ -18,6 +24,12 @@
 			],System.classPath);
 		});
 	</script>
+
+
+
+
+
+
 <style type="text/css">
 .abs{position:absolute;top:0;left:0;}
 .box{width:50px;height:50px;background:red;}
@@ -41,12 +53,6 @@
 				 style="fill:red;stroke:blue;stroke-width:3;fill-rule:evenodd;" />
 	</svg>
 </div>
-
-</body>
-</html>
-
-
-
 <script type="text/javascript">
 
 	LAMJS.run([
@@ -214,3 +220,5 @@
 
 	});
 </script>
+</body>
+</html>

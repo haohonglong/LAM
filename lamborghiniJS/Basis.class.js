@@ -1155,8 +1155,6 @@ if(!GRN_LHH){
 	Function.prototype.method=function(name,fn){
 		if(!this.prototype[name]){
 			this.prototype[name] = fn;
-		}else{
-			throw new Error(['Warning: \'',name,'\' 名称已经存在,请换个名字'].join(''));
 		}
 		return this;
 	};
@@ -1173,109 +1171,98 @@ if(!GRN_LHH){
 	 *
 	 */
 
-	if(!Date.prototype.format){
-		Date.method('format',function(fmt){
-			var o = {
-				"M+" : this.getMonth()+1,                 //月份
-				"d+" : this.getDate(),                    //日
-				"h+" : this.getHours(),                   //小时
-				"m+" : this.getMinutes(),                 //分
-				"s+" : this.getSeconds(),                 //秒
-				"q+" : Math.floor((this.getMonth()+3)/3), //季度
-				"S"  : this.getMilliseconds()             //毫秒
-			};
-			if(/(y+)/.test(fmt))
-				fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-			for(var k in o)
-				if(new RegExp("("+ k +")").test(fmt))
-					fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-			return fmt;
-		});
-	}
+	Date.method('format',function(fmt){
+		var o = {
+			"M+" : this.getMonth()+1,                 //月份
+			"d+" : this.getDate(),                    //日
+			"h+" : this.getHours(),                   //小时
+			"m+" : this.getMinutes(),                 //分
+			"s+" : this.getSeconds(),                 //秒
+			"q+" : Math.floor((this.getMonth()+3)/3), //季度
+			"S"  : this.getMilliseconds()             //毫秒
+		};
+		if(/(y+)/.test(fmt))
+			fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+		for(var k in o)
+			if(new RegExp("("+ k +")").test(fmt))
+				fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+		return fmt;
+	});
 
-	if(!String.prototype.trim){
-		String.method('trim',function(){
+	String
+		.method('trim',function(){
 			return this.replace(/(^\s*)|(\s*$)/g, "");
-		});
-	}
+		})
 
-
-	/**
-	 *
-	 * @author：lhh
-	 * 创建日期：2014-12-22
-	 * 修改日期：2015-10-28
-	 * 名称：filterChar
-	 * 功能：过滤所有字符串返回数字
-	 * 说明：
-	 * 注意：
-	 * @param(void)
-	 * @return (Number)
-	 * Example：String.filterChar()
-	 */
-	if(!String.prototype.filterChar){
-		String.method('filterChar',function(){
+		/**
+		 *
+		 * @author：lhh
+		 * 创建日期：2014-12-22
+		 * 修改日期：2015-10-28
+		 * 名称：filterChar
+		 * 功能：过滤所有字符串返回数字
+		 * 说明：
+		 * 注意：
+		 * @param(void)
+		 * @return (Number)
+		 * Example：String.filterChar()
+		 */
+		.method('filterChar',function(){
 			return Number(this.replace(/[^\d]*/ig,""));
-		});
-	}
+		})
 
-	/**
-	 *
-	 * @author：lhh
-	 * 创建日期：2014-12-22
-	 * 修改日期：2015-10-28
-	 * 名称：findStr
-	 * 功能：查找匹配的字符
-	 * 说明：
-	 * 注意：
-	 * @return (String)
-	 * Example：String.findStr()
-	 */
-	if(!String.prototype.findStr){
-		String.method('findStr',function(){
+		/**
+		 *
+		 * @author：lhh
+		 * 创建日期：2014-12-22
+		 * 修改日期：2015-10-28
+		 * 名称：findStr
+		 * 功能：查找匹配的字符
+		 * 说明：
+		 * 注意：
+		 * @return (String)
+		 * Example：String.findStr()
+		 */
+		.method('findStr',function(){
 			if(System.empty(this)) {
 				return false;
 			}
 			return this.match(/[^\d]*/i);
-		});
-	}
+		})
 
-	/**
-	 *
-	 * @author：lhh
-	 * 创建日期：2016-3-28
-	 * 修改日期：2016-3-28
-	 * 名称：firstToUpperCase
-	 * 功能：首字母大写
-	 * 说明：
-	 * 注意：
-	 * @return (String)
-	 * Example：String.firstToUpperCase()
-	 */
-	if(!String.prototype.firstToUpperCase){
-		String.method('firstToUpperCase',function(){
+		/**
+		 *
+		 * @author：lhh
+		 * 创建日期：2016-3-28
+		 * 修改日期：2016-3-28
+		 * 名称：firstToUpperCase
+		 * 功能：首字母大写
+		 * 说明：
+		 * 注意：
+		 * @return (String)
+		 * Example：String.firstToUpperCase()
+		 */
+		.method('firstToUpperCase',function(){
 			return this.replace(/(\w)/,function(v){return v.toUpperCase()});
-		});
-	}
+		})
 
 
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2014-12-22
-	 * 修改日期：2015-10-28
-	 * 名称：compareTwoStr
-	 * 功能：比较俩个字符是否相等
-	 * 说明：
-	 * 注意：
-	 * @param   (String)s 			NO NULL :要比较的字符串
-	 * @param   (Boolean)
-	 * Example：String.compareTwoStr('aaa')
-	 */
-	if(!String.prototype.compareTwoStr){
-		String.method('compareTwoStr',function(s){
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-12-22
+		 * 修改日期：2015-10-28
+		 * 名称：compareTwoStr
+		 * 功能：比较俩个字符是否相等
+		 * 说明：
+		 * 注意：
+		 * @param   (String)s 			NO NULL :要比较的字符串
+		 * @param   (Boolean)
+		 * Example：String.compareTwoStr('aaa')
+		 */
+		.method('compareTwoStr',function(s){
 			if(System.empty(this) || System.empty(s)) {
 				return false;
 			}
@@ -1288,77 +1275,71 @@ if(!GRN_LHH){
 				return false;
 			}
 		});
-	}
 
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2014-12-22
-	 * 修改日期：2015-10-28
-	 * 名称：indexOf
-	 * 功能：在指定的数组中查找对应的元素如果有，就返回元素在数组里的的下标，否则就放回-1
-	 * 说明：
-	 * 注意：
-	 * @param   (val)d
-	 * @returns   (Number)
-	 * Example：
-	 */
-	if(!Array.prototype.indexOf){
-		Array.method('indexOf',function(d){
+
+	Array
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-12-22
+		 * 修改日期：2015-10-28
+		 * 名称：indexOf
+		 * 功能：在指定的数组中查找对应的元素如果有，就返回元素在数组里的的下标，否则就放回-1
+		 * 说明：
+		 * 注意：
+		 * @param   (val)d
+		 * @returns   (Number)
+		 * Example：
+		 */
+		.method('indexOf',function(d){
 			for(var i=0,len=this.length;i < len;i++){
 				if(this[i] === d)
 					return i;
 			}
 			return -1;
-		});
-	}
+		})
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2014-12-22
-	 * 修改日期：2015-10-28
-	 * 名称：lastIndexOf
-	 * 功能：在指定的数组中查找对应的元素如果有，就返回元素在数组里的的下标，否则就放回-1
-	 * 说明：同indexOf一样不同的是，从数组尾部开始检索
-	 * 注意：
-	 * @param   (val)d
-	 * @returns   (Number)
-	 * Example：
-	 */
-	if(!Array.prototype.lastIndexOf){
-		Array.method('lastIndexOf',function(d){
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-12-22
+		 * 修改日期：2015-10-28
+		 * 名称：lastIndexOf
+		 * 功能：在指定的数组中查找对应的元素如果有，就返回元素在数组里的的下标，否则就放回-1
+		 * 说明：同indexOf一样不同的是，从数组尾部开始检索
+		 * 注意：
+		 * @param   (val)d
+		 * @returns   (Number)
+		 * Example：
+		 */
+		.method('lastIndexOf',function(d){
 			for(var i=this.length-1;i>=0;i--){
 				if(this[i] === d)
 					return i;
 			}
 			return -1;
-		});
-	}
-	/**
-	 * 根据内容删除一个元素，返回数组
-	 * @param val
-	 */
-	if(!Array.prototype.remove){
-		Array.method('remove',function(d){
+		})
+		/**
+		 * 根据内容删除一个元素，返回数组
+		 * @param val
+		 */
+		.method('remove',function(d){
 			var index = this.indexOf(d);
 			if (index > -1) {
 				this.splice(index, 1);
 			}
-		});
-	}
+		})
 
 
-	/**
-	 * 数组根据下标删除一个元素，返回一个删除后的数组
-	 * @param n
-	 * @returns
-	 */
-	if(!Array.prototype.del){
-		Array.method('del',function(n){//n表示第几项，从0开始算起。
+		/**
+		 * 数组根据下标删除一个元素，返回一个删除后的数组
+		 * @param n
+		 * @returns
+		 */
+		.method('del',function(n){//n表示第几项，从0开始算起。
 			//prototype为对象原型，注意这里为对象增加自定义方法的方法。
 			if(n<0) {  //如果n<0，则不进行任何操作。
 				return this;
@@ -1371,144 +1352,116 @@ if(!GRN_LHH){
 			 　　　　　　组成的新数组，这中间，刚好少了第n项。
 			 slice方法： 返回一个数组的一段，两个参数，分别指定开始和结束的位置。
 			 */
-		});
-	}
+		})
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2016.8.20
-	 * 修改日期：2016.8.20
-	 * 名称：in_array
-	 * 功能：搜索数组中是否存在指定的值
-	 * 说明：
-	 * 注意：
-	 * @param   (String|Number|Boolean|Object|Array)search		NO NULL : 必需。规定要在数组搜索的值。
-	 * @param   (Array)array						   			   NULL : 规定要搜索的数组。
-	 * 调用方式：
-	 * @return  (Boolean)
-	 * Example：
-	 */
-	if(!Array.prototype.in_array){
-		Array.method('in_array',function(search,array){
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2016.8.20
+		 * 修改日期：2016.8.20
+		 * 名称：in_array
+		 * 功能：搜索数组中是否存在指定的值
+		 * 说明：
+		 * 注意：
+		 * @param   (String|Number|Boolean|Object|Array)search		NO NULL : 必需。规定要在数组搜索的值。
+		 * @param   (Array)array						   			   NULL : 规定要搜索的数组。
+		 * 调用方式：
+		 * @return  (Boolean)
+		 * Example：
+		 */
+		.method('in_array',function(search,array){
 			array = array || this;
 			if(-1 === array.indexOf(search)){
 				return false;
 			}
 			return true;
-		});
-	}
+		})
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2014-12-22
-	 * 修改日期：2015-10-28
-	 * 名称：contains
-	 * 功能：数组中是否包括指定的元素
-	 * 说明：等同in_array 功能
-	 * 注意：
-	 * @param   (val)d
-	 * @returns   (Boolean)
-	 * Example：
-	 */
-	if(!Array.prototype.contains){
-		Array.method('contains',function(d){
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2014-12-22
+		 * 修改日期：2015-10-28
+		 * 名称：contains
+		 * 功能：数组中是否包括指定的元素
+		 * 说明：等同in_array 功能
+		 * 注意：
+		 * @param   (val)d
+		 * @returns   (Boolean)
+		 * Example：
+		 */
+		.method('contains',function(d){
 			return this.indexOf(d) != -1;
-		});
-	}
+		})
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2015.10.27
-	 * 修改日期：2015.10.27
-	 * 名称：clone
-	 * 功能：克隆数组
-	 * 说明：跟copy 是等效的 推荐用clone
-	 * 注意：
-	 * @param   (void)
-	 * 调用方式：
-	 * @return  (Array)返回克隆后的数组
-	 * Example：[].clone();
-	 */
-
-	if(!Array.prototype.clone){
-		Array.method('clone',function(){
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015.10.27
+		 * 修改日期：2015.10.27
+		 * 名称：clone
+		 * 功能：克隆数组
+		 * 说明：跟copy 是等效的 推荐用clone
+		 * 注意：
+		 * @param   (void)
+		 * 调用方式：
+		 * @return  (Array)返回克隆后的数组
+		 * Example：[].clone();
+		 */
+		.method('clone',function(){
 			if(this.concat){
 				return this.concat();
 			}
 			return this.copy();
 
-		});
-	}
+		})
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2015.2.28
-	 * 修改日期：2015.2.28
-	 * 名称：copy
-	 * 功能：复制数组
-	 * 说明：跟clone 是等效的
-	 * 注意：
-	 * @param   (void)
-	 * 调用方式：
-	 * @return  (Array)返回复制后的数组
-	 * Example：[].copy();
-	 */
-	if(!Array.prototype.copy){
-		Array.method('copy',function(){
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015.2.28
+		 * 修改日期：2015.2.28
+		 * 名称：copy
+		 * 功能：复制数组
+		 * 说明：跟clone 是等效的
+		 * 注意：
+		 * @param   (void)
+		 * 调用方式：
+		 * @return  (Array)返回复制后的数组
+		 * Example：[].copy();
+		 */
+		.method('copy',function(){
 			var arr=[];
 			for(var i=0,l=this.length;i<l;i++){
 				arr.push(this[i]);
 			}
 			return arr;
-		});
-	}
+		})
 
-	if(!Array.prototype.insertAt){
-		Array.method('insertAt',function(d,i){
+		.method('insertAt',function(d,i){
 			this.splice(i,0,d);
-		});
-	}
-
-
-
-	if(!Array.prototype.insertBefore){
-		Array.method('insertBefore',function(d,d2){
+		})
+		.method('insertBefore',function(d,d2){
 			var i=this.indexOf(d2);
 			if(i== -1) {
 				this.push(d);
 			}else {
 				this.splice(i, 0, d);
 			}
-		});
-	}
-
-
-
-	if(!Array.prototype.removeAt){
-		Array.method('removeAt',function(i){
+		})
+		.method('removeAt',function(i){
 			this.splice(i,1);
-		});
-	}
-
-
-	if(!Array.prototype.remove){
-		Array.method('remove',function(d){
+		})
+		.method('remove',function(d){
 			var i=this.indexOf(d);
 			if(i!= -1)
 				this.splice(i,1);
-		});
-	}
-
-	if(!Array.prototype.each){
-		Array.method('each',function(arr,fn){
+		})
+		.method('each',function(arr,fn){
 			if(1 === arguments.length){
 				arr = this;
 				fn = arguments[0]
@@ -1529,29 +1482,27 @@ if(!GRN_LHH){
 			}
 
 			return arr;
-		});
-	}
+		})
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2015.2.28
-	 * 修改日期：2015.2.28
-	 * 名称：merge
-	 * 功能：合并数组
-	 * 说明：
-	 * 注意：
-	 * @param   (Array)arr				NO NULL : //要被合并的数组
-	 * @param   (Boolean)override 		   NULL : //是否覆盖相同的值,true : 覆盖；false : 不覆盖；默认不覆盖
-	 * 调用方式：
-	 * @return  (Array)返回复制后的数组
-	 * Example：下面俩种方式任选其一
-	 * 		a.merge(b).merge(c).merge(e).merge(f);
-	 * 		a.merge(b.merge(c.merge(d.merge(e.merge(f)))));
-	 */
-	if(!Array.prototype.merge){
-		Array.method('merge',function(arr,override){
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015.2.28
+		 * 修改日期：2015.2.28
+		 * 名称：merge
+		 * 功能：合并数组
+		 * 说明：
+		 * 注意：
+		 * @param   (Array)arr				NO NULL : //要被合并的数组
+		 * @param   (Boolean)override 		   NULL : //是否覆盖相同的值,true : 覆盖；false : 不覆盖；默认不覆盖
+		 * 调用方式：
+		 * @return  (Array)返回复制后的数组
+		 * Example：下面俩种方式任选其一
+		 * 		a.merge(b).merge(c).merge(e).merge(f);
+		 * 		a.merge(b.merge(c.merge(d.merge(e.merge(f)))));
+		 */
+		.method('merge',function(arr,override){
 
 			if(!isArray(arr)){
 				throw new Error(['Warning',arr,'不是数组'].join(' '));
@@ -1573,27 +1524,25 @@ if(!GRN_LHH){
 				i++;
 			}
 			return a;
-		});
-	}
+		})
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2015.2.28
-	 * 修改日期：2015.2.28
-	 * 名称：filter
-	 * 功能：根据回调条件过滤数组里的数据
-	 * 说明：
-	 * 注意：
-	 * @param   (Function)fn 		NO NULL :
-	 * @param   (Object)D			NO NULL :
-	 * 调用方式：
-	 * @return  (Array)返回过滤后符合条件的元素
-	 * Example：
-	 */
-	if(!Array.prototype.filter){
-		Array.method('filter',function(fn,D){
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015.2.28
+		 * 修改日期：2015.2.28
+		 * 名称：filter
+		 * 功能：根据回调条件过滤数组里的数据
+		 * 说明：
+		 * 注意：
+		 * @param   (Function)fn 		NO NULL :
+		 * @param   (Object)D			NO NULL :
+		 * 调用方式：
+		 * @return  (Array)返回过滤后符合条件的元素
+		 * Example：
+		 */
+		.method('filter',function(fn,D){
 			if(!isFunction(fn)){
 				return this;
 			}
@@ -1606,24 +1555,22 @@ if(!GRN_LHH){
 				a.push(this[i]);
 			}
 			return a;
-		});
-	}
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2015.11.12
-	 * 修改日期：2015.11.12
-	 * 名称：arrayMin
-	 * 功能：找出数组里最小的数字
-	 * 说明：
-	 * 注意：
-	 * 调用方式：
-	 * @return  (Number)
-	 * Example：
-	 */
-	if(!Array.prototype.arrayMin){
-		Array.method('arrayMin',function(){
+		})
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015.11.12
+		 * 修改日期：2015.11.12
+		 * 名称：arrayMin
+		 * 功能：找出数组里最小的数字
+		 * 说明：
+		 * 注意：
+		 * 调用方式：
+		 * @return  (Number)
+		 * Example：
+		 */
+		.method('arrayMin',function(){
 			var i = this.length,
 				min = this[0];
 
@@ -1633,25 +1580,23 @@ if(!GRN_LHH){
 				}
 			}
 			return min;
-		});
-	}
+		})
 
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2015.11.12
-	 * 修改日期：2015.11.12
-	 * 名称：arrayMax
-	 * 功能：找出数组里最大的数字
-	 * 说明：
-	 * 注意：
-	 * 调用方式：
-	 * @return  (Number)
-	 * Example：
-	 */
-	if(!Array.prototype.arrayMax){
-		Array.method('arrayMax',function(){
+		/**
+		 *
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015.11.12
+		 * 修改日期：2015.11.12
+		 * 名称：arrayMax
+		 * 功能：找出数组里最大的数字
+		 * 说明：
+		 * 注意：
+		 * 调用方式：
+		 * @return  (Number)
+		 * Example：
+		 */
+		.method('arrayMax',function(){
 			var i = this.length,
 				max = this[0];
 
@@ -1662,7 +1607,6 @@ if(!GRN_LHH){
 			}
 			return max;
 		});
-	}
 
 	/**
 	 * @author: lhh
