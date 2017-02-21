@@ -289,7 +289,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                     xhr_params.dataType='script';
                     System.Html.getFiles(arr,null,System.merge(X && System.isPlainObject(X.params) ? X.params : {},[xhr_params]));
                 }else{
-                    this.load({
+                    __this__.load({
                         'baseUrl':baseUrl,
                         'js':url,
                         'suffix':suffix
