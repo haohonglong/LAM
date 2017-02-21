@@ -13,7 +13,7 @@
 		LAMJS.run(function() {
 			'use strict';
 			var System=this;
-			System.Config.render.remove = false;
+			System.use();
 
 			System.import([
 				'/Drag.class'
@@ -21,7 +21,7 @@
 				,'/Tab.class'
 				,'/Canvas.class'
 				,'/Shape.class'
-			],System.classPath,null,{'xhr':false});
+			],System.classPath);
 		});
 	</script>
 
