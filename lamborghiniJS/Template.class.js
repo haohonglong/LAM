@@ -5,12 +5,12 @@
  * 修改日期:2016-10-30
  * 名称：模版类
  * 功能：用于对模版标签里内容操作，模版渲染
- * 说明 : 
- *        
- * note : 
- * 		  
- *		
- * 
+ * 说明 :
+ *
+ * note :
+ *
+ *
+ *
  */
 
 window[GRN_LHH].run(function(undefined){
@@ -135,7 +135,7 @@ window[GRN_LHH].run(function(undefined){
 					v=this.split(delimiterRight);
 					$1=v[0];
 					$2=v[1].trim();
-					arr.push([System.analysisVar($1),System.findTpl($2)].join('').trim());
+					arr.push([Template.analysisVar($1),Template.findTpl($2)].join('').trim());
 
 				}
 
