@@ -117,7 +117,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * @params   (Object)D 			NO NULL :初始化参数
          * @param(Array)D.js		  	     NO NULL:js文件集合
          * @param(Array)D.css		  	     NO NULL:css文件集合
-         * @param(String)D.baseUrl		  	    NULL:文件路径
+         * @param(String|Boolean)D.baseUrl		  	    NULL:文件路径
          * @param(String)D.suffix		  	    NULL:文件后缀名
          * 注意：
          * @return  (Object) 返回当前对象
@@ -125,7 +125,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         'load':function(D){
             create = System.Config.render.create;
             var suffix,rel,len,src="",href="",i= 0,node = null;
-            var baseUrl=D.baseUrl || System.ROOT;
+            var baseUrl=System.isset(D.baseUrl) ? D.baseUrl : System.ROOT;
             if(D.js){
                 suffix = D.suffix || '.js';
                 for (i=0,len=D.js.length;i<len;i++){
@@ -246,7 +246,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 说明：System 参数不用传
          * 注意：
          * @param   (Array)url 			    NO NULL :要加载js文件
-         * @param   (String)baseUrl 		   NULL :文件路径
+         * @param   (String|Boolean)baseUrl 		   NULL :文件路径
          * @param   (String)suffix 		       NULL :文件后缀名
          * @param   (Object)X 		       		   NULL :是否异步加载配置参数
          * @param   (Boolean)X.xhr 		       NULL :是否异步加载，默认异步
@@ -256,7 +256,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          */
         'import':function(url,baseUrl,suffix,X){
             suffix = suffix || '.js';
-            baseUrl = baseUrl || System.ROOT;
+            baseUrl = System.isset(baseUrl) ? baseUrl : System.ROOT;
             var xhr_params = System.Config.XHR;
             var xhr =X && System.isPlainObject(X) && System.isBoolean(X.xhr) ? X.xhr : true;
             try {
