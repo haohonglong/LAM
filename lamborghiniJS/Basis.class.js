@@ -43,7 +43,7 @@ if(!GRN_LHH){
 
 })(typeof window !== "undefined" ? window : this,GRN_LHH,function(W,namespace,undefined){
 	'use strict';
-	var version="1.1.2.2";
+	var version="1.1.5";
 	var Interface,System;
 	/**
 	 *
