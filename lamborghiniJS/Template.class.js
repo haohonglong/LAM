@@ -22,15 +22,16 @@ window[GRN_LHH].run(function(undefined){
 	var __this__=null;
 	var guid=0;
 
-	function Template(){
+	function Template(Config){
 		System.Basis.extends.call(this,System.Browser);
 		__this__=this;
 		this.guid=0;
 		guid++;
 		this.html=[];
+		this.Config = Config || System.Config;
 		//模板分隔符
-		this.delimiterLeft  = System.Config.templat.delimiters[0];
-		this.delimiterRight = System.Config.templat.delimiters[1];
+		this.delimiterLeft  = this.Config.templat.delimiters[0];
+		this.delimiterRight = this.Config.templat.delimiters[1];
 
 
 
@@ -73,18 +74,20 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-03-8
-	 * 修改日期：2016-10-30
+	 * 修改日期：2017-2-23
 	 * 名称：Template.templat
 	 * 功能：替换模版中的变量
 	 * 说明：变量式：__root__ ; 对象式：System.__root__
 	 * 注意：
 	 * @param (String)S NO NULL:要匹配的变量
+	 * @param (Array)delimiters    NULL:模板分隔符
 	 * @returns {String}
 	 */
-	Template.template=function(S){
+	Template.template=function(S,delimiters){
 		if(!S) return null;
-		var delimiterLeft=System.Config.templat.delimiters[0];
-		var delimiterRight=System.Config.templat.delimiters[1];
+		delimiters = delimiters || System.Config.templat.delimiters;
+		var delimiterLeft  = delimiters[0];
+		var delimiterRight = delimiters[1];
 		//没找到模版分隔符就返回传入的字符串
 		if(-1 === S.indexOf(delimiterLeft)){
 			return S ||'';
@@ -112,19 +115,21 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-03-9
-	 * 修改日期：2016-10-30
+	 * 修改日期：2017-2-23
 	 * 名称：Template.findTpl
 	 * 功能：查找模版标签
 	 * 说明：
 	 * 注意：
-	 * @param (String)S NO NULL:要查找的字符串
+	 * @param (String)S 		 NO NULL:要查找的字符串
+	 * @param (Array)delimiters    NULL:模板分隔符
 	 * @returns {Array}
 	 */
-	Template.findTpl=function(S){
+	Template.findTpl=function(S,delimiters){
 		if(!S) return null;
 		var ss=[],arr=[],v=[],$1,$2;
-		var delimiterLeft=System.Config.templat.delimiters[0];
-		var delimiterRight=System.Config.templat.delimiters[1];
+		delimiters = delimiters || System.Config.templat.delimiters;
+		var delimiterLeft  = delimiters[0];
+		var delimiterRight = delimiters[1];
 		//没找到模版分隔符就返回传入的字符串
 		if(S.indexOf(delimiterLeft) !== -1){
 			ss=S.split(delimiterLeft);
@@ -135,7 +140,7 @@ window[GRN_LHH].run(function(undefined){
 					v=this.split(delimiterRight);
 					$1=v[0];
 					$2=v[1].trim();
-					arr.push([Template.analysisVar($1),Template.findTpl($2)].join('').trim());
+					arr.push([Template.analysisVar($1),Template.findTpl($2,delimiters)].join('').trim());
 
 				}
 

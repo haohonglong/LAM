@@ -1,0 +1,23 @@
+{
+  "menu":[
+     {
+        "url":"{{VIEWS}}/content/basis.html",
+        "title":"/Basis"
+     },
+     {
+        "url":"{{VIEWS}}/content/biObject.html",
+        "title":"/BiObject"
+     },
+     {
+        "url":"{{VIEWS}}/content/browser.html",
+        "title":"/Browser"
+     },
+     {
+        "url":"{{VIEWS}}/content/loader.html",
+        "title":"/Loader"
+      }
+
+
+
+  ]
+}

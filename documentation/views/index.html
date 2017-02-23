@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>文档说明</title>
-    <script type="text/javascript">var _ROOT_ ='..';</script>
-    <script type="text/javascript" src="./config.js"></script>
+    <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript">
         var VIEWS;
         LAMJS.run(function() {
@@ -30,7 +29,7 @@
     <div class="row">
         <div class="col-md-12">
             <ol class="breadcrumb">
-                <li><a data-var="tpl" href="{#VIEWS#}/index.html">首页</a></li>
+                <li><a data-var="tpl" id="title" href="{#VIEWS#}/index.html">首页</a></li>
             </ol>
         </div>
     </div>
@@ -93,6 +92,7 @@
                        var data=System.eval($this.attr(url));
                        if(System.isObject(data)){
                            $title.text(data.title);
+                           $('#title').text(data.title);
                            $('#content').load(data.url);
                        }
                    }
