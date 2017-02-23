@@ -24,13 +24,13 @@ window[GRN_LHH].run([window,window.document,jQuery],function(window,document,$,u
         __this__=this;
         init = init || {};
 
-        var file = Controller.get_url_name(init.file || 'file');
-        if(!System.isFunction(this[file+'Action'])){
-            throw new Error('Warning: \''+file+'Action\' method not exist');
+        var action = Controller.get_url_name(init.action || 'action');
+        if(!System.isFunction(this[action+'Action'])){
+            throw new Error('Warning: \''+action+'Action\' method not exist');
             return this;
         }
-        this[file+'Action']();
-        this.file = file;
+        this[action+'Action']();
+        this.action = action;
 
 
     }
@@ -46,7 +46,7 @@ window[GRN_LHH].run([window,window.document,jQuery],function(window,document,$,u
      * 功能：根据url参数获取方法名称
      * @param name
      * @returns {String}渲染对应视图文件的方法名
-     * Example: eval(Controller.get_url_name('file'))()
+     * Example: eval(Controller.get_url_name('action'))()
      */
     Controller.get_url_name = System.get_url_param;
 

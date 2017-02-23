@@ -1009,10 +1009,10 @@
 	十九、MVC (详细demo看project目录里)
 				
 				访问url格式：
-					localhost/project/controllers/controllerName.html?file=view
+					localhost/project/controllers/controllerName.html?action=view
 						controllers:控制器文件夹
 						controllerName:控制器文件名称（对应视图文件的文件夹，如：index）
-						file:接收控制器中的方法名的参数。file关键字可以在控制器中自定义
+						action:接收控制器中的方法名的参数。action关键字可以在控制器中自定义
 						view：调用对应控制器中的方法（对应着视图文件名）
 				//controllers/index.html
 				
@@ -1025,7 +1025,7 @@
 									var System = this;
 									//note:变量都在这里声明
 									
-									eval(System.Controller.get_url_name('file')+'Action')();
+									eval(System.Controller.get_url_name('action')+'Action')();
 			
 									function indexAction(){
 										new System.Template().render(views+'/index.html',{
@@ -1062,7 +1062,7 @@
 	                   note:
 	                          不要忘了方法名称前缀action
 	                          注1： System.Html.include($('include'))是可选的， 要放在渲染视图的下面。
-	                                MVC方式的include标签的file属性值是请求的控制器，而后通过控制器请求视图，而不是直接去请求视图。
+	                                MVC方式的include标签的action属性值是请求的控制器，而后通过控制器请求视图，而不是直接去请求视图。
 	                                错误的方式：System.Html.include($('include'))放在视图里。
 	                                    
 	                          注2：beforeSend函数里的this就是Ajax的settings,在发送之前设置jQuery Ajax提供的所有参数。
