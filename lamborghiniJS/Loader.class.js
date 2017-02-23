@@ -30,7 +30,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         System.is(System,'Dom');
         return new System.Dom();
     }
-    function initDom(self){
+    function initDom(){
+        var self = this;
         //var load = window.onload;
         //window.onload=function(){
         //    if(System.isFunction(load)){
@@ -322,7 +323,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                     self.Config.render.create_callback(files);
                 }else{
                     var append = self.Config.render.append;
-                    initDom(self);
+                    initDom.call(self);
                     System.each(files,function(i){
                         if(System.isObject(this)){
                             this.timer = i*1000;
