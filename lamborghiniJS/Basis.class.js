@@ -769,7 +769,7 @@ if(!GRN_LHH){
 		 *		System.merge({},[A[,...]],false);
 		 */
 		'merge':function(target,args,override){
-			var deep;
+			var deep,self = this;
 
 			if (System.isBoolean(target)) {
 				deep = target;
@@ -804,7 +804,7 @@ if(!GRN_LHH){
 					if(!override && (key in target)) {continue;}
 					var value = args[i][key];
 					if(deep && System.isObject(value) && System.isPlainObject(value)){
-						target[key] = System.merge(deep,{},[target[key],value],override);
+						target[key] = self.merge(deep,{},[target[key],value],override);
 					}else{
 						target[key] = value;
 					}

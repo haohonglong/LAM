@@ -30,7 +30,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         System.is(System,'Dom');
         return new System.Dom();
     }
-    function initDom(){
+    function initDom(self){
         //var load = window.onload;
         //window.onload=function(){
         //    if(System.isFunction(load)){
@@ -38,7 +38,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         //    }
         //
         //};
-        var H=System.Config.render.H();
+        var H=self.Config.render.H();
         html    = H.html;
         head    = H.head;
         body    = H.body;
@@ -48,51 +48,53 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
     }
     var __this__=null;
     var files = [];
-    function Loader(){
+    function Loader(Config){
         System.Basis.extends.call(this);
         __this__=this;
+        this.Config = Config || System.Config;
         this.D = null;
         this.js  =[];
         this.css =[];
     }
 
-    /**
-     *
-     * @author: lhh
-     * 名称： suffix_checkor
-     * 功能：检查加载的文件路径是否已经包含后缀名,如果没有就添加返回，有就返回原路径
-     * 创建日期：2016-11-3
-     * 修改日期：2016-11-3
-     * 说明：
-     *
-     * @param {String}str    文件路径
-     * @param {String}suffix 对应文件的后缀名
-     * @returns {*}
-     */
-    function suffix_checkor(str,suffix){
-        if(suffix){
-            if(-1 === str.indexOf(suffix)){
-                return str+suffix;
-            }else{
-                return str;
-            }
 
-        }
-        for(var i= 0,
-                suffixs=System.Config.render.suffixs,
-                len=suffixs.length;
-            i<len;i++){
-            if(str.indexOf(suffixs[i]) !== -1){
-                return true;
-            }
-        }
-        return false;
-    }
 
     Loader.prototype={
         'constructor':Loader,
         '__constructor':function(){},
+        /**
+         *
+         * @author: lhh
+         * 名称： suffix_checkor
+         * 功能：检查加载的文件路径是否已经包含后缀名,如果没有就添加返回，有就返回原路径
+         * 创建日期：2016-11-3
+         * 修改日期：2016-11-3
+         * 说明：
+         *
+         * @param {String}str    文件路径
+         * @param {String}suffix 对应文件的后缀名
+         * @returns {*}
+         */
+        'suffix_checkor':function(str,suffix){
+            var self = this;
+            if(suffix){
+                if(-1 === str.indexOf(suffix)){
+                    return str+suffix;
+                }else{
+                    return str;
+                }
 
+            }
+            for(var i= 0,
+                    suffixs=self.Config.render.suffixs,
+                    len=suffixs.length;
+                i<len;i++){
+                if(str.indexOf(suffixs[i]) !== -1){
+                    return true;
+                }
+            }
+            return false;
+        },
         /**
          *
          * @author: lhh
@@ -131,7 +133,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                 for (i=0,len=D.js.length;i<len;i++){
                     var js=D.js[i];
                     if(System.isString(js)){
-                        js = suffix_checkor(js,suffix);
+                        js = __this__.suffix_checkor(js,suffix);
                         src = baseUrl ? baseUrl+js : js;
                         //是否已加载过了
                         if(System.fileExisted(src)){
@@ -157,7 +159,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
 
                     }else if(System.isObject(js)){
-                        js.src = suffix_checkor(js.src,suffix);
+                        js.src = __this__.suffix_checkor(js.src,suffix);
                         js.src = baseUrl ? baseUrl+js.src : js.src;
                         //是否已加载过了
                         if(System.fileExisted(js.src)){
@@ -187,7 +189,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                     var css=D.css[i];
 
                     if(System.isString(css)){
-                        css = suffix_checkor(css,suffix);
+                        css = __this__.suffix_checkor(css,suffix);
                         href = baseUrl ? baseUrl+css : css;
                         //是否已加载过了
                         if(System.fileExisted(href)){
@@ -208,7 +210,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
 
                     }else if(System.isObject(css)){
-                        css.href = suffix_checkor(css.href,suffix);
+                        css.href = __this__.suffix_checkor(css.href,suffix);
                         css.rel = css.rel || rel;
                         css.href = baseUrl ? baseUrl+css.href : css.href;
                         //是否已加载过了
@@ -255,15 +257,16 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * Example：
          */
         'import':function(url,baseUrl,suffix,X){
+            var self = this;
             suffix = suffix || '.js';
             baseUrl = System.isset(baseUrl) ? baseUrl : System.ROOT;
-            var xhr_params = System.Config.XHR;
+            var xhr_params = self.Config.XHR;
             var xhr =X && System.isPlainObject(X) && System.isBoolean(X.xhr) ? X.xhr : true;
             try {
                 if(System.isset(importScripts) && System.isFunction(importScripts)){
                     url.each(function(){
                         var src=this;
-                        src = suffix_checkor(src,suffix);
+                        src = __this__.suffix_checkor(src,suffix);
                         src = baseUrl ? baseUrl+src : src;
                         if(!System.fileExisted(src)){
                             importScripts(src);
@@ -281,7 +284,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                     var arr=[];
                     url.each(function(){
                         var src=this;
-                        src = suffix_checkor(src,suffix);
+                        src = __this__.suffix_checkor(src,suffix);
                         src = baseUrl ? baseUrl+src : src;
                         arr.push(src);
 
@@ -310,15 +313,16 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * @returns {Loader}返回当前对象可以链式调用
          */
         'print':function(){
+            var self = this;
             if(files.length < 1){return this;}
-            if(!System.Config.render.create){//document.write() 方式引入外部文件(.js|.css)
+            if(!self.Config.render.create){//document.write() 方式引入外部文件(.js|.css)
                 System.print(files.join(''));
             }else{
-                if(System.isFunction(System.Config.render.create_callback)){
-                    System.Config.render.create_callback(files);
+                if(System.isFunction(self.Config.render.create_callback)){
+                    self.Config.render.create_callback(files);
                 }else{
-                    var append = System.Config.render.append;
-                    initDom();
+                    var append = self.Config.render.append;
+                    initDom.call(self);
                     System.each(files,function(i){
                         if(System.isObject(this)){
                             this.timer = i*1000;
@@ -335,7 +339,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                     }
                                 }
                                 //加载后要依次移除添加的script 节点
-                                if(System.Config.render.remove){
+                                if(self.Config.render.remove){
                                     //3秒后依次移除添加的script 节点
                                     System.wait([this],function(node){
                                         node.delNode();
@@ -394,6 +398,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
         'destructor':function(){}
 
     };
+
+    System['Cloader'] =Loader;
     System['Loadcommon'] = System['Loader'] =new Loader();
 
 
