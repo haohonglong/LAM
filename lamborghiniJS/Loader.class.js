@@ -322,7 +322,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                     self.Config.render.create_callback(files);
                 }else{
                     var append = self.Config.render.append;
-                    initDom.call(self);
+                    initDom(self);
                     System.each(files,function(i){
                         if(System.isObject(this)){
                             this.timer = i*1000;
