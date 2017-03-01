@@ -769,15 +769,13 @@ if(!GRN_LHH){
 		 *		System.merge({},[A[,...]],false);
 		 */
 		'merge':function(target,args,override){
-			var deep,self = this;
+			var deep = false,self = this;
 
 			if (System.isBoolean(target)) {
 				deep = target;
 				target = arguments[1];
 				args   = arguments[2];
 				override   = arguments[3];
-			}else{
-				deep = false;
 			}
 			if(!System.isArray(args)){
 				throw new Error('Warning args 不是一个数组');
