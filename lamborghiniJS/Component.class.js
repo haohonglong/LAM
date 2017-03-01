@@ -200,12 +200,10 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * Example：
 		 */
 		'clone': function(className) {
-			var deep;
+			var deep =false;
 			if(System.isBoolean(className)) {
 				deep = className;
 				className = arguments[1];
-			}else{
-				deep = false;
 			}
 			var obj;
 			obj = System.merge(deep,{},[className]);
