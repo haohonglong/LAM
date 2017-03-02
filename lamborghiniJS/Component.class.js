@@ -98,7 +98,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * Example：
 		 */
 		'define':function(args,callback){
-			if(System.alias && System.isObject(System.alias) && System.isPlainObject(System.alias)) {
+			if(System.alias && System.isPlainObject(System.alias)) {
 				var paths = System.alias.paths;
 				var urls=[];
 				System.each(args, function (i,item) {

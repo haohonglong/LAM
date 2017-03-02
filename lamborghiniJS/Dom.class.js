@@ -95,29 +95,55 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 	 * 产品介绍：
 	 * 创建日期：2014-11-28
 	 * 修改日期：2014-12-22
-	 * 名称：Dom.getByClass
-	 * 功能：获取类名集合
+	 * 名称：[] hasClass
+	 * 功能：查找指定的阶段中的是否有匹配的class 名称
 	 * 说明：
 	 * 注意：
-	 * @param   (String)s			NO NULL :class 名称
-	 * @param   (String)p 			NO NULL :
-	 * @param   (String)t 			NO NULL :
+	 * @param   (Dom)node 			NO NULL :dom节点
+	 * @param   (String)className 	NO NULL :要查找的类名称
+	 * @return  (Boolean)
+	 * Example：
+	 */
+	Dom.hasClass=function(node,className){
+		var names = node.className || node.getAttribute('class');
+		names = names.split(/\s+/);
+		for(var i=0,len=names.length;i<len;i++){
+			if(names[i] === className) {
+				return true;
+			}
+		}
+		return false;
+	};
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：
+	 * 创建日期：2014-11-28
+	 * 修改日期：2017-03-02
+	 * 名称：Dom.getElementsByClassName
+	 * 功能：获取所有对应的类名称的集合
+	 * 说明：
+	 * 注意：
+	 * @param   (String)s			 NO NULL :class 名称
+	 * @param   (String)p 				NULL :parent node
+	 * @param   (String)t 				NULL :tagName
 	 * @return  (Array)				返回匹配的节点集合
 	 * Example：
 	 */
-	Dom.getByClass=function(s,p,t){//使用class获取元素
-		var reg=new RegExp('\\b'+s+'\\b');
-		var aResult=[];
-		var aElement=(p||document).getElementsByTagName(t || '*');
+	Dom.getElementsByClassName=function(s,p,t){//使用class获取元素
+		var node = p || document;
+		if(node.getElementsByClassName){return node.getElementsByClassName(s);}
 
-		for(var i=0;i<aElement.length;i++)
-		{
-			if(reg.test(aElement[i].className))
-			{
-				aResult.push(aElement[i])
+		var reg=new RegExp('\\b'+s+'\\b');
+		var arr=[];
+		var element=node.getElementsByTagName(t || '*');
+
+		for(var i= 0,len = element.length;i < len;i++){
+			if(reg.test(element[i].className || element[i].getAttribute('class')) || Dom.hasClass(element[i],s)){
+				arr.push(element[i]);
 			}
 		}
-		return aResult;
+		return arr;
 	};
 	/**
 	 * @author: lhh
@@ -352,7 +378,7 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-12-08
-		 * 修改日期：2015-12-08
+		 * 修改日期：2017-03-02
 		 * 名称： innerHTML
 		 * 功能：克隆节点
 		 * 说明：logic true:下面的子孙节点一块克隆下来 ；false:只克隆当前节点 (默认)
@@ -361,12 +387,14 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @param logic
 		 * @returns {Node}
 		 */
-		'clone':function(logic,node){
-			node = node || this.node;
-			if(logic)
+		'clone':function(node,logic){
+			node  = node || this.node;
+			logic = logic || false;
+			if(logic){
 				return node.cloneNode(true);
-			else
+			}else{
 				return node.cloneNode(false);
+			}
 		},
 		/**
 		 * @author: lhh
@@ -842,63 +870,37 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @author lhh
 		 * 产品介绍：
 		 * 创建日期：2014-11-28
-		 * 修改日期：2014-12-22
+		 * 修改日期：2017-03-02
 		 * 名称：[] hasClass
 		 * 功能：查找指定的阶段中的是否有匹配的class 名称
 		 * 说明：
 		 * 注意：
-		 * @param   (Dom)node 			NO NULL :dom节点
 		 * @param   (String)className 		NO NULL :要查找的类名称
+		 * @param   (Dom)node 				NO NULL :dom节点
 		 * @return  (Boolean)
 		 * Example：
 		 */
-		'hasClass':function(node,className){
-			var names = node.className || this.attr(node,'class');
-			names = names.split(/\s+/);
-			for(var i=0,len=names.length;i<len;i++){
-				if(names[i] === className) {
-					return true;
-				}
-			}
-			return false;
+		'hasClass':function(className,node){
+			return Dom.hasClass(node || this.node,className);
 		},
-
-
 		/**
 		 *
 		 * @author lhh
 		 * 产品介绍：
 		 * 创建日期：2014-11-28
-		 * 修改日期：2014-12-22
-		 * 名称：getElementsByClass
+		 * 修改日期：2017-03-02
+		 * 名称：getElementsByClassName
 		 * 功能：获取类名集合
 		 * 说明：
 		 * 注意：
-		 * @param   (String)searchClass 		NO NULL :要查找的类名称
-		 * @param   (Dom)node 					   NULL :父级dom节点
-		 * @param   (String)tag 				   NULL :标签名称
+		 * @param   (String)s 		NO NULL :要查找的类名称
+		 * @param   (Dom)p 					   NULL :父级dom节点
+		 * @param   (String)t 				   NULL :标签名称
 		 * @return  (Array)					返回匹配的节点集合
 		 * Example：
 		 */
-		'getElementsByClass':function(searchClass,node,tag){//获取类名集合
-			node   = node || document,
-				tag    = tag  || "*";
-			if(node.getElementsByClassName){
-				return node.getElementsByClassName(searchClass);
-			}
-			var tags=node.getElementsByTagName(tag);
-			var ret=[];
-			for(var i=0,len = tags.length; i < len;i++){
-				if(this.hasClass(tags[i],searchClass)){
-					ret.push(tags[i]);
-				}
-			}
-
-			// if (1 === ret.length){//如果只有一个就直接返回节点元素
-			//   return ret[0];
-			// }
-
-			return ret;
+		'getElementsByClassName':function(s,p,t){
+			return Dom.getElementsByClassName(s,p,t);
 		},
 
 		/**
