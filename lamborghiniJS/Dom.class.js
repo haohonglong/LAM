@@ -897,36 +897,19 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @author lhh
 		 * 产品介绍：
 		 * 创建日期：2014-11-28
-		 * 修改日期：2014-12-22
-		 * 名称：getElementsByClass
+		 * 修改日期：2017-03-02
+		 * 名称：getElementsByClassName
 		 * 功能：获取类名集合
 		 * 说明：
 		 * 注意：
-		 * @param   (String)searchClass 		NO NULL :要查找的类名称
-		 * @param   (Dom)node 					   NULL :父级dom节点
-		 * @param   (String)tag 				   NULL :标签名称
+		 * @param   (String)s 		NO NULL :要查找的类名称
+		 * @param   (Dom)p 					   NULL :父级dom节点
+		 * @param   (String)t 				   NULL :标签名称
 		 * @return  (Array)					返回匹配的节点集合
 		 * Example：
 		 */
-		'getElementsByClass':function(searchClass,node,tag){//获取类名集合
-			node   = node || document,
-				tag    = tag  || "*";
-			if(node.getElementsByClassName){
-				return node.getElementsByClassName(searchClass);
-			}
-			var tags=node.getElementsByTagName(tag);
-			var ret=[];
-			for(var i=0,len = tags.length; i < len;i++){
-				if(this.hasClass(tags[i],searchClass)){
-					ret.push(tags[i]);
-				}
-			}
-
-			// if (1 === ret.length){//如果只有一个就直接返回节点元素
-			//   return ret[0];
-			// }
-
-			return ret;
+		'getElementsByClassName':function(s,p,t){
+			return Dom.getElementsByClassName(s,p,t);
 		},
 
 		/**
