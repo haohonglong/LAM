@@ -361,12 +361,15 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @param logic
 		 * @returns {Node}
 		 */
-		'clone':function(logic,node){
-			node = node || this.node;
-			if(logic)
+		'clone':function(node,logic){
+			node  = node || this.node;
+			logic = logic || false;
+			if(logic){
 				return node.cloneNode(true);
-			else
+
+			}else{
 				return node.cloneNode(false);
+			}
 		},
 		/**
 		 * @author: lhh
