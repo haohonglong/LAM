@@ -870,28 +870,19 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @author lhh
 		 * 产品介绍：
 		 * 创建日期：2014-11-28
-		 * 修改日期：2014-12-22
+		 * 修改日期：2017-03-02
 		 * 名称：[] hasClass
 		 * 功能：查找指定的阶段中的是否有匹配的class 名称
 		 * 说明：
 		 * 注意：
-		 * @param   (Dom)node 			NO NULL :dom节点
 		 * @param   (String)className 		NO NULL :要查找的类名称
+		 * @param   (Dom)node 				NO NULL :dom节点
 		 * @return  (Boolean)
 		 * Example：
 		 */
-		'hasClass':function(node,className){
-			var names = node.className || this.attr(node,'class');
-			names = names.split(/\s+/);
-			for(var i=0,len=names.length;i<len;i++){
-				if(names[i] === className) {
-					return true;
-				}
-			}
-			return false;
+		'hasClass':function(className,node){
+			return Dom.hasClass(node || this.node,className);
 		},
-
-
 		/**
 		 *
 		 * @author lhh
