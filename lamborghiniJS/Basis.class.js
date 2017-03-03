@@ -83,6 +83,8 @@ if(!GRN_LHH){
 	var isFunction = isType("Function");
 	var isBoolean = isType("Boolean");
 	var isNumber = isType("Number");
+	var isNull = isType("Null");
+	var isUndefined = isType("Undefined");
 
 
 
