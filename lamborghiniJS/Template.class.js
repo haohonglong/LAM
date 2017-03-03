@@ -30,8 +30,7 @@ window[GRN_LHH].run(function(undefined){
 		this.html=[];
 		this.Config = Config || System.Config;
 		//模板分隔符
-		this.delimiterLeft  = this.Config.templat.delimiters[0];
-		this.delimiterRight = this.Config.templat.delimiters[1];
+		this.delimiters  = this.Config.templat.delimiters;
 
 
 
@@ -41,7 +40,7 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-03-8
-	 * 修改日期：2016-03-9
+	 * 修改日期：2017-03-3
 	 * 名称：Template.analysisVar
 	 * 功能：解析变量
 	 * 说明：
@@ -54,11 +53,11 @@ window[GRN_LHH].run(function(undefined){
 						   root){
 
 		if(-1 === vars.indexOf('.')){
-			return eval(vars);
+			return System.eval(vars);
 		}
 
 		v=vars.split('.');
-		root=eval(v[0]);
+		root=System.eval(v[0]);
 		v.each(function(i){
 			if(i!=0){
 				root=root[this];
@@ -115,14 +114,14 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-03-9
-	 * 修改日期：2017-2-23
+	 * 修改日期：2017-3-3
 	 * 名称：Template.findTpl
 	 * 功能：查找模版标签
 	 * 说明：
 	 * 注意：
 	 * @param (String)S 		 NO NULL:要查找的字符串
 	 * @param (Array)delimiters    NULL:模板分隔符
-	 * @returns {Array}
+	 * @returns {String}
 	 */
 	Template.findTpl=function(S,delimiters){
 		if(!S) return null;
@@ -149,7 +148,7 @@ window[GRN_LHH].run(function(undefined){
 			return S ||'';
 		}
 
-		return arr;
+		return arr.join('');
 
 	};
 	/**
@@ -202,10 +201,11 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：获取容器里带模板标签的html 字符串 ，然后迭代解析后输出到指定标签里
 	 * 创建日期：2016-10-22
-	 * 修改日期：2016-10-30
+	 * 修改日期：2017-3-3
 	 * 名称：Template.foreach
 	 * @param {String}template NO NULL:容器里带模板标签的html 字符串
 	 * @param {Array}data		NO NUll:解析模板标签的数据
+	 * @param {Array}delimiters	   NUll:模板分隔符
 	 * @returns {string} 返回解析后的字符串
 	 * Example：
 	 * 			html:
@@ -248,11 +248,12 @@ window[GRN_LHH].run(function(undefined){
 						}]
 
 	 			js:
-	 				document.querySelector('.result').innerHTML=(System.Template.foreach($('[type="text/template-foreach:.result"]').html(), data));
+	 				document.querySelector('.result').innerHTML=(System.Template.foreach($('[type="text/template-foreach:.result"]').html(), data,['{{','}}']));
 	 */
-	Template.foreach=function(template, data){
-		var delimiterLeft=System.Config.templat.delimiters[0];
-		var delimiterRight=System.Config.templat.delimiters[1];
+	Template.foreach=function(template, data,delimiters){
+		delimiters = delimiters || System.Config.templat.delimiters;
+		var delimiterLeft  = delimiters[0];
+		var delimiterRight = delimiters[1];
 		var i = 0,
 			len = data.length,
 			fragment = '';
@@ -290,7 +291,7 @@ window[GRN_LHH].run(function(undefined){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-03-9
-		 * 修改日期：2016-10-30
+		 * 修改日期：2017-3-3
 		 * 名称：find
 		 * 功能：查找模版标签
 		 * 说明：
@@ -302,8 +303,8 @@ window[GRN_LHH].run(function(undefined){
 		'find':function(S,D){
 			var self=this;
 			var ss=[],arr=[],v=[],$1,$2;
-			var delimiterLeft  = this.delimiterLeft;
-			var delimiterRight = this.delimiterRight;
+			var delimiterLeft  = this.delimiters[0];
+			var delimiterRight = this.delimiters[1];
 			//没找到模版分隔符就返回传入的字符串
 			if(S.indexOf(delimiterLeft) !== -1){
 				ss=S.split(delimiterLeft);

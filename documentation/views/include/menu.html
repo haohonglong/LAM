@@ -17,7 +17,7 @@
         var System=this;
         System.Html.getFile(System.ROOT+'/database/data.json',function(data){
             var menu = System.Template.foreach($('#structList_tpl').html(), data.menu);
-            document.querySelector('#structList').innerHTML=System.findTpl(menu,['{{','}}']).join('');
+            document.querySelector('#structList').innerHTML=System.findTpl(menu,['{{','}}']);
         },{
             'dataType':'json',
             'type':'POST'

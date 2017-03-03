@@ -45,35 +45,6 @@ if(!GRN_LHH){
 	'use strict';
 	var version="1.1.5";
 	var Interface,System;
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2014.9.28
-	 * 修改日期：2014.9.28
-	 * 名称：private isType
-	 * 功能：判断数据是什么类型的
-	 * 说明：
-	 * 注意：
-	 * @param   (var)type 			NO NULL :
-	 * 调用方式：isType(type)(value);
-	 * @return  (Function)
-	 * Example：isType('Array')(['aaa']);
-	 */
-	function isType(type) {
-		return function(obj) {
-			return {}.toString.call(obj) == "[object " + type + "]";
-		};
-	}
-
-	var isObject = isType("Object");
-	var isString = isType("String");
-	var isArray = Array.isArray || isType("Array");
-	var isFunction = isType("Function");
-	var isBoolean = function(type){
-		return ("boolean" === typeof type);
-	};
-
 	// Used for trimming whitespace
 	var trimLeft = /^\s+/,
 		trimRight = /\s+$/,
@@ -81,11 +52,47 @@ if(!GRN_LHH){
 	// Save a reference to some core methods
 
 		toString = Object.prototype.toString,
+		getPrototypeOf = Object.getPrototypeOf,
 		hasOwn = Object.prototype.hasOwnProperty,
 		push = Array.prototype.push,
 		slice = Array.prototype.slice,
 		trim = String.prototype.trim,
 		indexOf = Array.prototype.indexOf;
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2014.9.28
+	 * 修改日期：2017.3.3
+	 * 名称：private isType
+	 * 功能：判断数据是什么类型的
+	 * 说明：
+	 * 注意：
+	 * @param   {String}type 			NO NULL :
+	 * @return  {Function}
+	 * Example：
+	 */
+	function isType(type) {
+		return function(obj) {
+			return (toString.call(obj) === "[object " + type + "]");
+		};
+	}
+
+	var isObject = isType("Object");
+	var isString = isType("String");
+	var isArray = Array.isArray || isType("Array");
+	var isFunction = isType("Function");
+	var isBoolean = isType("Boolean");
+	var isNumber = isType("Number");
+	var isDate = isType("Date");
+	var isRegExp = isType("RegExp");
+	var isBlob = isType("Blob");
+	var isXMLHttpRequest = isType("XMLHttpRequest");
+	var isXMLSerializer = isType("XMLSerializer");
+	var isNull = isType("Null");
+	var isUndefined = isType("Undefined");
+
+
 
 
 
@@ -178,6 +185,46 @@ if(!GRN_LHH){
 		String   = {};
 		Array    = {};
 	}
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2015-7-23
+	 * 修改日期：2017-3-3
+	 * 名称：System.extend
+	 * 功能：Extends a child object from a parent object using classical inheritance
+	 * pattern.
+	 * 说明：
+	 * 注意：
+	 * @param   (Object)subClass 			NO NULL :子类
+	 * @param   (Object)superClass 			NO NULL :父类
+	 * @return  (Function) 函数原型
+	 * Example：
+
+	 *
+	 */
+	var inherit =(function() {
+		// proxy used to establish prototype chain
+		var F = function() {};
+		// extend subClass from superClass
+		return function(subClass, superClass) {
+			if (Object.create) {//用 ecma5 Object.create() 实现 prototype 原型继承
+				// subclass extends superclass
+				subClass.prototype = Object.create(superClass.prototype);
+				subClass.prototype.constructor = subClass;
+			}else{
+				F.prototype = superClass.prototype;
+				subClass.prototype = new F();
+				subClass.prototype.constructor = subClass;
+				subClass.superClass = superClass.prototype;
+
+				if(superClass.prototype.constructor === Object.prototype.constructor){
+					superClass.prototype.constructor = superClass;
+				}
+			}
+			return subClass;
+		};
+	})();
 //interface
 //==================================================================================
 
@@ -698,58 +745,11 @@ if(!GRN_LHH){
 						superClass.call(this);
 					}
 					break;
-
-
 				default:
 					throw new Error('Warning type 非法类型');
-					return false;
-
 			}
-
-
 		},
 
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-7-23
-		 * 修改日期：2016-11-17
-		 * 名称：System.extend
-		 * 功能：Extends a child object from a parent object using classical inheritance
-		 * pattern.
-		 * 说明：
-		 * 注意：
-		 * @param   (Object)subClass 			NO NULL :子类
-		 * @param   (Object)superClass 			NO NULL :父类
-		 * @return  (Function) 函数原型
-		 * Example：
-
-		 *
-		 */
-		'extend': (function() {
-			// proxy used to establish prototype chain
-			var F = function() {};
-			// extend subClass from superClass
-			return function(subClass, superClass) {
-				if (Object.create) {//用 ecma5 Object.create() 实现 prototype 原型继承
-					// subclass extends superclass
-					subClass.prototype = Object.create(superClass.prototype);
-					subClass.prototype.constructor = subClass;
-				}else{
-					F.prototype = superClass.prototype;
-					subClass.prototype = new F();
-					subClass.prototype.constructor = subClass;
-
-					subClass.superClass = superClass.prototype;
-					if(superClass.prototype.constructor === Object.prototype.constructor){
-						superClass.prototype.constructor = superClass;
-					}
-				}
-
-
-			};
-		}()),
 		/**
 		 *
 		 * @author: lhh
@@ -967,7 +967,7 @@ if(!GRN_LHH){
 		 * @param ({})obj
 		 * @returns {boolean}
 		 */
-		isPlainObject: function( obj ) {
+		'isPlainObject': function( obj ) {
 			var key;
 
 			if ( !obj || !System.isObject(obj) || System.isArray(obj) || obj.nodeType) {
@@ -1116,23 +1116,31 @@ if(!GRN_LHH){
 
 
 //check
+	System.isNull 	 		= isNull;
+	System.isUndefined 	 	= isUndefined;
 	System.isset 	 		= isset_;
 	System.empty 	 		= empty_;
 	System.error 	 		= error;
 	System.isEmptyObject 	= isEmptyObject;
-	System.arr_isEmpty 	= arr_isEmpty;
-	System.isType 	= isType;
-	System.isObject 	= isObject;
-	System.isString 	= isString;
-	System.isArray 	= isArray;
-	System.isFunction = isFunction;
-	System.isBoolean = isBoolean;
+	System.arr_isEmpty 		= arr_isEmpty;
+	System.isType 			= isType;
+	System.isObject 		= isObject;
+	System.isString 		= isString;
+	System.isArray 			= isArray;
+	System.isFunction 		= isFunction;
+	System.isBoolean 		= isBoolean;
+	System.isRegExp 		= isRegExp;
+	System.isDate 			= isDate;
+	System.isBlob 			= isBlob;
+	System.isXMLHttpRequest = isXMLHttpRequest;
+	System.isXMLSerializer  = isXMLSerializer;
 
 	System.arr_Object_key_has = arr_Object_key_has;
 	System.contains = contains;
 	//check Number
-	System.isNumber = System.isNumeric 	= isNumeric;
-	System.isFloat 	= isFloat;
+	System.isNumber  = isNumber;
+	System.isNumeric = isNumeric;
+	System.isFloat 	 = isFloat;
 
 	System.guid=0;
 	System.classPath='./';
@@ -1144,6 +1152,9 @@ if(!GRN_LHH){
 	System.Date=Date.prototype;
 	System.String=String.prototype;
 	System.Array=Array.prototype;
+
+	//extend
+	System.extend=inherit;
 
 	System.printf=prints;
 
@@ -1919,7 +1930,7 @@ window[GRN_LHH].run([window],function(W,Config){
 				'script':{
 					'Attribute':{
 						'type':'text/javascript',
-						//'async':'async',
+						//'async':true,
 						//'defer':'defer',
 						'charset':'utf-8'
 					}
@@ -1966,8 +1977,8 @@ window[GRN_LHH].run([window],function(W,Config){
 			 */
 			'use':function(){
 				this.create=true;
-				this.default.script.Attribute.async='async';
-				this.default.script.Attribute.defer='defer';
+				this.default.script.Attribute.async = true;
+				this.default.script.Attribute.defer = 'defer';
 			},
 			/**
 			 * 用document.write() 创建标签并且设为非异步
@@ -2183,7 +2194,6 @@ window[GRN_LHH].run([window],function(W,Config){
 
 	System['Basis']=Basis;
 
-	//System.print(Basis.printScript({'src':System.classPath+'/loadcommon.js'}));
 
 });
 
