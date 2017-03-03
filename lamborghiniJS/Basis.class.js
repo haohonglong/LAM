@@ -966,7 +966,7 @@ if(!GRN_LHH){
 		 * @param ({})obj
 		 * @returns {boolean}
 		 */
-		isPlainObject: function( obj ) {
+		'isPlainObject': function( obj ) {
 			var key;
 
 			if ( !obj || !System.isObject(obj) || System.isArray(obj) || obj.nodeType) {
