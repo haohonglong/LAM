@@ -2194,7 +2194,6 @@ window[GRN_LHH].run([window],function(W,Config){
 
 	System['Basis']=Basis;
 
-	//System.print(Basis.printScript({'src':System.classPath+'/loadcommon.js'}));
 
 });
 
