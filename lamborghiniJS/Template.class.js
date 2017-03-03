@@ -41,7 +41,7 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-03-8
-	 * 修改日期：2016-03-9
+	 * 修改日期：2017-03-3
 	 * 名称：Template.analysisVar
 	 * 功能：解析变量
 	 * 说明：
@@ -58,7 +58,7 @@ window[GRN_LHH].run(function(undefined){
 		}
 
 		v=vars.split('.');
-		root=eval(v[0]);
+		root=System.eval(v[0]);
 		v.each(function(i){
 			if(i!=0){
 				root=root[this];
