@@ -11,9 +11,9 @@
 <div class="result"></div>
 
 <script type="text/template-foreach:.result" id="template">
-	<li sort:id="{{id}}">
-		<div><a href="{{href}}">{{title}}</a></div>
-		<img src="{{imgSrc}}" alt="{{title}}">
+	<li sort:id="<%= id%>">
+		<div><a href="<%= href%>"><%= title%></a></div>
+		<img src="<%= imgSrc%>" alt="<%= title%>">
 	</li>
 
 </script>
@@ -51,7 +51,7 @@
 
 		$(function(){
 			var template = document.querySelector('#template').innerHTML;
-			document.querySelector('.result').innerHTML=(System.Template.foreach($('[type="text/template-foreach:.result"]').html(), data));
+			document.querySelector('.result').innerHTML=(System.Template.foreach($('[type="text/template-foreach:.result"]').html(), data,['<%= ','%>']));
 
 		});
 	});

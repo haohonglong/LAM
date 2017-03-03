@@ -202,10 +202,11 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：获取容器里带模板标签的html 字符串 ，然后迭代解析后输出到指定标签里
 	 * 创建日期：2016-10-22
-	 * 修改日期：2016-10-30
+	 * 修改日期：2017-3-3
 	 * 名称：Template.foreach
 	 * @param {String}template NO NULL:容器里带模板标签的html 字符串
 	 * @param {Array}data		NO NUll:解析模板标签的数据
+	 * @param {Array}delimiters	   NUll:模板分隔符
 	 * @returns {string} 返回解析后的字符串
 	 * Example：
 	 * 			html:
@@ -248,11 +249,12 @@ window[GRN_LHH].run(function(undefined){
 						}]
 
 	 			js:
-	 				document.querySelector('.result').innerHTML=(System.Template.foreach($('[type="text/template-foreach:.result"]').html(), data));
+	 				document.querySelector('.result').innerHTML=(System.Template.foreach($('[type="text/template-foreach:.result"]').html(), data,['{{','}}']));
 	 */
-	Template.foreach=function(template, data){
-		var delimiterLeft=System.Config.templat.delimiters[0];
-		var delimiterRight=System.Config.templat.delimiters[1];
+	Template.foreach=function(template, data,delimiters){
+		delimiters = delimiters || System.Config.templat.delimiters;
+		var delimiterLeft  = delimiters[0];
+		var delimiterRight = delimiters[1];
 		var i = 0,
 			len = data.length,
 			fragment = '';
