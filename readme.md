@@ -2,7 +2,7 @@
 	version ：1.1.5
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2016-10-16
+	修改日期 ：2017-3-3
 
 
 产品介绍：
@@ -876,17 +876,24 @@
 			throw new Error(msg);
 	十、检测机制
 			1.数据类型检测
-				LAMJS.isset(); 	
-				LAMJS.empty();
+				LAMJS.isNull(); 	 	
+				LAMJS.isUndefined(); 	
+				LAMJS.isset(); 	 	
+				LAMJS.empty(); 	 	
 				LAMJS.error(); 	 	
 				LAMJS.isEmptyObject(); 
-				LAMJS.isType();
-				LAMJS.isObject();	 
-				LAMJS.isString();	 
-				LAMJS.isArray();
-				LAMJS.isFunction(); 
-				LAMJS.isNumber(); 	 
-				LAMJS.isFloat(); 
+				LAMJS.arr_isEmpty(); 	
+				LAMJS.isType(); 		
+				LAMJS.isObject(); 		
+				LAMJS.isString(); 		
+				LAMJS.isArray(); 		
+				LAMJS.isFunction(); 	
+				LAMJS.isBoolean(); 	
+				LAMJS.isRegExp(); 		
+				LAMJS.isDate(); 		
+				LAMJS.isBlob(); 		
+				LAMJS.isXMLHttpRequest(); 
+				LAMJS.isXMLSerializer();  
         	
         	2.文件类型检测
         		LAMJS.is(namespace,superClass,class);//检查父类是否存在(不存在 抛异常)，当前定义的类是否已定义过了(已定义过 抛异常)

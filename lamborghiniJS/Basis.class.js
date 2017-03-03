@@ -83,6 +83,11 @@ if(!GRN_LHH){
 	var isFunction = isType("Function");
 	var isBoolean = isType("Boolean");
 	var isNumber = isType("Number");
+	var isDate = isType("Date");
+	var isRegExp = isType("RegExp");
+	var isBlob = isType("Blob");
+	var isXMLHttpRequest = isType("XMLHttpRequest");
+	var isXMLSerializer = isType("XMLSerializer");
 	var isNull = isType("Null");
 	var isUndefined = isType("Undefined");
 
@@ -1117,17 +1122,24 @@ if(!GRN_LHH){
 
 
 //check
+	System.isNull 	 		= isNull;
+	System.isUndefined 	 	= isUndefined;
 	System.isset 	 		= isset_;
 	System.empty 	 		= empty_;
 	System.error 	 		= error;
 	System.isEmptyObject 	= isEmptyObject;
-	System.arr_isEmpty 	= arr_isEmpty;
-	System.isType 	= isType;
-	System.isObject 	= isObject;
-	System.isString 	= isString;
-	System.isArray 	= isArray;
-	System.isFunction = isFunction;
-	System.isBoolean = isBoolean;
+	System.arr_isEmpty 		= arr_isEmpty;
+	System.isType 			= isType;
+	System.isObject 		= isObject;
+	System.isString 		= isString;
+	System.isArray 			= isArray;
+	System.isFunction 		= isFunction;
+	System.isBoolean 		= isBoolean;
+	System.isRegExp 		= isRegExp;
+	System.isDate 			= isDate;
+	System.isBlob 			= isBlob;
+	System.isXMLHttpRequest = isXMLHttpRequest;
+	System.isXMLSerializer  = isXMLSerializer;
 
 	System.arr_Object_key_has = arr_Object_key_has;
 	System.contains = contains;
