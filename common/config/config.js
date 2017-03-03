@@ -95,7 +95,7 @@ if(!GRN_LHH){
                 'script':{
                     'Attribute':{
                         'type':'text/javascript',
-                        //'async':'async',
+                        //'async':true,
                         //'defer':'defer',
                         'charset':'utf-8'
                     }
@@ -142,7 +142,7 @@ if(!GRN_LHH){
              */
             'use':function(){
                 this.create=true;
-                this.default.script.Attribute.async='async';
+                this.default.script.Attribute.async=true;
                 this.default.script.Attribute.defer='defer';
             },
             /**
