@@ -185,6 +185,46 @@ if(!GRN_LHH){
 		String   = {};
 		Array    = {};
 	}
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2015-7-23
+	 * 修改日期：2017-3-3
+	 * 名称：System.extend
+	 * 功能：Extends a child object from a parent object using classical inheritance
+	 * pattern.
+	 * 说明：
+	 * 注意：
+	 * @param   (Object)subClass 			NO NULL :子类
+	 * @param   (Object)superClass 			NO NULL :父类
+	 * @return  (Function) 函数原型
+	 * Example：
+
+	 *
+	 */
+	var inherit =(function() {
+		// proxy used to establish prototype chain
+		var F = function() {};
+		// extend subClass from superClass
+		return function(subClass, superClass) {
+			if (Object.create) {//用 ecma5 Object.create() 实现 prototype 原型继承
+				// subclass extends superclass
+				subClass.prototype = Object.create(superClass.prototype);
+				subClass.prototype.constructor = subClass;
+			}else{
+				F.prototype = superClass.prototype;
+				subClass.prototype = new F();
+				subClass.prototype.constructor = subClass;
+				subClass.superClass = superClass.prototype;
+
+				if(superClass.prototype.constructor === Object.prototype.constructor){
+					superClass.prototype.constructor = superClass;
+				}
+			}
+			return subClass;
+		};
+	})();
 //interface
 //==================================================================================
 
@@ -720,48 +760,6 @@ if(!GRN_LHH){
 		 *
 		 * @author: lhh
 		 * 产品介绍：
-		 * 创建日期：2015-7-23
-		 * 修改日期：2016-11-17
-		 * 名称：System.extend
-		 * 功能：Extends a child object from a parent object using classical inheritance
-		 * pattern.
-		 * 说明：
-		 * 注意：
-		 * @param   (Object)subClass 			NO NULL :子类
-		 * @param   (Object)superClass 			NO NULL :父类
-		 * @return  (Function) 函数原型
-		 * Example：
-
-		 *
-		 */
-		'extend': (function() {
-			// proxy used to establish prototype chain
-			var F = function() {};
-			// extend subClass from superClass
-			return function(subClass, superClass) {
-				if (Object.create) {//用 ecma5 Object.create() 实现 prototype 原型继承
-					// subclass extends superclass
-					subClass.prototype = Object.create(superClass.prototype);
-					subClass.prototype.constructor = subClass;
-				}else{
-					F.prototype = superClass.prototype;
-					subClass.prototype = new F();
-					subClass.prototype.constructor = subClass;
-					subClass.superClass = superClass.prototype;
-
-					if(superClass.prototype.constructor === Object.prototype.constructor){
-						superClass.prototype.constructor = superClass;
-					}
-				}
-				return subClass;
-
-
-			};
-		}()),
-		/**
-		 *
-		 * @author: lhh
-		 * 产品介绍：
 		 * 创建日期：2015-3-27
 		 * 修改日期：2016-8-23
 		 * 名称：merge
@@ -1160,6 +1158,9 @@ if(!GRN_LHH){
 	System.Date=Date.prototype;
 	System.String=String.prototype;
 	System.Array=Array.prototype;
+
+	//extend
+	System.extend=inherit;
 
 	System.printf=prints;
 
