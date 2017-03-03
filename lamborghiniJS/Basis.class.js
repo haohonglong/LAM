@@ -745,15 +745,9 @@ if(!GRN_LHH){
 						superClass.call(this);
 					}
 					break;
-
-
 				default:
 					throw new Error('Warning type 非法类型');
-
-
 			}
-
-
 		},
 
 		/**
