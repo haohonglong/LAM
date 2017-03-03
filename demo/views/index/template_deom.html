@@ -20,40 +20,41 @@
 
 
 <script type="text/javascript">
-	setTimeout(function(){
-		LAMJS.run(function() {
-			'use strict';
-			var System = this;
-			var data = [
-				{
-					id : '1',
-					title : 'php web appliaction',
-					href : 'http://www.baidu.com',
-					imgSrc : 'http://www.baidu.com'
-				},
-				{
-					id : '2',
-					title : 'java web appliaction',
-					href : 'http://www.baidu.com',
-					imgSrc : 'http://www.baidu.com'
-				},
-				{
-					id : '3',
-					title : 'python web appliaction',
-					href : 'http://www.baidu.com',
-					imgSrc : 'http://www.baidu.com'
-				},
-				{
-					id : '4',
-					title : 'js 权威指南',
-					href : 'http://www.qq.com',
-					imgSrc : 'http://www.qq.com'
-				}];
-			var template = document.querySelector('#template').innerHTML;
+	LAMJS.run(function() {
+		'use strict';
+		var System = this;
+		var data = [
+			{
+				id : '1',
+				title : 'php web appliaction',
+				href : 'http://www.baidu.com',
+				imgSrc : 'http://www.baidu.com'
+			},
+			{
+				id : '2',
+				title : 'java web appliaction',
+				href : 'http://www.baidu.com',
+				imgSrc : 'http://www.baidu.com'
+			},
+			{
+				id : '3',
+				title : 'python web appliaction',
+				href : 'http://www.baidu.com',
+				imgSrc : 'http://www.baidu.com'
+			},
+			{
+				id : '4',
+				title : 'js 权威指南',
+				href : 'http://www.qq.com',
+				imgSrc : 'http://www.qq.com'
+			}];
 
+		$(function(){
+			var template = document.querySelector('#template').innerHTML;
 			document.querySelector('.result').innerHTML=(System.Template.foreach($('[type="text/template-foreach:.result"]').html(), data));
+
 		});
-	},3000);
+	});
 
 
 </script>

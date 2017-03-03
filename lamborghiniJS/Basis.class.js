@@ -50,7 +50,7 @@ if(!GRN_LHH){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2014.9.28
-	 * 修改日期：2014.9.28
+	 * 修改日期：2017.3.3
 	 * 名称：private isType
 	 * 功能：判断数据是什么类型的
 	 * 说明：
@@ -62,7 +62,7 @@ if(!GRN_LHH){
 	 */
 	function isType(type) {
 		return function(obj) {
-			return {}.toString.call(obj) == "[object " + type + "]";
+			return ({}.toString.call(obj) == "[object " + type + "]");
 		};
 	}
 
