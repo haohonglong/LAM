@@ -115,14 +115,14 @@ window[GRN_LHH].run(function(undefined){
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2016-03-9
-	 * 修改日期：2017-2-23
+	 * 修改日期：2017-3-3
 	 * 名称：Template.findTpl
 	 * 功能：查找模版标签
 	 * 说明：
 	 * 注意：
 	 * @param (String)S 		 NO NULL:要查找的字符串
 	 * @param (Array)delimiters    NULL:模板分隔符
-	 * @returns {Array}
+	 * @returns {String}
 	 */
 	Template.findTpl=function(S,delimiters){
 		if(!S) return null;
@@ -149,7 +149,7 @@ window[GRN_LHH].run(function(undefined){
 			return S ||'';
 		}
 
-		return arr;
+		return arr.join('');
 
 	};
 	/**
