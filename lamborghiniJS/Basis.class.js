@@ -1930,7 +1930,7 @@ window[GRN_LHH].run([window],function(W,Config){
 				'script':{
 					'Attribute':{
 						'type':'text/javascript',
-						//'async':'async',
+						//'async':true,
 						//'defer':'defer',
 						'charset':'utf-8'
 					}
@@ -1977,8 +1977,8 @@ window[GRN_LHH].run([window],function(W,Config){
 			 */
 			'use':function(){
 				this.create=true;
-				this.default.script.Attribute.async='async';
-				this.default.script.Attribute.defer='defer';
+				this.default.script.Attribute.async = true;
+				this.default.script.Attribute.defer = 'defer';
 			},
 			/**
 			 * 用document.write() 创建标签并且设为非异步
