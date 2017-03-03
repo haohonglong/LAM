@@ -749,7 +749,7 @@ if(!GRN_LHH){
 
 				default:
 					throw new Error('Warning type 非法类型');
-					return false;
+
 
 			}
 
