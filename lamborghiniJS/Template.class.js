@@ -30,8 +30,7 @@ window[GRN_LHH].run(function(undefined){
 		this.html=[];
 		this.Config = Config || System.Config;
 		//模板分隔符
-		this.delimiterLeft  = this.Config.templat.delimiters[0];
-		this.delimiterRight = this.Config.templat.delimiters[1];
+		this.delimiters  = this.Config.templat.delimiters;
 
 
 
@@ -292,7 +291,7 @@ window[GRN_LHH].run(function(undefined){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-03-9
-		 * 修改日期：2016-10-30
+		 * 修改日期：2017-3-3
 		 * 名称：find
 		 * 功能：查找模版标签
 		 * 说明：
@@ -304,8 +303,8 @@ window[GRN_LHH].run(function(undefined){
 		'find':function(S,D){
 			var self=this;
 			var ss=[],arr=[],v=[],$1,$2;
-			var delimiterLeft  = this.delimiterLeft;
-			var delimiterRight = this.delimiterRight;
+			var delimiterLeft  = this.delimiters[0];
+			var delimiterRight = this.delimiters[1];
 			//没找到模版分隔符就返回传入的字符串
 			if(S.indexOf(delimiterLeft) !== -1){
 				ss=S.split(delimiterLeft);
