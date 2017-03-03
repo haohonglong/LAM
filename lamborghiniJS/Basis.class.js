@@ -52,6 +52,7 @@ if(!GRN_LHH){
 	// Save a reference to some core methods
 
 		toString = Object.prototype.toString,
+		getPrototypeOf = Object.getPrototypeOf,
 		hasOwn = Object.prototype.hasOwnProperty,
 		push = Array.prototype.push,
 		slice = Array.prototype.slice,
