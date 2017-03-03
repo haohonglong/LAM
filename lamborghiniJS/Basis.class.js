@@ -45,35 +45,6 @@ if(!GRN_LHH){
 	'use strict';
 	var version="1.1.5";
 	var Interface,System;
-	/**
-	 *
-	 * @author: lhh
-	 * 产品介绍：
-	 * 创建日期：2014.9.28
-	 * 修改日期：2017.3.3
-	 * 名称：private isType
-	 * 功能：判断数据是什么类型的
-	 * 说明：
-	 * 注意：
-	 * @param   (var)type 			NO NULL :
-	 * 调用方式：isType(type)(value);
-	 * @return  (Function)
-	 * Example：isType('Array')(['aaa']);
-	 */
-	function isType(type) {
-		return function(obj) {
-			return ({}.toString.call(obj) == "[object " + type + "]");
-		};
-	}
-
-	var isObject = isType("Object");
-	var isString = isType("String");
-	var isArray = Array.isArray || isType("Array");
-	var isFunction = isType("Function");
-	var isBoolean = function(type){
-		return ("boolean" === typeof type);
-	};
-
 	// Used for trimming whitespace
 	var trimLeft = /^\s+/,
 		trimRight = /\s+$/,
@@ -86,6 +57,34 @@ if(!GRN_LHH){
 		slice = Array.prototype.slice,
 		trim = String.prototype.trim,
 		indexOf = Array.prototype.indexOf;
+	/**
+	 *
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2014.9.28
+	 * 修改日期：2017.3.3
+	 * 名称：private isType
+	 * 功能：判断数据是什么类型的
+	 * 说明：
+	 * 注意：
+	 * @param   {String}type 			NO NULL :
+	 * @return  {Function}
+	 * Example：
+	 */
+	function isType(type) {
+		return function(obj) {
+			return (toString.call(obj) === "[object " + type + "]");
+		};
+	}
+
+	var isObject = isType("Object");
+	var isString = isType("String");
+	var isArray = Array.isArray || isType("Array");
+	var isFunction = isType("Function");
+	var isBoolean = isType("Boolean");
+	var isNumber = isType("Number");
+
+
 
 
 
@@ -1131,8 +1130,9 @@ if(!GRN_LHH){
 	System.arr_Object_key_has = arr_Object_key_has;
 	System.contains = contains;
 	//check Number
-	System.isNumber = System.isNumeric 	= isNumeric;
-	System.isFloat 	= isFloat;
+	System.isNumber  = isNumber;
+	System.isNumeric = isNumeric;
+	System.isFloat 	 = isFloat;
 
 	System.guid=0;
 	System.classPath='./';
