@@ -54,7 +54,7 @@ window[GRN_LHH].run(function(undefined){
 						   root){
 
 		if(-1 === vars.indexOf('.')){
-			return eval(vars);
+			return System.eval(vars);
 		}
 
 		v=vars.split('.');
