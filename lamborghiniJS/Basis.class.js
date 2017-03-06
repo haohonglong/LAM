@@ -64,7 +64,7 @@ if(!GRN_LHH){
 	 * 产品介绍：
 	 * 创建日期：2014.9.28
 	 * 修改日期：2017.3.3
-	 * 名称：private isType
+	 * 名称：private gettype
 	 * 功能：判断数据是什么类型的
 	 * 说明：
 	 * 注意：
@@ -72,25 +72,25 @@ if(!GRN_LHH){
 	 * @return  {Function}
 	 * Example：
 	 */
-	function isType(type) {
+	function gettype(type) {
 		return function(obj) {
 			return (toString.call(obj) === "[object " + type + "]");
 		};
 	}
 
-	var isObject = isType("Object");
-	var isString = isType("String");
-	var isArray = Array.isArray || isType("Array");
-	var isFunction = isType("Function");
-	var isBoolean = isType("Boolean");
-	var isNumber = isType("Number");
-	var isDate = isType("Date");
-	var isRegExp = isType("RegExp");
-	var isBlob = isType("Blob");
-	var isXMLHttpRequest = isType("XMLHttpRequest");
-	var isXMLSerializer = isType("XMLSerializer");
-	var isNull = isType("Null");
-	var isUndefined = isType("Undefined");
+	var isObject = gettype("Object");
+	var isString = gettype("String");
+	var isArray = Array.isArray || gettype("Array");
+	var isFunction = gettype("Function");
+	var isBoolean = gettype("Boolean");
+	var isNumber = gettype("Number");
+	var isDate = gettype("Date");
+	var isRegExp = gettype("RegExp");
+	var isBlob = gettype("Blob");
+	var isXMLHttpRequest = gettype("XMLHttpRequest");
+	var isXMLSerializer = gettype("XMLSerializer");
+	var isNull = gettype("Null");
+	var isUndefined = gettype("Undefined");
 
 
 
@@ -303,7 +303,7 @@ if(!GRN_LHH){
 	 *			empty
 	 *			isNumeric
 	 *			error
-	 *			isType
+	 *			gettype
 	 *			isObject
 	 *			isString
 	 *			isArray
@@ -705,7 +705,49 @@ if(!GRN_LHH){
 
 			return obj;
 		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2015-8-26
+		 * 修改日期：2016-8-25
+		 * 名称： list
+		 * 功能：递归对象
+		 * 说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象为止
+		 * 注意：
+		 * @param 	(Object)D             			NO NULL : 对象
+		 * @param 	(Funtion)callback             	NO NULL : 回调方法
+		 * @returns {Object}
+		 * Example：
+		 *
+		 */
+		'list':function(D,callback){
+			var loop,totalLoop;
+			totalLoop=loop=0;
+			var list=function(D,callback){
 
+				if(!System.isArray(D) && !System.isPlainObject(D)){
+					return D;
+				}
+				if(!System.isFunction(callback)){
+					throw new Error('Warning 第二参数 必须是个callback');
+				}
+				//算出找到指定内容，所需要遍历的次数
+				loop++;
+				return System.each(D,function(k,v){
+					totalLoop++;
+					if (false === callback.apply(D,[k,v,loop,totalLoop])) {
+						console.log('共遍历----->'+loop+'<------次找到了')
+						return false;
+					}
+					//如果没找到，就继续递归搜索
+					if(v){
+						return list(v,callback);
+					}
+				});
+			};
+			return {'data':list(D,callback),'totalLoop':totalLoop,'loop':loop};
+
+		},
 
 		/**
 		 *
@@ -866,26 +908,26 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍： class文件检验器
 		 * 创建日期：2015-8-18
-		 * 修改日期：2016-10-9
+		 * 修改日期：2017-3-6
 		 * 名称： System.is
 		 * 功能：检测System是否合法，检测要使用的类是否已加载过；检测要定义的类名称之前是否已注册过。
 		 * 说明：子类继承父类之前调用此方法检测父类之前是否有加载过，如果填写第三参数可检测当前的类是否跟之前的类重名了
 		 * 注意：当Obj 类型是对象时 useClassName 参数必须要传！ 没传命名空间时 useClassName 参数可以省略不传
-		 * @param  (Object)Obj 	       				 NULL : 命名空间
+		 * @param  (Object)namespace 	       		 NULL : 命名空间
 		 * @param 	(String)useClassName     	  	 NULL : 要使用的类名称
 		 * @param 	(String)className         	　　 NULL : 当前类的名称
 		 * @return (Boolean)
 		 * Example：
 		 *
 		 */
-		'is':function(Obj,useClassName,className){
+		'is':function(namespace,useClassName,className){
 			var arg_len=arguments.length;
-			if(System.isString(Obj)){
+			if(System.isString(namespace)){
 				//两个参数时 参数类型全部是字符串
 				if(2 === arg_len){
 					className 	 = useClassName;
-					useClassName = Obj;
-					Obj = null;
+					useClassName = namespace;
+					namespace = null;
 					if(!System.isFunction (System.eval(useClassName))){
 						throw new Error(["Warning cannot find the class file ","'/",useClassName,".class'"].join(''));
 						return false;
@@ -896,9 +938,9 @@ if(!GRN_LHH){
 					}
 
 				}else if(1 === arg_len){//只有一个参数时 功能：检测函数或方法是否之前已定义过了
-					className 	 = Obj;
+					className 	 = namespace;
 					useClassName = null;
-					Obj = null;
+					namespace = null;
 					if(!System.empty(System.eval(className)) && System.isFunction (System.eval(className))) {
 						throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
 						return false;
@@ -906,18 +948,18 @@ if(!GRN_LHH){
 
 				}
 
-			}else if(System.isPlainObject(Obj)){
-				if(!(useClassName in Obj)){
+			}else if(System.isPlainObject(namespace)){
+				if(!(useClassName in namespace)){
 
-					throw new Error(["Warning ",Obj," is not a legitimate object or ","'",useClassName,"'"," is not a legitimate"].join(''));
+					throw new Error(["Warning ",namespace," is not a legitimate object or ","'",useClassName,"'"," is not a legitimate"].join(''));
 					return false;
 				}
 				className = className || null;
-				if(!System.isFunction (Obj[useClassName])){
+				if(!System.isFunction (namespace[useClassName])){
 					throw new Error(["Warning cannot find the class file ","'/",useClassName,".class'"].join(''));
 					return false;
 				}
-				if(!System.empty(className) && System.isFunction (Obj[className])) {
+				if(!System.empty(className) && System.isFunction (namespace[className])) {
 					throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
 					return false;
 				}
@@ -1123,7 +1165,7 @@ if(!GRN_LHH){
 	System.error 	 		= error;
 	System.isEmptyObject 	= isEmptyObject;
 	System.arr_isEmpty 		= arr_isEmpty;
-	System.isType 			= isType;
+	System.gettype 			= gettype;
 	System.isObject 		= isObject;
 	System.isString 		= isString;
 	System.isArray 			= isArray;
@@ -2002,6 +2044,10 @@ window[GRN_LHH].run([window],function(W,Config){
 	System.ROOT = System.Config.Public.ROOT;
 	//hashcode 随机种子
 	System.random 	 = System.Config.random || 10000;
+
+	//不允许外部直接修改，添加，删除 配置里面指定的参数！只能读取
+	//Object.freeze(System.Config);
+	//Object.freeze(System.Config.Public);
 
 	var CMyDom=function(){//创建Dom 对象
 		System.is(System,'Dom');
