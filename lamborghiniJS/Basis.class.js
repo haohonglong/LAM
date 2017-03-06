@@ -64,7 +64,7 @@ if(!GRN_LHH){
 	 * 产品介绍：
 	 * 创建日期：2014.9.28
 	 * 修改日期：2017.3.3
-	 * 名称：private isType
+	 * 名称：private gettype
 	 * 功能：判断数据是什么类型的
 	 * 说明：
 	 * 注意：
@@ -72,25 +72,25 @@ if(!GRN_LHH){
 	 * @return  {Function}
 	 * Example：
 	 */
-	function isType(type) {
+	function gettype(type) {
 		return function(obj) {
 			return (toString.call(obj) === "[object " + type + "]");
 		};
 	}
 
-	var isObject = isType("Object");
-	var isString = isType("String");
-	var isArray = Array.isArray || isType("Array");
-	var isFunction = isType("Function");
-	var isBoolean = isType("Boolean");
-	var isNumber = isType("Number");
-	var isDate = isType("Date");
-	var isRegExp = isType("RegExp");
-	var isBlob = isType("Blob");
-	var isXMLHttpRequest = isType("XMLHttpRequest");
-	var isXMLSerializer = isType("XMLSerializer");
-	var isNull = isType("Null");
-	var isUndefined = isType("Undefined");
+	var isObject = gettype("Object");
+	var isString = gettype("String");
+	var isArray = Array.isArray || gettype("Array");
+	var isFunction = gettype("Function");
+	var isBoolean = gettype("Boolean");
+	var isNumber = gettype("Number");
+	var isDate = gettype("Date");
+	var isRegExp = gettype("RegExp");
+	var isBlob = gettype("Blob");
+	var isXMLHttpRequest = gettype("XMLHttpRequest");
+	var isXMLSerializer = gettype("XMLSerializer");
+	var isNull = gettype("Null");
+	var isUndefined = gettype("Undefined");
 
 
 
@@ -303,7 +303,7 @@ if(!GRN_LHH){
 	 *			empty
 	 *			isNumeric
 	 *			error
-	 *			isType
+	 *			gettype
 	 *			isObject
 	 *			isString
 	 *			isArray
@@ -1123,7 +1123,7 @@ if(!GRN_LHH){
 	System.error 	 		= error;
 	System.isEmptyObject 	= isEmptyObject;
 	System.arr_isEmpty 		= arr_isEmpty;
-	System.isType 			= isType;
+	System.gettype 			= gettype;
 	System.isObject 		= isObject;
 	System.isString 		= isString;
 	System.isArray 			= isArray;

@@ -2,7 +2,7 @@
 	version ：1.1.5
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2017-3-3
+	修改日期 ：2017-3-6
 
 
 产品介绍：
@@ -883,7 +883,7 @@
 				LAMJS.error(); 	 	
 				LAMJS.isEmptyObject(); 
 				LAMJS.arr_isEmpty(); 	
-				LAMJS.isType(); 		
+				LAMJS.gettype(); 		
 				LAMJS.isObject(); 		
 				LAMJS.isString(); 		
 				LAMJS.isArray(); 		
