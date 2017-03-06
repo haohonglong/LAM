@@ -866,26 +866,26 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍： class文件检验器
 		 * 创建日期：2015-8-18
-		 * 修改日期：2016-10-9
+		 * 修改日期：2017-3-6
 		 * 名称： System.is
 		 * 功能：检测System是否合法，检测要使用的类是否已加载过；检测要定义的类名称之前是否已注册过。
 		 * 说明：子类继承父类之前调用此方法检测父类之前是否有加载过，如果填写第三参数可检测当前的类是否跟之前的类重名了
 		 * 注意：当Obj 类型是对象时 useClassName 参数必须要传！ 没传命名空间时 useClassName 参数可以省略不传
-		 * @param  (Object)Obj 	       				 NULL : 命名空间
+		 * @param  (Object)namespace 	       		 NULL : 命名空间
 		 * @param 	(String)useClassName     	  	 NULL : 要使用的类名称
 		 * @param 	(String)className         	　　 NULL : 当前类的名称
 		 * @return (Boolean)
 		 * Example：
 		 *
 		 */
-		'is':function(Obj,useClassName,className){
+		'is':function(namespace,useClassName,className){
 			var arg_len=arguments.length;
-			if(System.isString(Obj)){
+			if(System.isString(namespace)){
 				//两个参数时 参数类型全部是字符串
 				if(2 === arg_len){
 					className 	 = useClassName;
-					useClassName = Obj;
-					Obj = null;
+					useClassName = namespace;
+					namespace = null;
 					if(!System.isFunction (System.eval(useClassName))){
 						throw new Error(["Warning cannot find the class file ","'/",useClassName,".class'"].join(''));
 						return false;
@@ -896,9 +896,9 @@ if(!GRN_LHH){
 					}
 
 				}else if(1 === arg_len){//只有一个参数时 功能：检测函数或方法是否之前已定义过了
-					className 	 = Obj;
+					className 	 = namespace;
 					useClassName = null;
-					Obj = null;
+					namespace = null;
 					if(!System.empty(System.eval(className)) && System.isFunction (System.eval(className))) {
 						throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
 						return false;
@@ -906,18 +906,18 @@ if(!GRN_LHH){
 
 				}
 
-			}else if(System.isPlainObject(Obj)){
-				if(!(useClassName in Obj)){
+			}else if(System.isPlainObject(namespace)){
+				if(!(useClassName in namespace)){
 
-					throw new Error(["Warning ",Obj," is not a legitimate object or ","'",useClassName,"'"," is not a legitimate"].join(''));
+					throw new Error(["Warning ",namespace," is not a legitimate object or ","'",useClassName,"'"," is not a legitimate"].join(''));
 					return false;
 				}
 				className = className || null;
-				if(!System.isFunction (Obj[useClassName])){
+				if(!System.isFunction (namespace[useClassName])){
 					throw new Error(["Warning cannot find the class file ","'/",useClassName,".class'"].join(''));
 					return false;
 				}
-				if(!System.empty(className) && System.isFunction (Obj[className])) {
+				if(!System.empty(className) && System.isFunction (namespace[className])) {
 					throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
 					return false;
 				}
