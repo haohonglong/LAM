@@ -141,49 +141,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 			 */
 			'exports':{}
 		},
-		/**
-		 * @author: lhh
-		 * 产品介绍：
-		 * 创建日期：2015-8-26
-		 * 修改日期：2016-8-25
-		 * 名称： list
-		 * 功能：递归对象
-		 * 说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象为止
-		 * 注意：
-		 * @param 	(Object)D             			NO NULL : 对象
-		 * @param 	(Funtion)callback             	NO NULL : 回调方法
-		 * @returns {Object}
-		 * Example：
-		 *
-		 */
-		'list':function(D,callback){
-			var loop,totalLoop;
-			totalLoop=loop=0;
-			var list=function(D,callback){
 
-				if(!System.isArray(D) && !System.isObject(D)){
-					return D;
-				}
-				if(!System.isFunction(callback)){
-					throw new Error('Warning 第二参数 必须是个callback');
-				}
-				//算出找到指定内容，所需要遍历的次数
-				loop++;
-				return System.each(D,function(k,v){
-					totalLoop++;
-					if (false === callback.apply(D,[k,v,loop,totalLoop])) {
-						console.log('共遍历----->'+loop+'<------次找到了')
-						return false;
-					}
-					//如果没找到，就继续递归搜索
-					if(v){
-						return list(v,callback);
-					}
-				});
-			};
-			return {'data':list(D,callback),'totalLoop':totalLoop,'loop':loop};
-
-		},
 		/**
 		 *
 		 * @author: lhh
