@@ -1,8 +1,8 @@
 	name    ：LamborghiniJS(OO JS)
-	version ：1.1.5
+	version ：1.1.6
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2017-3-6
+	修改日期 ：2017-3-8
 
 
 产品介绍：
@@ -892,8 +892,13 @@
 				LAMJS.isRegExp(); 		
 				LAMJS.isDate(); 		
 				LAMJS.isBlob(); 		
-				LAMJS.isXMLHttpRequest(); 
-				LAMJS.isXMLSerializer();  
+				
+				LAMJS.isHTMLDocument();
+				LAMJS.isHTMLBodyElement();
+				LAMJS.isHTMLHeadElement();
+				LAMJS.isHTMLCollection();
+				LAMJS.isXMLHttpRequest();
+				LAMJS.isXMLSerializer();
         	
         	2.文件类型检测
         		LAMJS.is(namespace,superClass,class);//检查父类是否存在(不存在 抛异常)，当前定义的类是否已定义过了(已定义过 抛异常)

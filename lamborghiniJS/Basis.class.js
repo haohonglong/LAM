@@ -1,16 +1,11 @@
-/*
- * 标准 : 类及成员名称一旦定义不能轻易修改，如若修改就要升级版本！如若在遇到与第三方插件发生冲突要修改，请参考基类里的说明文档。
- *		
- * 
- */
-
 /**
  * LamborghiniJS 0.3 pre
  * @author：lhh
  * 创建日期:2015-3-20
- * 修改日期:2016-10-17
+ * 修改日期:2017-3-8
  * 名称：基类
  * 功能：服务于派生类
+ * 标准 : 类及成员名称一旦定义不能轻易修改，如若修改就要升级版本！如若在遇到与第三方插件发生冲突要修改，请参考基类里的说明文档。
  * 命名空间接口定义: var GRN_LHH='interfaceName';
  * 命名空间接口调用: window[GRN_LHH]  或者 W['interfaceName']
  * 说明 : 成员都是受保护的，不对外共享，如要在外面修改或者复写，都要通过接口。
@@ -43,7 +38,7 @@ if(!GRN_LHH){
 
 })(typeof window !== "undefined" ? window : this,GRN_LHH,function(W,namespace,undefined){
 	'use strict';
-	var version="1.1.5";
+	var version="1.1.6";
 	var Interface,System;
 	// Used for trimming whitespace
 	var trimLeft = /^\s+/,
@@ -87,10 +82,15 @@ if(!GRN_LHH){
 	var isDate = gettype("Date");
 	var isRegExp = gettype("RegExp");
 	var isBlob = gettype("Blob");
-	var isXMLHttpRequest = gettype("XMLHttpRequest");
-	var isXMLSerializer = gettype("XMLSerializer");
 	var isNull = gettype("Null");
 	var isUndefined = gettype("Undefined");
+
+	var isHTMLDocument = gettype("HTMLDocument");
+	var isHTMLBodyElement = gettype("HTMLBodyElement");
+	var isHTMLHeadElement = gettype("HTMLHeadElement");
+	var isHTMLCollection = gettype("HTMLCollection");
+	var isXMLHttpRequest = gettype("XMLHttpRequest");
+	var isXMLSerializer = gettype("XMLSerializer");
 
 
 
@@ -664,24 +664,22 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-2-29
-		 * 修改日期：2016-7-11
+		 * 修改日期：2017-3-8
 		 * 名称： each
 		 * 功能：遍历数组或对象
 		 * 说明：
 		 * 注意：
-		 * @param 	(Array | Object)arr     		NO NULL :
-		 * @param 	(Funtion)callback             	NO NULL : 回调方法
-		 * @return ()
-		 * Example：
-		 *
+		 * @param 	{Array | Object}arr     		NO NULL :
+		 * @param 	{Function}callback             	NO NULL : 回调方法
+		 * @returns {*}
 		 */
 		'each':function( obj, callback ) {
 			if(!obj || !callback){
 				throw new Error('Warning : 两个参数是必传的');
 
 			}
-			if(!System.isObject(obj) && !System.isArray(obj)){
-				throw new Error('Warning '+obj+': 必须是个Object 或者 Array 类型！');
+			if(System.isString(obj) || System.isNumeric(obj)){
+				throw new Error('Warning '+obj+': 数据类型非法！');
 				return obj;
 			}
 
@@ -692,10 +690,9 @@ if(!GRN_LHH){
 
 			var key;
 
-			if ( System.isArray( obj ) ) {
+			if (System.isArray( obj ) ) {
 				return obj.each(callback);
 			} else {
-				if(!System.isPlainObject(obj)) return obj;
 				for (key in obj ) {
 					if (false === callback.call( obj[ key ], key, obj[ key ])) {
 						break;
@@ -1174,6 +1171,11 @@ if(!GRN_LHH){
 	System.isRegExp 		= isRegExp;
 	System.isDate 			= isDate;
 	System.isBlob 			= isBlob;
+
+	System.isHTMLDocument = isHTMLDocument;
+	System.isHTMLBodyElement = isHTMLBodyElement;
+	System.isHTMLHeadElement = isHTMLHeadElement;
+	System.isHTMLCollection = isHTMLCollection;
 	System.isXMLHttpRequest = isXMLHttpRequest;
 	System.isXMLSerializer  = isXMLSerializer;
 
