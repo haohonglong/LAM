@@ -94,7 +94,7 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 	 * @author lhh
 	 * 产品介绍：
 	 * 创建日期：2014-11-28
-	 * 修改日期：2014-12-22
+	 * 修改日期：2017-3-8
 	 * 名称：[] hasClass
 	 * 功能：查找指定的阶段中的是否有匹配的class 名称
 	 * 说明：
@@ -106,14 +106,69 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 	 */
 	Dom.hasClass=function(node,className){
 		var names = node.className || node.getAttribute('class');
-		names = names.split(/\s+/);
-		for(var i=0,len=names.length;i<len;i++){
-			if(names[i] === className) {
-				return true;
-			}
+		if ((new RegExp("\\b"+className+"\\b")).test(names)){
+			return true;
 		}
+		//names = names.split(/\s+/);
+		//for(var i=0,len=names.length;i<len;i++){
+		//	if(names[i] === className) {
+		//		return true;
+		//	}
+		//}
 		return false;
 	};
+
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：
+	 * 创建日期：2014-11-28
+	 * 修改日期：2017-3-8
+	 * 名称：[] removeClass
+	 * 功能：删除指定的class 名称
+	 * 说明：
+	 * 注意：
+	 * @param   (Dom)node 			NO NULL :dom节点
+	 * @param   (String)className 	NO NULL :要查找的类名称
+	 * @return  (Boolean)
+	 * Example：
+	 */
+	Dom.removeClass=function(node,className){
+		if (!Dom.hasClass(node,className)){return node;}
+		var names = node.className || node.getAttribute('class');
+		names = names.replace(new RegExp("\\b"+className+"\\b"),"").trim();
+		if(node.className){
+			node.className = names;
+		}else{
+			node.setAttribute('class',names);
+		}
+
+		return node;
+	};
+	/**
+	 *
+	 * @author lhh
+	 * 产品介绍：
+	 * 创建日期：2014-11-28
+	 * 修改日期：2017-3-8
+	 * 名称：[] addClass
+	 * 功能：添加指定的class 名称
+	 * 说明：
+	 * 注意：
+	 * @param   (Dom)node 			NO NULL :dom节点
+	 * @param   (String)className 	NO NULL :要查找的类名称
+	 * @return  (Boolean)
+	 * Example：
+	 */
+	Dom.addClass=function(node,className){
+		if (Dom.hasClass(node,className)){return node;}
+		var names = node.className || node.getAttribute('class');
+		names = names.split(/\s+/);
+		names.push(className);
+		node.setAttribute('class',names.join(" ").trim());
+		return node;
+	};
+
 	/**
 	 *
 	 * @author lhh
@@ -794,7 +849,7 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-7-13
-		 * 修改日期：2016-10-26
+		 * 修改日期：2017-3-8
 		 * 名称：$
 		 * 功能：选择器功能
 		 * 说明：
@@ -808,7 +863,7 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 			}else if(document.getElementsByTagName(str)){
 				return document.getElementsByTagName(str);
 			}else{
-				return this.getElementsByClass(str,document,'*');
+				return this.getElementsByClassName(str,document,'*');
 			}
 
 		},
@@ -817,7 +872,7 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-7-13
-		 * 修改日期：2016-10-26
+		 * 修改日期：2017-3-8
 		 * 名称：addClass
 		 * 功能：给指定元素添加类名
 		 * 说明：
@@ -828,18 +883,16 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @returns {*}
 		 */
 		'addClass':function(node,className){//
-			var names = node.className || this.attr(node,'class');
-			names = names.split(/\s+/);
-			names.push(className);
-			this.attr(node,'class',names.join(" "));
-			return node;
+			node = node || this.node;
+			if (this.hasClass(className,node)){return node;}
+			return Dom.addClass(node,className);
 		},
 		/**
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-7-13
-		 * 修改日期：2016-10-26
-		 * 名称：delClass
+		 * 修改日期：2017-3-8
+		 * 名称：removeClass
 		 * 功能：删除指定元素类名
 		 * 说明：
 		 * 注意：
@@ -848,21 +901,9 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 		 * @param className
 		 * @returns {*}
 		 */
-		'delClass':function(node,className){
-			var names = node.className || this.attr(node,'class');
-			names = names.split(/\s+/);
-			for(var i=0,len=names.length;i<len;i++){
-				if(names[i] === className) {
-					delete names[i];
-				}
-			}
-
-			if(node.className){
-				node.className=names.join(" ");
-			}else{
-				this.attr(node,'class',names.join(" "));
-			}
-			return node;
+		'removeClass':function(node,className){
+			node = node || this.node;
+			return Dom.removeClass(node,className);
 		},
 
 		/**
