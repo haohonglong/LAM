@@ -331,6 +331,7 @@ if(!GRN_LHH){
 	 *			log
 	 *			defined
 	 *			merge
+	 *			free
 	 *			clone
 	 *			extends
 	 *			extend

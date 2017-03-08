@@ -30,6 +30,7 @@
 		
 	文件夹结构：
 			|-LAM      		 #项目根目录
+				|-documentation  #手册文档
 				|-demo 		 #
 					|-views	 #html文件
 						|-index	 #html文件
