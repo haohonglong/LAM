@@ -346,9 +346,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                         node.delNode();
                                         // 浏览器不会回收这些属性所指向的对象.
                                         //手动删除它以免内存泄漏.
-                                        for (var prop in node) {
-                                            delete node[prop];
-                                        }
+                                        System.free(node);
                                     },this.timer);
                                 }
                             }else if(this.style){

@@ -852,6 +852,21 @@ if(!GRN_LHH){
 			return target;
 		},
 		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2017-3-8
+		 * 修改日期：2017-3-8
+		 * 名称：System.free
+		 * 功能：删除对象下所有成员
+		 *
+		 * @param Obj
+		 */
+		'free':function(Obj){
+			for (var prop in Obj) {
+				delete Obj[prop];
+			}
+		},
+		/**
 		 *
 		 * @author: lhh
 		 * 产品介绍：
