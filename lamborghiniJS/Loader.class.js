@@ -344,6 +344,11 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                     //3秒后依次移除添加的script 节点
                                     System.wait([this],function(node){
                                         node.delNode();
+                                        // 浏览器不会回收这些属性所指向的对象.
+                                        //手动删除它以免内存泄漏.
+                                        for (var prop in node) {
+                                            delete node[prop];
+                                        }
                                     },this.timer);
                                 }
                             }else if(this.style){
