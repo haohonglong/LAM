@@ -734,7 +734,9 @@ if(!GRN_LHH){
 				return System.each(D,function(k,v){
 					totalLoop++;
 					if (false === callback.apply(D,[k,v,loop,totalLoop])) {
-						console.log('共遍历----->'+loop+'<------次找到了')
+						if(System.LAM_DEBUG){
+							console.log('共遍历----->'+loop+'<------次找到了');
+						}
 						return false;
 					}
 					//如果没找到，就继续递归搜索
@@ -1934,6 +1936,8 @@ window[GRN_LHH].run([window],function(W,Config){
 	var _ROOT_ = getRootPath();
 	Config={
 		'vendorPath':_ROOT_+'/lamborghiniJS',
+		'LAM_DEBUG':false,
+		'LAM_ENV':'prod',
 		'Public':{
 			'ROOT':_ROOT_
 			,'COMMON':_ROOT_+'/common'
@@ -2058,8 +2062,14 @@ window[GRN_LHH].run([window],function(W,Config){
 
 	System.merge(System.Config.XHR || {},[Config.XHR]);
 	System.merge(System.Config || {},[Config]);
-	System.classPath = System.Config.getClassPath();
 	System.ROOT = System.Config.Public.ROOT;
+	System.classPath = System.Config.getClassPath();
+
+	System.LAM_DEBUG = System.Config.LAM_DEBUG;
+	System.LAM_ENV = System.Config.LAM_ENV;
+	System.LAM_ENV_PROD = 'prod' === System.LAM_ENV;
+	System.LAM_ENV_DEV  = 'dev'  === System.LAM_ENV;
+	System.LAM_ENV_TEST = 'test' === System.LAM_ENV;
 	//hashcode 随机种子
 	System.random 	 = System.Config.random || 10000;
 
@@ -2212,21 +2222,8 @@ window[GRN_LHH].run([window],function(W,Config){
 			}
 			//保存父类数据,在子类中要调用父类方法可用： （this.Super.父类成员）
 			//this.Super = System.merge({},[superClass.prototype]);
-
 			this.Super 	= superClass.prototype;
 			this.Super.constructor 	= superClass.prototype.constructor;
-
-
-			//这样方式保存父类成员以后可能会出错误的，暂时还没想到解决的办法
-			//if(arg){
-			//	console.log(111)
-			//	this.Super 	= superClass.prototype;
-			//	this.Super.constructor 	= superClass.prototype.constructor;
-			//}else{
-			//	console.log(2222)
-			//	this.Super 	= new superClass();
-			//}
-
 			//如果它下面的子类已经设置了浏览器就不再设置浏览器
 			// if(Browser && (typeof Browser  !='undefined') && !this.Browser) this.setBrowser(Browser);
 

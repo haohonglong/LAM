@@ -1087,7 +1087,9 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 			var movie = document.getElementById(id);
 			var nPercentLoaded = Math.abs(movie.PercentLoaded());
 			if(100 === nPercentLoaded){
-				console.log('flash 加载完成');
+				if(System.LAM_DEBUG){
+					console.log('flash 加载完成');
+				}
 				return true;
 			}
 			return false;

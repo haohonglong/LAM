@@ -88,9 +88,9 @@ window[GRN_LHH].run([window,window['document']],function(window,document,undefin
         //var e = event || window.event || arguments.callee.caller.arguments[0];
         var e = event || window.event;
         //解决mouseover与mouserout事件不停切换的问题（问题不是由冒泡产生的）
-        if("mouseover" == e.type){
+        if("mouseover" === e.type){
             e.relatedTarget = e.fromElement;
-        }else if("mouseout" == e.type){
+        }else if("mouseout" === e.type){
             e.relatedTarget = e.toElement;
         }
         if(!e.target){//IE下没有下面的属性和方法，需要自定义下
