@@ -22,7 +22,7 @@ window[GRN_LHH].run([window],function(window,undefined){
     'use strict';
     var System=this;
     System.is(System,'Drag','Drag_xy');
-    System.is(System,'Event');
+
 
     var __this__=null;
 

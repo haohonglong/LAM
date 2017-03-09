@@ -1,7 +1,7 @@
 
 /**
  * 创建日期：2014-10-18
- * 修改日期：2014-12-15
+ * 修改日期：2017-3-9
  * 修改说明：添加partial属性可以指定某个区域可以拖到，不填默认拖到出入的dom
  *           添加this.arr_mouserDragValues属性可以存储鼠标拖动的距离集合
  *           在move方法中执行f_move这个回调方法传递一个参数，是时时返回每次拖拽时上下移动的数值
@@ -65,15 +65,7 @@ window[GRN_LHH].run([window],function(window,undefined){
         //记录鼠标拖动的距离集合
         this.obj_mouserDragValue  = {'x':0,'y':0};
         this.arr_mouserDragValues = [];
-
-
-
-
         this.init(init);
-
-
-
-
     }
 
     Drag.prototype = {
@@ -99,6 +91,7 @@ window[GRN_LHH].run([window],function(window,undefined){
             }
 
             this.partial.onmousedown=function(e){
+                e = fixEvt(e);
                 __this__.drag_=true;
                 __this__.fnDown(e);
 
@@ -109,37 +102,34 @@ window[GRN_LHH].run([window],function(window,undefined){
             };
         },
 
-
-
-
-
+        /**
+         * 鼠标按下去的操作
+         * @param e
+         */
         'fnDown':function(e){
             var __this__=this;
             e = fixEvt(e);
             //保存鼠标点击下的xy坐标
             this.disX = e.clientX - this.dom.offsetLeft;
             this.disY = e.clientY - this.dom.offsetTop;
-
-
             //设置捕获范围
             if(this.dom.setCapture){//鼠标按下去的时候全局捕获，兼容非标准浏览器
                 this.dom.setCapture();
             }else if(window.captureEvents){
-                window.captureEvents(Event.MOUSEMOVE | Event.MOUSEUP);
+                window.captureEvents(e.MOUSEMOVE | e.MOUSEUP);
             }
             e.stopPropagation();
-
             document.onmousemove=function(e){
-
+                e = fixEvt(e);
                 if(!__this__.drag_) return false;
                 __this__.move(e);
             };
-            document.onmouseup=function(){
-                __this__.fnUp();
+            document.onmouseup=function(e){
+                e = fixEvt(e);
+                __this__.fnUp(e);
 
             };
         },
-
 
         //当鼠标移动时做的操作
         'move':function(e){
@@ -149,11 +139,7 @@ window[GRN_LHH].run([window],function(window,undefined){
             L = T = 0;
             L=this.L=e.clientX-this.disX;
             T=this.T=e.clientY-this.disY;
-
             this.obj_mouserDragValue={'x':L,'y':T};
-
-
-
             switch(this.coord){
                 case 'x':
                     return this.move_level(e);
@@ -164,18 +150,14 @@ window[GRN_LHH].run([window],function(window,undefined){
                 default://自由拖拽
                     this.free();
             }
-
             //时时返回每次按住不松开移动时x,y数值(返回的是数组)
             if(System.isString(this.f_move)){
                 this.f_move.call(this,this.obj_mouserDragValue);
             }
-
             //存储记录鼠标拖动的距离集合(这个数组长度非常大,会消耗内存)
             if(this.isGetMouseDragValues){
                 this.arr_mouserDragValues.push(this.obj_mouserDragValue);
             }
-
-
         },
         /**
          * @author: lhh
@@ -241,7 +223,8 @@ window[GRN_LHH].run([window],function(window,undefined){
             __this__.dom.style.top = this.T+'px';
             return this;
         },
-        'fnUp':function(){
+        'fnUp':function(e){
+            e = fixEvt(e);
             var __this__=this;
             __this__.drag_=false;
 
@@ -250,7 +233,7 @@ window[GRN_LHH].run([window],function(window,undefined){
             if(this.dom.releaseCapture){
                 this.dom.releaseCapture();
             }else if(window.captureEvents){
-                window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP);
+                window.captureEvents(e.MOUSEMOVE|e.MOUSEUP);
             }
 
             document.onmousemove=null;
