@@ -235,7 +235,9 @@ window[GRN_LHH].run([window],function(window,undefined){
 					}
 				}
 			}
-			console.log(items);
+			if(System.LAM_DEBUG){
+				console.log(items);
+			}
 			return items;
 
 		},

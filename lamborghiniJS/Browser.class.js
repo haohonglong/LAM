@@ -124,15 +124,14 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 
 	/**
 	 * 创建日期：2014/8/29
-	 * 修改日期：2014/8/29
+	 * 修改日期：2017/3/9
 	 * 名称： getBodySize
 	 * 功能：获取网页的宽度和高度
 	 * @param 	String size   	需要的宽（w）或高（h）
 	 * @param 	Numver n   		获取哪种方式 默认不用输入
-	 * @param 	Boolean show   	是否在console.log()中打印出数据值调试 默认不打印，如要打印设为true
 	 * @return  (Number | Array) 如果参数size存在，则返回相应宽或高，如果size没有写则返回数组
 	 */
-	Browser.getBodySize=function(size,n,show) {
+	Browser.getBodySize=function(size,n) {
 		var bodySize = [];
 		switch(n){
 			case 1:
@@ -160,7 +159,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 
 
 		}
-		if(show){
+		if(System.LAM_DEBUG){
 			console.log('window:'+$(window).height() +'|document.body:'+$(document.body).height() +'|document:'+$(document).height()+'|bodySize[h]:'+bodySize['h']+'|bodySize:'+bodySize)
 		}
 		return size?bodySize[size]:bodySize;
@@ -235,8 +234,9 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 		}
 
 		Browser.befor_scrollTop = scrollTop;
-
-		console.log(scrollTop);
+		if(System.LAM_DEBUG){
+			console.log(scrollTop);
+		}
 	};
 
 

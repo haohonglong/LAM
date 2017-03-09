@@ -41,6 +41,8 @@ if(!GRN_LHH){
 
     Config = System.Config = {
         'vendorPath':_ROOT_+'/lamborghiniJS',
+        'LAM_DEBUG':true,
+        'LAM_ENV':'dev',
         'Public':{
              'ROOT':_ROOT_
             ,'COMMON':_ROOT_+'/common'
