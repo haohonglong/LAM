@@ -86,6 +86,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	}
 	Layout.prototype = {
 		'constructor':Layout,
+		'_className':'Layout',
 		'__constructor':function(){},
 
 		/**

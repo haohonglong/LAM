@@ -79,6 +79,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	}
 	AutoLayout.prototype = {
 		'constructor':AutoLayout,
+		'_className':'AutoLayout',
 		'__constructor':function(){},
 
 

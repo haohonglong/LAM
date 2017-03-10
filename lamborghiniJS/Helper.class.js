@@ -162,6 +162,7 @@ window[GRN_LHH].run([window,window.document],function(window,document,undefined)
 
 	Helper.prototype = {
 		'constructor':Helper,
+		'_className':'Helper',
 		'init':function(){},
 		'create':function(){},
 		'add':function(){},

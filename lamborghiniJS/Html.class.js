@@ -525,6 +525,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 
 	Html.prototype = {
 		'contructor':Html,
+		'_className':'Html',
 		'__constructor':function(){},
 		'render':function(content){
 			System.print(content);

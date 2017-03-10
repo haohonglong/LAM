@@ -20,6 +20,7 @@ window[GRN_LHH].run([window],function(window,undefined){
     function FakeSelect(){this.init.apply(this,arguments)};
     FakeSelect.prototype={
         'constructor': FakeSelect,
+        '_className':'FakeSelect',
         init:function(opt)
         {
             System.Basis.extends.call(this,System.Component);

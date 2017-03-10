@@ -438,6 +438,7 @@ window[GRN_LHH].run([window,window['document'],jQuery],function(window,document,
 
 	Browser.prototype = {
 		'constructor':Browser,
+		'_className':'Browser',
 		'__constructor':function(){},
 		'resize_super':function(){},
 		'scroll_super':function(){},

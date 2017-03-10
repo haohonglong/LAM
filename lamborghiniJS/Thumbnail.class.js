@@ -46,6 +46,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	}
 	Thumbnail.prototype = {
 		'constructor':Thumbnail,
+		'_className':'Thumbnail',
 		'__constructor':function(){},
 		'setAllLiWidth':function(width){
 			if(!this.$li) return this;

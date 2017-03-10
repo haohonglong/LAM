@@ -285,6 +285,7 @@ window[GRN_LHH].run(function(undefined){
 
 	Template.prototype = {
 		'constructor':Template,
+		'_className':'Template',
 		'create':function(){},
 		/**
 		 *

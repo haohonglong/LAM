@@ -114,6 +114,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	FindParentObject.prototype = {
 		'constructor':FindParentObject,
+		'_className':'FindParentObject',
 		'__constructor':function(){},
 		'find':function(obj,key){
 			if(!System.isObject(obj)) {return false;}

@@ -52,7 +52,7 @@ window[GRN_LHH].run([window,window.document,jQuery],function(window,document,$,u
 
     Controller.prototype = {
         'constructor':Controller,
-
+        '_className':'Controller',
 
         /**
          *

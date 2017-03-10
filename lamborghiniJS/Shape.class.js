@@ -32,6 +32,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	Shape.prototype = {
 		'constructor':Shape,
+		'_className':'Shape',
 		'__constructor':function(){},
 
 		/**

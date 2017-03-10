@@ -46,6 +46,7 @@ window[GRN_LHH].run([window,window.document,jQuery],
 
 		EditTables.prototype = {
 			'constructor':EditTables,
+			'_className':'EditTables',
 			/**
 			 *
 			 */

@@ -73,6 +73,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	}
 	Cache.prototype = {
 		'constructor':Cache,
+		'_className':'Cache',
 		'cache':function(key,value,callback){
 			cache = get();
 			var index = this.exist(key,value);

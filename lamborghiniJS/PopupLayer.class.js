@@ -61,6 +61,7 @@
 
 	 PopupLayer.prototype={
 		 'constructor': PopupLayer,
+		 '_className':'PopupLayer',
 		 '__constructor':function(){},
 		 /**
 		  *

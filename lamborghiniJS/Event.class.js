@@ -253,6 +253,7 @@ window[GRN_LHH].run([window,window['document']],function(window,document,undefin
 
     Event.prototype = {
         'constructor':Event,
+        '_className':'Event',
         '__constructor':function(){},
         'cancelBubble': function(){
             if(this._e.stopPropagation){

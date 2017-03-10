@@ -14,6 +14,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	Linklist.prototype = {
 		'constructor':Linklist,
+		'_className':'Linklist',
 		'__constructor':function(){},
 
 		/**

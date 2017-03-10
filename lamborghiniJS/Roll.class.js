@@ -34,6 +34,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	}
 	Roll.prototype = {
 		'constructor':Roll,
+		'_className':'Roll',
 		'__constructor':function(){},
 		'roll_text':function(text,fn){
 			var __this__=this;

@@ -61,6 +61,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	Canvas.prototype = {
 		'constructor':Canvas,
+		'_className':'Canvas',
 		'__constructor':function(){},
 
 		/**

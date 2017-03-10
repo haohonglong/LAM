@@ -74,6 +74,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	Xhr.ajax = myAjax;
 	Xhr.prototype = {
 		'constructor':Xhr,
+		'_className':'Xhr',
 		'__constructor':function(){},
 		/**
 		 *

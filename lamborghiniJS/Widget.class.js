@@ -35,6 +35,7 @@ window[GRN_LHH].run([window,window.document,jQuery],
 
 	Widget.prototype = {
 		'constructor':Widget,
+		'_className':'Widget',
 		/**
 		 *
 		 * @author lhh

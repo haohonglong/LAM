@@ -31,6 +31,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 
 	Tools.prototype = {
 		'constructor':Tools,
+		'_className':'Tools',
 		'__constructor':function(){},
 		'hasStorage':function(){
 			if(window.sessionStorage || typeof window.sessionStorage != 'undefined'){

@@ -317,6 +317,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	Sort.prototype = {
 		'constructor':Sort,
+		'_className':'Sort',
 
 		'setData':function(s){this.arr.push(s);},
 		'getData':function(){return this.arr.join('');},

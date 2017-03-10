@@ -32,6 +32,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	Fsc.prototype = {
 		'constructor':Fsc,
+		'_className':'Fsc',
 		'__constructor':function(){},
 		'cFsc':function(){
 			var __this__=this;

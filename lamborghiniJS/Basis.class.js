@@ -2237,6 +2237,7 @@ window[GRN_LHH].run([window],function(W,Config){
 
 	Basis.prototype={
 		'constructor': Basis,
+		'_className':'Basis',
 		/**
 		 *
 		 * @author: lhh

@@ -45,6 +45,7 @@ window[GRN_LHH].run([window,window.document,jQuery],
 
 	Validation.prototype = {
 		'constructor':Validation,
+		'_className':'Validation',
 		'__constructor':function(){},
 		/**
 		 *

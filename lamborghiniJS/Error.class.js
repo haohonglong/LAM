@@ -16,6 +16,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	Error.prototype = {
 		'constructor':Error,
+		'_className':'Error',
 		'__constructor':function(){},
 		//注意：onerror事件必需在此网页中其它Javascript程序之前！
 		'reportError':function(){
