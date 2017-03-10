@@ -28,6 +28,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	Chess.prototype = {
 		'constructor':Chess,
+		'_className':'Chess',
 		'__constructor':function(){},
 		'init':function(){
 			chessBoard=[];

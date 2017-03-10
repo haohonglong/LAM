@@ -121,6 +121,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
     Drag_xy.prototype = {
         'constructor':Drag_xy,
+        '_className':'Drag_xy',
         '__constructor':function(){},
         'fnDown':function(e){
             var __this__=this;

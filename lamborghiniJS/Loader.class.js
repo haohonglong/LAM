@@ -62,6 +62,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
     Loader.prototype={
         'constructor':Loader,
+        '_className':'Loader',
         '__constructor':function(){},
         /**
          *

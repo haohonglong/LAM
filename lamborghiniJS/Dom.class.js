@@ -295,6 +295,7 @@ window[GRN_LHH].run([window,document,jQuery],function(window,document,$,undefine
 
 	Dom.prototype = {
 		'constructor':Dom,
+		'_className':'Dom',
 		'__constructor':function(){},
 		/**
 		 * @author: lhh

@@ -70,6 +70,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
     Drag.prototype = {
         'constructor':Drag,
+        '_className':'Drag',
         '__constructor':function(){},
         'init':function(init){
             var __this__=this;

@@ -15,6 +15,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	Cookie.prototype = {
 		'constructor':Cookie,
+		'_className':'Cookie',
 		'__constructor':function(){},
 
 		/**

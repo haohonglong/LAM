@@ -259,6 +259,7 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 
 	Tab.prototype = {
 		'constructor':Tab,
+		'_className':'Tab',
 		'__constructor':function(){},
 		'doClass':function(D,css){
 			D = D || this.D;

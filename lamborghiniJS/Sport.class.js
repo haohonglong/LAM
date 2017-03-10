@@ -105,6 +105,7 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 
 	Sport.prototype = {
 		'constructor':Sport,
+		'_className':'Sport',
 		'__constructor':function(){},
 		'doMove':function (obj,oTarget,time,fn){
 			var time=time||30;

@@ -313,8 +313,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	Component.prototype = {
 		'constructor':Component,
-
-
+		'_className':'Component',
 		/**
 		 *
 		 * @author: lhh

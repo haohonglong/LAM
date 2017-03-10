@@ -34,6 +34,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	}
 	Css.prototype = {
 		'constructor':Css,
+		'_className':'Css',
 		'getRealStyle':function(e,key){//（对象，属性名）获取当前的style元素里的css属性值
 			return e.currentStyle? e.currentStyle[key] : document.defaultView.getComputedStyle(e,false)[key];
 			//document.defaultView.getComputedStyle 这是w3c标准方法，取得元素的样式信息，因为有些样式是在外部css文件定义的，所以用element.style是取不到的 如果是IE,可以用 element.currentStyle["name"]

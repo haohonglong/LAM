@@ -124,6 +124,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	}
 	Slider.prototype = {
 		'constructor':Slider,
+		'_className':'Slider',
 		'__constructor':function(){},
 
 		/**
