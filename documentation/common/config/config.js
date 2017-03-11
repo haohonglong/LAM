@@ -43,7 +43,7 @@ if(!GRN_LHH){
 
 
     Config = System.Config = {
-        'vendorPath':_ROOT_+'/../lamborghiniJS',
+        'vendorPath':_ROOT_+'/../lamborghiniJS2',
         'LAM_DEBUG':true,
         'LAM_ENV':'dev',
         'Public':{
@@ -75,7 +75,7 @@ if(!GRN_LHH){
             return [
                 classPath+'/jQuery/jquery.js',
                 classPath+'/Basis.class.js',
-                //classPath+'/Base.class.js',
+                classPath+'/Base.class.js',
                 classPath+'/BiObject.class.js',
                 classPath+'/Loader.class.js',
                 classPath+'/Component.class.js',

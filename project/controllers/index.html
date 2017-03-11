@@ -9,15 +9,13 @@
         System.is(System,'Controller','IndexController');
         var ROOT  = System.ROOT;
         var views = System.Config.Public.ROOT+'/project/views/index';
-        function IndexController(init){
-            System.Basis.extends.call(this,System.Controller,2,[init || {}]);
-            __this__=this;
+        var IndexController = System.Controller.extend({
+            constructor: function (init){
+                this.base(init || {});
+                __this__=this;
 
-        }
-
-
-        IndexController.prototype = {
-            'constructor':IndexController,
+            },
+            '_className':'IndexController',
             'indexAction':function(){
                 new System.Template().render(views+'/index.html',{
                     'ROOT':ROOT,
@@ -51,11 +49,8 @@
              * Example：
              */
             'destructor':function(){}
-        };
-        System.extends(IndexController,System.Controller,1);
+        });
         new IndexController();
-
-
     });
 
 </script>
