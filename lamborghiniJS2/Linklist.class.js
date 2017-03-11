@@ -5,15 +5,10 @@ window[GRN_LHH].run([window],function(window,undefined){
 	System.is(System,'Dom','Linklist');
 
 	var __this__=null;
-	function Linklist(){
-		System.Basis.extends.call(this,System.Dom);
-		__this__=this;
-
-
-	}
-
-	Linklist.prototype = {
-		'constructor':Linklist,
+	var Linklist = System.Dom.extend({
+		constructor: function () {
+			__this__ = this;
+		},
 		'_className':'Linklist',
 		'__constructor':function(){},
 
@@ -33,8 +28,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 		'destructor':function(){
 
 		}
-	};
-	System.extends(Linklist,System.Dom,1);
+	});
+
 	System['Linklist']=Linklist;
 
 });

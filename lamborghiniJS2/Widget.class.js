@@ -21,20 +21,10 @@ window[GRN_LHH].run([window,window.document,jQuery],
 
 	var __this__=null;
 
-
-	function Widget(){
-		System.Basis.extends.call(this,System.Helper);
-		__this__=this;
-
-	}
-	/*static mothed
-	 ----------------------------------------*/
-
-
-
-
-	Widget.prototype = {
-		'constructor':Widget,
+	var Widget = System.Helper.extend({
+		constructor: function () {
+			__this__ = this;
+		},
 		'_className':'Widget',
 		/**
 		 *
@@ -66,8 +56,8 @@ window[GRN_LHH].run([window,window.document,jQuery],
 		 * Example：
 		 */
 		'destructor':function(){}
-	};
-	System.extends(Widget,System.Helper,1);
+	});
+
 	System['Widget']=Widget;
 
 });

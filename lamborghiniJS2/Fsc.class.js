@@ -18,20 +18,13 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 
 	var __this__=null;
-
-	function Fsc(D){
-
-		System.Basis.extends.call(this,System.Xhr);
-		__this__=this;
-		/*--------------------------------------------------------------------------------------------------*/
-
-		this.fso =null;
-		this.file=null;
-		this.xhr = D.xhr || new System.Xhr().getXHR();
-	}
-
-	Fsc.prototype = {
-		'constructor':Fsc,
+	var Fsc = System.Xhr.extend({
+		constructor: function (D){
+			__this__=this;
+			this.fso =null;
+			this.file=null;
+			this.xhr = D.xhr || new System.Xhr().getXHR();
+		},
 		'_className':'Fsc',
 		'__constructor':function(){},
 		'cFsc':function(){
@@ -77,9 +70,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * Example：
 		 */
 		'destructor':function(){}
+	});
 
-	};
-	System.extends(Fsc,System.Xhr,1);
 	System['Fsc']=Fsc;
 
 });

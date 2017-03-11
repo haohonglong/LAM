@@ -15,10 +15,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Browser','Xhr');
-
-
 	var __this__=null;
-
 	// Functions to create xhrs
 	function createStandardXHR() {
 		try {
@@ -55,25 +52,11 @@ window[GRN_LHH].run([window],function(window,undefined){
 		}
 	};
 
-	function Xhr(){
-		System.Basis.extends.call(this,System.Browser);
-		__this__=this;
-
-		this.xhr =null;
-	}
-	Xhr.getXMLHttpRequest=function() {
-		if (window.XMLHttpRequest && !("file:" === window.location.protocol && "ActiveXObject" in window)){
-			return createStandardXHR();
-		}
-		try {
-			return createActiveXHR();
-		} catch (e) {
-			throw new Error("browser doesn't support AJAX."+e.name);
-		}
-	};
-	Xhr.ajax = myAjax;
-	Xhr.prototype = {
-		'constructor':Xhr,
+	var Xhr = System.Browser.extend({
+		constructor: function () {
+			__this__ = this;
+			this.xhr =null;
+		},
 		'_className':'Xhr',
 		'__constructor':function(){},
 		/**
@@ -99,9 +82,20 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * Example：
 		 */
 		'destructor':function(){}
+	});
 
+	Xhr.getXMLHttpRequest=function() {
+		if (window.XMLHttpRequest && !("file:" === window.location.protocol && "ActiveXObject" in window)){
+			return createStandardXHR();
+		}
+		try {
+			return createActiveXHR();
+		} catch (e) {
+			throw new Error("browser doesn't support AJAX."+e.name);
+		}
 	};
-	System.extends(Xhr,System.Browser,1);
+	Xhr.ajax = myAjax;
+
 	System['Xhr']=Xhr;
 
 });

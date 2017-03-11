@@ -17,34 +17,22 @@ window[GRN_LHH].run([window,window.document,jQuery],
 		'use strict';
 	var System=this;
 	System.is(System,'Browser','Validation');
-
 	var __this__=null;
-	function Validation(D){
-		System.Basis.extends.call(this,System.Browser);
-		__this__=this;
+	var Validation = System.Browser.extend({
+		constructor: function (D){
+			System.Basis.extends.call(this,System.Browser);
+			__this__=this;
+			var defaults={
+				'$message':$('.help-block')
+			};
 
-		var defaults={
-			'$message':$('.help-block')
-		};
+			var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
 
-		var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
-
-		this.init = init;
-		this.$message = init.$message;
-
-
-	}
-	Validation.reg={
-		'email'   : /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
-		'email_2' : /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/,
-		'email_3' : /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-		'phone'   : /^(13[0-9]{9})|(15[89][0-9]{8})$/,
-		'number'  : /[0-9]/
-	};
+			this.init = init;
+			this.$message = init.$message;
 
 
-	Validation.prototype = {
-		'constructor':Validation,
+		},
 		'_className':'Validation',
 		'__constructor':function(){},
 		/**
@@ -130,8 +118,16 @@ window[GRN_LHH].run([window,window.document,jQuery],
 		'destructor':function(){
 
 		}
+	});
+
+	Validation.reg={
+		'email'   : /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+		'email_2' : /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/,
+		'email_3' : /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+		'phone'   : /^(13[0-9]{9})|(15[89][0-9]{8})$/,
+		'number'  : /[0-9]/
 	};
-	System.extends(Validation,System.Browser,1);
+
 	System['Validation']=Validation;
 
 });

@@ -17,20 +17,14 @@
 window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 	'use strict';
 	var System=this;
-
 	System.is(System,'Browser','Tools');
-
 	var __this__=null;
 	var fixEvt = System.Browser.fixEvt;
 	var isIE6 = System.Browser.isIE6;
-	function Tools(){
-		System.Basis.extends.call(this,System.Browser);
-		__this__=this;
-	}
-
-
-	Tools.prototype = {
-		'constructor':Tools,
+	var Tools = System.Browser.extend({
+		constructor: function () {
+			__this__ = this;
+		},
 		'_className':'Tools',
 		'__constructor':function(){},
 		'hasStorage':function(){
@@ -190,19 +184,19 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 		 * @param   (Function)callBack            NULL :回调返回俩参数:this (当前点击的li元素) input(当前输入框)
 		 * @return (void)
 		 *html_strure:
-					 <div class="btn-group">
-						 <button type="button" class="btn btn-default" data-select="input">请选择...</button>
-		 				<input type="hidden">
-						 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							 <span class="caret"></span>
-							 <span class="sr-only">Toggle Dropdown</span>
-						 </button>
-						 <ul class="dropdown-menu">
-							 <li>2016-2-5</li>
-							 <li>2016-2-5</li>
-							 <li>2016-2-5</li>
-						 </ul>
-					 </div>
+		 <div class="btn-group">
+		 <button type="button" class="btn btn-default" data-select="input">请选择...</button>
+		 <input type="hidden">
+		 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		 <span class="caret"></span>
+		 <span class="sr-only">Toggle Dropdown</span>
+		 </button>
+		 <ul class="dropdown-menu">
+		 <li>2016-2-5</li>
+		 <li>2016-2-5</li>
+		 <li>2016-2-5</li>
+		 </ul>
+		 </div>
 		 *
 		 */
 		'dropdownMenu':function(D,callBack){
@@ -231,7 +225,7 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 					}else{
 						$input.text($(this).text());
 					}
-			});
+				});
 			//$(D.input).each(function(){
 			//	var input=this;
 			//	$(this).closest(D.group).on(D.event, D.option,function(){
@@ -258,16 +252,16 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 		 fake_drop_down_box($('.sectionSelect-A1'),'.js_select1');
 
 		 html_strure:
-				 <div class="sectionSelect-A1">
-					 <input data-box="input" type="hidden" value="" name="">
-					 <span data-box="tip">更换部门至</span>
-					 <div class="sectionArrow-A1 sectionArrow-A1-3 sectionArrow-A1-3-2"><i class="down"></i></div>
-				 </div>
-				 <div class="sectionShowBox-A3 sectionShowBox-A3-3 sectionList-A3 sectionList-A3-2 js_select1 none">
-					 <ul class="border">
-						<li>text...</li>
-					 </ul>
-				 </div>
+		 <div class="sectionSelect-A1">
+		 <input data-box="input" type="hidden" value="" name="">
+		 <span data-box="tip">更换部门至</span>
+		 <div class="sectionArrow-A1 sectionArrow-A1-3 sectionArrow-A1-3-2"><i class="down"></i></div>
+		 </div>
+		 <div class="sectionShowBox-A3 sectionShowBox-A3-3 sectionList-A3 sectionList-A3-2 js_select1 none">
+		 <ul class="border">
+		 <li>text...</li>
+		 </ul>
+		 </div>
 		 *
 		 */
 		'fake_drop_down_box':function($select,selectBox){
@@ -1223,9 +1217,9 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 		 * Example：
 		 */
 		'destructor':function(){}
-	};
+	});
 
-	System.extends(Tools,System.Browser,1);
+
 	System['Tools']=new Tools();
 
 });

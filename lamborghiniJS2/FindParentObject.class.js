@@ -3,37 +3,43 @@ window[GRN_LHH].run([window],function(window,undefined){
 	'use strict';
 	var System=this;
 	System.is(System,'Helper','FindParentObject');
+	System.is(System,'Dom');
 
 	var __this__=null;
-
-	function Node(name,node){
-		this.name=name;
-		this.node=node;
-		this.next=null;
+	var Node = System.Dom.extend({
+		constructor: function (name,node){
+			this.name=name;
+			this.node=node;
+			this.next=null;
+		},
 		/**
-		 添加链表
+		 * 添加链表
+		 * @param next
 		 */
-		this.add=function(next){
+		'add':function(next){
 			if(this.next != null){
 				this.next.add(next);
 			}else{
 				this.next=next;
 			}
-		};
+		},
 		/**
-		 输出链表
+		 * 输出链表
+		 * @param node
 		 */
-		this.print=function(node){
+		'print':function(node){
 			if(node!=null){
 				if(node.next!=null){
 					this.print(node.next);
 				}
 			}
-		};
+		},
 		/**
-		 查找节点
+		 * 查找节点
+		 * @param name
+		 * @returns {*}
 		 */
-		this.findNode=function(name){
+		'findNode':function(name){
 			if(this.name === name){
 				return true;
 			}else{
@@ -42,11 +48,13 @@ window[GRN_LHH].run([window],function(window,undefined){
 				}
 			}
 			return false;
-		};
+		},
 		/**
-		 删除指定节点
+		 * 删除指定节点
+		 * @param node
+		 * @param name
 		 */
-		this.delNode=function(node,name){
+		'delNode':function(node,name){
 			if(this.name==name){
 				node.next=this.next
 			}else{
@@ -54,30 +62,33 @@ window[GRN_LHH].run([window],function(window,undefined){
 					this.next.delNode(this,name);
 				}
 			}
-		};
-	}
-	function Link(){
-		this.root=null;
-		this.add=function(key,node){
+		}
+	});
+
+	var Link = Node.extend({
+		constructor: function () {
+			this.root=null;
+		},
+		'add':function(key,node){
 			var node=new Node(key,node);
 			if(this.root==null){
 				this.root=node;
 			}else{
 				this.root.add(node);
 			}
-		};
-		this.find=function(key){
+		},
+		'find':function(key){
 			if(this.root!=null){
 				return this.root.findNode(key);
 			}else{
 				return false;
 			}
-		};
-
+		},
 		/**
-		 删除节点
+		 * 删除节点
+		 * @param name
 		 */
-		this.del=function(name){
+		'del':function(name){
 			if(this.find(name)){
 				if(this.root.name==name){
 					if(this.root.next!=null){
@@ -91,29 +102,22 @@ window[GRN_LHH].run([window],function(window,undefined){
 					}
 				}
 			}
-		};
+		},
 		/**
-		 输出
+		 * 输出
 		 */
-		this.print=function(){
+		'print':function(){
 			if(this.root!=null){
 				this.root.print(this.root);
 			}
-		};
-	}
+		}
+	});
 
-
-
-	function FindParentObject(){
-		System.Basis.extends.call(this,System.Helper);
-		__this__=this;
-		this.root=null;
-
-
-	}
-
-	FindParentObject.prototype = {
-		'constructor':FindParentObject,
+	var FindParentObject = System.Helper.extend({
+		constructor: function () {
+			__this__=this;
+			this.root=null;
+		},
 		'_className':'FindParentObject',
 		'__constructor':function(){},
 		'find':function(obj,key){
@@ -154,8 +158,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		'destructor':function(){
 
 		}
-	};
-	System.extends(FindParentObject,System.Helper,1);
+	});
 	System['FindParentObject']=FindParentObject;
 
 });

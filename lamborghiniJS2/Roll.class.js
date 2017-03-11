@@ -15,25 +15,21 @@ window[GRN_LHH].run([window],function(window,undefined){
 	 *			(function)  		fn
 	 *
 	 */
-	function Roll(init){
-		System.Basis.extends.call(this,System.Browser);
-		__this__=this;
-		/*--------------------------------------------------------------------------------------------------*/
+	var Roll = System.Browser.extend({
+		constructor: function (init){
+			__this__=this;
+			this.time 	=init.time;
+			this.arr 	=init.arr;
+			this.fn 	=init.fn;
+			this.select =init.select;
+			this.timer	=null;
 
-		this.time 	=init.time;
-		this.arr 	=init.arr;
-		this.fn 	=init.fn;
-		this.select =init.select;
-		this.timer	=null;
+			if(!this.time){
+				alert('出错了,参数填的不完整！');
+				return false;
+			}
 
-		if(!this.time){
-			alert('出错了,参数填的不完整！');
-			return false;
-		}
-
-	}
-	Roll.prototype = {
-		'constructor':Roll,
+		},
 		'_className':'Roll',
 		'__constructor':function(){},
 		'roll_text':function(text,fn){
@@ -52,7 +48,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 				return false;
 			}
 			var select=obj.select,
-			//html  =obj.html,
+				//html  =obj.html,
 				fn 	  =obj.fn || this.fn;
 			arr =arr || this.arr;
 			if(!arr){
@@ -111,8 +107,8 @@ window[GRN_LHH].run([window],function(window,undefined){
 		'destructor':function(){
 
 		}
-	};
-	System.extends(Roll,System.Browser,1);
+	});
+
 	System['Roll']=Roll;
 
 });

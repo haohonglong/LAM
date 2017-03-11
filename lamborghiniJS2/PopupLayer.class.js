@@ -45,22 +45,17 @@
 
 	 var __this__=null;
 	 var $=jQuery;
-	 function PopupLayer(D){
+	 var PopupLayer = System.Browser.extend({
+		 constructor: function (D){
+			 __this__=this;
 
-		 System.Basis.extends.call(this,System.Browser);
-		 __this__=this;
+			 if(!D) return this;
+			 if(!System.isPlainObject(D)) return this;
 
-		 if(!D) return this;
-		 if(!System.isPlainObject(D)) return this;
-
-		 this.popLayout  = D.popLayout;
-		 this.padding	=  D.padding || 0;
-		 this.mask 		=  D.mask    || null;
-	 }
-
-
-	 PopupLayer.prototype={
-		 'constructor': PopupLayer,
+			 this.popLayout  = D.popLayout;
+			 this.padding	=  D.padding || 0;
+			 this.mask 		=  D.mask    || null;
+		 },
 		 '_className':'PopupLayer',
 		 '__constructor':function(){},
 		 /**
@@ -159,42 +154,42 @@
 			 switch(D['select']){
 				 case 0:
 					 container = tag('div',{'class':D["div_class_PopupLayer_wrap_name"]},
-									 [
-										  tag('div',{'class':D["div_class_colose_name"]})
-										 ,tag('div',{'class':'p10'},
-												 tag('div',{'class':'content'},
-													 [
-														 tag('div',{'class':D["div_title_name"]},
-															 [
-																 tag('h2',{},D["title"])
-																 ,D["more"] ? tag('div',{'class':'more'},D["more"]) : ''
-															 ]
-														 )
-														 ,tag('div',{'class':D["div_content_name"]},
-															 tag('div',{'class':'P20'},D["content"])
-														 )
-													 ]
-												 )
-										 )
+						 [
+							 tag('div',{'class':D["div_class_colose_name"]})
+							 ,tag('div',{'class':'p10'},
+							 tag('div',{'class':'content'},
+								 [
+									 tag('div',{'class':D["div_title_name"]},
+										 [
+											 tag('h2',{},D["title"])
+											 ,D["more"] ? tag('div',{'class':'more'},D["more"]) : ''
+										 ]
+									 )
+									 ,tag('div',{'class':D["div_content_name"]},
+									 tag('div',{'class':'P20'},D["content"])
+								 )
+								 ]
+							 )
+						 )
 
-									 ]
-								 );
+						 ]
+					 );
 					 /*
-					 container ='<div class="'+D["div_class_PopupLayer_wrap_name"]+'"> \
-									<div class="'+D["div_class_colose_name"]+'"></div> \
-									<div class="p10"> \
-										<div class="content"> \
-											<div class="'+D["div_title_name"]+'"> \
-												<h2>'+D["title"]+'</h2>';
-					 if(D["more"]){
-						 container +=			'<div class="more">'+D["more"]+'</div>';
-					 }
-					 container +=		'</div> \
-											<div class="'+D["div_content_name"]+'"><div class="p15">'+D["content"]+'</div></div> \
-										</div> \
-									</div> \
-								</div>' ;
-					*/
+					  container ='<div class="'+D["div_class_PopupLayer_wrap_name"]+'"> \
+					  <div class="'+D["div_class_colose_name"]+'"></div> \
+					  <div class="p10"> \
+					  <div class="content"> \
+					  <div class="'+D["div_title_name"]+'"> \
+					  <h2>'+D["title"]+'</h2>';
+					  if(D["more"]){
+					  container +=			'<div class="more">'+D["more"]+'</div>';
+					  }
+					  container +=		'</div> \
+					  <div class="'+D["div_content_name"]+'"><div class="p15">'+D["content"]+'</div></div> \
+					  </div> \
+					  </div> \
+					  </div>' ;
+					  */
 					 break;
 
 
@@ -255,10 +250,8 @@
 		  * Example：
 		  */
 		 'destructor':function(){}
+	 });
 
-	 };
-
-	 System.extends(PopupLayer,System.Browser,1);
 	 System['PopupLayer']=PopupLayer;
 
  });
