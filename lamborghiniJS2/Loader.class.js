@@ -157,7 +157,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
                     }else if(System.isObject(css)){
                         css.href = __this__.suffix_checkor(css.href,suffix);
-                        css.rel = css.rel || rel;
+                        css.rel  = css.rel  || rel;
+                        css.type = css.type || type;
                         css.href = baseUrl ? baseUrl+css.href : css.href;
                         //是否已加载过了
                         if(System.fileExisted(css.href)){
