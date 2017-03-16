@@ -123,12 +123,14 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          */
         'load':function(D){
             create = System.Config.render.create;
-            var suffix,rel,len,src="",href="",i= 0,node = null;
+            var suffix,rel,type,len,src="",href="",i= 0,node = null;
             var baseUrl=System.isset(D.baseUrl) ? D.baseUrl : System.ROOT;
             //link
             if(D.css){
-                suffix = D.suffix || '.css';
-                rel = D.rel || 'stylesheet';
+                suffix  = D.suffix  || '.css';
+                rel     = D.rel     || 'stylesheet';
+                type    = D.type    || 'text/css';
+
                 for (i=0,len=D.css.length;i<len;i++){
                     var css=D.css[i];
 
@@ -139,7 +141,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                         if(System.fileExisted(href)){
                             continue;
                         }else{
-                            var attr = System.clone(cAttribute);
+                            var attr = System.merge({'rel':rel,'type':type},[cAttribute]);
                             attr['href'] = href;
                             if(create){
                                 node = CMyDom().create('link',attr);
