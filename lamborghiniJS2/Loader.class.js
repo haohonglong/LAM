@@ -111,7 +111,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
          * 名称： load
          * 功能：动态创建js,css 标签引入公共文件
          * 创建日期：2014-9-9
-         * 修改日期：2016-11-3
+         * 修改日期：2017-3-16
          * 说明：js 和 css 任选其一
          * @params   (Object)D 			NO NULL :初始化参数
          * @param(Array)D.js		  	     NO NULL:js文件集合
@@ -125,60 +125,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
             create = System.Config.render.create;
             var suffix,rel,len,src="",href="",i= 0,node = null;
             var baseUrl=System.isset(D.baseUrl) ? D.baseUrl : System.ROOT;
-            if(D.js){
-                suffix = D.suffix || '.js';
-                for (i=0,len=D.js.length;i<len;i++){
-                    var js=D.js[i];
-                    if(System.isString(js)){
-                        js = __this__.suffix_checkor(js,suffix);
-                        src = baseUrl ? baseUrl+js : js;
-                        //是否已加载过了
-                        if(System.fileExisted(src)){
-                            continue;
-                        }else{
-
-                            var attr = System.clone(sAttribute);
-                            attr['src'] = src;
-                            if(create){
-                                node = CMyDom().create('script',attr);
-                                node.script=true;
-                            }else{
-                                node = System.Html.scriptFile(src,attr);
-                            }
-
-                            if(System.isClassFile(src)){
-                                System.classes.push(src);
-                            }
-                            files.push(node);
-                            System.files.push(src);
-                        }
-
-
-
-                    }else if(System.isObject(js)){
-                        js.src = __this__.suffix_checkor(js.src,suffix);
-                        js.src = baseUrl ? baseUrl+js.src : js.src;
-                        //是否已加载过了
-                        if(System.fileExisted(js.src)){
-                            continue;
-                        }else{
-                            System.merge(js,[sAttribute]);
-                            if(create){
-                                node = CMyDom().create('script',js);
-                                node.script=true;
-                            }else{
-                                node = System.Html.scriptFile(js.src,js);
-                            }
-                            if(System.isClassFile(js.src)){
-                                System.classes.push(js.src);
-                            }
-                            files.push(node);
-                            System.files.push(js.src);
-                        }
-                    }
-                }
-            }
-
+            //link
             if(D.css){
                 suffix = D.suffix || '.css';
                 rel = D.rel || 'stylesheet';
@@ -230,6 +177,60 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
 
                     }
 
+                }
+            }
+            //script
+            if(D.js){
+                suffix = D.suffix || '.js';
+                for (i=0,len=D.js.length;i<len;i++){
+                    var js=D.js[i];
+                    if(System.isString(js)){
+                        js = __this__.suffix_checkor(js,suffix);
+                        src = baseUrl ? baseUrl+js : js;
+                        //是否已加载过了
+                        if(System.fileExisted(src)){
+                            continue;
+                        }else{
+
+                            var attr = System.clone(sAttribute);
+                            attr['src'] = src;
+                            if(create){
+                                node = CMyDom().create('script',attr);
+                                node.script=true;
+                            }else{
+                                node = System.Html.scriptFile(src,attr);
+                            }
+
+                            if(System.isClassFile(src)){
+                                System.classes.push(src);
+                            }
+                            files.push(node);
+                            System.files.push(src);
+                        }
+
+
+
+                    }else if(System.isObject(js)){
+                        js.src = __this__.suffix_checkor(js.src,suffix);
+                        js.src = baseUrl ? baseUrl+js.src : js.src;
+                        //是否已加载过了
+                        if(System.fileExisted(js.src)){
+                            continue;
+                        }else{
+                            System.merge(js,[sAttribute]);
+                            if(create){
+                                node = CMyDom().create('script',js);
+                                node.script=true;
+                            }else{
+                                node = System.Html.scriptFile(js.src,js);
+                            }
+                            if(System.isClassFile(js.src)){
+                                System.classes.push(js.src);
+                            }
+                            files.push(node);
+                            System.files.push(js.src);
+                        }
+                    }
                 }
             }
 
