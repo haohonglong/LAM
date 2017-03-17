@@ -137,23 +137,14 @@ window[GRN_LHH].run([window,window['document']],function(window,document,undefin
         }
         return e;
     };
-    //绑定事件的句柄
-    Event.handler=function(event,fns){//哪个事件发生了？
-        event=Event.fixEvt(event);
-        //event.type :当前 event 对象表示的事件的名称
-        fns=fns[event.type];//
-        for(var i=0,len=fns.length;i < len;i++){
-            if(fns[i])
-                fns[i].call(this,event);//call的方法起到一个对象冒充的作用（把指向window对象变成指向当前对象）
-        }
-    };
+
 
     /**
      *
      * @author lhh
      * 产品介绍：
      * 创建日期：2014-12-22
-     * 修改日期：2014-12-23
+     * 修改日期：2017-3-17
      * 名称：Event.addEvent
      * 功能：给dom节点绑定指定事件
      * 说明：
@@ -163,7 +154,7 @@ window[GRN_LHH].run([window,window['document']],function(window,document,undefin
      * @param   (Function)fn 		NO NULL :绑定事件对象的函数
      * Example：
      */
-    Event.addEvent=function(dom,evt,fn){
+    function addEvent(dom,evt,fn){
         if("[object Opera]"===String(window.opera)){
             dom.addEventListener(evt,function(evt){
                 evt.layerX=evt.offsetX;
@@ -188,36 +179,52 @@ window[GRN_LHH].run([window,window['document']],function(window,document,undefin
             functions.push(fn);
             //fn.index=functions.length-1;
             if(System.isFunction(dom["on"+evt])){//检测是否已经注册过事件监听函数
-                if(dom["on"+evt] !== Event.handler){
-                    functions.push(dom["on"+evt]);//
+                if(dom["on"+evt] !== addEventHandler){
+                    functions.push(dom["on"+evt]);
                 }
             }
-            dom["on"+evt]=function(event){
-                Event.handler.apply(this,[event,functions]);
-            };
+            dom["on"+evt]=addEventHandler;
         }
         return dom;
-    };
+    }
+
+    /**
+     *
+     * 创建日期：2014-12-22
+     * 修改日期：2017-3-17
+     * 功能:绑定事件的句柄
+     * @param evt
+     */
+    function addEventHandler(evt){//哪个事件发生了？
+        evt=Event.fixEvt(evt);
+        var evtype=evt.type;
+        var functions=this.functions[evtype];
+        for (var i=0;i<functions.length;i++) {
+            if (functions[i]) functions[i].call(this,evt);
+        }
+    }
+
+    function unbind(obj,evtype,fn){//删除事件监听
+        if (obj.removeEventListener && !System.Browser.isOpera) {
+            obj.removeEventListener(evtype,fn,false);
+            return obj;
+        }
+        var fns=obj.functions || {};
+        fns=fns[evtype] || [];
+        for (var i=0;i<fns.length;i++) {
+            if (fns[i]==fn) {
+                fns.splice(i,1);
+                return obj;
+            }
+        }
+    }
 
 
     Event.bind=function(dom,evt,fn){//给某个对象添加多个事件监听函数
-        return Event.addEvent(dom,evt,fn);
+        return addEvent(dom,evt,fn);
     };
     Event.unbind =function(obj,evt,fn){//删除事件监听
-        if(obj.functions){
-            var fns = obj.functions;
-            if(fns != null){
-                fns = fns[evt];
-                if(fns != null){
-                    for(var i=0,len=fns.length; i<len ; i++){
-                        if(fns[i] === fn){
-                            delete fns[i];
-                        }
-                    }
-                }
-            }
-        }
-        return obj;
+        return unbind(obj,evt,fn);
     };
     /**
      *
