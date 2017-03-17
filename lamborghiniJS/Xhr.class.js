@@ -58,7 +58,9 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 * @returns {null|*}
 		 */
 		'getXHR':function(){
-			this.xhr = Xhr.getXMLHttpRequest();
+			if(!this.xhr){
+				this.xhr = Xhr.getXMLHttpRequest();
+			}
 			return this.xhr;
 		},
 
