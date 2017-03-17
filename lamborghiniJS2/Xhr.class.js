@@ -3,7 +3,7 @@
  * @author lhh
  * 产品介绍：创建一个XMLHTTP 对象
  * 创建日期：2016-10-17
- * 修改日期：2016-10-17
+ * 修改日期：2017-3-17
  * 名称：LAMJS.Xhr
  * 功能：
  * 说明：
@@ -29,28 +29,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		} catch( e ) {}
 	}
 
-	var myAjax = {
-		// XMLHttpRequest IE7+, Firefox, Chrome, Opera, Safari ；  ActiveXObject IE6, IE5
-		xhr: window.XMLHttpRequest ? createStandardXHR() : createActiveXHR(),
-		get: function (url, callback) {
-			this.xhr.open('get', url);
-			this.onreadystatechange(callback, this.xhr);
-			this.xhr.send(null);
-		},
-		post: function (url, data, callback) {
-			this.xhr.open('post', url);
-			this.xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			this.onreadystatechange(callback, this.xhr);
-			this.xhr.send(data);
-		},
-		onreadystatechange: function (callback, _xhr) {
-			_xhr.onreadystatechange = function () {
-				if (_xhr.readyState == 4 && _xhr.status == 200) {
-					callback(_xhr.responseText);
-				}
-			}
-		}
-	};
+
 
 	var Xhr = System.Browser.extend({
 		constructor: function () {
@@ -83,9 +62,31 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 */
 		'destructor':function(){}
 	});
+	var myAjax = {
+		// XMLHttpRequest IE7+, Firefox, Chrome, Opera, Safari ；  ActiveXObject IE6, IE5
+		xhr: Xhr.getXMLHttpRequest(),
+		get: function (url, callback) {
+			this.xhr.open('get', url);
+			this.onreadystatechange(callback, this.xhr);
+			this.xhr.send(null);
+		},
+		post: function (url, data, callback) {
+			this.xhr.open('post', url);
+			this.xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			this.onreadystatechange(callback, this.xhr);
+			this.xhr.send(data);
+		},
+		onreadystatechange: function (callback, _xhr) {
+			_xhr.onreadystatechange = function () {
+				if (_xhr.readyState == 4 && _xhr.status == 200) {
+					callback(_xhr.responseText);
+				}
+			}
+		}
+	};
 
 	Xhr.getXMLHttpRequest=function() {
-		if (window.XMLHttpRequest && !("file:" === window.location.protocol && "ActiveXObject" in window)){
+		if (window.XMLHttpRequest && !("file:" === window.location.protocol && ("ActiveXObject" in window))){
 			return createStandardXHR();
 		}
 		try {

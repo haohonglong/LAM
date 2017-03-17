@@ -3,7 +3,7 @@
  * @author lhh
  * 产品介绍：创建一个XMLHTTP 对象
  * 创建日期：2016-10-17
- * 修改日期：2016-10-17
+ * 修改日期：2017-3-17
  * 名称：LAMJS.Xhr
  * 功能：
  * 说明：
@@ -34,7 +34,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 
 	var myAjax = {
 		// XMLHttpRequest IE7+, Firefox, Chrome, Opera, Safari ；  ActiveXObject IE6, IE5
-		xhr: window.XMLHttpRequest ? createStandardXHR() : createActiveXHR(),
+		xhr: Xhr.getXMLHttpRequest(),
 		get: function (url, callback) {
 			this.xhr.open('get', url);
 			this.onreadystatechange(callback, this.xhr);
@@ -62,7 +62,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		this.xhr =null;
 	}
 	Xhr.getXMLHttpRequest=function() {
-		if (window.XMLHttpRequest && !("file:" === window.location.protocol && "ActiveXObject" in window)){
+		if (window.XMLHttpRequest && !("file:" === window.location.protocol && ("ActiveXObject" in window))){
 			return createStandardXHR();
 		}
 		try {
