@@ -62,6 +62,16 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 */
 		'destructor':function(){}
 	});
+	Xhr.getXMLHttpRequest=function() {
+		if (window.XMLHttpRequest && !("file:" === window.location.protocol && ("ActiveXObject" in window))){
+			return createStandardXHR();
+		}
+		try {
+			return createActiveXHR();
+		} catch (e) {
+			throw new Error("browser doesn't support AJAX."+e.name);
+		}
+	};
 	var myAjax = {
 		// XMLHttpRequest IE7+, Firefox, Chrome, Opera, Safari ；  ActiveXObject IE6, IE5
 		xhr: Xhr.getXMLHttpRequest(),
@@ -82,17 +92,6 @@ window[GRN_LHH].run([window],function(window,undefined){
 					callback(_xhr.responseText);
 				}
 			}
-		}
-	};
-
-	Xhr.getXMLHttpRequest=function() {
-		if (window.XMLHttpRequest && !("file:" === window.location.protocol && ("ActiveXObject" in window))){
-			return createStandardXHR();
-		}
-		try {
-			return createActiveXHR();
-		} catch (e) {
-			throw new Error("browser doesn't support AJAX."+e.name);
 		}
 	};
 	Xhr.ajax = myAjax;
