@@ -83,13 +83,13 @@ window[GRN_LHH].run([window],function(window,undefined){
 		xhr: Xhr.getXMLHttpRequest(),
 		get: function (url, callback) {
 			this.xhr.open('get', url);
-			this.onreadystatechange(callback, this.xhr);
+			this.onreadystatechange(callback);
 			this.xhr.send(null);
 		},
 		post: function (url, data, callback) {
 			this.xhr.open('post', url);
 			this.xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			this.onreadystatechange(callback, this.xhr);
+			this.onreadystatechange(callback);
 			this.xhr.send(data);
 		},
 		onreadystatechange: function (callback, xhr) {
