@@ -86,10 +86,11 @@ window[GRN_LHH].run([window],function(window,undefined){
 			this.onreadystatechange(callback, this.xhr);
 			this.xhr.send(data);
 		},
-		onreadystatechange: function (callback, _xhr) {
-			_xhr.onreadystatechange = function () {
-				if (_xhr.readyState == 4 && _xhr.status == 200) {
-					callback(_xhr.responseText);
+		onreadystatechange: function (callback, xhr) {
+			xhr = xhr || this.xhr;
+			xhr.onreadystatechange = function () {
+				if (4 === xhr.readyState && 200 === xhr.status) {
+					callback(xhr.responseText);
 				}
 			}
 		}
