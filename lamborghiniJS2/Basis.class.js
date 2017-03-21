@@ -38,7 +38,7 @@ if(!GRN_LHH){
 
 })(typeof window !== "undefined" ? window : this,GRN_LHH,function(W,namespace,undefined){
 	'use strict';
-	var version="1.1.6";
+	var version="1.1.7";
 	var Interface,System;
 	// Used for trimming whitespace
 	var trimLeft = /^\s+/,
@@ -345,6 +345,7 @@ if(!GRN_LHH){
 	 *			replaceTpl
 	 *			analysisVar
 	 *			getRootPath
+	 *			exit
 	 * 对象列表:
 	 *			Function
 	 *			Date
@@ -372,6 +373,10 @@ if(!GRN_LHH){
 		'main':function(args,callback){
 			return this.run(args,callback);
 		},
+		/**
+		 * 退出javascript 进程
+		 */
+		'exit':function(){},
 		/**
 		 * @author: lhh
 		 * 产品介绍：
