@@ -482,28 +482,17 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-8-26
-		 * 修改日期：2017-3-21
+		 * 修改日期：2016-8-26
 		 * 名称：System.eval
 		 * 功能：对json 或 function 的字符串 进行eval 处理
 		 * 说明：
 		 * 注意：
-		 * @param   {String}code 			    NO NULL :表达式字符串
-		 * @param   {String}language 			NO NULL :执行execScript 方法时第二个参数 用什么脚本语言执行第一个参数的代码？默认 JavaScript
+		 * @param   {String}expression 		NO NULL :表达式字符串
 		 * @return  {*}								:
 		 * Example：
 		 */
-		'eval':function(code,language){
-			language = language || 'JavaScript';
-			code = '('+code+')';
-			if(W.execScript){
-				W.execScript(code,language);
-			}else{
-				if (System.isset(W.eval) && System.isFunction(W.eval)){
-					return W.eval(code);
-				}else{
-					(new Function(code))();
-				}
-			}
+		'eval':function(expression){
+			return eval('('+expression+')');
 		},
 		/**
 		 * @author: lhh
