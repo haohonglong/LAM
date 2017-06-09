@@ -2,7 +2,7 @@
 	version ：1.1.6
 	author  ：lhh
 	创建日期 ：2015-8-19
-	修改日期 ：2017-3-8
+	修改日期 ：2017-6-9
 
 
 产品介绍：
@@ -552,6 +552,13 @@
 	             @param 	(String)useClassName     	NO NULL : 要使用的类名称
 	             @param 	(String)className         	　　NULL : 当前类的名称
 	             @return (Boolean)
+			LAMJS.isJson(s);
+				 名称：isJson
+				 功能：检查字符串是否是json格式
+				 说明：
+				 注意：
+				 @param s{String}
+                 @returns {boolean}
 			LAMJS.isclone(className);
 				 名称：isclone
 		         功能：检查对象是否是克隆对象

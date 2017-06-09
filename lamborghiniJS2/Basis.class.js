@@ -2,7 +2,7 @@
  * LamborghiniJS 0.3 pre
  * @author：lhh
  * 创建日期:2015-3-20
- * 修改日期:2017-3-8
+ * 修改日期:2017-6-9
  * 名称：基类
  * 功能：服务于派生类
  * 标准 : 类及成员名称一旦定义不能轻易修改，如若修改就要升级版本！如若在遇到与第三方插件发生冲突要修改，请参考基类里的说明文档。
@@ -327,6 +327,7 @@ if(!GRN_LHH){
 	 *			putIndexGetObjectTheValue
 	 *			list
 	 *			is
+	 *			isJson
 	 *			isPlainObject
 	 *			log
 	 *			defined
@@ -1014,8 +1015,17 @@ if(!GRN_LHH){
 
 
 		},
-
-
+		/**
+		 * 检查字符串是否是json格式
+		 * @param s{String}
+		 * @returns {boolean}
+		 */
+		'isJson':function(s){
+			if(s && (System.isString(s)) && s.match("^\{(.+:.+,*){1,}\}$")){
+				return true;
+			}
+			return false;
+		},
 		/**
 		 *
 		 * @author: lhh
