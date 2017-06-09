@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<script type="text/javascript" src="./common/config/config.js"></script>
+<script type="text/javascript" src="./config.js"></script>
 <script type="text/javascript">
     LAMJS.main(function() {
         'use strict';
@@ -9,15 +9,12 @@
         var ROOT  = System.ROOT;
         var views = System.Config.Public.ROOT+'/project/views/demo';
 
-        function DemoController(){
-            System.Basis.extends.call(this,System.Controller);
-            __this__=this;
+        var DemoController = System.Controller.extend({
+            constructor: function (init){
+                this.base(init || {});
+                __this__=this;
 
-        }
-
-
-        DemoController.prototype = {
-            'constructor':DemoController,
+            },
             'layoutAction':function(){
                 new System.Template().render(views+'/layout.html',{
                     'ROOT':ROOT,
@@ -102,12 +99,6 @@
                 });
             },
 
-
-
-
-
-
-
             /**
              *
              * @author lhh
@@ -122,8 +113,8 @@
              * Example：
              */
             'destructor':function(){}
-        };
-        System.extends(DemoController,System.Controller,1);
+        });
+
         new DemoController();
 
 
