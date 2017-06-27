@@ -9,12 +9,12 @@
         var ROOT  = System.ROOT;
         var views = System.Config.Public.ROOT+'/project/views/demo';
 
-        var DemoController = System.Controller.extend({
-            constructor: function (init){
-                this.base(init || {});
-                __this__=this;
-
-            },
+        function DemoController(){
+            System.Basis.extends.call(this,System.Controller);
+            __this__=this;
+        }
+        DemoController.prototype = {
+            'constructor':DemoController,
             'layoutAction':function(){
                 new System.Template().render(views+'/layout.html',{
                     'ROOT':ROOT,
@@ -23,10 +23,8 @@
                         'title':'你好，世界！',
                         'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
                     }
-
                 },function(content){
                     System.print(content);
-
                 },{
                     beforeSend:function(a,b){
                         this.async=true;
@@ -41,22 +39,17 @@
                         'title':'你好，世界！',
                         'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
                     }
-
                 },function(content){
                     System.print(content);
-
                 });
             },
-
             'popLayerAction':function(){
                 new System.Template().render(views+'/popLayer.html',{
                     'ROOT':ROOT,
                     'title':'弹出层',
                     'D':{}
-
                 },function(content){
                     System.print(content);
-
                 });
             },
             'sliderAction':function(){
@@ -65,11 +58,8 @@
                     'title':'背景半透明覆盖整个可视区域',
                     'LAMJS':System.classPath,
                     'D':{}
-
                 },function(content){
                     System.print(content);
-
-
                 });
             },
             'dragAction':function(){
@@ -78,11 +68,8 @@
                     'title':'拖拽实例',
                     'LAMJS':System.classPath,
                     'D':{}
-
                 },function(content){
                     System.print(content);
-
-
                 });
             },
             'chessAction':function(){
@@ -91,14 +78,10 @@
                     'title':'五子棋',
                     'LAMJS':System.classPath,
                     'D':{}
-
                 },function(content){
                     System.print(content);
-
-
                 });
             },
-
             /**
              *
              * @author lhh
@@ -113,11 +96,9 @@
              * Example：
              */
             'destructor':function(){}
-        });
-
+        };
+        System.extends(DemoController,System.Controller,1);
         new DemoController();
-
-
     });
 
 </script>
