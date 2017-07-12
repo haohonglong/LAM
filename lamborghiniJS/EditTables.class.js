@@ -12,12 +12,7 @@ window[GRN_LHH].run([window,window.document,jQuery],
 		var __this__=null;
 		var fixEvent = System.Browser.fixEvt;
 
-		var defaultOptions = {
-			cloneProperties: ['padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right',
-				'text-align', 'font', 'font-size', 'font-family', 'font-weight',
-				'border', 'border-top', 'border-bottom', 'border-left', 'border-right'],
-			editor: $('<input>')
-		};
+
 
 		/**
 		 *设置多个表格可编辑
@@ -28,8 +23,13 @@ window[GRN_LHH].run([window,window.document,jQuery],
 		function EditTables(table,D) {
 			System.Basis.extends.call(this,System.Dom);
 			__this__=this;
+			var __this__=this;
 			var defaults={
-				'event':'click'
+				"add":'[data-input="add"]',
+				"del":'[data-input="del"]',
+				"reset":'[data-input="reset"]',
+				"submit":'[data-input="submit"]',
+				"event":'click'
 			};
 			var init = System.isObject(D) ? System.merge({},[D,defaults]) : defaults;
 			var parent= table[0] || document;
@@ -38,7 +38,28 @@ window[GRN_LHH].run([window,window.document,jQuery],
 			this.table  = table;
 			this.parent = parent;
 
-			this.run();
+			$(parent).off(init['event'],'[data-input="add"]');
+			$(parent).on(init['event'],'[data-input="add"]',function(){
+				__this__.addRow(table,1);
+			});
+			$(parent).off(init['event'],'[data-input="del"]');
+			$(parent).on(init['event'],'[data-input="del"]',function(){
+				__this__.deleteRow(table,1);
+			});
+			$(parent).off(init['event'],'[data-input="reset"]');
+			$(parent).on(init['event'],'[data-input="reset"]',function(){
+				window.location.reload();
+			});
+			$(parent).off(init['event'],'[data-input="submit"]');
+			$(parent).on(init['event'],'[data-input="submit"]',function(event){
+				event = fixEvent(event);
+				__this__.getTableData(table,1);
+				event.preventDefault();
+
+			});
+
+
+			this.setTableCanEdit();
 
 		}
 
@@ -47,45 +68,14 @@ window[GRN_LHH].run([window,window.document,jQuery],
 		EditTables.prototype = {
 			'constructor':EditTables,
 			'_className':'EditTables',
-			/**
-			 *
-			 */
-			'run':function(){
-				var __this__ = this;
-				var init     = this.init;
-				var parent   = this.parent;
-				var table    = this.table;
 
-				$(parent).off(init['event'],'[data-input="add"]');
-				$(parent).on(init['event'],'[data-input="add"]',function(){
-					__this__.addRow(table,1);
-				});
-				$(parent).off(init['event'],'[data-input="del"]');
-				$(parent).on(init['event'],'[data-input="del"]',function(){
-					__this__.deleteRow(table,1);
-				});
-				$(parent).off(init['event'],'[data-input="reset"]');
-				$(parent).on(init['event'],'[data-input="reset"]',function(){
-					window.location.reload();
-				});
-				$(parent).off(init['event'],'[data-input="submit"]');
-				$(parent).on(init['event'],'[data-input="submit"]',function(event){
-					event = fixEvent(event);
-					__this__.getTableData(table,1);
-					event.preventDefault();
-
-				});
-
-
-			this.setTableCanEdit(this.table);
-			return this;
-		},
 		/**
 		 * 设置表格是可编辑的
 		 * @param table
 		 * @returns {EditTables}
 		 */
 		'setTableCanEdit':function(table) {
+			table = table || this.table;
 			for (var i = 1; i < table.rows.length; i++) {
 				this.setRowCanEdit(table.rows[i]);
 			}
@@ -157,7 +147,7 @@ window[GRN_LHH].run([window,window.document,jQuery],
 					value = element.getAttribute("Value");
 				}
 				//创建文本框
-				var input=System.Html.tag('input',true,{'type':'text','EditTables':'editCell_TextBox','value':value});
+				var input=System.Html.tag(true,'input',{'type':'text','EditTables':'editCell_TextBox','value':value});
 				var $input = $(input);
 				var textBox = $input[0];
 
@@ -201,7 +191,7 @@ window[GRN_LHH].run([window,window.document,jQuery],
 				}
 
 				if (items) {
-					items = eval("[" + items + "]");
+					items = System.eval(items);
 					System.each(items,function(){
 						var option=System.Html.tag('option',{'type':'text','text':this.text,'value':this.value},this.text);
 						options.push(option);
@@ -337,7 +327,7 @@ window[GRN_LHH].run([window,window.document,jQuery],
 				}
 			});
 
-			return eval(expn);
+			return System.eval(expn);
 		},
 			/**
 			 * 格式化数字显示方式
