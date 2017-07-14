@@ -720,7 +720,7 @@ if(!GRN_LHH){
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2015-8-26
-		 * 修改日期：2017-7-13
+		 * 修改日期：2017-7-14
 		 * 名称： search
 		 * 功能：递归对象搜索
 		 * 说明：如果对象的属性的值还是一个对象的话就递归搜索，直到对象下的属性不是对象为止
@@ -734,6 +734,7 @@ if(!GRN_LHH){
 		'search':function(D,callback){
 			var loop,totalLoop;
 			totalLoop=loop=0;
+			var recursion = true;
 			var list=function(D,callback){
 
 				if(!System.isArray(D) && !System.isPlainObject(D)){
@@ -750,10 +751,11 @@ if(!GRN_LHH){
 						if(System.LAM_DEBUG){
 							console.log('共遍历'+loop+'次找到了');
 						}
+						recursion = false;
 						return false;
 					}
 					//如果没找到，就继续递归搜索
-					if(v){
+					if(v && recursion){
 						return list(v,callback);
 					}
 				});
