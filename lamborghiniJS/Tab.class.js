@@ -256,6 +256,46 @@ window[GRN_LHH].run([window,jQuery],function(window,jQuery,undefined){
 		__this__=this;
 		this.D = D;
 	}
+	/**
+	 *
+	 * @returns {Function}
+	 * example:
+	 * <ul tab="ul">
+	 * <li></li>
+	 * </ul>
+	 * <div tab="section"></div>
+	 */
+	Tab.tab=function(){
+		var old_dom=null;
+		return function(D){
+			if(old_dom === this){return;}
+			var defaults ={
+				"li":"li",
+				"section":'[tab="section"]',
+				"active":'active',
+				"callback":function(){}
+			};
+			D = $.isPlainObject(D) ? $.extend(defaults,D) : defaults;
+			old_dom = this;
+			var $this = $(this);
+			$this.parent().find(D.li).removeClass(D.active);
+			$this.addClass(D.active);
+			var id = $this.data('id');
+			if(!id){return;}
+			var ids = id.toString().split(',');
+			var $section = $(D.section);
+			$section.hide();
+			$section.each(function(){
+				var $this = $(this);
+				var id = $this.data('id');
+				if($.inArray(id.toString(),ids) !== -1){
+					D.callback.call(this);
+					$this.show();
+				}
+			});
+
+		};
+	};
 
 	Tab.prototype = {
 		'constructor':Tab,
