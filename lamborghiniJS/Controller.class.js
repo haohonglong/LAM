@@ -1,8 +1,8 @@
 
 /**
  * 创建人：lhh
- * 创建日期:2015/7/22
- * 修改日期:2015/7/23
+ * 创建日期:2015-7-22
+ * 修改日期:2017-10-10
  * 名称：助手类
  * 功能：
  * 说明 : 这个基类不允许被直接实例化，要实例化它的派生类。
@@ -24,7 +24,7 @@ window[GRN_LHH].run([window,window.document,jQuery],function(window,document,$,u
         __this__=this;
         init = init || {};
 
-        var action = Controller.get_url_name(init.action || 'action');
+        var action = Controller.get_url_name(init.action || 'r');
         if(!System.isFunction(this[action+'Action'])){
             throw new Error('Warning: \''+action+'Action\' method not exist');
             return this;
