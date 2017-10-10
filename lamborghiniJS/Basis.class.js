@@ -186,27 +186,56 @@ if(!GRN_LHH){
 		Array    = {};
 	}
 	/**
+	 * @author: lhh
+	 * 产品介绍：
+	 * 创建日期：2017-10-9
+	 * 修改日期：2017-10-9
+	 * 名称：extend
+	 * 功能：子类继承父类
+	 * 说明：仅原型上继承
+	 * 注意：
+	 * @param {Function}subclass
+	 * @param {Function}superclass
+	 * @param {Object}definition
+	 */
+	function extend(subclass, superclass, definition){
+		if (Object.__proto__){
+			definition.__proto__ = superclass.prototype;
+			subclass.prototype = definition;
+		}else{
+			var tmpclass = function(){}, ret;
+			tmpclass.prototype = superclass.prototype;
+			subclass.prototype = new tmpclass();
+			subclass.prototype.constructor = superclass;
+			for (var i in definition){
+				if (definition.hasOwnProperty(i)){
+					subclass.prototype[i] = definition[i];
+				}
+			}
+		}
+	}
+	/**
 	 *
 	 * @author: lhh
 	 * 产品介绍：
 	 * 创建日期：2015-7-23
-	 * 修改日期：2017-3-3
+	 * 修改日期：2017-10-10
 	 * 名称：System.extend
 	 * 功能：Extends a child object from a parent object using classical inheritance
 	 * pattern.
 	 * 说明：
 	 * 注意：
-	 * @param   (Object)subClass 			NO NULL :子类
-	 * @param   (Object)superClass 			NO NULL :父类
+	 * @param   (Function)subClass 			NO NULL :子类
+	 * @param   (Function)superClass 			NO NULL :父类
 	 * @return  (Function) 函数原型
 	 * Example：
 
 	 *
 	 */
 	var inherit =(function() {
+		// extend subClass from superClass
 		// proxy used to establish prototype chain
 		var F = function() {};
-		// extend subClass from superClass
 		return function(subClass, superClass) {
 			if (Object.create) {//用 ecma5 Object.create() 实现 prototype 原型继承
 				// subclass extends superclass
@@ -215,7 +244,7 @@ if(!GRN_LHH){
 			}else{
 				F.prototype = superClass.prototype;
 				subClass.prototype = new F();
-				subClass.prototype.constructor = subClass;
+				subClass.prototype.constructor = superClass;
 				subClass.superClass = superClass.prototype;
 
 				if(superClass.prototype.constructor === Object.prototype.constructor){
@@ -1203,7 +1232,8 @@ if(!GRN_LHH){
 	System.Array=Array.prototype;
 
 	//extend
-	System.extend=inherit;
+	System.extend  = extend;
+	System.inherit = inherit;
 
 	System.printf=prints;
 
