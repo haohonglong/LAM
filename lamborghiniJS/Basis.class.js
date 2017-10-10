@@ -185,6 +185,7 @@ if(!GRN_LHH){
 		String   = {};
 		Array    = {};
 	}
+
 	/**
 	 * @author: lhh
 	 * 产品介绍：
@@ -561,6 +562,27 @@ if(!GRN_LHH){
 			System.close(document);
 		},
 		/**
+		 * 产品介绍：
+		 * 创建日期：2017-9-5
+		 * 修改日期：2017-9-5
+		 * 名称：System.printErrorInfoOfObject
+		 * 功能：打印错误信息对象里的所有属性
+		 * 说明：
+		 * 注意：
+		 * @param D
+		 * @returns {string}
+		 */
+		'printErrorInfoOfObject':function(D){
+			var arr =['\n{'];
+			System.search(D,function(k,v){
+				if(!System.isObject(v)){
+					arr.push('\t'+k+':'+typeof v+',');
+				}
+			});
+			arr.push('}\n');
+			return arr.join('\n');
+		},
+		/**
 		 * @author: lhh
 		 * 产品介绍：
 		 * 创建日期：2016-9-30
@@ -760,6 +782,22 @@ if(!GRN_LHH){
 			};
 			list(D,callback);
 			return {'totalLoop':totalLoop,'loop':loop};
+		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2017-10-10
+		 * 修改日期：2017-10-10
+		 * 名称：createDict
+		 * 功能：创建字典
+		 * 说明：
+		 * 注意：
+		 * @returns {Object}
+		 */
+		'createDict':function(){
+			var result = {};
+			result.__proto__ = null;
+			return result;
 		},
 
 		/**
@@ -966,7 +1004,6 @@ if(!GRN_LHH){
 						throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
 						return false;
 					}
-
 				}else if(1 === arg_len){//只有一个参数时 功能：检测函数或方法是否之前已定义过了
 					className 	 = namespace;
 					useClassName = null;
@@ -975,12 +1012,9 @@ if(!GRN_LHH){
 						throw new Error(["Warning Class name ","'",className,"'"," already exists"].join(''));
 						return false;
 					}
-
 				}
-
 			}else if(System.isPlainObject(namespace)){
 				if(!(useClassName in namespace)){
-
 					throw new Error(["Warning ",namespace," is not a legitimate object or ","'",useClassName,"'"," is not a legitimate"].join(''));
 					return false;
 				}
@@ -994,11 +1028,7 @@ if(!GRN_LHH){
 					return false;
 				}
 			}
-
-
 			return true;
-
-
 		},
 
 		/**
@@ -1024,8 +1054,17 @@ if(!GRN_LHH){
 
 
 		},
-
-
+		/**
+		 * 检查字符串是否是json格式
+		 * @param s{String}
+		 * @returns {boolean}
+		 */
+		'isJson':function(s){
+			if(s && (System.isString(s)) && s.match("^\{(.+:.+,*){1,}\}$")){
+				return true;
+			}
+			return false;
+		},
 		/**
 		 *
 		 * @author: lhh
@@ -1036,18 +1075,15 @@ if(!GRN_LHH){
 		 * 功能：是否是纯对象
 		 * 说明：摘抄jQuery isPlainObject()
 		 * 注意：
-		 * @param ({})obj
+		 * @param {Object}obj
 		 * @returns {boolean}
 		 */
 		'isPlainObject': function( obj ) {
 			var key;
-
 			if ( !obj || !System.isObject(obj) || System.isArray(obj) || obj.nodeType) {
 				return false;
 			}
-
 			try {
-
 				// Not own constructor property must be Object
 				if ( obj.constructor &&
 					!hasOwn.call( obj, "constructor" ) &&
@@ -1055,18 +1091,32 @@ if(!GRN_LHH){
 					return false;
 				}
 			} catch ( e ) {
-
 				// IE8,9 Will throw exceptions on certain host objects #9897
 				return false;
 			}
-
-
-
 			// Own properties are enumerated firstly, so to speed up,
 			// if last one is own, then all properties are own.
 			for ( key in obj ) {}
-
 			return key === undefined || hasOwn.call( obj, key );
+		},
+		/**
+		 * @author: lhh
+		 * 产品介绍：
+		 * 创建日期：2017-10-9
+		 * 修改日期：2017-10-9
+		 * 名称： System.hasOwnProperty
+		 * 功能：对象里是否包含指定的属性(key),有就返回值
+		 * 说明：
+		 * 注意：
+		 * @param {Object}obj
+		 * @param {String}key
+		 * @returns {*}
+		 */
+		'hasOwnProperty':function(obj, key){
+			if (obj.hasOwnProperty(key)){
+				return obj[key];
+			}
+			return null;
 		},
 
 		/**
@@ -1091,8 +1141,6 @@ if(!GRN_LHH){
 				'line':'行号',
 				'message':'message'
 			};
-
-
 			if(arguments.length !== 3) {
 				throw new Error("Warning 缺少参数。");
 				return false;
@@ -1102,15 +1150,11 @@ if(!GRN_LHH){
 				return false;
 			}
 			M = isObject(M) ? this.merge({},[M,defaults]) : defaults;
-
 			if(!empty(name) && System[name]) {
 				throw new Error(["Warning the name ","'",name,"'"," is already defined, at ","'",M.line,"'"," line tip: ","-> ",M.message].join(''));
 				return true;
 			}
-
 			return false;
-
-
 		},
 		/**
 		 *
@@ -1232,8 +1276,8 @@ if(!GRN_LHH){
 	System.Array=Array.prototype;
 
 	//extend
-	System.extend  = extend;
-	System.inherit = inherit;
+	System.extend=extend;
+	System.inherit=inherit;
 
 	System.printf=prints;
 
