@@ -85,7 +85,11 @@ window[GRN_LHH].run([window,jQuery],function(window,$,undefined){
 				}
 			},
 			error:function(){
-				throw new Error("Warning :没有取到数据！！！note:也许是file属性的参数错了哦...");
+				try{
+					throw new Error("Warning :getFile 时没有取到数据！！！note:也许是file属性的参数错了哦...");
+				}catch(e){
+
+				}
 			},
 			success: function(content){
 				if(System.isFunction(capture)){
