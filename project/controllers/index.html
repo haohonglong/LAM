@@ -7,8 +7,7 @@
         var System = this;
         var __this__=null;
         System.is(System,'Controller','IndexController');
-        var ROOT  = System.ROOT;
-        var views = System.Config.Public.ROOT+'/project/views/index';
+        var views = System.ROOT+'/project/views/index';
         function IndexController(init){
             System.Basis.extends.call(this,System.Controller,2,[init || {}]);
             __this__=this;
@@ -17,7 +16,7 @@
             'constructor':IndexController,
             'indexAction':function(){
                 new System.Template().render(views+'/index.html',{
-                    'ROOT':ROOT,
+                    'ROOT':System.ROOT,
                     'D':{
                         'title':'你好，世界！',
                         'content':'This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.'
