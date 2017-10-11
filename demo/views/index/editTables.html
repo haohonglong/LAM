@@ -79,11 +79,13 @@
     </table>
 
     <br />
-    <input type="button" name="Submit" data-input="add" value="新增"  />
-    <input type="button" name="Submit2" data-input="del" value="删除"  />
-    <input type="button" name="Submit22" data-input="reset" value="重置"  />
-    <input type="submit" name="Submit3"  data-input="submit" value="提交" />
+    <input type="button" name="Submit"   edit-table-input="add" value="新增"  />
+    <input type="button" name="Submit2"  edit-table-input="del" value="删除"  />
+    <input type="button" name="Submit22" edit-table-input="reset" value="重置"  />
+    <input type="submit" name="Submit3"  edit-table-input="submit" value="提交" />
 </form>
+
+
 
 <script type="text/javascript">
 
@@ -91,9 +93,12 @@
     LAMJS.run(function(){
         'use strict';
         var System=this;
+        var COMMON = System.Config.Public.COMMON;
 
-        new System.EditTables( document.getElementById("tabProduct"));
+        $(function(){
+            new System.EditTables( document.getElementById("tabProduct"));
 
+        });
 
 
 
