@@ -247,9 +247,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                         System.files.push(D.url);
                     }
                 }
-                D.tag.each(function(i){
-                    files.push(this);
-                });
+                files.push(D.tag.join(''));
             }
             return this;
         },
