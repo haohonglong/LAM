@@ -335,7 +335,7 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                 System.print(files.join(''));
             }else{
                 if(System.isFunction(self.Config.render.create_callback)){
-                    self.Config.render.create_callback(files);
+                    self.Config.render.create_callback(files,self);
                 }else{
                     var append = self.Config.render.append;
                     initDom.call(self);
@@ -345,12 +345,8 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                         if(System.isObject(this)){
                             this.timer = i*1000;
                             if(this.script){
-                                if('befor' === append){
+                                if('befor' === append || 'after' === append){
                                     fragment_script.appendChild(this.node);
-                                    //this.appendTo(head);
-                                }else if('after' === append){
-                                    fragment_script.appendChild(this.node);
-                                    //this.appendTo(body);
                                 }else{
                                     if(0 === i){
                                         this.insertBefore(null,head.firstChild);
@@ -370,7 +366,6 @@ window[GRN_LHH].run([window,document],function(window,document,undefined){
                                 }
                             }else if(this.style){
                                 fragment_style.appendChild(this.node);
-                                //this.appendTo(head);
                             }
 
                         }
