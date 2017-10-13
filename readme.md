@@ -1,4 +1,4 @@
-# LAM2
+# LAM
 	name    ：LamborghiniJS(OO JS)
 	version ：1.1.6
 	author  ：lhh
