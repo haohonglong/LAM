@@ -16,7 +16,7 @@
 window[GRN_LHH].run([window],function(window,undefined){
 	'use strict';
 	var System=this;
-	System.is(System,'BiObject','Component');
+	System.is(System,'Object','Component');
 	System.merge(null,[{
 		/**
 		 * @author: lhh
@@ -165,7 +165,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 			var obj;
 			obj = System.merge(deep,{},[className]);
 			if(obj['_hashCode']){
-				obj['_hashCode'] += '_'+System.BiObject.generate();
+				obj['_hashCode'] += '_'+System.Object.generate();
 			}
 			return obj;
 
@@ -299,7 +299,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 	var __this__=null;
 
 	function Component(){
-		System.Basis.extends.call(this,System.BiObject);
+		System.Basis.extends.call(this,System.Object);
 		__this__=this;
 
 	}
@@ -480,7 +480,7 @@ window[GRN_LHH].run([window],function(window,undefined){
 		 */
 		'destructor':function(){}
 	};
-	System.extends(Component,System.BiObject,1);
+	System.extends(Component,System.Object,1);
 	System['Component']=Component;
 
 });
